@@ -12,4 +12,10 @@ class AdminGraduationController extends Controller
         //
         return view('admin.page.graduation.index');
     }
+
+    public function graduationAdd()
+    {
+        //
+        return view('admin.page.graduation.graduation-add');
+    }
 }

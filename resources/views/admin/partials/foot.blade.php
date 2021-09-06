@@ -8,6 +8,11 @@
 	<script src="assets/plugins/apexcharts-bundle/js/apexcharts.min.js"></script>
 	<script src="assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
 	<script src="assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
+
+	<script src="assets/plugins/select2/js/select2.min.js"></script>
+	<script src="assets/js/form-select2.js"></script>
+
+	<script src="assets/js/table-datatable.js"></script>
 	
 	<script src="assets/js/index.js"></script>
 	<!--app JS-->
