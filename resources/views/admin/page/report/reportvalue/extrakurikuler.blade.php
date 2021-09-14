@@ -28,11 +28,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -57,6 +57,21 @@
                                         <option value="United States">9 C</option>
                                         <option value="United States">9 D</option>
                                         <option value="United States">9 E</option>
+										<option value="United States">10 A</option>
+										<option value="United States">10 B</option>
+										<option value="United States">10 C</option>
+										<option value="United States">10 D</option>
+										<option value="United States">10 E</option>
+										<option value="United States">11 A</option>
+										<option value="United States">11 B</option>
+										<option value="United States">11 C</option>
+										<option value="United States">11 D</option>
+										<option value="United States">11 E</option>
+										<option value="United States">12 A</option>
+										<option value="United States">12 B</option>
+										<option value="United States">12 C</option>
+										<option value="United States">12 D</option>
+										<option value="United States">12 E</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,7 +94,7 @@
                                         <thead>
                                             <tr>
                                             <th rowspan="2">No</th>
-                                                <th rowspan="2">NIS / NISN</th>
+                                                <th rowspan="2">NSM / NPSN</th>
                                                 <th rowspan="2">Nama Santri</th>
                                                 <th rowspan="2">L/P</th>
                                                 <th colspan="3" class="text-center">Extrakurikuler 1</th>
@@ -106,7 +121,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td> 
@@ -182,7 +197,7 @@
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td> 
@@ -257,7 +272,7 @@
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td> 
@@ -332,7 +347,7 @@
                                             </tr>
                                             <tr>
                                                 <td>1</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td> 

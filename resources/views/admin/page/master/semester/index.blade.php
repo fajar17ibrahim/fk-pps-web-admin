@@ -15,7 +15,7 @@
                                                 <th>No</th>
                                                 <th>Kode</th>
                                                 <th>Nama Semester</th>
-                                                <th>Opsi</th>
+                                                <th width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -26,20 +26,11 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editSemesterModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/master/semester/semester-edit')
                                                         </div>
                                                     </div>
-                                                </td>
+											    </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
@@ -48,20 +39,10 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editSemesterModal"><i class='bx bx-edit'></i>Edit</button>
                                                         </div>
                                                     </div>
-                                                </td>
+											    </td>
                                             </tr>
                                         </tbody>
                                     </table>

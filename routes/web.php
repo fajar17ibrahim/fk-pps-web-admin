@@ -19,6 +19,8 @@ use App\Http\Controllers\AdminMasterSemesterController;
 use App\Http\Controllers\AdminMasterRelationClassController;
 use App\Http\Controllers\AdminMasterRelationMapelController;
 use App\Http\Controllers\AdminSchoolProfileController;
+use App\Http\Controllers\AdminAuthLoginController;
+use App\Http\Controllers\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,8 @@ use App\Http\Controllers\AdminSchoolProfileController;
 |
 */
 
+Route::get('/login', [AdminAuthLoginController::class, 'login'])->name('login');
+
 Route::get('/', [AdminDashboardController::class, 'index'])->name('home');
 
 Route::get('/graduation', [AdminGraduationController::class, 'index'])->name('graduation');
@@ -39,13 +43,25 @@ Route::get('/graduation-add', [AdminGraduationController::class, 'graduationAdd'
 
 Route::get('/master-santri', [AdminMasterSantriController::class, 'index'])->name('master-santri');
 
+Route::get('/master-santri-add', [AdminMasterSantriController::class, 'addSantri'])->name('master-santri-add');
+
+Route::get('/master-santri-edit', [AdminMasterSantriController::class, 'editSantri'])->name('master-santri-edit');
+
 Route::get('/master-ustadz', [AdminMasterUstadzController::class, 'index'])->name('master-ustadz');
+
+Route::get('/master-ustadz-add', [AdminMasterUstadzController::class, 'addUstadz'])->name('master-ustadz-add');
+
+Route::get('/master-ustadz-edit', [AdminMasterUstadzController::class, 'editUstadz'])->name('master-ustadz-edit');
 
 Route::get('/master-class', [AdminMasterClassController::class, 'index'])->name('master-class');
 
 Route::get('/master-mapel', [AdminMasterMapelController::class, 'index'])->name('master-mapel');
 
 Route::get('/master-school', [AdminMasterSchoolController::class, 'index'])->name('master-school');
+
+Route::get('/master-school-add', [AdminMasterSchoolController::class, 'addSchool'])->name('master-school-add');
+
+Route::get('/master-school-edit', [AdminMasterSchoolController::class, 'editSchool'])->name('master-school-edit');
 
 Route::get('/master-school-year', [AdminMasterSchoolYearController::class, 'index'])->name('master-school-year');
 
@@ -59,9 +75,13 @@ Route::get('/masterbook', [AdminMasterBookController::class, 'index'])->name('ma
 
 Route::get('/report-equipment', [AdminReportEquipmentController::class, 'index'])->name('report-equipment');
 
-Route::get('/report', [AdminReportValueController::class, 'index'])->name('report');
-
 Route::get('/report-print', [AdminReportPrintController::class, 'index'])->name('report-print');
+
+Route::get('/report-uts-print-pdf', [AdminReportPrintController::class, 'utsExportPdf'])->name('report-uts-print-pdf');
+
+Route::get('/report-uas-print-pdf', [AdminReportPrintController::class, 'uasExportPdf'])->name('report-uas-print-pdf');
+
+Route::get('/report', [AdminReportValueController::class, 'index'])->name('report');
 
 Route::get('/report-value', [AdminReportValueController::class, 'reportValue'])->name('report-value');
 
@@ -82,4 +102,6 @@ Route::get('/user-profile', [AdminUserProfileController::class, 'index'])->name(
 Route::get('/school-profile', [AdminSchoolProfileController::class, 'index'])->name('school-profile');
 
 Route::get('/curriculum', [AdminCurriculumController::class, 'index'])->name('curriculum');
+
+Route::get('/user', [AdminUserController::class, 'index'])->name('user');
 

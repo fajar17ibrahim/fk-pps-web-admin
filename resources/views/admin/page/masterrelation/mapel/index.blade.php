@@ -26,11 +26,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,6 +55,21 @@
                                         <option value="United States">9 C</option>
                                         <option value="United States">9 D</option>
                                         <option value="United States">9 E</option>
+										<option value="United States">10 A</option>
+										<option value="United States">10 B</option>
+										<option value="United States">10 C</option>
+										<option value="United States">10 D</option>
+										<option value="United States">10 E</option>
+										<option value="United States">11 A</option>
+										<option value="United States">11 B</option>
+										<option value="United States">11 C</option>
+										<option value="United States">11 D</option>
+										<option value="United States">11 E</option>
+										<option value="United States">12 A</option>
+										<option value="United States">12 B</option>
+										<option value="United States">12 C</option>
+										<option value="United States">12 D</option>
+										<option value="United States">12 E</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,7 +83,7 @@
                     </div>
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Mata Pelajaran MA MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
+                        <h6 class="mb-0 text-uppercase">Daftar Mata Pelajaran PKPPS MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
                         <br>
                         <div class="card">
                             <div class="card-body">
@@ -77,11 +92,11 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Kode</th>
+                                                <th>Kode Mapel</th>
                                                 <th>Nama Mapel</th>
                                                 <th>Kelas</th>
                                                 <th>Ustadz</th>
-                                                <th>Opsi</th>
+                                                <th width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,17 +109,8 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
                                                         </div>
                                                     </div>
 											    </td>
@@ -118,17 +124,8 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
                                                         </div>
                                                     </div>
 											    </td>
@@ -142,17 +139,8 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
                                                         </div>
                                                     </div>
 											    </td>
@@ -166,17 +154,8 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
                                                         </div>
                                                     </div>
 											    </td>

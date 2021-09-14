@@ -34,8 +34,12 @@
                     </div>
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Pondok Pesantren</h6>
-                        <br>
+                        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                        <h6 class="mb-0 text-uppercase">Daftar PKPPS</h6>
+                            <a class="ms-auto" href="/master-school-add"> 
+                                    <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah PKPPS</button>
+                            </a>
+                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -43,7 +47,7 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Informasi Pondok Pesantren</th>
+                                                <th>Informasi PKPPS</th>
                                                 <th>Alamat</th>
                                                 <th>Nomor Telepon</th>
                                                 <th>Email</th>
@@ -55,7 +59,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>MA MINHAAJUSHSHOOBIRIIN<br>
+                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
                                                     NIPS : 232131232<br>
                                                     Kepsek : Adi Saputra<br>
                                                     NIP : 1212321312212
@@ -80,8 +84,9 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
                                                                 </li>
+                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>
@@ -93,7 +98,7 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>MA MINHAAJUSHSHOOBIRIIN<br>
+                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
                                                     NIPS : 232131232<br>
                                                     Kepala : Adi Saputra<br>
                                                     NIP : 1212321312212
@@ -118,8 +123,9 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
                                                                 </li>
+                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>
@@ -131,7 +137,7 @@
                                             </tr>
                                             <tr>
                                                 <td>3</td>
-                                                <td>MA MINHAAJUSHSHOOBIRIIN<br>
+                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
                                                     NIPS : 232131232<br>
                                                     Kepala : Adi Saputra<br>
                                                     NIP : 1212321312212
@@ -156,8 +162,9 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
                                                                 </li>
+                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>
@@ -169,7 +176,7 @@
                                             </tr>
                                             <tr>
                                                 <td>4</td>
-                                                <td>MA MINHAAJUSHSHOOBIRIIN<br>
+                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
                                                     NIPS : 232131232<br>
                                                     Kepala : Adi Saputra
                                                 </td>
@@ -193,8 +200,9 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
                                                                 </li>
+                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>

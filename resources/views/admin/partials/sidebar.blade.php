@@ -29,44 +29,8 @@
             <a href="/school-profile">
                 <div class="parent-icon"><i class="bx bx-building"></i>
                 </div>
-                <div class="menu-title">Profil Sekolah</div>
+                <div class="menu-title">Profil PKPPS</div>
             </a>
-        </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-data'></i>
-                </div>
-                <div class="menu-title">Master</div>
-            </a>
-            <ul>
-                <li> <a href="/master-class"><i class="bx bx-right-arrow-alt"></i>Kelas</a>
-                </li>
-                <li> <a href="/master-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
-                </li>
-                <li> <a href="/master-school"><i class="bx bx-right-arrow-alt"></i>Sekolah</a>
-                </li>
-                <li> <a href="/master-semester"><i class="bx bx-right-arrow-alt"></i>Semester</a>
-                </li>
-                <li> <a href="/master-santri"><i class="bx bx-right-arrow-alt"></i>Santri</a>
-                </li>
-                <li> <a href="/master-school-year"><i class="bx bx-right-arrow-alt"></i>Tahun Ajaran</a>
-                </li>
-                <li> <a href="/master-ustadz"><i class="bx bx-right-arrow-alt"></i>Ustadz</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-network-chart'></i>
-                </div>
-                <div class="menu-title">Relasi Data Master</div>
-            </a>
-            <ul>
-                <li> <a href="/master-relation-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
-                </li>
-                <li> <a href="/master-relation-semester"><i class="bx bx-right-arrow-alt"></i>Semester</a>
-                </li>
-            </ul>
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -83,12 +47,49 @@
                 </li>
             </ul>
         </li>
+        
         <li>
             <a href="/masterbook">
                 <div class="parent-icon"><i class="bx bx-book-bookmark"></i>
                 </div>
                 <div class="menu-title">Buku Induk</div>
             </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-data'></i>
+                </div>
+                <div class="menu-title">Master</div>
+            </a>
+            <ul>
+                <li> <a href="/master-class"><i class="bx bx-right-arrow-alt"></i>Kelas</a>
+                </li>
+                <li> <a href="/master-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
+                </li>
+                <li> <a href="/master-school"><i class="bx bx-right-arrow-alt"></i>PKPPS</a>
+                </li>
+                <li> <a href="/master-semester"><i class="bx bx-right-arrow-alt"></i>Semester</a>
+                </li>
+                <li> <a href="/master-santri"><i class="bx bx-right-arrow-alt"></i>Santri</a>
+                </li>
+                <li> <a href="/master-school-year"><i class="bx bx-right-arrow-alt"></i>Tahun Pelajaran</a>
+                </li>
+                <li> <a href="/master-ustadz"><i class="bx bx-right-arrow-alt"></i>Ustadz / Ustadzah</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-network-chart'></i>
+                </div>
+                <div class="menu-title">Relasi Data Master</div>
+            </a>
+            <ul>
+                <li> <a href="/master-relation-class"><i class="bx bx-right-arrow-alt"></i>Kelas</a>
+                </li>
+                <li> <a href="/master-relation-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="/graduation">
@@ -102,6 +103,13 @@
                 <div class="parent-icon"><i class="bx bxs-book-open"></i>
                 </div>
                 <div class="menu-title">Kurikulum</div>
+            </a>
+        </li>
+        <li>
+            <a href="/user">
+                <div class="parent-icon"><i class="lni lni-users"></i>
+                </div>
+                <div class="menu-title">User</div>
             </a>
         </li>
     </ul>

@@ -13,8 +13,8 @@
 											<div class="d-flex flex-column align-items-center text-center">
 												<img src="assets/images/school-building.jpg" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
 												<div class="mt-3">
-													<p class="text-secondary mb-1">Madrasah Aliyah</p>
-													<h5>MA MINHAAJUSHSHOOBIRIIN</h5>
+													<p class="text-secondary mb-1">PKPPS</p>
+													<h5>MINHAAJUSHSHOOBIRIIN</h5>
 												</div>
 											</div>
 											<br>
@@ -30,10 +30,10 @@
 										<div class="card-body">
 											<div class="row mb-3">
 												<div class="col-sm-3">
-													<h6 class="mb-0">Nama Sekolah</h6>
+													<h6 class="mb-0">Nama PKPPS</h6>
 												</div>
 												<div class="col-sm-9 text-secondary">
-													<input type="text" class="form-control" value="MA MINHAAJUSHSHOOBIRIIN" />
+													<input type="text" class="form-control" value="MINHAAJUSHSHOOBIRIIN" />
 												</div>
 											</div>
 											<div class="row mb-3">

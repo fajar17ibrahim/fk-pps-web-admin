@@ -12,4 +12,16 @@ class AdminMasterSchoolController extends Controller
         //
         return view('admin.page.master.school.index');
     }
+
+    public function addSchool()
+    {
+        //
+        return view('admin.page.master.school.school-add');
+    }
+
+    public function editSchool()
+    {
+        //
+        return view('admin.page.master.school.school-edit');
+    }
 }

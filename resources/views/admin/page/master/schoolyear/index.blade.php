@@ -4,7 +4,7 @@
                 @section('content')
                 <div class="col-lg-12">
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Tahun Ajaran</h6>
+                        <h6 class="mb-0 text-uppercase">Daftar Tahun Pelajaran</h6>
                         <br>
                         <div class="card">
                             <div class="card-body">
@@ -14,9 +14,9 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Kode</th>
-                                                <th>Nama Tahun Ajaran</th>
+                                                <th>Nama Tahun Pelajaran</th>
                                                 <th>Semester</th>
-                                                <th>Opsi</th>
+                                                <th width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -28,20 +28,11 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editSchoolYearModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/master/class/class-edit')
                                                         </div>
                                                     </div>
-                                                </td>
+											    </td>
                                             </tr>
                                             <tr>
                                                 <td>2</td><td>GNP2019</td>
@@ -50,20 +41,11 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/master/schoolyear/schoolyear-edit')
                                                         </div>
                                                     </div>
-                                                </td>
+											    </td>
                                             </tr>
                                             <tr>
                                                 <td>3</td><td>GJL2020</td>
@@ -72,20 +54,11 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/master/schoolyear/schoolyear-edit')
                                                         </div>
                                                     </div>
-                                                </td>
+											    </td>
                                             </tr>
                                             <tr>
                                                 <td>4</td><td>GNP2020</td>
@@ -94,20 +67,11 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/master/schoolyear/schoolyear-edit')
                                                         </div>
                                                     </div>
-                                                </td>
+											    </td>
                                             </tr>
                                         </tbody>
                                     </table>

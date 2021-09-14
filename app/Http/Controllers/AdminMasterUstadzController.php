@@ -12,4 +12,17 @@ class AdminMasterUstadzController extends Controller
         //
         return view('admin.page.master.ustadz.index');
     }
+
+    
+    public function editUstadz()
+    {
+        //
+        return view('admin.page.master.ustadz.ustadz-edit');
+    }
+
+    public function addUstadz()
+    {
+        //
+        return view('admin.page.master.ustadz.ustadz-add');
+    }
 }

@@ -14,17 +14,6 @@
                             <br>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">UTS / UAS</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                        <select class="single-select">
-                                            <option value="United States">UTS (Ujian Tengah Semester)</option>
-                                            <option value="United Kingdom">UAS (Ujian Akhir Semester)</option>
-                                        </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
                                     <h6 class="mb-0">Jenjang</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
@@ -66,6 +55,21 @@
                                         <option value="United States">9 C</option>
                                         <option value="United States">9 D</option>
                                         <option value="United States">9 E</option>
+										<option value="United States">10 A</option>
+										<option value="United States">10 B</option>
+										<option value="United States">10 C</option>
+										<option value="United States">10 D</option>
+										<option value="United States">10 E</option>
+										<option value="United States">11 A</option>
+										<option value="United States">11 B</option>
+										<option value="United States">11 C</option>
+										<option value="United States">11 D</option>
+										<option value="United States">11 E</option>
+										<option value="United States">12 A</option>
+										<option value="United States">12 B</option>
+										<option value="United States">12 C</option>
+										<option value="United States">12 D</option>
+										<option value="United States">12 E</option>
                                     </select>
                                 </div>
                             </div>
@@ -88,49 +92,54 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>NIS / NISN</th>
+                                                <th>NSM / NPSN</th>
                                                 <th>Nama Santri</th>
                                                 <th>L/P</th>
                                                 <th>Tanggal Download</th>
-                                                <th>Link Download</th>
-                                                <th>Aksi</th>
+                                                <th>Cetak Nilai UTS</th>
+                                                <th>Cetak Nilai UAS</th>
+                                                <th width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>2021-01-01 12:12:12</td>
-                                                <td><a href="#">rapor.pdf</a></td>
+                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
+                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
                                                 <td><input type="button" class="btn btn-danger" value="Blok Rapor" /></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>2021-01-01 12:12:12</td>
-                                                <td><a href="#">rapor.pdf</a></td>
+                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
+                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
                                                 <td><input type="button" class="btn btn-danger" value="Blok Rapor" /></td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>2021-01-01 12:12:12</td>
-                                                <td><a href="#">rapor.pdf</a></td>
+                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
+                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
                                                 <td><input type="button" class="btn btn-danger" value="Blok Rapor" /></td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>2021-01-01 12:12:12</td>
-                                                <td><a href="#">rapor.pdf</a></td>
+                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
+                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
                                                 <td><input type="button" class="btn btn-secondary" value="Unblok Rapor" /></td>
                                             </tr>
                                         </tbody>

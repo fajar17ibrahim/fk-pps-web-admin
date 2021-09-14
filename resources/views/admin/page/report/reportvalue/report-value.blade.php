@@ -26,11 +26,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,6 +55,21 @@
                                         <option value="United States">9 C</option>
                                         <option value="United States">9 D</option>
                                         <option value="United States">9 E</option>
+										<option value="United States">10 A</option>
+										<option value="United States">10 B</option>
+										<option value="United States">10 C</option>
+										<option value="United States">10 D</option>
+										<option value="United States">10 E</option>
+										<option value="United States">11 A</option>
+										<option value="United States">11 B</option>
+										<option value="United States">11 C</option>
+										<option value="United States">11 D</option>
+										<option value="United States">11 E</option>
+										<option value="United States">12 A</option>
+										<option value="United States">12 B</option>
+										<option value="United States">12 C</option>
+										<option value="United States">12 D</option>
+										<option value="United States">12 E</option>
                                     </select>
                                 </div>
                             </div>
@@ -227,7 +242,7 @@
                                                                 <th scope="row">B</th>
                                                             </tr>
                                                             <tr>
-                                                                <td>80 - 86</td>
+                                                                <td> - 86</td>
                                                                 <th scope="row">C</th>
                                                             </tr>
                                                             <tr>
@@ -248,7 +263,7 @@
                                         <thead class="align-middle">
                                             <tr>
                                                 <th rowspan="2">No</th>
-                                                <th rowspan="2">NIS / NISN</th>
+                                                <th rowspan="2">NSM / NPSN</th>
                                                 <th rowspan="2">Nama Santri</th>
                                                 <th rowspan="2">L/P</th>
                                                 <th rowspan="2">KKM</th>
@@ -299,282 +314,282 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>6075</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>DWI KURTILAS</td>
                                                 <td>P</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
-                                                <td>6076</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>DINILAI</td>
                                                 <td>L</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>4</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>7</td>
-                                                <td>136</td>
+                                                <td>1510031750032 / 6998516736</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
-                                                <td><input type="text" class="form-control" value="80" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
+                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th >No</th>
-                                                <th>NIS / NISN</th>
+                                                <th rowspan="2">NSM / NPSN</th>
                                                 <th>Nama Santri</th>
                                                 <th >L/P</th>
                                                 <th >KKM</th>

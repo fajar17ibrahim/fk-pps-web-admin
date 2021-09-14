@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,6 +55,21 @@
 										<option value="United States">9 C</option>
 										<option value="United States">9 D</option>
 										<option value="United States">9 E</option>
+										<option value="United States">10 A</option>
+										<option value="United States">10 B</option>
+										<option value="United States">10 C</option>
+										<option value="United States">10 D</option>
+										<option value="United States">10 E</option>
+										<option value="United States">11 A</option>
+										<option value="United States">11 B</option>
+										<option value="United States">11 C</option>
+										<option value="United States">11 D</option>
+										<option value="United States">11 E</option>
+										<option value="United States">12 A</option>
+										<option value="United States">12 B</option>
+										<option value="United States">12 C</option>
+										<option value="United States">12 D</option>
+										<option value="United States">12 E</option>
 									</select>
 								</div>
 							</div>
@@ -77,7 +92,7 @@
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>NIS / NISN</th>
+												<th>NSM / NPSN</th>
 												<th>Nama Santri</th>
 												<th>L/P</th>
 												<th>Tanggal Download</th>
@@ -88,7 +103,7 @@
 										<tbody>
 											<tr>
 												<td>1</td>
-												<td>136</td>
+												<td>510031750032 / 69985167</td>
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
@@ -97,7 +112,7 @@
 											</tr>
 											<tr>
 												<td>2</td>
-												<td>136</td>
+												<td>510031750032 / 69985167</td>
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
@@ -106,7 +121,7 @@
 											</tr>
 											<tr>
 												<td>3</td>
-												<td>136</td>
+												<td>510031750032 / 69985167</td>
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
@@ -115,7 +130,7 @@
 											</tr>
 											<tr>
 												<td>4</td>
-												<td>136</td>
+												<td>510031750032 / 69985167</td>
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>

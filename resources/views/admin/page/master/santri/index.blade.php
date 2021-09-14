@@ -26,11 +26,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -55,6 +55,21 @@
                                         <option value="United States">9 C</option>
                                         <option value="United States">9 D</option>
                                         <option value="United States">9 E</option>
+										<option value="United States">10 A</option>
+										<option value="United States">10 B</option>
+										<option value="United States">10 C</option>
+										<option value="United States">10 D</option>
+										<option value="United States">10 E</option>
+										<option value="United States">11 A</option>
+										<option value="United States">11 B</option>
+										<option value="United States">11 C</option>
+										<option value="United States">11 D</option>
+										<option value="United States">11 E</option>
+										<option value="United States">12 A</option>
+										<option value="United States">12 B</option>
+										<option value="United States">12 C</option>
+										<option value="United States">12 D</option>
+										<option value="United States">12 E</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,8 +83,12 @@
                     </div>
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Santri MA MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
-                        <br>
+                        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                            <h6 class="mb-0 text-uppercase">Daftar Santri PKPPS MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
+                            <a class="ms-auto" href="/master-santri-add"> 
+                                    <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Santri</button>
+                            </a>
+                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -78,7 +97,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Foto</th>
-                                                <th>NIS / NISN</th>
+                                                <th>NSM / NPSN</th>
                                                 <th>Nama Santri</th>
                                                 <th>L/P</th>
                                                 <th>Tempat Lahir</th>
@@ -95,7 +114,7 @@
                                                         <img src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -111,6 +130,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
@@ -128,7 +149,7 @@
                                                         <img src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -144,6 +165,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
@@ -161,7 +184,7 @@
                                                         <img src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -177,6 +200,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
@@ -194,7 +219,7 @@
                                                         <img src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>510031750032 / 69985167</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>

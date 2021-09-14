@@ -26,35 +26,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Kelas</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">7 A</option>
-                                        <option value="United States">7 B</option>
-                                        <option value="United States">7 C</option>
-                                        <option value="United States">7 D</option>
-                                        <option value="United States">7 E</option>
-                                        <option value="United States">8 A</option>
-                                        <option value="United States">8 B</option>
-                                        <option value="United States">8 C</option>
-                                        <option value="United States">8 D</option>
-                                        <option value="United States">8 E</option>
-                                        <option value="United States">9 A</option>
-                                        <option value="United States">9 B</option>
-                                        <option value="United States">9 C</option>
-                                        <option value="United States">9 D</option>
-                                        <option value="United States">9 E</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,8 +44,12 @@
                     </div>
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Ustadz MA MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
-                        <br>
+                        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                            <h6 class="mb-0 text-uppercase">Daftar Ustadz PKPPS MINHAAJUSHSHOOBIRIIN</h6>
+                            <a class="ms-auto" href="/master-ustadz-add"> 
+                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Ustadz</button>
+                            </a>
+                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -78,7 +58,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Foto</th>
-                                                <th>NIP</th>
+                                                <th>NIK</th>
                                                 <th>Nama Ustadz</th>
                                                 <th>L/P</th>
                                                 <th>Tempat Lahir</th>
@@ -95,7 +75,7 @@
                                                         <img src="assets/images/avatars/avatar.png" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>317505540298000</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -111,6 +91,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-ustadz-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
@@ -128,7 +110,7 @@
                                                         <img src="assets/images/avatars/avatar.png" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>317505540298000</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -144,6 +126,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-ustadz-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
@@ -161,7 +145,7 @@
                                                         <img src="assets/images/avatars/avatar.png" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>317505540298000</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -177,6 +161,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-ustadz-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
@@ -194,7 +180,7 @@
                                                         <img src="assets/images/avatars/avatar.png" alt="" class="p-1 border bg-white"  width="90" height="100">
                                                     </div>
                                                 </td>
-                                                <td>136</td>
+                                                <td>317505540298000</td>
                                                 <td>EKO RAPORT</td>
                                                 <td>L</td>
                                                 <td>Surabaya</td>
@@ -210,6 +196,8 @@
                                                             </button>
                                                             <ul class="dropdown-menu">
                                                                 <li><a class="dropdown-item" href="#">Details</a>
+                                                                </li>
+                                                                <li><a class="dropdown-item" href="/master-ustadz-edit">Edit</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>

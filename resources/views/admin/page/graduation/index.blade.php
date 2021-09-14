@@ -28,11 +28,11 @@
 							</div>
 							<div class="row mb-3">
 								<div class="col-sm-3">
-									<h6 class="mb-0">Pondok Pesantren</h6>
+									<h6 class="mb-0">PKPPS</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
 									<select class="single-select">
-										<option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+										<option value="United States">MINHAAJUSHSHOOBIRIIN</option>
 									</select>
 								</div>
 							</div>
@@ -57,7 +57,7 @@
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>NIS / NISN</th>
+											<th>NSM / NPSN</th>
 											<th>Nama Santri</th>
 											<th>L/P</th>
 											<th>Melanjutkan / Tidak</th>
@@ -70,7 +70,7 @@
 									<tbody>
 										<tr>
 											<td>1</td>
-											<td>136</td>
+											<td>510031750032 / 69985167</td>
 											<td>EKO RAPORT</td>
 											<td>L</td>
 											<td>
@@ -97,7 +97,7 @@
 										</tr>
 										<tr>
 											<td>1</td>
-											<td>136</td>
+											<td>510031750032 / 69985167</td>
 											<td>EKO RAPORT</td>
 											<td>L</td>
 											<td>

@@ -26,11 +26,11 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select">
-                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
                                     </select>
                                 </div>
                             </div>
@@ -44,8 +44,11 @@
                     </div>
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Kelas MA MINHAAJUSHSHOOBIRIIN</h6>
-                        <br>
+                        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                            <h6 class="mb-0 text-uppercase">Daftar Kelas PKPPS MINHAAJUSHSHOOBIRIIN</h6>
+                            <button type="button" class="btn btn-warning px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addClassModal"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Kelas</button>
+                            @include('admin/page/master/class/class-add')
+                        </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -56,7 +59,7 @@
                                                 <th>Kode</th>
                                                 <th>Nama Kelas</th>
                                                 <th>Jenjang</th>
-                                                <th>Opsi</th>
+                                                <th width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -68,17 +71,8 @@
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class='bx bx-edit'></i>Edit</button>
+                                                            @include('admin/page/master/class/class-edit')
                                                         </div>
                                                     </div>
 											    </td>
@@ -87,21 +81,12 @@
                                                 <td>2</td>
                                                 <td>136</td>
                                                 <td>8 B</td>
-                                                <td>Wustha / SMP / MTS</td>
+                                                <td>Wustha</td>
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                                <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class='bx bx-edit'></i>Edit</button>
+                                                                @include('admin/page/master/class/class-edit')
                                                         </div>
                                                     </div>
 											    </td>
@@ -110,21 +95,12 @@
                                                 <td>3</td>
                                                 <td>136</td>
                                                 <td>9 A</td>
-                                                <td>Ulya / SMA / MA</td>
+                                                <td>Ulya</td>
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                                <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class='bx bx-edit'></i>Edit</button>
+                                                                @include('admin/page/master/class/class-edit')
                                                         </div>
                                                     </div>
 											    </td>
@@ -133,21 +109,12 @@
                                                 <td>4</td>
                                                 <td>136</td>
                                                 <td>9 B</td>
-                                                <td>Ulya / SMA / MA</td>
+                                                <td>Ulya</td>
                                                 <td>
                                                     <div class="col">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
+                                                                <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editClassModal"><i class='bx bx-edit'></i>Edit</button>
+                                                                @include('admin/page/master/class/class-edit')
                                                         </div>
                                                     </div>
 											    </td>
