@@ -6,19 +6,10 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
+                                <img src="assets/images/lambang-pancasila.jpg">
+                                <h2 class="mb-0 text-uppercase text-center">Kumpulan Nilai Tengah Semester</h2>
                                 <div>
-                                    <table id="table-attendance"  class="borderless" style="width:100%">
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="4" class="text-center"><img src="assets/images/lambang-pancasila.jpg" width="80" heigh="80"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="text-center"><h2 class="mb-0 text-uppercase text-center">Kumpulan Nilai Tengah Semester</h2></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br>
-                                    <table id="table-attendance"  class="borderless" style="width:100%">
+                                    <table id="table-attendance"  class="table-borderless" style="width:100%">
                                         <tbody>
                                             <tr>
                                                 <td style="width:15%">Nama PKPPS</td>
@@ -49,11 +40,11 @@
                                 </div>
                                 <br>
                                 <div class="table-responsive">
-                                    <table id="table-attendance" class="border text-center" style="width:100%">
-                                        <thead>
+                                    <table id="table-attendance" class="table-bordered" style="width:100%">
+                                        <thead class="text-center">
                                             <tr>
                                                 <th rowspan="3">No</th>
-                                                <th rowspan="3" style="width: 30%">Mata Pelajaran</th>
+                                                <th rowspan="3">Mata Pelajaran</th>
                                                 <th rowspan="3">KKM</th>
                                                 <th colspan="10">Hasil Penilaian Harian</th>
                                                 <th rowspan="3">HPTS</th>
@@ -78,7 +69,7 @@
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -93,8 +84,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>2</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -109,8 +100,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -125,8 +116,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -141,8 +132,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>5</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -157,8 +148,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>6</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -173,8 +164,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>7</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -189,8 +180,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>8</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -205,8 +196,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>9</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -221,8 +212,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>10</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -237,8 +228,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>11</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -253,8 +244,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>12</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -269,8 +260,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>13</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -285,8 +276,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>14</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -301,8 +292,8 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <td>15</td>
-                                                <td class="text-left">Bahasa Arab</td>
+                                                <td>1</td>
+                                                <td>Bahasa Arab</td>
                                                 <td>80</td>
                                                 <td></td>
                                                 <td></td>
@@ -316,20 +307,16 @@
                                                 <td></td>
                                                 <td></td>
                                             </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="borderless" style="width: 100%;">
-                                        <tbody>
-                                            <tr class="text-italic">
-                                                <td colspan="2">HPTS =  Hasil Penilaian Tengah Semester (Khusus pada aspek Pengetahuan)<br><br></td>
+                                            <tr class="text-italic" style="border:0">
+                                                <td colspan="14">HPTS =  Hasil Penilaian Tengah Semester (Khusus pada aspek Pengetahuan)<br><br></td>
                                             </tr>
-                                            <tr>
-                                                <td style="width: 70%">
+                                            <tr style="border:0">
+                                                <td colspan="7">
                                                     Mengetahui:<br>
                                                     Orang Tua / Wali<br><br><br><br><br>
                                                     ...........................
                                                 </td>
-                                                <td style="width: 30%">
+                                                <td colspan="7">
                                                     Jakarta Timur, 18 September 2021<br>
                                                     Wali Kelas<br><br><br><br><br>
                                                     <b>RULI</b>

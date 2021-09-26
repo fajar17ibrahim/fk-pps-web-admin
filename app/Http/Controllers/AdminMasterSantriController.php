@@ -24,4 +24,10 @@ class AdminMasterSantriController extends Controller
         //
         return view('admin.page.master.santri.santri-add');
     }
+
+    public function detailsSantri()
+    {
+        //
+        return view('admin.page.master.santri.santri-details');
+    }
 }

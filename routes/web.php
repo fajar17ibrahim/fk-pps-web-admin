@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminGraduationController;
+use App\Http\Controllers\AdminMutationController;
 use App\Http\Controllers\AdminMasterBookController;
 use App\Http\Controllers\AdminReportEquipmentController;
 use App\Http\Controllers\AdminReportValueController;
@@ -41,11 +42,17 @@ Route::get('/graduation', [AdminGraduationController::class, 'index'])->name('gr
 
 Route::get('/graduation-add', [AdminGraduationController::class, 'graduationAdd'])->name('graduation-add');
 
+Route::get('/mutation', [AdminMutationController::class, 'index'])->name('mutation');
+
+Route::get('/mutation-add', [AdminMutationController::class, 'mutationAdd'])->name('mutation-add');
+
 Route::get('/master-santri', [AdminMasterSantriController::class, 'index'])->name('master-santri');
 
 Route::get('/master-santri-add', [AdminMasterSantriController::class, 'addSantri'])->name('master-santri-add');
 
 Route::get('/master-santri-edit', [AdminMasterSantriController::class, 'editSantri'])->name('master-santri-edit');
+
+Route::get('/master-santri-details', [AdminMasterSantriController::class, 'detailsSantri'])->name('master-santri-details');
 
 Route::get('/master-ustadz', [AdminMasterUstadzController::class, 'index'])->name('master-ustadz');
 
@@ -73,7 +80,19 @@ Route::get('/master-relation-mapel', [AdminMasterRelationMapelController::class,
 
 Route::get('/masterbook', [AdminMasterBookController::class, 'index'])->name('masterbook');
 
+Route::get('/masterbook-cover', [AdminMasterBookController::class, 'masterbookCover'])->name('masterbook-cover');
+
+Route::get('/masterbook-santri', [AdminMasterBookController::class, 'masterbookSantri'])->name('masterbook-santri');
+
+Route::get('/masterbook-report', [AdminMasterBookController::class, 'masterbookReport'])->name('masterbook-report');
+
 Route::get('/report-equipment', [AdminReportEquipmentController::class, 'index'])->name('report-equipment');
+
+Route::get('/report-equipment-cover', [AdminReportEquipmentController::class, 'reportCover'])->name('report-equipment-cover');
+
+Route::get('/report-equipment-lembaga', [AdminReportEquipmentController::class, 'reportLembaga'])->name('report-equipment-lembaga');
+
+Route::get('/report-equipment-santri', [AdminReportEquipmentController::class, 'reportSantri'])->name('report-equipment-santri');
 
 Route::get('/report-print', [AdminReportPrintController::class, 'index'])->name('report-print');
 

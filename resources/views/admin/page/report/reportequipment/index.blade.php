@@ -107,7 +107,10 @@
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
-												<td><a href="#">pelengkap-rapor.pdf</a></td>
+												<td>
+													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
+													@include('admin/page/report/reportequipment/report-equipment-list')
+												</td>
 												<td><input type="button" class="btn btn-danger" value="Blok" /></td>
 											</tr>
 											<tr>
@@ -116,7 +119,10 @@
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
-												<td><a href="#">pelengkap-rapor.pdf</a></td>
+												<td>
+													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
+													@include('admin/page/report/reportequipment/report-equipment-list')
+												</td>
 												<td><input type="button" class="btn btn-danger" value="Blok" /></td>
 											</tr>
 											<tr>
@@ -125,7 +131,10 @@
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
-												<td><a href="#">pelengkap-rapor.pdf</a></td>
+												<td>
+													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
+													@include('admin/page/report/reportequipment/report-equipment-list')
+												</td>
 												<td><input type="button" class="btn btn-danger" value="Blok" /></td>
 											</tr>
 											<tr>
@@ -134,7 +143,10 @@
 												<td>EKO RAPORT</td>
 												<td>L</td>
 												<td>2021-01-01 12:12:12</td>
-												<td><a href="#">pelengkap-rapor.pdf</a></td>
+												<td>
+													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
+													@include('admin/page/report/reportequipment/report-equipment-list')
+												</td>
 												<td><input type="button" class="btn btn-secondary" value="Unblok" /></td>
 											</tr>
 										</tbody>

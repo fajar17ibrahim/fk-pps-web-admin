@@ -85,9 +85,9 @@
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 class="mb-0 text-uppercase">Daftar Santri PKPPS MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
-                            <a class="ms-auto" href="/master-santri-add"> 
-                                    <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Santri</button>
-                            </a>
+                            <!-- <a class="ms-auto" href="/master-santri-add"> 
+                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Santri</button>
+                            </a> -->
                         </div>
                         <div class="card">
                             <div class="card-body">
@@ -129,10 +129,10 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-santri-details">Details</a>
                                                                 </li>
-                                                                <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
-                                                                </li>
+                                                                <!-- <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
+                                                                </li> -->
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>
@@ -164,10 +164,10 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-santri-details">Details</a>
                                                                 </li>
-                                                                <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
-                                                                </li>
+                                                                <!-- <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
+                                                                </li> -->
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>
@@ -199,10 +199,10 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-santri-details">Details</a>
                                                                 </li>
-                                                                <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
-                                                                </li>
+                                                                <!-- <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
+                                                                </li> -->
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Nonaktif</a>
@@ -234,7 +234,7 @@
                                                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                                                             </button>
                                                             <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="#">Details</a>
+                                                                <li><a class="dropdown-item" href="/master-santri-details">Details</a>
                                                                 </li>
                                                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                                                 </li>

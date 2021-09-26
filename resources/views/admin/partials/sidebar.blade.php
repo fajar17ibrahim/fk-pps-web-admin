@@ -92,11 +92,17 @@
             </ul>
         </li>
         <li>
-            <a href="/graduation">
-                <div class="parent-icon"><i class="lni lni-graduation"></i>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='lni lni-graduation'></i>
                 </div>
-                <div class="menu-title">Kelulusan</div>
+                <div class="menu-title">Lulusan</div>
             </a>
+            <ul>
+                <li> <a href="/graduation"><i class="bx bx-right-arrow-alt"></i>Lulus</a>
+                </li>
+                <li> <a href="/mutation"><i class="bx bx-right-arrow-alt"></i>Mutasi</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="/curriculum">
