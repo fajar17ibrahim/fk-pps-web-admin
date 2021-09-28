@@ -273,14 +273,11 @@
                                                 <th>PAS</th>
                                                 <th rowspan="2">HPA</th>
                                                 <th rowspan="2">PRE</th>
-                                                <th rowspan="2">Deskripsi</th>
+                                                <th rowspan="2" style="width:500px">Deskripsi</th>
                                                 <th colspan="10" class="text-center">Penilaian Keterampilan</th>
-                                                <th>RPH</th>
-                                                <th>PTS</th>
-                                                <th>PAS</th>
                                                 <th rowspan="2">HPA</th>
                                                 <th rowspan="2">PRE</th>
-                                                <th rowspan="2">Deskripsi</th>
+                                                <th rowspan="2" >Deskripsi</th>
                                             </tr>
                                             <tr>
                                                 <th>P-1</th>
@@ -306,9 +303,6 @@
                                                 <th>K-8</th>
                                                 <th>K-9</th>
                                                 <th>K-10</th>
-                                                <th>2</th>
-                                                <th>1</th>
-                                                <th>1</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -333,7 +327,7 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
@@ -346,10 +340,7 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
@@ -373,9 +364,6 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
@@ -424,9 +412,6 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
@@ -451,9 +436,6 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
@@ -502,9 +484,6 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
@@ -529,9 +508,6 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
@@ -580,9 +556,6 @@
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
                                                 <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
                                                 <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                         </tbody>
@@ -619,9 +592,6 @@
                                                 <th>K-8</th>
                                                 <th>K-9</th>
                                                 <th>K-10</th>
-                                                <th>RPH</th>
-                                                <th>PTS</th>
-                                                <th>PAS</th>
                                                 <th>HPA</th>
                                                 <th>PRE</th>
                                                 <th>Deskripsi</th>

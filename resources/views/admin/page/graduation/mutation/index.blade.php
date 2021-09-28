@@ -46,8 +46,8 @@
 					</div>
 					<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 						<h6 class="mb-0 text-uppercase">Data Mutasi Santri</h6>
-						<a class="ms-auto" href="/graduation-add"> 
-                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Kelulusan</button>
+						<a class="ms-auto" href="/mutation-add"> 
+                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Mutasi</button>
 						</a>
 					</div>
 					<div class="card">
@@ -60,10 +60,11 @@
 											<th>NSM / NPSN</th>
 											<th>Nama Santri</th>
 											<th>L/P</th>
-											<th>Melanjutkan / Tidak</th>
 											<th>Sekolah Asal</th>
 											<th>Sekolah Tujuan</th>
+											<th>Melanjutkan / Tidak</th>
 											<th>Alasan Tidak Melanjutkan</th>
+											<th>Surat Mutasi</th>
 											<th>Opsi</th>
 										</tr>
 									</thead>
@@ -73,12 +74,13 @@
 											<td>510031750032 / 69985167</td>
 											<td>EKO RAPORT</td>
 											<td>L</td>
+											<td>Ula Nurul Huda</td>
+											<td>SMPN 5 Jakarta</td>
 											<td>
 												<span class="badge bg-warning text-dark">Melanjutkan</span>
 											</td>
-											<td>Ula Nurul Huda</td>
-											<td>SMPN 5 Jakarta</td>
 											<td></td>
+											<td><a href="mutation-print-letter">Cetak</a></td>
 											<td>
 												<div class="col">
 													<div class="btn-group">
@@ -100,12 +102,13 @@
 											<td>510031750032 / 69985167</td>
 											<td>EKO RAPORT</td>
 											<td>L</td>
+											<td>Ula Nurul Huda</td>
 											<td>
 												<span class="badge bg-danger">Tidak Melanjutkan</span>
 											</td>
-											<td>Ula Nurul Huda</td>
 											<td></td>
 											<td>Pindah Rumah</td>
+											<td><a href="mutation-print-letter">Cetak</a></td>
 											<td>
 												<div class="col">
 													<div class="btn-group">

@@ -141,7 +141,7 @@
                                                         <option value="United States">C</option>
                                                     </select>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                                 <td>
                                                     <select class="single-select">
                                                         <option value="United States">Pendidikan Kepramukaan</option>
@@ -158,7 +158,7 @@
                                                         <option value="United States">SB</option>
                                                     </select>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                                 <td>
                                                     <select class="single-select">
                                                         <option value="United States">Pendidikan Kepramukaan</option>
@@ -175,7 +175,7 @@
                                                         <option value="United States">SB</option>
                                                     </select>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                                 <td>
                                                     <select class="single-select">
                                                         <option value="United States">Pendidikan Kepramukaan</option>
@@ -192,8 +192,8 @@
                                                         <option value="United States">SB</option>
                                                     </select>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                             </tr>
                                             <tr>
                                                 <td>1</td>

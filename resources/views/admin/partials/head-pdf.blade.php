@@ -40,8 +40,21 @@
             border: 1px solid #000000;
         }
 
+        .border-bottom-double td {
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom-style: double;
+            border-bottom-color: #000000;
+            border-bottom-width: 2px;
+        }
+
         .text-center {
             text-align: center !important;
+        }
+
+        .text-justify {
+            text-align: justify !important;
         }
 
         .text-right {

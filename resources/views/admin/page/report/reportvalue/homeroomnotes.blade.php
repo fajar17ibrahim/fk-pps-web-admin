@@ -123,7 +123,7 @@
                                                         <option value="United States">6</option>
                                                     </select>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3">Prestasinya sangat baik, perlu dipertahankan</textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">Prestasinya sangat baik, perlu dipertahankan</textarea></td>
                                                 <td><select class="single-select">
                                                         <option value="United States">Selalu berusaha untuk mematuhi tata tertib sekolah dan patuh terhadap Guru.</option>
                                                         <option value="United States">Selalu berusaha untuk mandiri dan tepat waktu dalam mengerjakan tugas.</option>

@@ -12,7 +12,7 @@
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-center">
                                                 <div><i class="lni lni-graduation me-1 font-22 text-success"></i></div>
-                                                <h5 class="mb-0 text-success">Form Kelulusan Santri</h5>
+                                                <h5 class="mb-0 text-success">Form Mutasi Santri</h5>
                                             </div>
                                             <hr>
                                             <div class="row mb-3">

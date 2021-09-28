@@ -42,9 +42,13 @@ Route::get('/graduation', [AdminGraduationController::class, 'index'])->name('gr
 
 Route::get('/graduation-add', [AdminGraduationController::class, 'graduationAdd'])->name('graduation-add');
 
+Route::get('/graduation-print-letter', [AdminGraduationController::class, 'graduationPrintLetter'])->name('graduation-print-letter');
+
 Route::get('/mutation', [AdminMutationController::class, 'index'])->name('mutation');
 
 Route::get('/mutation-add', [AdminMutationController::class, 'mutationAdd'])->name('mutation-add');
+
+Route::get('/mutation-print-letter', [AdminMutationController::class, 'mutationPrintLetter'])->name('mutation-print-letter');
 
 Route::get('/master-santri', [AdminMasterSantriController::class, 'index'])->name('master-santri');
 

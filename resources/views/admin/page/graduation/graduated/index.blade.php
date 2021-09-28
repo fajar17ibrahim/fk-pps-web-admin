@@ -60,9 +60,10 @@
 											<th>NSM / NPSN</th>
 											<th>Nama Santri</th>
 											<th>L/P</th>
-											<th>Tingkat</th>
+											<th>Jenjang</th>
 											<th>Lulus / Tidak Lulus</th>
 											<th>Tahun Lulus</th>
+											<th>Surat Kelulusan</th>
 											<th>Opsi</th>
 										</tr>
 									</thead>
@@ -77,7 +78,7 @@
 												<span class="badge bg-warning text-dark">Lulus</span>
 											</td>
 											<td>2020</td>
-											<td></td>
+											<td><a href="graduation-print-letter">Cetak</a></td>
 											<td>
 												<div class="col">
 													<div class="btn-group">

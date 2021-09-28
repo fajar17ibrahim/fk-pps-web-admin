@@ -93,16 +93,16 @@
                                     <table id="table-attendance" class="table table-striped table-borderless " style="width:100%">
                                         <thead>
                                             <tr>
-                                            <th rowspan="2">No</th>
-                                                <th rowspan="2">NIS / NISN</th>
-                                                <th rowspan="2">Nama Santri</th>
-                                                <th rowspan="2">L/P</th>
+                                            <th rowspan="2" style="width:5%">No</th>
+                                                <th rowspan="2" style="width:20%">NIS / NISN</th>
+                                                <th rowspan="2" >Nama Santri</th>
+                                                <th rowspan="2" style="width:10%">L/P</th>
                                                 <th colspan="3" class="text-center">Kehadiran</th>
                                             </tr>
                                             <tr>
-                                                <th>S</th>
-                                                <th>I</th>
-                                                <th>A</th>
+                                                <th style="width:10%">S</th>
+                                                <th style="width:10%">I</th>
+                                                <th style="width:10%">A</th>
                                             </tr>
                                         </thead>
                                         <tbody>

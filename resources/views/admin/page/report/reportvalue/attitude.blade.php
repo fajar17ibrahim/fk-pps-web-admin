@@ -429,7 +429,7 @@
                                                         <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 2</label>
                                                     </div>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
                                                 <td>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -472,7 +472,7 @@
                                                         <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 2</label>
                                                     </div>
                                                 </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>                                                            </tr>
+                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>                                                            </tr>
                                             <tr>
                                                 <td>1</td>
                                                 <td>510031750032 / 69985167</td>

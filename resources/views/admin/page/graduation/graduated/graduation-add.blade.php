@@ -24,11 +24,11 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <label for="inputMeneruskanTidak" class="col-sm-3 col-form-label">Meneruskan / Tidak</label>
+                                                <label for="inputMeneruskanTidak" class="col-sm-3 col-form-label">Lulus / Tidak</label>
                                                 <div class="col-sm-3 text-secondary">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                        <label class="form-check-label" for="flexRadioDefault1">Meneruskan</label>
+                                                        <label class="form-check-label" for="flexRadioDefault1">Lulus</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6  text-secondary">
@@ -39,21 +39,17 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <label for="inputSekolahAsal" class="col-sm-3 col-form-label">Sekolah Asal</label>
-                                                <div class="col-sm-3 text-secondary">
+                                                <label for="inputSekolahAsal" class="col-sm-3 col-form-label">Jenjang</label>
+                                                <div class="col-sm-9 text-secondary">
                                                     <select class="single-select" id="inputSekolahAsal">
-                                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
-                                                    </select>
-                                                </div>
-                                                <label for="inputSekolahTujuan" class="col-sm-2 col-form-label">Sekolah Tujuan</label>
-                                                <div class="col-sm-4 text-secondary">
-                                                    <select class="single-select" id="inputSekolahTujuan">
-                                                        <option value="United States">MA MINHAAJUSHSHOOBIRIIN</option>
+                                                        <option value="United States">Ula</option>
+                                                        <option value="United States">Wustha</option>
+                                                        <option value="United States">Ulya</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <label for="inputAlasan" class="col-sm-3 col-form-label">Alasan Tidak Meneruskan</label>
+                                                <label for="inputAlasan" class="col-sm-3 col-form-label">Tahun Lulus</label>
                                                 <div class="col-sm-9 text-secondary">
                                                     <input type="text" class="form-control" value="" id="inputAlasan"/>
                                                 </div>
