@@ -31,6 +31,7 @@
 	<!-- Bootstrap JS -->
     @include('admin/partials/foot')
 	
+	@yield('custom_js')
 </body>
 
 </html>

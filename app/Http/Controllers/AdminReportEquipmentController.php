@@ -40,4 +40,15 @@ class AdminReportEquipmentController extends Controller
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }
+
+    
+    //
+    public function reportMutation()
+    {
+        //
+        $pdf = PDF::loadView('admin.page.report.reportequipment.report-mutation');
+        $pdf->setPaper('a4', 'potrait');
+        return $pdf->stream();
+    }
+
 }

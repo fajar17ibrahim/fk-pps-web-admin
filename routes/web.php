@@ -98,6 +98,8 @@ Route::get('/report-equipment-lembaga', [AdminReportEquipmentController::class, 
 
 Route::get('/report-equipment-santri', [AdminReportEquipmentController::class, 'reportSantri'])->name('report-equipment-santri');
 
+Route::get('/report-equipment-mutation', [AdminReportEquipmentController::class, 'reportMutation'])->name('report-equipment-mutation');
+
 Route::get('/report-print', [AdminReportPrintController::class, 'index'])->name('report-print');
 
 Route::get('/report-uts-print-pdf', [AdminReportPrintController::class, 'utsExportPdf'])->name('report-uts-print-pdf');

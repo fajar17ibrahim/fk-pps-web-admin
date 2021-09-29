@@ -10,13 +10,16 @@
                                                     <table class="table table-sm mb-0">
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row"><h5><a href="/report-equipment-cover">Halaman Cover</a></h5></th>
+                                                                <th scope="row"><h5><a href="report-equipment-cover">Halaman Cover</a></h5></th>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row"><h5><a href="/report-equipment-lembaga">Halaman Informasi PKPPS</a></h5></th>
+                                                                <th scope="row"><h5><a href="report-equipment-lembaga">Halaman Informasi PKPPS</a></h5></th>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row"><h5><a href="/report-equipment-santri">Halaman Biodata Santri</a></h5></th>
+                                                                <th scope="row"><h5><a href="report-equipment-santri">Halaman Biodata Santri</a></h5></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row"><h5><a href="report-equipment-mutation">Halaman Mutasi Rapor</a></h5></th>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row"><h5><a href="#">Halaman Petunjuk Pengisian</a></h5></th>

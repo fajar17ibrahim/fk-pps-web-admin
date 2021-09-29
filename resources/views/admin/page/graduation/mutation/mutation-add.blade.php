@@ -27,18 +27,18 @@
                                                 <label for="inputMeneruskanTidak" class="col-sm-3 col-form-label">Meneruskan / Tidak</label>
                                                 <div class="col-sm-3 text-secondary">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                        <input name="rbMelanjutkanTidak" value="Melanjutkan" class="form-check-input" type="radio">
                                                         <label class="form-check-label" for="flexRadioDefault1">Meneruskan</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6  text-secondary">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                        <input name="rbMelanjutkanTidak" value="Tidak" class="form-check-input" type="radio" >
                                                         <label class="form-check-label" for="flexRadioDefault1">Tidak</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3">
+                                            <div class="row mb-3" id="sekolahAsal">
                                                 <label for="inputSekolahAsal" class="col-sm-3 col-form-label">Sekolah Asal</label>
                                                 <div class="col-sm-3 text-secondary">
                                                     <select class="single-select" id="inputSekolahAsal">
@@ -52,8 +52,8 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="row mb-3">
-                                                <label for="inputAlasan" class="col-sm-3 col-form-label">Alasan Tidak Meneruskan</label>
+                                            <div class="row mb-3" id="alasan">
+                                                <label for="inputAlasan" class="col-sm-3 col-form-label">Alasan</label>
                                                 <div class="col-sm-9 text-secondary">
                                                     <input type="text" class="form-control" value="" id="inputAlasan"/>
                                                 </div>
@@ -71,4 +71,31 @@
                         </div>
                     </div>
                 </div>
+                @endsection
+
+                @section('custom_js')
+                <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+                <script>
+                    $(document).ready(function() {
+                        $(document).ready(function(){
+                            
+                            var lbSekolahAsal = $("#sekolahAsal");
+                            var lbAlasan = $("#alasan");
+
+                            $(lbSekolahAsal).hide();
+                            $(lbAlasan).hide();
+
+                            $('input[name$="rbMelanjutkanTidak"]').click(function(){
+                                var inputValue = $(this).attr("value");
+                                if (inputValue == 'Melanjutkan') {
+                                    $(lbSekolahAsal).show();
+                                    $(lbAlasan).hide();
+                                } else {
+                                    $(lbSekolahAsal).hide();
+                                    $(lbAlasan).show();
+                                }
+                            });
+                        });
+                    });
+                </script>
                 @endsection
