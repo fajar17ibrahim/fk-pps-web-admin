@@ -8,7 +8,7 @@
                         <tr>
                             <td class="text-center text-bold">
                                 <div class="text-uppercase text-size-18">Keterangan Pindah Madrasah / PPS</div>
-                                <div class="text-size-12">Nama Peserta Didik : ...........................................</div>
+                                <div class="text-size-12">Nama Peserta Didik : {{ $santri[0]->santri_name }}</div>
                             </td>
                         </tr>
                     </tbody>
@@ -74,7 +74,7 @@
                         <tr>
                             <td class="text-center text-bold">
                                 <div class="text-uppercase text-size-18">Keterangan Pindah Madrasah / PPS</div>
-                                <div class="text-size-12">Nama Peserta Didik : ...........................................</div>
+                                <div class="text-size-12">Nama Peserta Didik : {{ $santri[0]->santri_name }}</div>
                             </td>
                         </tr>
                     </tbody>

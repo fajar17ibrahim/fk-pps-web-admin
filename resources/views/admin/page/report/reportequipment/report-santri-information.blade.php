@@ -18,50 +18,50 @@
                         <tr>
                             <td style="width:1%;">1.</td>
                             <td style="width:39%;">Nama Peserta Didik (Lengkap)</td>
-                            <td style="width:60%;">: PPS MINHAAJUSHSHOOBIRIIN</td>
+                            <td style="width:60%;">: {{ $santri[0]->santri_name }}</td>
                         </tr>
                         <tr>
                             <td>2.</td>
                             <td>NIS</td>
-                            <td>: 2523523525253</td>
+                            <td>: {{ $santri[0]->santri_nism }}</td>
                         </tr>
                         <tr>
                             <td>3.</td>
                             <td>NISN</td>
-                            <td>: 24209425</td>
+                            <td>: {{ $santri[0]->santri_nisn }}</td>
                         </tr>
                         
                         <tr>
                             <td>4.</td>
                             <td>Tempat Tanggal Lahir</td>
-                            <td>: Jakarta, 18 Maret 2004</td>
+                            <td>: {{ $santri[0]->santri_born_place .", ". tanggal($santri[0]->santri_born_date) }}</td>
                         </tr>
                         
                         <tr>
                             <td>5.</td>
                             <td>Jenis Kelamin</td>
-                            <td>: Perempuan</td>
+                            <td>: {{ $santri[0]->santri_gender }}</td>
                         </tr>
                         
                         <tr>
                             <td>6.</td>
                             <td>Agama</td>
-                            <td>: Islam</td>
+                            <td>: {{ $santri[0]->santri_religion }}</td>
                         </tr>
                         <tr>
                             <td>7.</td>
                             <td>Status dalam Keluarga</td>
-                            <td>: Anak Kandung</td>
+                            <td>: -</td>
                         </tr>
                         <tr>
                             <td>8.</td>
                             <td>Anak ke</td>
-                            <td>: 2</td>
+                            <td>: {{ $santri[0]->santri_child_of }}</td>
                         </tr>
                         <tr>
                             <td>9.</td>
                             <td>Alamat Peserta Didik</td>
-                            <td>: Jl Masjid Sobirin</td>
+                            <td>: {{ $santri[0]->santri_address . " RT/RW " . $santri[0]->santri_rt_rw . ", " . $santri[0]->santri_village . "" . $santri[0]->santri_district . ", " . $santri[0]->santri_city . ", " . $santri[0]->santri_province . " " . $santri[0]->santri_pos_code . ", " . $santri[0]->santri_country }}</td>
                         </tr>
                         <tr>
                             <td>10.</td>
@@ -96,12 +96,12 @@
                         <tr>
                             <td></td>
                             <td>a. Ayah</td>
-                            <td>: Sumiran</td>
+                            <td>: {{ $santri[0]->father_name }}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>b. Ibu</td>
-                            <td>: Karyani</td>
+                            <td>: {{ $santri[0]->mother_name }}</td>
                         </tr>
                         <tr>
                             <td>14.</td>
@@ -111,7 +111,7 @@
                         <tr>
                             <td></td>
                             <td>Nomor Telepon Rumah</td>
-                            <td>:</td>
+                            <td>: {{ $santri[0]->father_phone }}</td>
                         </tr>
                         <tr>
                             <td>15.</td>
@@ -121,17 +121,17 @@
                         <tr>
                             <td></td>
                             <td>a. Ayah</td>
-                            <td>: Wiraswasta</td>
+                            <td>: {{ $santri[0]->father_profession }}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>b. Ibu</td>
-                            <td>: Ibu Rumah Tangga</td>
+                            <td>: {{ $santri[0]->mother_profession }}</td>
                         </tr>
                         <tr>
                             <td>16.</td>
                             <td>Nama Wali Peserta Didik</td>
-                            <td>:</td>
+                            <td>: {{ $santri[0]->wali_name }}</td>
                         </tr>
                         <tr>
                             <td>17.</td>
@@ -141,12 +141,12 @@
                         <tr>
                             <td></td>
                             <td>Nomor Telepon Rumah</td>
-                            <td>:</td>
+                            <td>: {{ $santri[0]->wali_phone }}</td>
                         </tr>
                         <tr>
                             <td>18.</td>
                             <td>Pekerjaan Wali Peserta Didik</td>
-                            <td>:</td>
+                            <td>: {{ $santri[0]->wali_profession }}</td>
                         </tr>
                     </tbody>
                 </table>

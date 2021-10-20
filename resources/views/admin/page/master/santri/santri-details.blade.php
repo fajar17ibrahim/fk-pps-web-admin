@@ -13,9 +13,9 @@
                                             <div class="d-flex flex-column align-items-center text-center">
                                                 <img src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white mt-4"  width="120" height="150">
                                                 <div class="mt-4">
-                                                    <h5>AHMAD MAULANA PUTRA</h5>
+                                                    <h5 id="vSantriNameCard">-</h5>
                                                     <p class="text-secondary mb-1">Santri</p>
-                                                    <p class="text-secondary mb-1">PKPPS MINHAAJUSHSHOOBIRIIN</p>
+                                                    <p id="vSchool" class="text-secondary text-uppercase mb-1">-</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -31,59 +31,59 @@
                                                     <tbody>      
                                                         <tr>
                                                             <td style="width:30%">Nama Santri</td>
-                                                            <td style="width:70%">: AHMAD MAULANA PUTRA</td>
+                                                            <td style="width:70%" id="vSantriName">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>NISM</td>
-                                                            <td>: 510031750032190026</td>
+                                                            <td id="vSantriNISM">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>NISN</td>
-                                                            <td>: 0044291810</td>
+                                                            <td id="vSantriNISN">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>No. KIP</td>
-                                                            <td>: -</td>
+                                                            <td id="vSantriNoKIP">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>No. PKH</td>
-                                                            <td>: -</td>
+                                                            <td id="vSantriNoKPH">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>NIK</td>
-                                                            <td>: 1571021901040001</td>
+                                                            <td id="vSantriNIK">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Tempat Tanggal Lahir</td>
-                                                            <td>: JAMBI, 02 Januari 2006</td>
+                                                            <td id="vSantriBornPlace">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Jenis Kelamin</td>
-                                                            <td>: Laki - Laki</td>
+                                                            <td id="vSantriGender">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Agama</td>
-                                                            <td>: Islam</td>
+                                                            <td id="vSantriReligion">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Hobi</td>
-                                                            <td>: Olahraga</td>
+                                                            <td id="vSantriHobby">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Cita - Cita</td>
-                                                            <td>: Ilmuwan</td>
+                                                            <td id="vSantriGoals">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Kewarganegaraan</td>
-                                                            <td>: WNI</td>
+                                                            <td id="vSantriState">: WNI</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Kebutuhan Khusus</td>
-                                                            <td>: Tidak Ada</td>
+                                                            <td id="vSantri">: Tidak Ada</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Status Rumah</td>
-                                                            <td>: Asrama milik lembaga</td>
+                                                            <td id="vSantriHomeStatus">: Asrama milik lembaga</td>
                                                         </tr> 
                                                     </tbody>
                                                 </table>
@@ -94,31 +94,31 @@
                                                     <tbody>
                                                         <tr>
                                                             <td style="width:30%">No. KK</td>
-                                                            <td style="width:70%">: 1571022412050051</td>
+                                                            <td id="vSantriNoKK" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">NIK Ayah</td>
-                                                            <td style="width:70%">: 1571022603650021</td>
+                                                            <td id="vAyahNIK" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Nama Ayah</td>
-                                                            <td style="width:70%">: SARJU</td>
+                                                            <td id="vAyahName" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Pekerjaan Ayah</td>
-                                                            <td style="width:70%">: PNS</td>
+                                                            <td id="vAyahProfesion" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Pendidikan Ayah</td>
-                                                            <td style="width:70%">: D4 / S1</td>
+                                                            <td id="vAyahEducation" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Telepon Ayah</td>
-                                                            <td style="width:70%">: -</td>
+                                                            <td id="vAyahPhone" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Rata - Rata Penghasilan</td>
-                                                            <td style="width:70%">: Rp. 3.000.000 - Rp. 4.000.000</td>
+                                                            <td id="vAyahSalary" style="width:70%">: -</td>
                                                         </tr>   
                                                     </tbody>
                                                 </table>
@@ -129,23 +129,23 @@
                                                     <tbody>
                                                         <tr>
                                                             <td style="width:30%">NIK Ibu</td>
-                                                            <td style="width:70%">: 1571022603650021</td>
+                                                            <td id="vIbuNIK" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Nama Ibu</td>
-                                                            <td style="width:70%">: SARJU</td>
+                                                            <td id="vIbuName" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Pekerjaan Ibu</td>
-                                                            <td style="width:70%">: PNS</td>
+                                                            <td id="vIbuProfesion" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Pendidikan Ibu</td>
-                                                            <td style="width:70%">: D4 / S1</td>
+                                                            <td id="vIbuEducation" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Telepon Ibu</td>
-                                                            <td style="width:70%">: -</td>
+                                                            <td id="vIbuPhone" style="width:70%">: -</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -155,28 +155,28 @@
                                                 <table id="table-attendance"  class="table-borderless" style="width:100%; line-height:2">
                                                     <tbody>
                                                         <tr>
-                                                            <td style="width:30%">Hubungan Wali</td>
-                                                            <td style="width:70%">: 1571022412050051</td>
+                                                            <td style="width:30%">No. KK Wali</td>
+                                                            <td id="vWaliNoKK" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">NIK Wali</td>
-                                                            <td style="width:70%">: 1571022603650021</td>
+                                                            <td id="vWaliNIK" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Nama Wali</td>
-                                                            <td style="width:70%">: SARJU</td>
+                                                            <td id="vWaliName" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Pekerjaan Wali</td>
-                                                            <td style="width:70%">: PNS</td>
+                                                            <td id="vWaliProfesion" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="width:30%">Pendidikan Ayah</td>
-                                                            <td style="width:70%">: D4 / S1</td>
+                                                            <td style="width:30%">Pendidikan Wali</td>
+                                                            <td id="vWaliEducation" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Rata - Rata Penghasilan</td>
-                                                            <td style="width:70%">: Rp. 3.000.000 - Rp. 4.000.000</td>
+                                                            <td id="vWaliSalary" style="width:70%">: -</td>
                                                         </tr>   
                                                     </tbody>
                                                 </table>
@@ -187,27 +187,27 @@
                                                     <tbody>
                                                         <tr>
                                                             <td style="width:30%">Alamat Rumah</td>
-                                                            <td style="width:70%">: JL. MASJID H SHOBIRIN</td>
+                                                            <td id="vSantriAddress" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">RT / RW</td>
-                                                            <td style="width:70%">: 013 / 010</td>
+                                                            <td id="vSantriRTRW" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="width:30%">Propinsi</td>
-                                                            <td style="width:70%">: DKI Jakarta</td>
+                                                            <td style="width:30%">Provinsi</td>
+                                                            <td id="vSantriProvince" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Kabupaten/Kota</td>
-                                                            <td style="width:70%">: Kota Jakarta Timur</td>
+                                                            <td id="vSantriCity" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Kecamatan</td>
-                                                            <td style="width:70%">: -</td>
+                                                            <td id="vSantriDistrict" style="width:70%">: -</td>
                                                         </tr>
                                                         <tr>
                                                             <td style="width:30%">Kode Pos</td>
-                                                            <td style="width:70%">: 13720</td>
+                                                            <td id="vSantriPosCode" style="width:70%">: -</td>
                                                         </tr>   
                                                     </tbody>
                                                 </table>
@@ -220,4 +220,64 @@
                         </div>
                     </div>
                 </div>
+                @endsection
+
+                @section('custom_js')
+                <script>
+                    // View Santri
+                    $(function () {
+                        const params = new URLSearchParams(window.location.search);
+                        var id = params.get('id');
+                        $.ajax({
+                            url: "master-santri/" + id,
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function(data) {
+                                console.log(data)
+                                $('#vSchool').text(data.school);
+                                $('#vSantriNameCard').text(data.name);
+                                $('#vSantriName').text(": " + data.name);
+                                $('#vSantriNISM').text(": " + data.nism);
+                                $('#vSantriNISN').text(": " + data.nisn);
+                                $('#vSantriNIK').text(": " + data.name);
+                                $('#vSantriBornPlace').text(": " + data.tempat_lahir + ", " + data.tanggal_lahir);
+                                $('#vSantriGender').text(": " + data.gender);
+                                $('#vSantriHobby').text(": " + data.hobi);
+                                $('#vSantriGoals').text(": " + data.cita_cita);
+                                $('#vSantriStatusHome').text(": " + data.status_rumah);
+                                $('#vSantriNoKK').text(": " + data.no_kk);
+                                $('#vAyahNIK').text(": " + data.nik_ayah);
+                                $('#vAyahName').text(": " + data.nama_ayah);
+                                $('#vAyahProfesion').text(": " + data.pekerjaan_ayah);
+                                $('#vAyahEducation').text(": " + data.pendidikan_ayah);
+                                $('#vAyahPhone').text(": " + data.telepon_ayah);
+                                $('#vAyahSalary').text(": " + data.gaji_ayah);
+                                $('#vIbuNIK').text(": " + data.nik_ibu);
+                                $('#vIbuName').text(": " + data.nama_ibu);
+                                $('#vIbuProfesion').text(": " + data.pekerjaan_ibu);
+                                $('#vIbuEducation').text(": " + data.pendidikan_ibu);
+                                $('#vIbuPhone').text(": " + data.telepon_ibu);
+                                $('#vIbuSalary').text(": " + data.gaji_ibu);
+                                $('#vWaliNoKK').text(": " + data.no_kk_wali);
+                                $('#vWaliNIK').text(": " + data.nik_wali);
+                                $('#vWaliName').text(": " + data.nama_wali);
+                                $('#vWaliProfesion').text(": " + data.pekerjaan_wali);
+                                $('#vWaliEducation').text(": " + data.pendidikan_wali);
+                                $('#vWaliPhone').text(": " + data.telepon_wali);
+                                $('#vWaliSalary').text(": " + data.gaji_wali);
+                                $('#vSantriAddress').text(": " + data.alamat);
+                                $('#vSantriRTRW').text(": " + data.rt_rw);
+                                $('#vSantriDistrict').text(": " + data.kecamatan);
+                                $('#vSantriCity').text(": " + data.kab_kota);
+                                $('#vSantriProvince').text(": " + data.provinsi);
+                                $('#vSantriPosCode').text(": " + data.kode_pos);
+                                $('#vSantriCountry').text(": " + data.negara);
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    });
+                    
+                </script>
                 @endsection

@@ -211,9 +211,9 @@ a {
 	padding: 8px 15px 8px 45px
 }
 .sidebar-wrapper .metismenu .mm-active>a, .sidebar-wrapper .metismenu a:active, .sidebar-wrapper .metismenu a:focus, .sidebar-wrapper .metismenu a:hover {
-	color: #0d6efd;
+	color: #06691f;
 	text-decoration: none;
-	background: rgb(13 110 253 / .12)
+	background: rgb(13 255 13 / .12)
 }
 .menu-label {
 	padding: 20px 15px 5px 5px;
@@ -892,7 +892,7 @@ a {
 	color: #4a4b4c
 }
 .chat-tab-menu .nav-pills .nav-link.active, .chat-tab-menu .nav-pills .show>.nav-link {
-	color: #0d6efd;
+	color: #0dfd21;
 	background-color: rgb(0 123 255 / 0%)
 }
 .chat-title {
@@ -1050,7 +1050,7 @@ a {
 	background-color: rgb(13 110 253 / .12)
 }
 .email-navigation a.list-group-item.active {
-	color: #0b5ed7;
+	color: #0bd73e;
 	font-weight: 600;
 	background-color: rgb(13 110 253 / .12)
 }
@@ -1147,8 +1147,8 @@ a {
 	background-color: rgb(255 255 255 / 20%)
 }
 .nav-primary.nav-tabs .nav-link.active {
-	color: #0d6efd;
-	border-color: #0d6efd #0d6efd #fff
+	color: #21fd0d;
+	border-color: #21fd0d #21fd0d #fff
 }
 .nav-danger.nav-tabs .nav-link.active {
 	color: #f41127;

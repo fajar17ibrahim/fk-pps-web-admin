@@ -85,9 +85,9 @@
                 <div class="menu-title">Relasi Data Master</div>
             </a>
             <ul>
-                <li> <a href="/master-relation-class"><i class="bx bx-right-arrow-alt"></i>Kelas</a>
+                <li> <a href="/master-relation-class"><i class="bx bx-right-arrow-alt"></i>Wali Kelas</a>
                 </li>
-                <li> <a href="/master-relation-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
+                <li> <a href="/master-relation-mapel"><i class="bx bx-right-arrow-alt"></i>Guru Mapel</a>
                 </li>
             </ul>
         </li>

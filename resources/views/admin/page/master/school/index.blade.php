@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    <div class="card">
+                <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="">
@@ -14,20 +14,21 @@
                             <br>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Jenjang</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">Ula</option>
-                                        <option value="United States">Wustha</option>
-                                        <option value="United States">Ulya</option>
+                                    <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
+                                        <option value="0">Semua</option>
+                                        @foreach ($schools as $school)
+                                        <option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="button" class="btn btn-success px-4" value="Tampilkan Data" />
+                                    <button type="button" onclick="filter()" class="btn btn-success px-4">Tampilkan Data</button>
                                 </div>
                             </div>
                         </div>
@@ -37,180 +38,33 @@
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                         <h6 class="mb-0 text-uppercase">Daftar PKPPS</h6>
                             <a class="ms-auto" href="/master-school-add"> 
-                                    <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah PKPPS</button>
+                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah PKPPS</button>
                             </a>
                         </div>
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="table-attendance" class="table table-striped table-borderless " style="width:100%">
+                                    <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Informasi PKPPS</th>
+                                                <th>NPSN</th>
+                                                <th>Nama Pondok Pesantren</th>
                                                 <th>Alamat</th>
-                                                <th>Nomor Telepon</th>
-                                                <th>Email</th>
+                                                <th>Status</th>
                                                 <th>Logo</th>
-                                                <th>TTD Kepsek</th>
                                                 <th>Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
-                                                    NIPS : 232131232<br>
-                                                    Kepsek : Adi Saputra<br>
-                                                    NIP : 1212321312212
-                                                </td>
-                                                <td>Surabaya</td>
-                                                <td>(0335) 2342 234</td>
-                                                <td>maminhaajushoobirin@gmail.com</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/logo_fk_pkpps.jpg" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/ttd-digital.png" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
-                                                    NIPS : 232131232<br>
-                                                    Kepala : Adi Saputra<br>
-                                                    NIP : 1212321312212
-                                                </td>
-                                                <td>Surabaya</td>
-                                                <td>(0335) 2342 234</td>
-                                                <td>maminhaajushoobirin@gmail.com</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/logo_fk_pkpps.jpg" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/ttd-digital.png" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
-                                                    NIPS : 232131232<br>
-                                                    Kepala : Adi Saputra<br>
-                                                    NIP : 1212321312212
-                                                </td>
-                                                <td>Surabaya</td>
-                                                <td>(0335) 2342 234</td>
-                                                <td>maminhaajushoobirin@gmail.com</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/logo_fk_pkpps.jpg" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/ttd-digital.png" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>PKPPS MINHAAJUSHSHOOBIRIIN<br>
-                                                    NIPS : 232131232<br>
-                                                    Kepala : Adi Saputra
-                                                </td>
-                                                <td>Surabaya</td>
-                                                <td>(0335) 2342 234</td>
-                                                <td>maminhaajushoobirin@gmail.com</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/logo_fk_pkpps.jpg" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="assets/images/ttd-digital.png" alt="" class="p-1 border bg-white"  width="90" height="90">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success">Aksi</button>
-                                                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
-                                                                <li><a class="dropdown-item" href="#">Aktif</a>
-                                                                </li>
-                                                                <li><a class="dropdown-item" href="#">Nonaktif</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-											    </td>
+                                                <th width="1%">No</th>
+                                                <th width="20%">Informasi PKPPS</th>
+                                                <th width="10px">JL. KAPUK MUARA NO.02 RT.005/RW.004 KAPUK MUARA PENJARINGAN</th>
+                                                <th >Nomor Telepon</th>
+                                                <th>Email</th>
+                                                <th >Logo</th>
+                                                <th >Opsi</th>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -219,4 +73,35 @@
                         </div>
                     </div>
                 </div>
+                @endsection
+
+                @section('custom_js')
+                <script>
+                    var school = 0;
+                    var table;
+                    $(function() {
+                        // Menampilkan data Lembaga
+                        table = $('#dataTable').DataTable({
+                            ajax: {
+                                "url": "master-school/data/" + school,
+                                "type": "GET"
+                            }
+                        });
+                    });
+
+                    // Filter
+                    function filter() {				
+                        school = $('#soSchoolFilter').val();
+                        $.ajax({
+                            url: "master-school/data/" + school,
+                            success: function(response){
+                                table.ajax.url("master-school/data/" + school).load(); 
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    };
+
+                </script>
                 @endsection

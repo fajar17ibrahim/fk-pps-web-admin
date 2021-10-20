@@ -29,9 +29,11 @@
                                     <h6 class="mb-0">Pondok Pesantren</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
-                                    </select>
+									<select class="single-select">
+										@foreach ($schools as $school)
+										<option value=" {{ $school->school_id }} ">{{ $school->school_name }}</option>
+										@endforeach
+									</select>
                                 </div>
                             </div>
 							<div class="row mb-3">
@@ -40,36 +42,9 @@
 								</div>
 								<div class="col-sm-9 text-secondary">
 									<select class="single-select">
-										<option value="United States">7 A</option>
-										<option value="United States">7 B</option>
-										<option value="United States">7 C</option>
-										<option value="United States">7 D</option>
-										<option value="United States">7 E</option>
-										<option value="United States">8 A</option>
-										<option value="United States">8 B</option>
-										<option value="United States">8 C</option>
-										<option value="United States">8 D</option>
-										<option value="United States">8 E</option>
-										<option value="United States">9 A</option>
-										<option value="United States">9 B</option>
-										<option value="United States">9 C</option>
-										<option value="United States">9 D</option>
-										<option value="United States">9 E</option>
-										<option value="United States">10 A</option>
-										<option value="United States">10 B</option>
-										<option value="United States">10 C</option>
-										<option value="United States">10 D</option>
-										<option value="United States">10 E</option>
-										<option value="United States">11 A</option>
-										<option value="United States">11 B</option>
-										<option value="United States">11 C</option>
-										<option value="United States">11 D</option>
-										<option value="United States">11 E</option>
-										<option value="United States">12 A</option>
-										<option value="United States">12 B</option>
-										<option value="United States">12 C</option>
-										<option value="United States">12 D</option>
-										<option value="United States">12 E</option>
+										@foreach ($kelass as $kelas)
+										<option value=" {{ $kelas->class_id }} ">{{ $kelas->class_name }}</option>
+										@endforeach
 									</select>
 								</div>
 							</div>
@@ -77,6 +52,7 @@
 								<div class="col-sm-3"></div>
 								<div class="col-sm-9 text-secondary">
 									<input type="button" class="btn btn-success px-4" value="Tampilkan Data" />
+									@include('admin/page/report/reportequipment/report-equipment-list')
 								</div>
 							</div>
 						</div>
@@ -88,7 +64,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="table-attendance" class="table table-striped table-borderless " style="width:100%">
+									<table id="dataTable" class="table table-striped table-borderless " style="width:100%">
 										<thead>
 											<tr>
 												<th>No</th>
@@ -101,54 +77,6 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>510031750032 / 69985167</td>
-												<td>EKO RAPORT</td>
-												<td>L</td>
-												<td>2021-01-01 12:12:12</td>
-												<td>
-													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
-													@include('admin/page/report/reportequipment/report-equipment-list')
-												</td>
-												<td><input type="button" class="btn btn-danger" value="Blok" /></td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>510031750032 / 69985167</td>
-												<td>EKO RAPORT</td>
-												<td>L</td>
-												<td>2021-01-01 12:12:12</td>
-												<td>
-													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
-													@include('admin/page/report/reportequipment/report-equipment-list')
-												</td>
-												<td><input type="button" class="btn btn-danger" value="Blok" /></td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>510031750032 / 69985167</td>
-												<td>EKO RAPORT</td>
-												<td>L</td>
-												<td>2021-01-01 12:12:12</td>
-												<td>
-													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
-													@include('admin/page/report/reportequipment/report-equipment-list')
-												</td>
-												<td><input type="button" class="btn btn-danger" value="Blok" /></td>
-											</tr>
-											<tr>
-												<td>4</td>
-												<td>510031750032 / 69985167</td>
-												<td>EKO RAPORT</td>
-												<td>L</td>
-												<td>2021-01-01 12:12:12</td>
-												<td>
-													<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#reportEquipmentListModal">Pelengkap Rapor</button>
-													@include('admin/page/report/reportequipment/report-equipment-list')
-												</td>
-												<td><input type="button" class="btn btn-secondary" value="Unblok" /></td>
-											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -157,3 +85,40 @@
 					</div>
 				</div>
 				@endsection
+
+				@section('custom_js')
+                <script>
+                    var table;
+                    var status = 0;
+                    $(function() {
+                        // Menampilkan data Equipment
+                        table = $('#dataTable').DataTable({
+                            ajax: {
+                                "url": "report-equipment/data",
+                                "type": "GET"
+                            }
+                        });
+                    
+                    });
+
+					// Form List Equipment
+                    function listForm($id) {
+                        $.ajax({
+                            url: "report-equipment/" + $id,
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function(data) {
+                                $('#reportEquipmentListModal').modal('show');
+								$('#lsCover').attr('href', 'report-equipment-cover/' + data[0].santri_nisn);
+								$('#lsLembaga').attr('href', 'report-equipment-lembaga/' + data[0].santri_nisn);
+								$('#lsSantri').attr('href', 'report-equipment-santri/' + data[0].santri_nisn);
+								$('#lsMutation').attr('href', 'report-equipment-mutation/' + data[0].santri_nisn);
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    }
+
+                </script>
+                @endsection

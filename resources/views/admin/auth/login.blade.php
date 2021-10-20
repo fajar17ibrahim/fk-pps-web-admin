@@ -41,26 +41,43 @@
 										</p>
 									</div>
 									<div class="form-body">
-										<form class="row g-3" action="/">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Email</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Email">
+										<form class="row g-3 needs-validation" action="login-request" method="post" novalidate>
+											@csrf
+											@if(session('error'))
+											<div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+												<div class="d-flex align-items-center">
+													<div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+													</div>
+													<div class="ms-3">
+														<h6 class="mb-0 text-white">Login Gagal</h6>
+														<div class="text-white">{{ Session::get('error') }}</div>
+													</div>
+												</div>
+												<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Password</label>
-												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+											@endif
+											<div class="col-12 position-relative">
+												<label for="inputEmail" class="form-label">Email</label>
+												<div class="input-group">
+													<input type="email" name="email" class="form-control" id="inputEmail" placeholder="contoh@gmail.com" required>
+													<div class="invalid-tooltip">Email tidak boleh kosong</div>
 												</div>
 											</div>
-											<div class="col-md-12 text-end">	<a href="authentication-forgot-password.html">Lupa Password ?</a>
+											<div class="col-12 position-relative">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group" id="show_hide_password">
+													<input type="password" name="password" class="form-control border-end-0" id="inputChoosePassword" value="" placeholder="Password" required> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+													<div class="invalid-tooltip">Password boleh kosong</div>
+												</div>
+											</div>
+											<div class="col-md-12 text-end"><a href="authentication-forgot-password.html">Lupa Password ?</a>
 											</div>
                                             
 											<div class="col-12">
 												<div class="d-grid">
-													    <button type="submit" class="btn btn-success"><i class="bx bxs-lock-open"></i>Sign in</button>
+													<button type="submit" class="btn btn-success"><i class="bx bxs-lock-open"></i>Sign in</button>
                                                 </div>
 											</div>
-                                           
 										</form>
 									</div>
 								</div>
@@ -79,6 +96,7 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/plugins/simplebar/js/simplebar.min.js"></script>
 	<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+	<script src="assets/js/form-validations.js"></script>
 	<script src="assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
 	<!--Password show & hide js -->
 	<script>
