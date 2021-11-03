@@ -6,10 +6,13 @@ use JWTAuth;
 use Session;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\School;
+use App\Models\Ustadz;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Auth;
 
 class AdminAuthLoginController extends Controller
 {
@@ -23,27 +26,34 @@ class AdminAuthLoginController extends Controller
     public function login(Request $request) 
     {
         $credentials = $request->only('email', 'password');
-
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                Session::flash('error', 'Email atau password salah');
-                return redirect()->route('login');
-                // return response()->json(['error' => 'invalid_credentials'], 400);
+        if (Auth::attempt($credentials)) {
+            
+            $user = Auth::user();
+            $ustadz = Ustadz::leftJoin('users', 'users.email', '=', 'ustadz.ustadz_email')
+            ->leftJoin('role', 'role.id', '=', 'users.role_id')
+            ->leftJoin('school', 'school.school_npsn', '=', 'ustadz.ustadz_school')
+            ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
+            ->where('ustadz_email' , '=', $user->email)
+                ->get();
+            Session::put('user', $ustadz);
+            Session::put('pkpps', $ustadz[0]->school_name);
+            if ($user->role == '1') {
+                
+                return redirect('/');
+                // return redirect()->intended('admin');
+            } else if ($user->level == '2') {
+                return redirect()->intended('guru');
             }
-        } catch (JWTException $e) {
-            Session::flash('error', 'Internal Server Error');
-            return redirect()->route('login');
-            // return response()->json(['error' => 'could_not_create_token'], 500);
+            return redirect('/');
         }
+        Session::flash('error', 'Email atau password salah');
+        return redirect('login');
+    }
 
-        // return $token;
-        // $token = JWTAuth::setAuthenticationHeader($token);
-        // Session::flash('token', $token);
-        // $response = Http::withToken($token)->get('127.0.0.1:8000/user-request');
-
-        Session::flash('token', $token);
-        return redirect()->route('user');
-        // return response()->json(compact('token'));
+    public function logout(Request $request) {
+        $request->session()->flush();
+        Auth::logout();
+        return Redirect('login');
     }
 
     public function register(Request $request)
@@ -71,30 +81,5 @@ class AdminAuthLoginController extends Controller
         return response()->json(compact('user','token'), 201);
     }
 
-    public function getAuthenticatedUser()
-    {
-        try {
-
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-
-        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-            return response()->json(['token_expired'], $e->getStatusCode());
-
-        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
-            return response()->json(['token_invalid'], $e->getStatusCode());
-
-        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-
-            return response()->json(['token_absent'], $e->getStatusCode());
-
-        }
-
-        return response()->json(compact('user'));
-    }
-
-
+    
 }

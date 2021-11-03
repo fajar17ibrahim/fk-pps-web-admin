@@ -1,5 +1,5 @@
                                     <!-- Modal -->
-                                    <div class="modal fade" id="masterbookPageListModal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal fade" id="masterBookListModal" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -10,13 +10,13 @@
                                                     <table class="table table-sm mb-0">
                                                         <tbody>
                                                             <tr>
-                                                                <th scope="row"><h5><a href="/masterbook-cover">Halaman Cover</a></h5></th>
+                                                                <th scope="row"><h5><a id="lsCover">Halaman Cover</a></h5></th>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row"><h5><a href="/masterbook-santri">Halaman Biodata Santri</a></h5></th>
+                                                                <th scope="row"><h5><a id="lsSantri">Halaman Biodata Santri</a></h5></th>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row"><h5><a href="/masterbook-report">Informasi Nilai Rapor</a></h5></th>
+                                                                <th scope="row"><h5><a id="lsReport">Informasi Nilai Rapor</a></h5></th>
                                                             </tr>
                                                         </tbody>
                                                     </table>

@@ -3,6 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
+                    @if(Session::get('user')[0]['role_id'] == 1)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -46,12 +47,15 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 class="mb-0 text-uppercase">Daftar Kelas</h6>
+                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                             <button type="button" class="btn btn-warning px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addClassModal"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Kelas</button>
                             @include('admin/page/master/class/class-add')
+                            @endif
                         </div>
                         <div class="card">
                             <div class="card-body">
@@ -91,7 +95,9 @@
                                                 <th>Nama Kelas</th>
                                                 <th>Jenjang</th>
                                                 <th>PKPPS</th>
+                                                @if (Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2) {
                                                 <th width="10%">Aksi</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>

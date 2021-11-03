@@ -18,17 +18,20 @@ class CreateSchoolTable extends Migration
             $table->string('school_statistic_number', 25)->unique()->nullable();
             $table->string('school_npsn', 25)->unique()->nullable();
             $table->string('school_name', 100)->nullable();
+            $table->string('school_email', 50)->nullable();
+            $table->string('school_phone', 20)->nullable();
             $table->string('school_address')->nullable();
-            $table->string('school_village')->nullable();
+            $table->string('school_village', 50)->nullable();
+            $table->string('school_rt_rw', 15)->nullable();
             $table->string('school_districts', 50)->nullable();
             $table->string('school_city', 50)->nullable();
             $table->string('school_province', 50)->nullable();
             $table->string('school_pos_code', 12)->nullable();
             $table->string('school_country', 25)->nullable();
-            $table->integer('school_santri_total')->nullable();
-            $table->integer('school_photo')->nullable();
-            $table->integer('school_status')->nullable();
-            $table->integer('school_headship')->nullable();
+            $table->string('school_santri_total', 12)->nullable();
+            $table->string('school_photo', 50)->nullable()->default('logo_fk_pkpps.jpg');
+            $table->string('school_status', 15)->nullable();
+            $table->string('school_headship', 25)->nullable();
             $table->timestamps();
         });
     }

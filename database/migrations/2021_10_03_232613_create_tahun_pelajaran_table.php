@@ -15,8 +15,8 @@ class CreateTahunPelajaranTable extends Migration
     {
         Schema::create('tahun_pelajaran', function (Blueprint $table) {
             $table->integer('tahun_pelajaran_id', 12);
-            $table->string('tahun_pelajaran_name', 20);
-            $table->string('tahun_pelajaran_semester', 12);
+            $table->string('tahun_pelajaran_name', 20)->nullable();
+            $table->string('tahun_pelajaran_semester', 12)->nullable();
             $table->timestamps();
         });
     }

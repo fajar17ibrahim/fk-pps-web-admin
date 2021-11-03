@@ -14,9 +14,11 @@ class CreateKelasTable extends Migration
     public function up()
     {
         Schema::create('kelas', function (Blueprint $table) {
-            $table->integer('kelasi_id', 12);
-            $table->string('class_name', 10);
-            $table->string('class_level', 25);
+            $table->integer('class_id', 12);
+            $table->string('class_name', 10)->nullable();
+            $table->string('class_level', 25)->nullable();
+            $table->string('class_school', 25)->nullable();
+            $table->string('homeroom_teacher', 25)->nullable();
             $table->timestamps();
         });
     }

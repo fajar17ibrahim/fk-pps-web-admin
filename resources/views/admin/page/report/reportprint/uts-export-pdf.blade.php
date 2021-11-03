@@ -22,25 +22,25 @@
                                         <tbody>
                                             <tr>
                                                 <td style="width:15%">Nama PKPPS</td>
-                                                <td style="width:40%">: PKPPS MINHAAJUSHSHOOBIRIIN</td>
+                                                <td style="width:40%">: {{ $reportPrint[0]->school_name }}</td>
                                                 <td style="width:15%">Kelas</td>
-                                                <td style="width:20%">: X-IPA 1</td>
+                                                <td style="width:20%">: {{ $reportPrint[0]->class_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Alamat</td>
-                                                <td>: Jakarta</td>
+                                                <td>: {{ $reportPrint[0]->school_address }}</td>
                                                 <td>Semester</td>
                                                 <td>: 1 (Satu)</td>
                                             </tr>
                                             <tr>
                                                 <td>Nama</td>
-                                                <td>: EKO RAPOR</td>
+                                                <td>: {{ $reportPrint[0]->santri_name }}</td>
                                                 <td>Tahun Pelajaran</td>
                                                 <td>: 2018-2019</td>
                                             </tr>
                                             <tr>
                                                 <td>Nomor Induk</td>
-                                                <td>: 12312</td>
+                                                <td>: {{ $reportPrint[0]->santri_nism }}</td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
@@ -327,7 +327,7 @@
                                                 <td style="width: 70%">
                                                     Mengetahui:<br>
                                                     Orang Tua / Wali<br><br><br><br><br>
-                                                    ...........................
+                                                    {{ $reportPrint[0]->father_name }}
                                                 </td>
                                                 <td style="width: 30%">
                                                     Jakarta Timur, 18 September 2021<br>

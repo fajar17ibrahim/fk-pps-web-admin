@@ -8,10 +8,10 @@
                             <td class="text-size-18">Lembar Buku Induk Registrasi</td>
                         </tr>
                         <tr>
-                            <td class="text-size-14">PK-PPS MINHAAJUSHSHOOBIRIIN</td>
+                            <td class="text-size-14">{{ $masterBook[0]->school_name }}</td>
                         </tr>
                         <tr>
-                            <td class="text-size-14">Islamic School Tingkat Ulya</td>
+                            <td class="text-size-14">Islamic School Tingkat {{ $masterBook[0]->class_level }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -25,36 +25,36 @@
                         <tr>
                             <td style="width:0%;">1.</td>
                             <td style="width:35%;">Nama Lengkap</td>
-                            <td style="width:40%;">: Muhammad Fajar Ibrahim</td>
+                            <td style="width:40%;">: {{ $masterBook[0]->santri_name }}</td>
                             <td style="width:25%;" rowspan="11"  class="table-text-top"><img src="assets/images/avatars/avatar-santri.jpg" alt="" class="bg-white"  width="100" height="120"></td>
                         </tr>   
                         <tr>
                             <td style="width:1%;">2.</td>
                             <td>NIS</td>
-                            <td>: 2523523525253</td>
+                            <td>: {{ $masterBook[0]->santri_nism }}</td>
                         </tr>
                         <tr>
                             <td>3.</td>
                             <td>NISN</td>
-                            <td>: 24209425</td>
+                            <td>: {{ $masterBook[0]->santri_nisn }}</td>
                         </tr>
 
                         <tr>
                             <td>4.</td>
                             <td>Jenis Kelamin</td>
-                            <td>: Laki - Laki</td>
+                            <td>: {{ $masterBook[0]->santri_gender }}</td>
                         </tr>
                         
                         <tr>
                             <td>5.</td>
                             <td>Tempat Lahir</td>
-                            <td>: Jakarta</td>
+                            <td>: {{ $masterBook[0]->santri_born_place }}</td>
                         </tr>
                         
                         <tr>
                             <td>6.</td>
                             <td>Tanggal Lahir</td>
-                            <td>: 18 Maret 2004</td>
+                            <td>: {{ tanggal($masterBook[0]->santri_born_date) }}</td>
                         </tr>
 
                         <tr>
@@ -174,31 +174,31 @@
                         <tr>
                             <td>18.</td>
                             <td>Ayah</td>
-                            <td colspan="2">: -</td>
+                            <td colspan="2">: {{ $masterBook[0]->father_name }}</td>
                         </tr>
 
                         <tr>
                             <td>19.</td>
                             <td>NIK Ayah</td>
-                            <td colspan="2">: -</td>
+                            <td colspan="2">: {{ $masterBook[0]->father_nik }}</td>
                         </tr>
 
                         <tr>
                             <td>20.</td>
                             <td>Pendidikan Terakhir Ayah</td>
-                            <td colspan="2">: -</td>
+                            <td colspan="2">: {{ $masterBook[0]->father_education }}</td>
                         </tr>
 
                         <tr>
                             <td>21.</td>
                             <td>Kerja Ayah</td>
-                            <td colspan="2">: -</td>
+                            <td colspan="2">: {{ $masterBook[0]->father_position }}</td>
                         </tr>
 
                         <tr>
                             <td>22.</td>
                             <td>Penghasilan Ayah</td>
-                            <td colspan="2">: -</td>
+                            <td colspan="2">: {{ $masterBook[0]->father_salary }}</td>
                         </tr>
                         
                         <tr>

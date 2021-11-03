@@ -70,8 +70,8 @@
                         </tr>
                         <tr>
                             <td>11.</td>
-                            <td>Madrasah Asal (SMP/MTS)</td>
-                            <td>: MTS Raudadlatul Mualim</td>
+                            <td>Madrasah Asal</td>
+                            <td>: {{ $santri[0]->school_name }}</td>
                         </tr>
                         <tr>
                             <td>12.</td>
@@ -158,7 +158,7 @@
                             <!-- <td rowspan="4">Kepaa Ulya</td> -->
                             <td>
                                 Jakarta, 15 Juli 2018<br>
-                                Kepala Ulya
+                                Kepala {{ $santri[0]->class_level }}
                             </td>
                         </tr>
                         <tr>

@@ -20,9 +20,13 @@
                                                         <label for="soLevel" class="col-sm-3 col-form-label">Jenjang</label>
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" name="soLevel" id="soLevel" tabindex="-1">
+                                                                @if(Session::get('user')[0]['role_id'] != 1)
+                                                                <option value="{{ Session::get('user')[0]['class_level'] }}" class="form-control">{{ Session::get('user')[0]['class_level'] }}</option>
+                                                                @else
                                                                 <option value="Ula" class="form-control">Ula</option>
                                                                 <option value="Wustha" class="form-control">Wustha</option>
                                                                 <option value="Ulya" class="form-control"  >Ulya</option>
+                                                                @endif
                                                             </select>
                                                         </div>
                                                     </div>

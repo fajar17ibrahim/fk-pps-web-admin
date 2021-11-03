@@ -16,6 +16,8 @@ class AdminMastermapelController extends Controller
     public function index()
     {
         //
+        $this->authorize('master-mapel');
+
         $kelompokMapels = KelompokMapel::orderBy('kelompok_name', 'asc')->get();
         return view('admin.page.master.mapel.index', compact('kelompokMapels'));
     }
@@ -41,6 +43,8 @@ class AdminMastermapelController extends Controller
         //
         try {
             //
+            $this->authorize('master-mapel');
+
             $mapel = new Mapel;
             $mapel->mapel_name = $request['inName'];
             $mapel->mapel_kelompok = $request['soKelompok'];
@@ -68,6 +72,8 @@ class AdminMastermapelController extends Controller
     public function show($id)
     {
         //
+        $this->authorize('master-mapel');
+
         $mapel = Mapel::find($id);
         $data = array(
             'id' => $mapel->mapel_id, 
@@ -85,6 +91,8 @@ class AdminMastermapelController extends Controller
     public function edit($id)
     {
         //
+        $this->authorize('master-mapel');
+
         $mapel = Mapel::find($id);
         $data = array(
             'id' => $mapel->mapel_id, 
@@ -105,6 +113,8 @@ class AdminMastermapelController extends Controller
         //
         try {
             //
+            $this->authorize('master-mapel');
+            
             $mapel = Mapel::find($id);
             $mapel->mapel_name = $request['inNameEdit'];
             $mapel->mapel_kelompok = $request['soKelompokEdit'];

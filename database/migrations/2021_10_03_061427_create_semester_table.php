@@ -14,8 +14,8 @@ class CreateSemesterTable extends Migration
     public function up()
     {
         Schema::create('semester', function (Blueprint $table) {
-            $table->integer('semester_id', 12);
-            $table->string('semester_name', 50)->unique();
+            $table->integer('semester_id', 12)->nullable();
+            $table->string('semester_name', 50)->unique()->nullable();
             $table->timestamps();
         });
     }

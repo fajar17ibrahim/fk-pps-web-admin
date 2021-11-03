@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ustadz;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -146,26 +148,36 @@ class AdminUserController extends Controller
         return response()->json($ustadz);
     }
 
-    public function listData() { 
-        $users = User::leftJoin('role', 'users.role', '=', 'role.role_id')
+    public function listData() {
+        $user = Session::get('user');
+
+        $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
+        ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
+        ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
+        ->where('kelas.class_level', '=', $user[0]->class_level)
         ->get();
         
         $no = 0;
         $data = array();
-        foreach ($users as $user) {
+        foreach ($users as $userData) {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $user->id;
-            $row[] = $user->name;
-            $row[] = $user->email;
-            $row[] = $user->role_name;
-            $row[] = $user->status;
+            $row[] = $userData->id;
+            $row[] = $userData->name;
+            $row[] = $userData->email;
+            $row[] = $userData->role_name;
+            $row[] = '<div class="d-flex align-items-center text-success">	
+                        <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
+                        <span>' . $userData->status . '</span>
+                    </div>';
+            if ($user[0]->role_id == 1 || $user[0]->role_id == 2) {
             $row[] = '<div class="col">
                         <div class="btn-group">
-                            <a href="#" onclick="editForm(' . $user->id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
+                            <a href="#" onclick="editForm(' . $userData->id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
                         </div>
                     </div>';
+            }
             $data[] = $row;
         }
 

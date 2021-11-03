@@ -17,21 +17,25 @@
                                     <h6 class="mb-0">Jenjang</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">Ula</option>
-                                        <option value="United States">Wustha</option>
-                                        <option value="United States">Ulya</option>
+                                    <select class="single-select" name="soLevelFilter" id="soLevelFilter">
+                                        <option value="0">Semua</option>
+                                        <option value="Ula">Ula</option>
+                                        <option value="Wustha">Wustha</option>
+                                        <option value="Ulya">Ulya</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Pondok Pesantren</h6>
+                                    <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
-                                    </select>
+                                    <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
+									<option value="0">Semua</option>	
+                                    @foreach ($schools as $school)
+										<option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+										@endforeach
+									</select>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -39,44 +43,18 @@
                                     <h6 class="mb-0">Kelas</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">7 A</option>
-                                        <option value="United States">7 B</option>
-                                        <option value="United States">7 C</option>
-                                        <option value="United States">7 D</option>
-                                        <option value="United States">7 E</option>
-                                        <option value="United States">8 A</option>
-                                        <option value="United States">8 B</option>
-                                        <option value="United States">8 C</option>
-                                        <option value="United States">8 D</option>
-                                        <option value="United States">8 E</option>
-                                        <option value="United States">9 A</option>
-                                        <option value="United States">9 B</option>
-                                        <option value="United States">9 C</option>
-                                        <option value="United States">9 D</option>
-                                        <option value="United States">9 E</option>
-										<option value="United States">10 A</option>
-										<option value="United States">10 B</option>
-										<option value="United States">10 C</option>
-										<option value="United States">10 D</option>
-										<option value="United States">10 E</option>
-										<option value="United States">11 A</option>
-										<option value="United States">11 B</option>
-										<option value="United States">11 C</option>
-										<option value="United States">11 D</option>
-										<option value="United States">11 E</option>
-										<option value="United States">12 A</option>
-										<option value="United States">12 B</option>
-										<option value="United States">12 C</option>
-										<option value="United States">12 D</option>
-										<option value="United States">12 E</option>
+                                    <select class="single-select" name="soKelasFilter" id="soKelasFilter">
+                                        <option value="0">Semua</option>
+                                        @foreach ($kelass as $kelas)
+                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="button" class="btn btn-success px-4" value="Tampilkan Data" />
+                                    <button type="button" onclick="filter()" class="btn btn-success px-4">Tampilkan Data</button>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +66,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="table-attendance" class="table table-striped table-borderless " style="width:100%">
+                                    <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -102,46 +80,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td>2021-01-01 12:12:12</td>
-                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
-                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
-                                                <td><input type="button" class="btn btn-danger" value="Blok Rapor" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td>2021-01-01 12:12:12</td>
-                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
-                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
-                                                <td><input type="button" class="btn btn-danger" value="Blok Rapor" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td>2021-01-01 12:12:12</td>
-                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
-                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
-                                                <td><input type="button" class="btn btn-danger" value="Blok Rapor" /></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td>2021-01-01 12:12:12</td>
-                                                <td><a href="/report-uts-print-pdf">rapor-uts.pdf</a></td>
-                                                <td><a href="/report-uas-print-pdf">rapor-uas.pdf</a></td>
-                                                <td><input type="button" class="btn btn-secondary" value="Unblok Rapor" /></td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -149,4 +87,40 @@
                         </div>
                     </div>
                 </div>
+                @endsection
+
+                @section('custom_js')
+                <script>
+                    var level = 0;
+                    var school = 0;
+                    var kelas = 0;
+                    var table;
+                    $(function() {
+                        // Menampilkan data Sanri
+                        table = $('#dataTable').DataTable({
+                            ajax: {
+                                "url": "report-print/data/" + level + "/" + school+ "/" + kelas,
+                                "type": "GET"
+                            }
+                        });
+                    
+                    });
+
+                    // Filter
+                    function filter() {				
+                        level = $('#soLevelFilter').val();
+                        school = $('#soSchoolFilter').val();
+                        kelas = $('#soKelasFilter').val();
+                        $.ajax({
+                            url: "report-print/data/" + level + "/" + school + "/" + kelas,
+                            success: function(response){
+                                table.ajax.url("report-print/data/" + level + "/" + school+ "/" + kelas).load(); 
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    };
+                    
+                </script>
                 @endsection

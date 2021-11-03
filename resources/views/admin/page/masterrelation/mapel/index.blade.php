@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    <div class="card">
+                <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="">
@@ -17,10 +17,11 @@
                                     <h6 class="mb-0">Jenjang</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">Ula</option>
-                                        <option value="United States">Wustha</option>
-                                        <option value="United States">Ulya</option>
+                                    <select class="single-select" name="soLevelFilter" id="soLevelFilter">
+                                        <option value="0">Semua</option>
+                                        <option value="Ula">Ula</option>
+                                        <option value="Wustha">Wustha</option>
+                                        <option value="Ulya">Ulya</option>
                                     </select>
                                 </div>
                             </div>
@@ -29,9 +30,12 @@
                                     <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
-                                    </select>
+                                    <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
+									<option value="0">Semua</option>	
+                                    @foreach ($schools as $school)
+										<option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+										@endforeach
+									</select>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -39,56 +43,34 @@
                                     <h6 class="mb-0">Kelas</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">7 A</option>
-                                        <option value="United States">7 A</option>
-                                        <option value="United States">7 C</option>
-                                        <option value="United States">7 D</option>
-                                        <option value="United States">7 E</option>
-                                        <option value="United States">8 A</option>
-                                        <option value="United States">8 B</option>
-                                        <option value="United States">8 C</option>
-                                        <option value="United States">8 D</option>
-                                        <option value="United States">8 E</option>
-                                        <option value="United States">9 A</option>
-                                        <option value="United States">9 B</option>
-                                        <option value="United States">9 C</option>
-                                        <option value="United States">9 D</option>
-                                        <option value="United States">9 E</option>
-										<option value="United States">10 A</option>
-										<option value="United States">10 B</option>
-										<option value="United States">10 C</option>
-										<option value="United States">10 D</option>
-										<option value="United States">10 E</option>
-										<option value="United States">11 A</option>
-										<option value="United States">11 B</option>
-										<option value="United States">11 C</option>
-										<option value="United States">11 D</option>
-										<option value="United States">11 E</option>
-										<option value="United States">12 A</option>
-										<option value="United States">12 B</option>
-										<option value="United States">12 C</option>
-										<option value="United States">12 D</option>
-										<option value="United States">12 E</option>
+                                    <select class="single-select" name="soKelasFilter" id="soKelasFilter">
+                                        <option value="0">Semua</option>
+                                        @foreach ($kelass as $kelas)
+                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="button" class="btn btn-success px-4" value="Tampilkan Data" />
+                                    <button type="button" onclick="filter()" class="btn btn-success px-4">Tampilkan Data</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Mata Pelajaran PKPPS MINHAAJUSHSHOOBIRIIN Kelas 7 A</h6>
-                        <br>
+                        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                            <h6 class="mb-0 text-uppercase">Daftar Mata Pelajaran</h6>   
+                            <button type="button" class="btn btn-warning px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addMapelTeacherModal"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Kelas</button>
+                            @include('admin/page/masterrelation/mapel/mapel-relation-add')
+                        </div>
                         <div class="card">
                             <div class="card-body">
+                                @include('admin/page/masterrelation/mapel/mapel-relation-edit')
                                 <div class="table-responsive">
-                                    <table id="table-attendance" class="table table-striped table-borderless " style="width:100%">
+                                    <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -100,66 +82,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>MPL01</td>
-                                                <td>Bahasa Arab</td>
-                                                <td>7 A</td>
-                                                <td>Adi Saputra</td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
-                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>MPL02</td>
-                                                <td>Bahasa Indonesia</td>
-                                                <td>7 A</td>
-                                                <td>Adi Saputra</td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
-                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>MPL03</td>
-                                                <td>Bahasa Inggris</td>
-                                                <td>7 A</td>
-                                                <td>Adi Saputra</td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
-                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>MPL04</td>
-                                                <td>Al-Qur'an</td>
-                                                <td>7 A</td>
-                                                <td>Adi Saputra</td>
-                                                <td>
-                                                    <div class="col">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#editMapelTeacherModal"><i class='bx bx-edit'></i>Edit</button>
-                                                            @include('admin/page/masterrelation/mapel/mapel-relation-edit')
-                                                        </div>
-                                                    </div>
-											    </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -167,4 +89,60 @@
                         </div>
                     </div>
                 </div>
+                @endsection
+
+                @section('custom_js')
+                <script>
+                    var class = 0;
+                    var level = 0;
+                    var school = 0;
+                    var table;
+                    $(function() {
+                        // Menampilkan data Guru Mapel
+                        table = $('#dataTable').DataTable({
+                            ajax: {
+                                "url": "master-relation-mapel/data/" + level + "/" + school + "/" + class,
+                                "type": "GET"
+                            }
+                        });                    
+                    });
+
+                    // Filter
+                    function filter() {				
+                        level = $('#soLevelFilter').val();
+                        school = $('#soSchoolFilter').val();
+                        kelas = $('#soKelasFilter').val();
+                        $.ajax({
+                            url: "master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
+                            success: function(response){
+                                table.ajax.url("master-relation-mapel/data/" + level + "/" + school+ "/" + kelas).load(); 
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    };
+
+                    // Form Edit Kelas
+                    function editForm($id) {
+                        url = "master-relation-class/" + $id;
+                        $('.modal-title').text('Edit Kelas');
+                        $.ajax({
+                            url: "master-relation-class/" + $id + "/edit",
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function(data) {
+                                $('#editWaliKelasModal').modal('show');
+                                $('.modal-title').text('Edit Kelas');
+                                $('#formEdit').attr('action', url);
+                                $('#soClassName').val(data.id);
+                                $('#soHomeroomTeacher').val(data.wali);
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    }
+                    
+                </script>
                 @endsection

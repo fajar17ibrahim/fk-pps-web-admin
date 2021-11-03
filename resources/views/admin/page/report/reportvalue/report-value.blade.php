@@ -17,10 +17,11 @@
                                     <h6 class="mb-0">Jenjang</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">Ula</option>
-                                        <option value="United States">Wustha</option>
-                                        <option value="United States">Ulya</option>
+                                    <select class="single-select" name="soLevelFilter" id="soLevelFilter">
+                                        <option value="0">Semua</option>
+                                        <option value="Ula">Ula</option>
+                                        <option value="Wustha">Wustha</option>
+                                        <option value="Ulya">Ulya</option>
                                     </select>
                                 </div>
                             </div>
@@ -29,9 +30,12 @@
                                     <h6 class="mb-0">PKPPS</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">MINHAAJUSHSHOOBIRIIN</option>
-                                    </select>
+                                    <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
+									    <option value="0">Semua</option>	
+                                        @foreach ($schools as $school)
+										<option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+										@endforeach
+									</select>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -39,56 +43,31 @@
                                     <h6 class="mb-0">Kelas</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">7 A</option>
-                                        <option value="United States">7 B</option>
-                                        <option value="United States">7 C</option>
-                                        <option value="United States">7 D</option>
-                                        <option value="United States">7 E</option>
-                                        <option value="United States">8 A</option>
-                                        <option value="United States">8 B</option>
-                                        <option value="United States">8 C</option>
-                                        <option value="United States">8 D</option>
-                                        <option value="United States">8 E</option>
-                                        <option value="United States">9 A</option>
-                                        <option value="United States">9 B</option>
-                                        <option value="United States">9 C</option>
-                                        <option value="United States">9 D</option>
-                                        <option value="United States">9 E</option>
-										<option value="United States">10 A</option>
-										<option value="United States">10 B</option>
-										<option value="United States">10 C</option>
-										<option value="United States">10 D</option>
-										<option value="United States">10 E</option>
-										<option value="United States">11 A</option>
-										<option value="United States">11 B</option>
-										<option value="United States">11 C</option>
-										<option value="United States">11 D</option>
-										<option value="United States">11 E</option>
-										<option value="United States">12 A</option>
-										<option value="United States">12 B</option>
-										<option value="United States">12 C</option>
-										<option value="United States">12 D</option>
-										<option value="United States">12 E</option>
+                                    <select class="single-select" name="soKelasFilter" id="soKelasFilter">
+                                        <option value="0">Semua</option>
+                                        @foreach ($kelass as $kelas)
+                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Mata Pelajaran</h6>
+                                    <h6 class="mb-0">Mapel</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <select class="single-select">
-                                        <option value="United States">Al-Qur'an</option>
-                                        <option value="United States">Hadist</option>
-                                        <option value="United States">Akidah</option>
+                                    <select class="single-select" name="soMapelFilter" id="soMapelFilter">
+                                        <option value="0">Semua</option>
+                                        @foreach ($mapels as $mapel)
+                                        <option value="{{ $mapel->mapel_id }}">{{ $mapel->mapel_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="button" class="btn btn-success px-4" value="Tampilkan Data" />
+                                    <button type="button" onclick="filter()" class="btn btn-success px-4">Tampilkan Data</button>
                                 </div>
                             </div>
                         </div>
@@ -259,11 +238,11 @@
                                 
                                 <br>
                                 <div class="table-responsive">
-                                    <table id="report-value" class="table table-striped table-borderless">
+                                    <table id="dataTable" class="table table-striped table-borderless">
                                         <thead class="align-middle">
                                             <tr>
                                                 <th rowspan="2">No</th>
-                                                <th rowspan="2">NSM / NPSN</th>
+                                                <th rowspan="2">NISN</th>
                                                 <th rowspan="2">Nama Santri</th>
                                                 <th rowspan="2">L/P</th>
                                                 <th rowspan="2">KKM</th>
@@ -277,7 +256,7 @@
                                                 <th colspan="10" class="text-center">Penilaian Keterampilan</th>
                                                 <th rowspan="2">HPA</th>
                                                 <th rowspan="2">PRE</th>
-                                                <th rowspan="2" >Deskripsi</th>
+                                                <th rowspan="2" style="width:500px">Deskripsi</th>
                                             </tr>
                                             <tr>
                                                 <th>P-1</th>
@@ -306,297 +285,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>DWI KURTILAS</td>
-                                                <td>P</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>DINILAI</td>
-                                                <td>L</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td>1510031750032 / 6998516736</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><input type="text" class="form-control" value="" /></td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th >No</th>
-                                                <th rowspan="2">NSM / NPSN</th>
-                                                <th>Nama Santri</th>
-                                                <th >L/P</th>
-                                                <th >KKM</th>
-                                                <th>P-1</th>
-                                                <th>P-2</th>
-                                                <th>P-3</th>
-                                                <th>P-4</th>
-                                                <th>P-5</th>
-                                                <th>P-6</th>
-                                                <th>P-7</th>
-                                                <th>P-8</th>
-                                                <th>P-9</th>
-                                                <th>P-10</th>
-                                                <th>RPH</th>
-                                                <th>PTS</th>
-                                                <th>PAS</th>
-                                                <th>HPA</th>
-                                                <th>PRE</th>
-                                                <th>Deskripsi</th>
-                                                <th>K-1</th>
-                                                <th>K-2</th>
-                                                <th>K-3</th>
-                                                <th>K-4</th>
-                                                <th>K-5</th>
-                                                <th>K-6</th>
-                                                <th>K-7</th>
-                                                <th>K-8</th>
-                                                <th>K-9</th>
-                                                <th>K-10</th>
-                                                <th>HPA</th>
-                                                <th>PRE</th>
-                                                <th>Deskripsi</th>
-                                            </tr>
-                                        </tfoot>
                                     </table>
                                 </div>
                                 <br>
@@ -607,6 +296,43 @@
                         </div>
                     </div>
                 </div>
+                @endsection
+
+                @section('custom_js')
+                <script>
+                    var level = 0;
+                    var school = 0;
+                    var kelas = 0;
+                    var mapel = 0;
+                    var table;
+                    $(function() {
+                        // Menampilkan data Report Value
+                        table = $('#dataTable').DataTable({
+                            ajax: {
+                                "url": "report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                                "type": "GET"
+                            }
+                        });
+                    });
+
+					// Filter
+                    function filter() {				
+                        level = $('#soLevelFilter').val();
+                        school = $('#soSchoolFilter').val();
+                        kelas = $('#soKelasFilter').val();
+                        mapel = $('#soMapelFilter').val();
+                        $.ajax({
+                            url: "report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                            success: function(response){
+                                table.ajax.url("report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load(); 
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    };
+
+                </script>
                 @endsection
 									
                                     

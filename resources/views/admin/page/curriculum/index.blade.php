@@ -6,6 +6,7 @@
     
     <div class="container">
         <div class="main-body">
+            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['class_level'] == 'Ula')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -27,11 +28,13 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload Kurikulum</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -55,11 +58,13 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload Silabus</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -83,16 +88,19 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload RPP</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-
+            @endif
+            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['class_level'] == 'Wustha')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -114,11 +122,13 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload Kurikulum</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -142,11 +152,13 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload Silabus</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -170,16 +182,19 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload RPP</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-
+            @endif
+            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['class_level'] == 'Ulya')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -201,11 +216,13 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload Kurikulum</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -229,11 +246,13 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload Silabus</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -257,15 +276,18 @@
                                     </div>
                                 </a>
                             </div>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <label for="inputGroupFileRPP" class="form-label">Upload RPP</label>
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="inputGroupFileRPP" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                 <button class="btn btn-success" type="button" id="inputGroupFileAddon04">Upload</button>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

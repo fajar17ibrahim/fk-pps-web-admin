@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                <div class="card">
+                    <!-- <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="">
@@ -32,7 +32,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -43,6 +43,32 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
+                                @if(Session::has('message_success'))
+                                    <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Berhasil</h6>
+                                                <div class="text-white">{{ Session::get('message_success') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @if(Session::has('message_error'))
+                                    <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Gagal!</h6>
+                                                <div class="text-white">{{ Session::get('message_error') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
                                 <div class="table-responsive">
                                     <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
                                         <thead>
@@ -57,15 +83,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th width="1%">No</th>
-                                                <th width="20%">Informasi PKPPS</th>
-                                                <th width="10px">JL. KAPUK MUARA NO.02 RT.005/RW.004 KAPUK MUARA PENJARINGAN</th>
-                                                <th >Nomor Telepon</th>
-                                                <th>Email</th>
-                                                <th >Logo</th>
-                                                <th >Opsi</th>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

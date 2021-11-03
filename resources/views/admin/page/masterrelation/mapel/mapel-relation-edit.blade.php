@@ -3,7 +3,7 @@
                                         <div class="modal-dialog modal-dialog-scrollable">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Form Pemilihan Guru Mapel</h5>
+                                                    <h5 class="modal-title">Edit Guru Mapel</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <form>

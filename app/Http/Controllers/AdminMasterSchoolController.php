@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\School;
+use App\Models\Address;
+use App\Models\Ustadz;
 
 class AdminMasterSchoolController extends Controller
 {
@@ -38,6 +40,38 @@ class AdminMasterSchoolController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //
+            $school = new School;
+            $school->school_statistic_number = $request['inSchoolNSP'];
+            $school->school_npsn = $request['inSchoolNPSN'];
+            $school->school_name = $request['inSchoolName'];
+            $school->school_email = $request['inSchoolEmail'];
+            $school->school_phone = $request['inSchoolPhone'];
+            $school->school_address = $request['inAddress'];
+            $school->school_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $school->school_village = $request['soVillage'];
+            $school->school_districts = $request['inDistrict'];
+            $school->school_city = $request['inKabOrCity'];
+            $school->school_province = $request['inProvince'];
+            $school->school_pos_code = $request['inPosCode'];
+            $school->school_country = $request['inCountry'];
+            $school->school_status = 'Aktif';
+            $school->school_headship = $request['soKepsek'];
+            $saveschool = $school->save();
+    
+            if ($saveschool) {
+                return redirect()->route('master-school.index')
+                ->with('message_success', 'PKPPS berhasil disimpan.');
+            } else {
+                return redirect()->route('master-school.index')
+                ->with('message_error', 'PKPPS gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('master-school.index')
+            ->with('message_error', 'PKPPS gagal disimpan.');
+            // ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -72,6 +106,38 @@ class AdminMasterSchoolController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            //
+            $school = School::find($id);
+            $school->school_statistic_number = $request['inSchoolNSP'];
+            $school->school_npsn = $request['inSchoolNPSN'];
+            $school->school_name = $request['inSchoolName'];
+            $school->school_email = $request['inSchoolEmail'];
+            $school->school_phone = $request['inSchoolPhone'];
+            $school->school_address = $request['inAddress'];
+            $school->school_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $school->school_village = $request['soVillage'];
+            $school->school_districts = $request['inDistrict'];
+            $school->school_city = $request['inKabOrCity'];
+            $school->school_province = $request['inProvince'];
+            $school->school_pos_code = $request['inPosCode'];
+            $school->school_country = $request['inCountry'];
+            $school->school_status = 'Aktif';
+            $school->school_headship = $request['soKepsek'];;
+            $saveschool = $school->update();
+    
+            if ($saveschool) {
+                return redirect()->route('master-school.index')
+                ->with('message_success', 'PKPPS berhasil diperbarui.');
+            } else {
+                return redirect()->route('master-school.index')
+                ->with('message_error', 'PKPPS gagal diperbarui.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('master-school.index')
+            ->with('message_error', 'PKPPS gagal diperbarui.');
+            // ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -88,13 +154,33 @@ class AdminMasterSchoolController extends Controller
     public function addSchool()
     {
         //
-        return view('admin.page.master.school.school-add');
+        $ustadzs = Ustadz::leftJoin('school','ustadz.npsn','=','school.school_npsn')->get();
+        $address = Address::get();
+        return view('admin.page.master.school.school-add', compact('ustadzs'), compact('address'));
     }
 
-    public function editSchool()
+    public function editSchool($id)
     {
         //
-        return view('admin.page.master.school.school-edit');
+        $school = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')->find($id);
+        $ustadzs = Ustadz::leftJoin('school','ustadz.npsn','=','school.school_npsn')->get();
+        $address = Address::get();
+        return view('admin.page.master.school.school-edit', compact('ustadzs'), compact('address'))
+        ->with('school', $school);
+    }
+
+    public function search($id) { 
+        $village = explode(", ", $id);
+        $address = Address::where('address_village', '=', $village[0])
+        ->where('address_districts', '=', $village[1])
+        ->get();
+        return response()->json($address);
+    }
+
+    public function searchKepsek($nik) { 
+        $ustadz = Ustadz::where('ustadz_nik', '=', $nik)
+        ->get();
+        return response()->json($ustadz);
     }
 
     public function listData($school) {
@@ -113,8 +199,16 @@ class AdminMasterSchoolController extends Controller
             $row[] = $no;
             $row[] = $school->school_npsn;
             $row[] = $school->school_name;
-            $row[] = $school->school_address;
-            $row[] = $school->school_status;
+            $row[] = $school->school_address .'<br>'. 
+                    $school->school_village .', '.
+                    $school->school_districts .'<br>'. 
+                    $school->school_city .', '. 
+                    $school->school_province .' '.
+                    $school->school_pos_code;
+            $row[] = '<div class="d-flex align-items-center text-success">	
+                        <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
+                        <span>' . $school->school_status .'</span>
+                    </div>';
             $row[] = '<div class="d-flex align-items-center">
                             <img src="assets/images/logo_fk_pkpps.jpg" alt="" class="p-1 border bg-white"  width="90" height="90">
                         </div>';
@@ -124,9 +218,9 @@ class AdminMasterSchoolController extends Controller
                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/master-school-edit">Edit</a>
+                                <li><a class="dropdown-item" href="master-school-edit/'. $school->school_id .'">Edit</a>
                                 </li>
-                                <li><a class="dropdown-item" href="/public/master-school-details">Details</a>
+                                <li><a class="dropdown-item" href="master-school-details">Details</a>
                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                 </li>
                                 <li><a class="dropdown-item" href="#">Nonaktif</a>

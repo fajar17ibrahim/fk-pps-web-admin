@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKelompokMapel extends Migration
+class CreateKelompokMapelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateKelompokMapel extends Migration
     {
         Schema::create('kelompok_mapel', function (Blueprint $table) {
             $table->integer('kelompok_id', 12);
-            $table->string('kelompok_name', 50);
+            $table->string('kelompok_name', 50)->nullable();
             $table->timestamps();
         });
     }

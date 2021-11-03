@@ -11,10 +11,8 @@
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="row mb-3 position-relative">
-                                                        <label for="inCodeEdit" class="col-sm-3 col-form-label">Kode Kelas</label>
                                                         <div class="col-sm-9 text-secondary">
-                                                            <input type="text" name="inCodeEdit" class="form-control" value="" id="inCodeEdit" required/>
-                                                            <div class="invalid-tooltip">Kode Kelas tidak boleh kosong</div>
+                                                            <input type="text" name="inCodeEdit" class="form-control" value="" id="inCodeEdit" hidden />
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3 position-relative">
@@ -28,9 +26,13 @@
                                                         <label for="soLevelEdit" class="col-sm-3 col-form-label">Jenjang</label>
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" id="soLevelEdit" name="soLevelEdit" tabindex="-1">
+                                                                @if(Session::get('user')[0]['role_id'] != 1)
+                                                                <option value="{{ Session::get('user')[0]['class_level'] }}" class="form-control">{{ Session::get('user')[0]['class_level'] }}</option>
+                                                                @else
                                                                 <option value="Ula" class="form-control">Ula</option>
                                                                 <option value="Wustha" class="form-control">Wustha</option>
                                                                 <option value="Ulya" class="form-control"  >Ulya</option>
+                                                                @endif
                                                             </select>
                                                         </div>
                                                     </div>

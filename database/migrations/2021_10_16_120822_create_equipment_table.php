@@ -15,8 +15,8 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->increments('equipment_id', 12);
-            $table->string('santri_id', 12);
-            $table->string('equipment_date_download', 50);
+            $table->string('santri_id', 12)->nullable();
+            $table->string('equipment_date_download', 50)->nullable();
             $table->timestamps();
         });
     }

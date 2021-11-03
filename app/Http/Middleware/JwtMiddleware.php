@@ -23,7 +23,6 @@ class JwtMiddleware
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (Exception $e) {
-
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 Session::flash('error', 'Token is Invalid');
             }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
@@ -32,10 +31,12 @@ class JwtMiddleware
                 Session::flash('error', 'Authorization Token not found');
             }
 
-            // return error_log($e);
+            // abort(403);
+
+            return error_log($e);
             // Session::flash('error', $e);
 
-            return redirect()->route('login');
+            // return redirect()->route('login');
         }
 
         return $next($request);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\School;
@@ -16,8 +17,20 @@ class AdminMasterClassController extends Controller
     public function index()
     {
         //
-        $schools = School::orderBy('school_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        $this->authorize('master-class');
+            
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $schools = School::orderBy('school_name', 'asc')->get();
+            $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        } else {
+            $schools = School::orderBy('school_name', 'asc')
+            ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+            ->get();
+            $kelass = Kelas::orderBy('class_name', 'asc')
+            ->where('kelas.class_level', '=', $user[0]->class_level)
+            ->get();
+        }
         return view('admin.page.master.class.index', compact('schools'), compact('kelass'));
     }
 
@@ -42,6 +55,8 @@ class AdminMasterClassController extends Controller
         //
         try {
             //
+            $this->authorize('master-class');
+
             $kelas = new Kelas;
             $kelas->class_name = $request['inName'];
             $kelas->class_level = $request['soLevel'];
@@ -70,6 +85,8 @@ class AdminMasterClassController extends Controller
     public function show($id)
     {
         //
+        $this->authorize('master-class');
+
         $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
         ->find($id);
         $data = array(
@@ -88,6 +105,8 @@ class AdminMasterClassController extends Controller
     public function edit($id)
     {
         //
+        $this->authorize('master-class');
+
         $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
         ->find($id);
         $data = array(
@@ -110,6 +129,8 @@ class AdminMasterClassController extends Controller
         //
         try {
             //
+            $this->authorize('master-class');
+
             $kelas = Kelas::find($id);
             $kelas->class_name = $request['inNameEdit'];
             $kelas->class_level = $request['soLevelEdit'];
@@ -141,22 +162,31 @@ class AdminMasterClassController extends Controller
     }
 
     public function listData($level, $school) {
-        if ($level != 0 && $school != 0) {
-            $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_level', '=', $level)
-            ->where('kelas.class_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0) {
-            $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0) {
-            $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_school', '=', $school)
-            ->get();
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0) {
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $level)
+                ->where('kelas.class_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0) {
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0) {
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_school', '=', $school)
+                ->get();
+            } else {
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->get();
+            }
         } else {
             $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->where('kelas.class_level', '=', $user[0]->class_level)
+            ->where('school.school_npsn', '=', $user[0]->ustadz_school)
             ->get();
+            
         }
         
         $no = 0;
@@ -169,11 +199,13 @@ class AdminMasterClassController extends Controller
             $row[] = $kelas->class_name;
             $row[] = $kelas->class_level;
             $row[] = $kelas->school_name;
+            if ($user[0]->role_id == 1 || $user[0]->role_id == 2) {
             $row[] = '<div class="col">
                         <div class="btn-group">
                             <a href="#" onclick="editForm(' . $kelas->class_id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
                         </div>
                     </div>';
+            }
             $data[] = $row;
         }
 

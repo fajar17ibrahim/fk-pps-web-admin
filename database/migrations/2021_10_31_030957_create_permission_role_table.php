@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateKelasTable extends Migration
+class CreatePermissionRoleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class UpdateKelasTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('kelas', function (Blueprint $table) {
-            //
-            $table->string('class_school', 25);
+        Schema::create('permission_role', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('role_id')->unsigned();
+            $table->bigInteger('permission_id')->unsigned();
+            $table->timestamps();
         });
     }
 
@@ -27,10 +28,6 @@ class UpdateKelasTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('kelas', function (Blueprint $table) {
-            //
-            $table->dropColumn('class_school');
-        });
+        Schema::dropIfExists('permission_role');
     }
 }

@@ -6,7 +6,10 @@ use App\Http\Controllers\AdminGraduationController;
 use App\Http\Controllers\AdminMutationController;
 use App\Http\Controllers\AdminMasterBookController;
 use App\Http\Controllers\AdminReportEquipmentController;
+use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\AdminReportValueController;
+use App\Http\Controllers\AdminReportAttendanceController;
+use App\Http\Controllers\AdminReportAttitudeController;
 use App\Http\Controllers\AdminReportPrintController;
 use App\Http\Controllers\AdminUserProfileController;
 use App\Http\Controllers\AdminCurriculumController;
@@ -37,16 +40,16 @@ use App\Http\Controllers\AdminUserController;
 
 Route::get('/login', [AdminAuthLoginController::class, 'index'])->name('login');
 
-Route::post('/login-request', [AdminAuthLoginController::class, 'login']);
+Route::post('login-request', [AdminAuthLoginController::class, 'login']);
 
 Route::post('register-request', [AdminAuthLoginController::class, 'register']);
 
-// Route::middleware(['jwt.verify', 'verified'])->group(function () {
+Route::get('logout', [AdminAuthLoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('home');
-
-    Route::get('/graduation', [AdminGraduationController::class, 'index'])->name('graduation');
-
+        
     Route::get('/graduation-add', [AdminGraduationController::class, 'graduationAdd'])->name('graduation-add');
 
     Route::get('/graduation-print-letter', [AdminGraduationController::class, 'graduationPrintLetter'])->name('graduation-print-letter');
@@ -71,15 +74,15 @@ Route::post('register-request', [AdminAuthLoginController::class, 'register']);
     Route::get('master-santri-details', [AdminMasterSantriController::class, 'detailsSantri'])->name('master-santri.details');
 
     // Ustadz
-    Route::get('master-ustadz/data', [AdminMasterUstadzController::class, 'listData'])->name('master-ustadz.data');
+    Route::get('master-ustadz/data/{school}', [AdminMasterUstadzController::class, 'listData'])->name('master-ustadz.data');
         
-    // Route::resource('master-mapel', AdminMasterMapelController::class);
-    
     Route::resource('master-ustadz', AdminMasterUstadzController::class);
 
     Route::get('/master-ustadz-add', [AdminMasterUstadzController::class, 'addUstadz'])->name('master-ustadz-add');
 
-    Route::get('/master-ustadz-edit', [AdminMasterUstadzController::class, 'editUstadz'])->name('master-ustadz-edit');
+    Route::get('master-ustadz-add/search/{village}', [AdminMasterUstadzController::class, 'search'])->name('master-ustadz.search');
+    
+    Route::get('/master-ustadz-edit/{id}', [AdminMasterUstadzController::class, 'editUstadz'])->name('master-ustadz-edit');
 
     // Kelas
     Route::get('master-class/data/{level}/{school}', [AdminMasterClassController::class, 'listData'])->name('master-class.data');
@@ -103,31 +106,42 @@ Route::post('register-request', [AdminAuthLoginController::class, 'register']);
 
     Route::get('/master-school-add', [AdminMasterSchoolController::class, 'addSchool'])->name('master-school-add');
 
-    Route::get('/master-school-edit', [AdminMasterSchoolController::class, 'editSchool'])->name('master-school-edit');
+    Route::get('master-school-add/search/{village}', [AdminMasterSchoolController::class, 'search'])->name('master-santri.search');
+    
+    Route::get('master-school-add/search-kepsek/{nik}', [AdminMasterSchoolController::class, 'searchKepsek'])->name('master-school.search-kepsek');
+    
+    Route::get('master-school-edit/{id}', [AdminMasterSchoolController::class, 'editSchool'])->name('master-school-edit');
 
     // Semester
     Route::get('master-semester/data', [AdminMasterSemesterController::class, 'listData'])->name('master-semester.data');
     
     Route::resource('master-semester', AdminMasterSemesterController::class);
 
-    Route::get('/master-relation-class', [AdminMasterRelationClassController::class, 'index'])->name('master-relation-class');
+    // Relation Class
+    Route::get('master-relation-class/data/{level}/{school}', [AdminMasterRelationClassController::class, 'listData'])->name('master-relation-class.data');
+    
+    Route::resource('master-relation-class', AdminMasterRelationClassController::class);
 
-    Route::get('/master-relation-mapel', [AdminMasterRelationMapelController::class, 'index'])->name('master-relation-mapel');
+    // Relation Guru Mapel
+    Route::get('master-relation-mapel/data/{level}/{school}/{kelas}', [AdminMasterRelationMapelController::class, 'listData'])->name('master-relation-mapel.data');
+    
+    Route::resource('master-relation-mapel', AdminMasterRelationMapelController::class);
 
-    Route::get('/masterbook', [AdminMasterBookController::class, 'index'])->name('masterbook');
+    // Report Print
+    Route::get('masterbook/data/{level}/{school}/{kelas}', [AdminMasterBookController::class, 'listData'])->name('masterbook.data');
 
-    Route::get('/masterbook-cover', [AdminMasterBookController::class, 'masterbookCover'])->name('masterbook-cover');
+    Route::resource('masterbook', AdminMasterBookController::class);
 
-    Route::get('/masterbook-santri', [AdminMasterBookController::class, 'masterbookSantri'])->name('masterbook-santri');
+    Route::get('/masterbook-cover/{id}', [AdminMasterBookController::class, 'masterbookCover'])->name('masterbook-cover');
 
-    Route::get('/masterbook-report', [AdminMasterBookController::class, 'masterbookReport'])->name('masterbook-report');
+    Route::get('/masterbook-santri/{id}', [AdminMasterBookController::class, 'masterbookSantri'])->name('masterbook-santri');
+
+    Route::get('/masterbook-report/{id}', [AdminMasterBookController::class, 'masterbookReport'])->name('masterbook-report');
 
     // Report Equipment
-    Route::get('report-equipment/data', [AdminReportEquipmentController::class, 'listData'])->name('report-equipment.data');
+    Route::get('report-equipment/data/{level}/{school}/{kelas}', [AdminReportEquipmentController::class, 'listData'])->name('report-equipment.data');
     
     Route::resource('report-equipment', AdminReportEquipmentController::class);
-
-    // Route::get('/report-equipment', [AdminReportEquipmentController::class, 'index'])->name('report-equipment');
 
     Route::get('/report-equipment-cover/{id}', [AdminReportEquipmentController::class, 'reportCover'])->name('report-equipment-cover');
 
@@ -137,21 +151,33 @@ Route::post('register-request', [AdminAuthLoginController::class, 'register']);
 
     Route::get('/report-equipment-mutation/{id}', [AdminReportEquipmentController::class, 'reportMutation'])->name('report-equipment-mutation');
 
-    Route::get('/report-print', [AdminReportPrintController::class, 'index'])->name('report-print');
+    // Report Print
+    Route::get('report-print/data/{level}/{school}/{kelas}', [AdminReportPrintController::class, 'listData'])->name('report-print.data');
 
-    Route::get('/report-uts-print-pdf', [AdminReportPrintController::class, 'utsExportPdf'])->name('report-uts-print-pdf');
+    Route::resource('report-print', AdminReportPrintController::class);
 
-    Route::get('/report-uas-print-pdf', [AdminReportPrintController::class, 'uasExportPdf'])->name('report-uas-print-pdf');
+    Route::get('report-uts-print-pdf/{id}', [AdminReportPrintController::class, 'utsExportPdf'])->name('report-uts-print-pdf');
 
-    Route::get('/report', [AdminReportValueController::class, 'index'])->name('report');
+    Route::get('report-uas-print-pdf/{id}', [AdminReportPrintController::class, 'uasExportPdf'])->name('report-uas-print-pdf');
 
-    Route::get('/report-value', [AdminReportValueController::class, 'reportValue'])->name('report-value');
+    // Report Input
+    Route::resource('report', AdminReportController::class);
+    
+    // Report Value
+    Route::resource('report-value', AdminReportValueController::class);
 
-    Route::get('/report-value-settings', [AdminReportValueController::class, 'reportValueSettings'])->name('report-value-settings');
+    Route::get('report-value-settings', [AdminReportValueController::class, 'reportValueSettings'])->name('report-value-settings');
 
-    Route::get('/report-attitude', [AdminReportValueController::class, 'reportAttitude'])->name('report-attitude');
+    Route::get('report-value/data/{level}/{school}/{kelas}/{mapel}', [AdminReportValueController::class, 'listData'])->name('report-value.data');
+    
+    // Report Attitude
+    Route::resource('report-attitude', AdminReportAttitudeController::class);
 
-    Route::get('/report-attendance', [AdminReportValueController::class, 'reportAttendance'])->name('report-attendance');
+    Route::get('report-attitude/data/{level}/{school}/{kelas}/{mapel}', [AdminReportAttitudeController::class, 'listData'])->name('report-attitude.data');
+
+    Route::resource('report-attendance', AdminReportAttendanceController::class);
+
+    Route::get('report-attendance/data/{level}/{school}/{kelas}/{mapel}', [AdminReportAttendanceController::class, 'listData'])->name('report-attendance.data');
 
     Route::get('/report-achievement', [AdminReportValueController::class, 'reportAchievement'])->name('report-achievement');
 
@@ -159,14 +185,19 @@ Route::post('register-request', [AdminAuthLoginController::class, 'register']);
 
     Route::get('/report-extrakurikuler', [AdminReportValueController::class, 'reportExtrakurikuler'])->name('report-extrakurikuler');
 
-    Route::get('/user-profile', [AdminUserProfileController::class, 'index'])->name('user-profile');
+    // Route::get('/user-profile', [AdminUserProfileController::class, 'index'])->name('user-profile');
 
-    Route::get('/school-profile', [AdminSchoolProfileController::class, 'index'])->name('school-profile');
+    // User School
+    Route::resource('user-profile', AdminUserProfileController::class);
 
+    // Profile School
+    Route::resource('school-profile', AdminSchoolProfileController::class);
+
+    // Route::get('school-profile/{id}', [AdminSchoolProfileController::class, 'index'])->name('school-profile');
+
+    // Curriculum
     Route::get('/curriculum', [AdminCurriculumController::class, 'index'])->name('curriculum');
 
-    // Route::get('/user', [AdminUserController::class, 'index'])->name('user');
-    
     // User
     Route::get('user/data', [AdminUserController::class, 'listData'])->name('user.data');
 
@@ -174,8 +205,7 @@ Route::post('register-request', [AdminAuthLoginController::class, 'register']);
     
     Route::resource('user', AdminUserController::class);
 
-
-// });
+});
 
 
 

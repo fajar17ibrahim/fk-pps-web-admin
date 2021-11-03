@@ -58,7 +58,7 @@
 													<label for="soSantriGender" class="col-sm-3 col-form-label">Jenis Kelamin</label>
 													<div class="col-sm-9 text-secondary">
 														<select class="form-select form-control" name="soSantriGender" id="soSantriGender" >
-															<option value="Laki - Laki" class="form-control">Laki - Laki</option>
+															<option value="Laki - Laki" class="form-control">Laki-Laki</option>
 															<option value="Perempuan" class="form-control">Perempuan</option>
 														</select>
 													</div>
@@ -404,7 +404,7 @@
 										<div class="card">
 											<div class="card-body">
 												<div class="card-title d-flex align-items-center">
-													<div><i class="bx bx-user me-1 font-22 text-success"></i></div>
+													<div><i class="bx bx-map me-1 font-22 text-success"></i></div>
 													<h5 class="mb-0 text-success">Alamat Rumah</h5>
 												</div>
 												<hr>
