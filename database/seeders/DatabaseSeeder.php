@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
             SchoolYearSeeder::class,
             SemesterSeeder::class,
             RoleSeeder::class,
-            PermissionSeeder::class
+            PermissionSeeder::class,
+            GraduationSeeder::class,
+            MutationSeeder::class,
+            NewsSeeder::class
         ]);
     }
 }

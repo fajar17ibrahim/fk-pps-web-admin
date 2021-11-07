@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Santri;
 use App\Models\Kelas;
 use App\Models\School;
-use App\Models\Mapel;
+use App\Models\Santri;
 
-class AdminReportValueController extends Controller
+class AdminReportAchievementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +17,12 @@ class AdminReportValueController extends Controller
     public function index()
     {
         //
-        $this->authorize('report-value');
+        $this->authorize('report-achievement');
 
         $schools = School::orderBy('school_name', 'asc')->get();
-        $santris = Santri::orderBy('santri_name', 'asc')->get();
         $kelass = Kelas::orderBy('class_name', 'asc')->get();
-        $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
-        return view('admin.page.report.reportvalue.report-value', compact('santris'), compact('schools'))
-        ->with(array('kelass' => $kelass))
-        ->with(array('mapels' => $mapels));
+        return view('admin.page.report.reportvalue.achievement', compact('schools'))
+        ->with(array('kelass' => $kelass));
     }
 
     /**
@@ -95,7 +91,7 @@ class AdminReportValueController extends Controller
         //
     }
 
-    public function listData($level, $school, $kelas, $mapel) {
+    public function listData($level, $school, $kelas) {
         if ($level != 0 && $school != 0 && $kelas != 0) {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
@@ -151,54 +147,25 @@ class AdminReportValueController extends Controller
             $row[] = $santri->santri_nisn;
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea>';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<input type="text" class="form-control" value="" />';
-            $row[] = '<textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<select class="single-select form-select">
+                        <option value="United States">Kesenian</option>
+                        <option value="United States">Keagamaan</option>
+                    </select>';
+            $row[] = '<textarea class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<select class="single-select form-select">
+                        <option value="United States">Kesenian</option>
+                        <option value="United States">Keagamaan</option>
+                    </select>';
+            $row[] = '<textarea class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<select class="single-select form-select">
+                        <option value="United States">Kesenian</option>
+                        <option value="United States">Keagamaan</option>
+                    </select>';
+            $row[] = '<textarea class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
             $data[] = $row;
         }
 
         $output = array("data" => $data);
         return response()->json($output);
     }
-
-    public function reportValueSettings()
-    {
-        //
-        return view('admin.page.report.reportvalue.report-value-settings');
-    }
-
-
-    public function reportAttendance()
-    {
-        //
-        return view('admin.page.report.reportvalue.attendance');
-    }
-
 }

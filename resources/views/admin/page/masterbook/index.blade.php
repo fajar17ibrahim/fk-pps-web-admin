@@ -12,6 +12,7 @@
                             </div>
                             <hr>
                             <br>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Jenjang</h6>
@@ -38,6 +39,8 @@
 									</select>
                                 </div>
                             </div>
+                            @endif
+                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Kelas</h6>
@@ -51,6 +54,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">

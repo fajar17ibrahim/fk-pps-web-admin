@@ -3,7 +3,8 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                <div class="card">
+                    @if(Session::get('user')[0]['role_id'] == 1)
+                    <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="">
@@ -59,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endif
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 class="mb-0 text-uppercase">Daftar Mata Pelajaran</h6>   
@@ -70,7 +71,7 @@
                             <div class="card-body">
                                 @include('admin/page/masterrelation/mapel/mapel-relation-edit')
                                 <div class="table-responsive">
-                                    <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
+                                    <table id="dataTable" class="table table-striped table-borderless" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>

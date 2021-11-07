@@ -27,7 +27,6 @@ class AdminAuthLoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            
             $user = Auth::user();
             $ustadz = Ustadz::leftJoin('users', 'users.email', '=', 'ustadz.ustadz_email')
             ->leftJoin('role', 'role.id', '=', 'users.role_id')
@@ -37,6 +36,8 @@ class AdminAuthLoginController extends Controller
                 ->get();
             Session::put('user', $ustadz);
             Session::put('pkpps', $ustadz[0]->school_name);
+            $user->login_date = tanggal('now');
+            $user->update();
             if ($user->role == '1') {
                 
                 return redirect('/');
@@ -48,6 +49,11 @@ class AdminAuthLoginController extends Controller
         }
         Session::flash('error', 'Email atau password salah');
         return redirect('login');
+    }
+
+    public function updateUser(Request $request, User $user) 
+    {
+        
     }
 
     public function logout(Request $request) {

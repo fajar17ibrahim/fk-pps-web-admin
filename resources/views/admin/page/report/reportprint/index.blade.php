@@ -3,6 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
+                    @if(Session::get('user')[0]['role_id'] == 1)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -59,9 +60,10 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                     <div class="col">
-                        <h6 class="mb-0 text-uppercase">Daftar Nilai Rapor UTS Kelas 7 A</h6>
+                        <h6 class="mb-0 text-uppercase">Daftar Nilai Rapor</h6>
                         <br>
                         <div class="card">
                             <div class="card-body">

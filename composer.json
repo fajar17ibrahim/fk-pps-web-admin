@@ -29,7 +29,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files" : [
-            "app/Helpers/tanggal.php"
+            "app/Helpers/tanggal.php",
+            "app/Helpers/roleName.php"
         ]
     },
     "autoload-dev": {

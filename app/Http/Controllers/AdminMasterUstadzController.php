@@ -19,7 +19,7 @@ class AdminMasterUstadzController extends Controller
     public function index()
     {
         //
-        $this->authorize('master-ustadz');
+        // $this->authorize('master-ustadz');
         
         $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = Kelas::orderBy('class_name', 'asc')->get();

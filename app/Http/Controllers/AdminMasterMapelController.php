@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use App\Models\Kelompokmapel;
 use App\Models\mapel;
@@ -44,6 +45,7 @@ class AdminMastermapelController extends Controller
         try {
             //
             $this->authorize('master-mapel');
+            $user = Session::get('user');
 
             $mapel = new Mapel;
             $mapel->mapel_name = $request['inName'];
@@ -51,8 +53,20 @@ class AdminMastermapelController extends Controller
             $save = $mapel->save();
     
             if ($save) {
-                return redirect()->route('master-mapel.index')
-                ->with('message_success', 'mapel berhasil disimpan.');
+                $mapelLast = Mapel::orderBy('mapel_id', 'desc')->first();
+                $mapelTeacher = new MapelTeacher;
+                $mapelTeacher->mapel_id = $mapelLast->mapel_id;
+                $mapelTeacher->class_id = $user->ustadz_class;
+                $mapelTeacher->ustadz_nik = "";
+                $mapelTeacherSaved = $mapelTeacher->save();
+
+                if ($mapelTeacherSaved) {
+                    return redirect()->route('master-mapel.index')
+                    ->with('message_success', 'mapel berhasil disimpan.');
+                } else {
+                    return redirect()->route('master-mapel.index')
+                    ->with('message_error', 'mapel gagal disimpan.');
+                }
             } else {
                 return redirect()->route('master-mapel.index')
                 ->with('message_error', 'mapel gagal disimpan.');

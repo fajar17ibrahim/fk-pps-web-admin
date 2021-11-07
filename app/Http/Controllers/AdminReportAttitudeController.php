@@ -18,7 +18,12 @@ class AdminReportAttitudeController extends Controller
     public function index()
     {
         //
-        return view('admin.page.report.reportvalue.attitude');
+        $this->authorize('report-attitude');
+
+        $schools = School::orderBy('school_name', 'asc')->get();
+        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        return view('admin.page.report.reportvalue.attitude', compact('schools'))
+        ->with(array('kelass' => $kelass));
     }
 
     /**
@@ -143,7 +148,7 @@ class AdminReportAttitudeController extends Controller
             $row[] = $santri->santri_nisn;
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<select class="single-select">
+            $row[] = '<select class="single-select form-select">
                         <option value="United States">B</option>
                         <option value="United States">SB</option>
                         <option value="United States">C</option>
@@ -268,7 +273,7 @@ class AdminReportAttitudeController extends Controller
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
                     </div>';
-            $row[] = '<select class="single-select">  
+            $row[] = '<select class="single-select form-select">  
                         <option value="United States">B</option>
                         <option value="United States">SB</option>
                         <option value="United States">C</option>

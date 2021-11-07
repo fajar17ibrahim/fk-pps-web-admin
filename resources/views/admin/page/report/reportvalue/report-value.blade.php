@@ -12,6 +12,7 @@
                             </div>
                             <hr>
                             <br>
+                            @if(Session::get('user')[0]['role_id'] == 1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Jenjang</h6>
@@ -38,6 +39,8 @@
 									</select>
                                 </div>
                             </div>
+                            @endif
+                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Kelas</h6>
@@ -51,6 +54,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @endif
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Mapel</h6>
@@ -74,8 +78,8 @@
                     </div>
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                            <h6 class="mb-0 text-uppercase">Input Nilai Rapor UTS Kelas 7 A Mata Pelajaran Al-Qur'an</h6>
-                            <a class="ms-auto" href="/report-value-settings"> 
+                            <h6 class="mb-0 text-uppercase">Input Nilai Rapor</h6>
+                            <a class="ms-auto" href="report-value-settings"> 
                                 <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-cog mr-1'></i>Pengaturan</button>
                             </a>
                         </div>

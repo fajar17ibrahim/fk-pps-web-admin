@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
         $user->email = "ceo@gmail.com";
         $user->role_id = "1";
         $user->status = "Aktif";
+        $user->login_date = tanggal('now');
         $user->password = Hash::make('1234567890');
         $user->save();
 
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
         $user->email = "admin-ula@gmail.com";
         $user->role_id = "2";
         $user->status = "Aktif";
+        $user->login_date = tanggal('now');
         $user->password = Hash::make('1234567890');
         $user->save();
 
@@ -38,6 +40,7 @@ class UserSeeder extends Seeder
         $user->email = "admin-wustha@gmail.com";
         $user->role_id = "2";
         $user->status = "Aktif";
+        $user->login_date = tanggal('now');
         $user->password = Hash::make('1234567890');
         $user->save();
 
@@ -46,6 +49,7 @@ class UserSeeder extends Seeder
         $user->email = "admin-ulya@gmail.com";
         $user->role_id = "2";
         $user->status = "Aktif";
+        $user->login_date = tanggal('now');
         $user->password = Hash::make('1234567890');
         $user->save();
 
@@ -54,6 +58,7 @@ class UserSeeder extends Seeder
         $user->email = "walikelas@gmail.com";
         $user->role_id = "3";
         $user->status = "Aktif";
+        $user->login_date = tanggal('now');
         $user->password = Hash::make('1234567890');
         $user->save();
 
@@ -62,9 +67,9 @@ class UserSeeder extends Seeder
         $user->email = "guru@gmail.com";
         $user->role_id = "4";
         $user->status = "Aktif";
+        $user->login_date = tanggal('now');
         $user->password = Hash::make('1234567890');
         $user->save();
-
     
     }
 }

@@ -78,7 +78,7 @@
 				<!--end row-->
 
 				<div class="row row-cols-1 row-cols-md-3 row-cols-xl-5">
-					<a href="report-homeroomnotes">
+					<a href="report-homeroom-teacher-notes">
 						<div class="col">
 							<div class="card radius-10 bg-warning bg-gradient">
 								<div class="card-body">

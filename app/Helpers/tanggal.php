@@ -1,7 +1,7 @@
 <?php
 
 //Format -> tanggal("2021-01-01");
-function tanggal($date){
+function tanggal($date) {
 	$month = array (
 		1 =>   'Januari',
 		'Februari',
@@ -23,7 +23,12 @@ function tanggal($date){
 	// variabel split 1 = month
 	// variabel split 2 = year
  
-	return $split[2] . ' ' . $month[ (int) $split[1] ] . ' ' . $split[0];
+	if ($date == 'now') {
+		$mytime = Carbon\Carbon::now();
+		return $mytime->toDateTimeString();
+	} else  {
+		return $split[2] . ' ' . $month[ (int) $split[1] ] . ' ' . $split[0];
+	}
 }
 
 ?>

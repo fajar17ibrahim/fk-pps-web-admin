@@ -83,6 +83,8 @@ class AdminUserProfileController extends Controller
         //
         try {
             //
+            $this->authorize('user-profile');
+
             $ustadz = Ustadz::find($id);
             $ustadz->ustadz_nik = $request['inUstadzNIK'];
             $ustadz->ustadz_name = $request['inUstadzName'];

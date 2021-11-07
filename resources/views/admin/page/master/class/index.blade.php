@@ -87,7 +87,7 @@
                                     </div>
                                 @endif
                                 <div class="table-responsive">
-                                    <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
+                                    <table id="dataTable" class="table table-striped table-borderless" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th width="1%">No</th>
@@ -95,7 +95,7 @@
                                                 <th>Nama Kelas</th>
                                                 <th>Jenjang</th>
                                                 <th>PKPPS</th>
-                                                @if (Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2) {
+                                                @if (Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2) 
                                                 <th width="10%">Aksi</th>
                                                 @endif
                                             </tr>
