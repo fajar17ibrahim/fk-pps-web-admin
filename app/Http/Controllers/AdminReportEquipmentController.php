@@ -57,7 +57,7 @@ class AdminReportEquipmentController extends Controller
         $equipment = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
         ->leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
         ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
-        ->where('equipment.santri_id', $id)
+        ->where('equipment.equipment_id', $id)
         ->get();
         return json_encode($equipment);
     }
@@ -161,7 +161,7 @@ class AdminReportEquipmentController extends Controller
             $row[] = $equipment->santri_name;
             $row[] = $equipment->santri_gender;
             $row[] = $equipment->equipment_date_download;
-            $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $equipment->santri_nisn . ')">Pelengkap Rapor</button>';
+            $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $equipment->equipment_id . ')">Pelengkap Rapor</button>';
             $row[] = '<input type="button" class="btn btn-danger" value="Blok" />';
             $data[] = $row;
         }
@@ -200,6 +200,7 @@ class AdminReportEquipmentController extends Controller
         //
         $santri = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
         ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+        ->leftJoin('ustadz', 'ustadz.ustadz_nik', '=', 'school.school_headship')
         ->where('santri_nisn', '=', $id)->get();
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-santri-information', compact('santri'));
         $pdf->setPaper('a4', 'potrait');

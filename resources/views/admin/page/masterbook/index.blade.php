@@ -3,7 +3,8 @@
 
 				@section('content')
 				<div class="col-lg-12">
-					<div class="card">
+                    @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                    <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="">
@@ -32,8 +33,8 @@
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
-									<option value="0">Semua</option>	
-                                    @foreach ($schools as $school)
+									    <option value="0">Semua</option>	
+                                        @foreach ($schools as $school)
 										<option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
 										@endforeach
 									</select>
@@ -63,9 +64,10 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
 					<div class="col">
-						<h6 class="mb-0 text-uppercase">Daftar Buku Induk Kelas 7 A</h6>
+						<h6 class="mb-0 text-uppercase">Daftar Buku Induk</h6>
 						<br>
 						<div class="card">
 							<div class="card-body">
@@ -75,9 +77,9 @@
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>NSM / NPSN</th>
+												<th>NSM / NISN</th>
 												<th>Nama Santri</th>
-												<th>L/P</th>
+												<th>Jenis Kelamin</th>
 												<th>Tanggal Download</th>
 												<th>Link Download</th>
 												<th>Aksi</th>
@@ -128,6 +130,7 @@
 
 					// Form List MasterBook
                     function listForm($id) {
+                        $('#masterBookListModal').modal('show');
                         $.ajax({
                             url: "masterbook/" + $id,
                             type: "GET",

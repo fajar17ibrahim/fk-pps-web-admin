@@ -33,29 +33,3 @@
                 </table>
                 
                 @endsection
-
-                @section('custom_js')
-                <script>
-                    // View Cover Data
-                    $(function () {
-                        alert('Tidak dapat menampilkan Data');
-                        // const params = new URLSearchParams(window.location.search);
-                        // var id = params.get('id');
-                        // $.ajax({
-                        //     url: "report-equipment/" + id,
-                        //     type: "GET",
-                        //     dataType: "JSON",
-                        //     success: function(data) {
-                        //         alert(data);
-                        //         $('#vSantriName').text(": " + data[0].santri_name);
-                        //         $('#vSantriNISM').text(": " + data.nism);
-                        //         $('#vSantriNISN').text(": " + data.nisn);
-                        //     },
-                        //     error: function() {
-                        //         alert('Tidak dapat menampilkan Data');
-                        //     }
-                        // });
-                    });
-                    
-                </script>
-                @endsection

@@ -72,9 +72,9 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>NSM / NPSN</th>
+                                                <th>NSM / NISN</th>
                                                 <th>Nama Santri</th>
-                                                <th>L/P</th>
+                                                <th>Jenis Kelamin</th>
                                                 <th>Tanggal Download</th>
                                                 <th>Cetak Nilai UTS</th>
                                                 <th>Cetak Nilai UAS</th>

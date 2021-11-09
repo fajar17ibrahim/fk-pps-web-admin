@@ -115,5 +115,5 @@
 
     
     </style>
-	<title>Cetak Rapor</title>
+	<title>Cetak</title>
 </head>

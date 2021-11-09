@@ -57,7 +57,7 @@ class AdminMasterBookController extends Controller
         $masterBook = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('master_book.santri_nisn', $id)
+            ->where('master_book.masterbook_id', $id)
             ->get();
 
             return json_encode($masterBook);
@@ -105,6 +105,8 @@ class AdminMasterBookController extends Controller
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
             ->where('master_book.santri_nisn', $id)
             ->get();
+
+            // return $masterBook;
 
         $pdf = PDF::loadView('admin.page.masterbook.masterbook-cover', compact('masterBook'));
         $pdf->setPaper('a4', 'potrait');
@@ -198,7 +200,7 @@ class AdminMasterBookController extends Controller
             $row[] = $masterBook->santri_name;
             $row[] = $masterBook->santri_gender;
             $row[] = $masterBook->master_book_date_download;
-            $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $masterBook->santri_nisn . ')">Buku Induk</button>';
+            $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $masterBook->masterbook_id . ')">Buku Induk</button>';
             $row[] = '<input type="button" class="btn btn-danger" value="Blok" />';
             $data[] = $row;
         }

@@ -4,13 +4,15 @@
                 @section('content')
                 <br><br>
                 <table class="borderless" style="width:100%">
-                    <tbody class="text-center">
+                    <tbody class="text-center text-uppercase text-bold">
                         <tr>
-                            <td class="text-center">
-                                <h2 class="text-uppercase">Laporan Hasil Belajar</h2>
-                                <h2 class="text-uppercase">PPS MINHAAJUSHSHOOBIRIIN</h2>
-                                <h2 class="text-uppercase">Tingkat {{ $santri[0]->class_level }}</h2>
-                            </td>
+                            <td class="text-size-18">Laporan Hasil Belajar</td>
+                        </tr>
+                        <tr>
+                            <td class="text-size-18">{{ $santri[0]->school_name }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-size-18">Tingkat {{ $santri[0]->class_level }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -55,7 +57,7 @@
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>: -</td>
+                            <td>: {{ $santri[0]->school_email }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -143,11 +143,11 @@ Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::resource('masterbook', AdminMasterBookController::class);
 
-    Route::get('/masterbook-cover/{id}', [AdminMasterBookController::class, 'masterbookCover'])->name('masterbook-cover');
+    Route::get('masterbook-cover/{id}', [AdminMasterBookController::class, 'masterbookCover'])->name('masterbook-cover');
 
-    Route::get('/masterbook-santri/{id}', [AdminMasterBookController::class, 'masterbookSantri'])->name('masterbook-santri');
+    Route::get('masterbook-santri/{id}', [AdminMasterBookController::class, 'masterbookSantri'])->name('masterbook-santri');
 
-    Route::get('/masterbook-report/{id}', [AdminMasterBookController::class, 'masterbookReport'])->name('masterbook-report');
+    Route::get('masterbook-report/{id}', [AdminMasterBookController::class, 'masterbookReport'])->name('masterbook-report');
 
     // Report Equipment
     Route::get('report-equipment/data/{level}/{school}/{kelas}', [AdminReportEquipmentController::class, 'listData'])->name('report-equipment.data');

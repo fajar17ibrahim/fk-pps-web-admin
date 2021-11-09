@@ -16,10 +16,10 @@
                                                                 <th scope="row"><h5><a id="lsLembaga">Halaman Informasi PKPPS</a></h5></th>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row"><h5><a id="lsSantri" href="">Halaman Biodata Santri</a></h5></th>
+                                                                <th scope="row"><h5><a id="lsSantri">Halaman Biodata Santri</a></h5></th>
                                                             </tr>
                                                             <tr>
-                                                                <th scope="row"><h5><a id="lsMutation" href="">Halaman Mutasi Rapor</a></h5></th>
+                                                                <th scope="row"><h5><a id="lsMutation">Halaman Mutasi Rapor</a></h5></th>
                                                             </tr>
                                                             <tr>
                                                                 <th scope="row"><h5><a href="#">Halaman Petunjuk Pengisian</a></h5></th>

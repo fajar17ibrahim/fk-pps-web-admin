@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\ReportPrint;
+use App\Models\ReportValue;
 use App\Models\Santri;
 use App\Models\School;
 use App\Models\Kelas;
@@ -166,13 +167,23 @@ class AdminReportPrintController extends Controller
     }
 
     public function utsExportPdf($id) {
+        
         $reportPrint = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+            ->leftJoin('semester','semester.semester_id','=','tahun_pelajaran.tahun_pelajaran_semester')
             ->where('report_print.santri_nisn','=', $id)
+            ->first();
+
+
+        $reportValues = ReportValue::leftJoin('mapel','mapel.mapel_id','=','report_value.mapel_id')
+            ->where('report_value.class_id', '=', $reportPrint->santri_class)
+            ->where('report_value.santri_nisn', '=', $id)
             ->get();
 
-        $pdf = PDF::loadView('admin.page.report.reportprint.uts-export-pdf', compact('reportPrint'));
+        $pdf = PDF::loadView('admin.page.report.reportprint.uts-export-pdf', compact('reportPrint'), compact('reportValues'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }

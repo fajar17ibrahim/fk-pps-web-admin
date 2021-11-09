@@ -17,30 +17,92 @@ class MapelSeeder extends Seeder
     {
         //
 
-        $mapel = new Mapel;
-        $mapel->mapel_name = 'Al-Quran';
-        $mapel->mapel_kelompok = '1';
-        $save = $mapel->save();
+        // $mapel = new Mapel;
+        // $mapel->mapel_name = 'Al-Quran';
+        // $mapel->mapel_kelompok = '1';
+        // $save = $mapel->save();
+
+        Mapel::insert([
+            [
+                'mapel_name' => 'Al-Quran',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Hadist',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Aqidah',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Akhlaq',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Fiqih',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Sejarah Kebudayaan Islam',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Bahasa Arab',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Pendidikan Pancasila dan Kewarganegaraan',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Matematika',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Bahasa Indonesia',
+                'mapel_kelompok' => '1'
+            ],
+            [
+                'mapel_name' => 'Bahasa Inggris',
+                'mapel_kelompok' => '2'
+            ],
+            [
+                'mapel_name' => 'Sejarah Indonesia',
+                'mapel_kelompok' => '2'
+            ],
+            [
+                'mapel_name' => 'Fisika',
+                'mapel_kelompok' => '3'
+            ],
+            [
+                'mapel_name' => 'Kimia',
+                'mapel_kelompok' => '3'
+            ],
+            [
+                'mapel_name' => 'Biologi',
+                'mapel_kelompok' => '3'
+            ]
+        ]);
     
-        if ($save) {
-            $mapelLast = Mapel::orderBy('mapel_id', 'desc')->first();
-
+        $mapels = Mapel::get();
+        foreach ($mapels as $mapel) {
             $mapelTeacher = new MapelTeacher;
-            $mapelTeacher->mapel_id = $mapelLast->mapel_id;
+            $mapelTeacher->mapel_id = $mapel->mapel_id;
             $mapelTeacher->class_id = '1';
-            $mapelTeacher->ustadz_nik = '';
+            $mapelTeacher->ustadz_nik = '351315100000000';
             $mapelTeacherSaved = $mapelTeacher->save();
 
             $mapelTeacher = new MapelTeacher;
-            $mapelTeacher->mapel_id = $mapelLast->mapel_id;
+            $mapelTeacher->mapel_id = $mapel->mapel_id;
             $mapelTeacher->class_id = '2';
-            $mapelTeacher->ustadz_nik = '';
+            $mapelTeacher->ustadz_nik = '351315100000000';
             $mapelTeacherSaved = $mapelTeacher->save();
 
             $mapelTeacher = new MapelTeacher;
-            $mapelTeacher->mapel_id = $mapelLast->mapel_id;
+            $mapelTeacher->mapel_id = $mapel->mapel_id;
             $mapelTeacher->class_id = '3';
-            $mapelTeacher->ustadz_nik = '';
+            $mapelTeacher->ustadz_nik = '351315100000000';
             $mapelTeacherSaved = $mapelTeacher->save();
         }
         

@@ -22,25 +22,25 @@
                                         <tbody>
                                             <tr>
                                                 <td style="width:15%">Nama PKPPS</td>
-                                                <td style="width:40%">: {{ $reportPrint[0]->school_name }}</td>
+                                                <td style="width:40%">: {{ $reportPrint->school_name }}</td>
                                                 <td style="width:15%">Kelas</td>
-                                                <td style="width:20%">: {{ $reportPrint[0]->class_name }}</td>
+                                                <td style="width:20%">: {{ $reportPrint->class_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Alamat</td>
-                                                <td>: {{ $reportPrint[0]->school_address }}</td>
+                                                <td>: {{ $reportPrint->school_address }}</td>
                                                 <td>Semester</td>
-                                                <td>: 1 (Satu)</td>
+                                                <td>: {{ $reportPrint->semester_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Nama</td>
-                                                <td>: {{ $reportPrint[0]->santri_name }}</td>
+                                                <td>: {{ $reportPrint->santri_name }}</td>
                                                 <td>Tahun Pelajaran</td>
-                                                <td>: 2018-2019</td>
+                                                <td>: {{ $reportPrint->tahun_pelajaran_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Nomor Induk</td>
-                                                <td>: {{ $reportPrint[0]->santri_nism }}</td>
+                                                <td>: {{ $reportPrint->santri_nism }}</td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
@@ -76,246 +76,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php $no = 1; @endphp
+                                            @foreach ($reportValues as $reportValue)
                                             <tr>
-                                                <td>1</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $no }}</td>
+                                                <td class="text-left">{{ $reportValue->mapel_name }}</td>
+                                                <td>{{ $reportValue->report_kkm }}</td>
+                                                <td>{{ $reportValue->p1 }}</td>
+                                                <td>{{ $reportValue->p2 }}</td>
+                                                <td>{{ $reportValue->p3 }}</td>
+                                                <td>{{ $reportValue->p4 }}</td>
+                                                <td>{{ $reportValue->p5 }}</td>
+                                                <td>{{ $reportValue->k1 }}</td>
+                                                <td>{{ $reportValue->k2 }}</td>
+                                                <td>{{ $reportValue->k3 }}</td>
+                                                <td>{{ $reportValue->k4 }}</td>
+                                                <td>{{ $reportValue->k5 }}</td>
+                                                <td>{{ $reportValue->pts }}</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>7</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>8</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>9</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>10</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>11</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>12</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>13</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>14</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>15</td>
-                                                <td class="text-left">Bahasa Arab</td>
-                                                <td>80</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                            @php $no++ @endphp
+                                            @endforeach
                                         </tbody>
                                     </table>
                                     <table class="borderless" style="width: 100%;">
@@ -327,12 +107,12 @@
                                                 <td style="width: 70%">
                                                     Mengetahui:<br>
                                                     Orang Tua / Wali<br><br><br><br><br>
-                                                    {{ $reportPrint[0]->father_name }}
+                                                    {{ $reportPrint->father_name }}
                                                 </td>
                                                 <td style="width: 30%">
-                                                    Jakarta Timur, 18 September 2021<br>
+                                                {{ $reportPrint->school_city . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                                     Wali Kelas<br><br><br><br><br>
-                                                    <b>RULI</b>
+                                                    <b>{{ $reportPrint->ustadz_name }}</b>
                                                 </td>
                                             </tr>
                                         </tbody>

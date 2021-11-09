@@ -182,12 +182,14 @@
 														<input name="inKepsekEmail" type="text" id="inKepsekEmail" class="form-control" value="{{ $school[0]->ustadz_email }}" readonly/>
 													</div>
 												</div>
+												@if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
 												<div class="row">
 													<div class="col-sm-3"></div>
 													<div class="col-sm-9 text-secondary">
 														<input type="submit" class="btn btn-success px-4" value="Simpan" />
 													</div>
 												</div>
+												@endif
 											</div>
 										</div>
 									</div>

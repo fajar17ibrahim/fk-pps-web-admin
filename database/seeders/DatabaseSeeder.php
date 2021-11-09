@@ -28,7 +28,11 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             GraduationSeeder::class,
             MutationSeeder::class,
-            NewsSeeder::class
+            NewsSeeder::class,
+            ReportEquipmentSeeder::class,
+            ReportPrintSeeder::class,
+            MasterBookSeeder::class,
+            ReportValueSeeder::class
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
+                    @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -62,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endif
                     <div class="col">
                         <h6 class="mb-0 text-uppercase">Input Nilai Extrakurikuler</h6>
                         <br>

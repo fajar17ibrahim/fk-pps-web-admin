@@ -70,6 +70,32 @@
                         <div class="card">
                             <div class="card-body">
                                 @include('admin/page/masterrelation/mapel/mapel-relation-edit')
+                                @if(Session::has('message_success'))
+                                    <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Berhasil Update Data</h6>
+                                                <div class="text-white">{{ Session::get('message_success') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @if(Session::has('message_error'))
+                                    <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Gagal Update Data!</h6>
+                                                <div class="text-white">{{ Session::get('message_error') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
                                 <div class="table-responsive">
                                     <table id="dataTable" class="table table-striped table-borderless" style="width:100%">
                                         <thead>
@@ -94,7 +120,7 @@
 
                 @section('custom_js')
                 <script>
-                    var class = 0;
+                    var kelas = 0;
                     var level = 0;
                     var school = 0;
                     var table;
@@ -102,7 +128,7 @@
                         // Menampilkan data Guru Mapel
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-relation-mapel/data/" + level + "/" + school + "/" + class,
+                                "url": "master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
                                 "type": "GET"
                             }
                         });                    
@@ -116,6 +142,7 @@
                         $.ajax({
                             url: "master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
+                                alert(response  );
                                 table.ajax.url("master-relation-mapel/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
@@ -124,20 +151,21 @@
                         });
                     };
 
-                    // Form Edit Kelas
+                    // Form Edit Guru Mapel
                     function editForm($id) {
-                        url = "master-relation-class/" + $id;
+                        url = "master-relation-mapel/" + $id;
                         $('.modal-title').text('Edit Kelas');
                         $.ajax({
-                            url: "master-relation-class/" + $id + "/edit",
+                            url: "master-relation-mapel/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {
-                                $('#editWaliKelasModal').modal('show');
+                                $('#editMapelTeacherModal').modal('show');
                                 $('.modal-title').text('Edit Kelas');
                                 $('#formEdit').attr('action', url);
-                                $('#soClassName').val(data.id);
-                                $('#soHomeroomTeacher').val(data.wali);
+                                $('#soMapelEdit').val(data.mapel);
+                                $('#soKelasEdit').val(data.kelas);
+                                $('#soUstadzEdit').val(data.teacher);
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
