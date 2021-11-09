@@ -20,6 +20,7 @@ class CreateReportValue extends Migration
             $table->string('santri_nisn', 20)->nullable();
             $table->string('tahun_pelajaran_id', 12)->nullable();
             $table->string('report_kkm', 5)->nullable();
+            $table->string('jp', 5)->nullable();
             $table->string('p1', 5)->nullable();
             $table->string('p2', 5)->nullable();
             $table->string('p3', 5)->nullable();
@@ -33,6 +34,7 @@ class CreateReportValue extends Migration
             $table->string('rph', 5)->nullable();
             $table->string('pts', 5)->nullable();
             $table->string('pas', 5)->nullable();
+            $table->string('knowledge_pre', 5)->nullable();
             $table->text('knowledge_desc')->nullable();
             $table->string('k1', 5)->nullable();
             $table->string('k2', 5)->nullable();
@@ -45,7 +47,7 @@ class CreateReportValue extends Migration
             $table->string('k9', 5)->nullable();
             $table->string('k10', 5)->nullable();
             $table->string('hpa', 5)->nullable();
-            $table->string('pre', 5)->nullable();
+            $table->string('skills_pre', 5)->nullable();
             $table->text('skills_desc')->nullable();
             $table->timestamps();
         });

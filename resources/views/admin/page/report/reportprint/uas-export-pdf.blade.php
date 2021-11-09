@@ -11,25 +11,25 @@
                                     <tbody>
                                         <tr >
                                             <td style="width:15%">Nama PKPPS</td>
-                                            <td style="width:40%" class="text-bold">: {{ $reportPrint[0]->school_name }}</td>
+                                            <td style="width:40%" class="text-bold">: {{ $data['biodata']['pps_nama'] }}</td>
                                             <td style="width:15%">Kelas</td>
-                                            <td style="width:20%" class="text-bold">: {{ $reportPrint[0]->class_name }}</td>
+                                            <td style="width:20%" class="text-bold">: {{ $data['biodata']['kelas_nama'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Alamat</td>
-                                            <td class="text-bold">: {{ $reportPrint[0]->school_address }}</td>
+                                            <td class="text-bold">: {{ $data['biodata']['pps_alamat'] }}</td>
                                             <td>Semester</td>
-                                            <td class="text-bold">: 1 (Satu)</td>
+                                            <td class="text-bold">: {{ $data['biodata']['semester'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Nama</td>
-                                            <td class="text-bold">: {{ $reportPrint[0]->santri_name }}</td>
+                                            <td class="text-bold">: {{ $data['biodata']['santri_nama'] }}</td>
                                             <td>Tahun Pelajaran</td>
-                                            <td class="text-bold">: 2018-2019</td>
+                                            <td class="text-bold">: {{ $data['biodata']['tahun_pelajaran'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Nomor Induk</td>
-                                            <td class="text-bold">: {{ $reportPrint[0]->santri_nism }}</td>
+                                            <td class="text-bold">: {{ $data['biodata']['santri_no_induk'] }}</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -89,232 +89,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($data['nilai'] as $nilais)
                                     <tr class="text-bold bg-light-info" >
-                                        <td colspan="10" >Kelompok A (Umum)</td>
+                                        <td colspan="10" >{{ $nilais['kelompok'] }}</td>
                                     </tr>
+                                    @foreach ($nilais['mapel'] as $mapel)
                                     <tr>
-                                        <td>1</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
+                                        <td>{{ $mapel['no'] }}</td>
+                                        <td class="text-left">{{ $mapel['mapel_nama'] }}</td>
+                                        <td>{{ $mapel['kkm'] }}</td>
+                                        <td>{{ $mapel['kkm'] }}</td>
+                                        <td>{{ $mapel['pas'] }}</td>
+                                        <td>{{ $mapel['pre_pengetahuan'] }}</td>
+                                        <td>{{ $mapel['hpa'] }}</td>
+                                        <td>{{ $mapel['pre_keterampilan'] }}</td>
+                                        <td>{{ $mapel['average'] }}</td>
+                                        <td>{{ $mapel['nxb'] }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr class="text-bold bg-light-info" >
-                                        <td colspan="10">Kelompok B (Umum)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>8</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        
-                                    <tr>
-                                        <td>9</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>10</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>11</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>12</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table id="table-attendance" class="border text-center" style="width:100%">
-                                <thead class="text-center bg-light-info">
-                                    <tr>
-                                        <th rowspan="2">No</th>
-                                        <th rowspan="2" style="width: 30%">Mata Pelajaran</th>
-                                        <th rowspan="2">KKM</th>
-                                        <th rowspan="2">JP (B)</th>
-                                        <th colspan="2">Pengetahuan</th>
-                                        <th colspan="2">Keterampilan</th>
-                                        <th rowspan="2" style="width: 12%">Rata-Rata (N)</th>
-                                        <th rowspan="2" style="width: 8%">N x B</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Nilai</th>
-                                        <th>Predikat</th>
-                                        <th>Nilai</th>
-                                        <th>Predikat</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-bold bg-light-info" >
-                                        <td colspan="10">Kelompok C (Peminatan)</td>
-                                    </tr>
-                                    <tr class="text-bold" >
-                                        <td colspan="10">I. Peminatan Matematika dan Ilmu Alam</td>
-                                    </tr>
-                                    <tr>
-                                        <td>13</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>14</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>15</td>
-                                        <td class="text-left">Bahasa Arab</td>
-                                        <td>80</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>A</td>
-                                        <td>90</td>
-                                        <td>90</td>
-                                    </tr>
+                                    @endforeach
+                                    @endforeach
                                     <tr>
                                         <td colspan="3">Jumlah</td>
-                                        <td>30</td>
-                                        <td>1264</td>
+                                        <td>{{ $data['totol_jp'] }}</td>
+                                        <td>{{ $data['totol_pengetahuan'] }}</td>
                                         <td></td>
-                                        <td>1259</td>
+                                        <td>{{ $data['totol_keterampilan'] }}</td>
                                         <td></td>
-                                        <td>1262</td>
-                                        <td>2524</td>
+                                        <td>{{ $data['totol_average'] }}</td>
+                                        <td>{{ $data['totol_nxb'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -355,183 +157,27 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <br><br><br>
+                            <div class="new-page"></div>
                             <div class="text-bold text-uppercase">C. Deskripsi Pengetahuan dan Keterampilan</div>
                             <table id="table-attendance" class="border" style="width:100%">
                                 <tbody>
+                                    @foreach ($data['nilai'] as $nilais)
                                     <tr class="text-bold bg-light-info">
-                                        <th colspan="4">Kelompok A (Umum)</th>
+                                        <th colspan="4">{{ $nilais['kelompok'] }}</th>
                                     </tr>
+                                    @foreach ($nilais['mapel'] as $mapel)
                                     <tr>
-                                        <td style="width: 1%" rowspan="2">1</td>
-                                        <td style="width: 20%" rowspan="2">Bahasa Arab</td>
+                                        <td style="width: 1%" rowspan="2">{{ $mapel['no'] }}</td>
+                                        <td style="width: 25%" rowspan="2">{{ $mapel['mapel_nama'] }}</td>
                                         <td style="width: 15%">Pengetahuan</td>
-                                        <td style="width: 64%; height: 80px;">Lorem ipsum</td>
+                                        <td style="width: 59%; height: 75px;">{{ $mapel['deskripsi_pengetahuan'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
+                                        <td style="height: 80px">{{ $mapel['deskripsi_keterampilan'] }}</td>
                                     </tr>
-
-                                    <tr>
-                                        <td rowspan="2">2</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">3</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">4</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 100px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 100px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">5</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 100px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 100px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">6</td>
-                                        <td rowspan="2">Bahasa x x x x</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">7</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr class="text-bold bg-light-info">
-                                        <th colspan="4">Kelompok B (Umum)</th>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">1</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">2</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">3</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">4</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">5</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr class="text-bold bg-light-info">
-                                        <th colspan="4">Kelompok C (Peminatan)</th>
-                                    </tr>
-                                    <tr class="text-bold">
-                                        <th colspan="4" >I. Peminatan Matematika dan Ilmu Alam</th>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2">1</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">2</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2">3</td>
-                                        <td rowspan="2">Bahasa Arab</td>
-                                        <td>Pengetahuan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keterampilan</td>
-                                        <td style="height: 80px">Lorem ipsum</td>
-                                    </tr>
+                                    @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                             
@@ -637,7 +283,7 @@
                                         <td>
                                             Mengetahui:<br>
                                             Orang Tua / Wali<br><br><br><br><br>
-                                            {{ $reportPrint[0]->father_name }}
+                                            
                                         </td>
                                         <td style="width:30%">
                                             Jakarta Timur, 18 September 2021<br>
