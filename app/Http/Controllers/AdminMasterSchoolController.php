@@ -42,6 +42,24 @@ class AdminMasterSchoolController extends Controller
         //
         try {
             //
+            $rtLength =  strlen($request['inRT']);
+            $angkaNol = "0";
+            if ($rtLength < 3) {
+                for ($i = 1; $i < 3 - $rtLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rt = $angkaNol . $request['inRT'];
+            }
+            
+            $rwLength =  strlen($request['inRW']);
+            $angkaNol = "0";
+            if ($rwLength < 3) {
+                for ($i = 1; $i < 3 - $rwLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rw = $angkaNol . $request['inRW'];
+            }
+
             $school = new School;
             $school->school_statistic_number = $request['inSchoolNSP'];
             $school->school_npsn = $request['inSchoolNPSN'];
@@ -49,7 +67,7 @@ class AdminMasterSchoolController extends Controller
             $school->school_email = $request['inSchoolEmail'];
             $school->school_phone = $request['inSchoolPhone'];
             $school->school_address = $request['inAddress'];
-            $school->school_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $school->school_rt_rw = $rt . "/" . $rw;
             $school->school_village = $request['soVillage'];
             $school->school_districts = $request['inDistrict'];
             $school->school_city = $request['inKabOrCity'];
@@ -108,6 +126,24 @@ class AdminMasterSchoolController extends Controller
         //
         try {
             //
+            $rtLength =  strlen($request['inRT']);
+            $angkaNol = "0";
+            if ($rtLength < 3) {
+                for ($i = 1; $i < 3 - $rtLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rt = $angkaNol . $request['inRT'];
+            }
+            
+            $rwLength =  strlen($request['inRW']);
+            $angkaNol = "0";
+            if ($rwLength < 3) {
+                for ($i = 1; $i < 3 - $rwLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rw = $angkaNol . $request['inRW'];
+            }
+
             $school = School::find($id);
             $school->school_statistic_number = $request['inSchoolNSP'];
             $school->school_npsn = $request['inSchoolNPSN'];
@@ -115,7 +151,7 @@ class AdminMasterSchoolController extends Controller
             $school->school_email = $request['inSchoolEmail'];
             $school->school_phone = $request['inSchoolPhone'];
             $school->school_address = $request['inAddress'];
-            $school->school_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $school->school_rt_rw = $rt . "/" . $rw;
             $school->school_village = $request['soVillage'];
             $school->school_districts = $request['inDistrict'];
             $school->school_city = $request['inKabOrCity'];
@@ -154,7 +190,7 @@ class AdminMasterSchoolController extends Controller
     public function addSchool()
     {
         //
-        $ustadzs = Ustadz::leftJoin('school','ustadz.npsn','=','school.school_npsn')->get();
+        $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')->get();
         $address = Address::get();
         return view('admin.page.master.school.school-add', compact('ustadzs'), compact('address'));
     }
@@ -163,7 +199,7 @@ class AdminMasterSchoolController extends Controller
     {
         //
         $school = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')->find($id);
-        $ustadzs = Ustadz::leftJoin('school','ustadz.npsn','=','school.school_npsn')->get();
+        $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')->get();
         $address = Address::get();
         return view('admin.page.master.school.school-edit', compact('ustadzs'), compact('address'))
         ->with('school', $school);

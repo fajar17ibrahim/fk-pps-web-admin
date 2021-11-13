@@ -19,5 +19,10 @@ class SchoolYearSeeder extends Seeder
         $schoolYear->tahun_pelajaran_name = '2021/2022';
         $schoolYear->tahun_pelajaran_semester = '1';
         $save = $schoolYear->save();
+
+        $schoolYear = new SchoolYear;
+        $schoolYear->tahun_pelajaran_name = '2021/2022';
+        $schoolYear->tahun_pelajaran_semester = '2';
+        $save = $schoolYear->save();
     }
 }

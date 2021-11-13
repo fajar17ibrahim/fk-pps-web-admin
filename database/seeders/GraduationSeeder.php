@@ -16,11 +16,13 @@ class GraduationSeeder extends Seeder
     {
         //
         $graduation = new Graduation;
+        $graduation->test_number = '1202129111';
         $graduation->graduation_santri = '0987654321';
         $graduation->graduation_class = '1';
         $graduation->graduation_school = '1234567890';
         $graduation->graduated_statement = 'Lulus';
         $graduation->graduated_year = '2021';
+        $graduation->tahun_pelajaran = '1';
         $graduation->continue_statement = 'Melanjutkan';
         $graduation->reason = '';
         $graduation->continue_to = 'Ulya';

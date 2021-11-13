@@ -78,46 +78,16 @@
                                     <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
                                         <thead>
                                             <tr>
-                                            <th rowspan="2">No</th>
-                                                <th rowspan="2">NSM / NPSN</th>
-                                                <th rowspan="2">Nama Santri</th>
-                                                <th rowspan="2">L/P</th>
-                                                <th colspan="2" class="text-center">Berdasarkan Ranking</th>
-                                                <th class="text-center">Berdasarkan Pilihan</th>
-                                            </tr>
-                                            <tr>
+                                                <th>No</th>
+                                                <th>NSM / NISN</th>
+                                                <th>Nama Santri</th>
+                                                <th>Jenis Kelamin</th>
                                                 <th>Ranking</th>
-                                                <th>Catatan</th>
-                                                <th>Catatan</th>
+                                                <th class="text-center">Catatan Berdasarkan Ranking</th>
+                                                <th class="text-center">Catatan Berdasarkan Pilihan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td>
-                                                    <select class="single-select">
-                                                        <option value="United States">1</option>
-                                                        <option value="United States">2</option>
-                                                        <option value="United States">3</option>
-                                                        <option value="United States">4</option>
-                                                        <option value="United States">5</option>
-                                                        <option value="United States">6</option>
-                                                    </select>
-                                                </td>
-                                                <td><textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">Prestasinya sangat baik, perlu dipertahankan</textarea></td>
-                                                <td><select class="single-select">
-                                                        <option value="United States">Selalu berusaha untuk mematuhi tata tertib sekolah dan patuh terhadap Guru.</option>
-                                                        <option value="United States">Selalu berusaha untuk mandiri dan tepat waktu dalam mengerjakan tugas.</option>
-                                                        <option value="United States">Mempunyai kemampuan dan motivasi yang tinggi untuk menggunakan waktu secara efisien.</option>
-                                                        <option value="United States">Diharapkan merubah penampilannya menjadi lebih rapi. Seperti tentang potong rambut dan cara berpakaian.</option>
-                                                        <option value="United States">Masih perlu memperbanyak teman bergaul dan teman diskusi, kurangi aktifitas menyendiri.</option>
-                                                        <option value="United States">Diharapkan dapat meningkatkan komitmennya untuk lebih serius saat mengerjakan tugas dan tidak mudah menyerah.</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                         
                                     </table>

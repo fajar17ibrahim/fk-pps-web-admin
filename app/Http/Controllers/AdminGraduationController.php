@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Session;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Graduation;
+use App\Models\Ustadz;
+use App\Models\ReportValueLast;
 
 class AdminGraduationController extends Controller
 {
@@ -105,8 +108,78 @@ class AdminGraduationController extends Controller
         return view('admin.page.graduation.graduated.graduation-add');
     }
 
-    public function graduationPrintLetter() {
-        $pdf = PDF::loadView('admin.page.graduation.graduated.graduation-print-letter');
+    public function graduationPrintLetter($id) {
+        $graduation = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','graduation.tahun_pelajaran')
+            ->leftJoin('school','school.school_npsn','=','graduation.graduation_school')
+            ->where('graduation.graduation_id', '=', $id)
+            ->first();
+
+            // return $graduation;
+
+            $kepsek = Ustadz::where('ustadz.ustadz_nik', '=', $graduation->school_headship)
+            ->first();
+
+            if ($graduation->class_level == 'Ula') {
+                $setara = "SD/MI";
+            } else if ($graduation->class_level == 'Wustha') {
+                $setara = "SMP/MTS";
+            } else {
+                $setara = "SMA/MA";
+            }
+
+        $reportValuesLast = ReportValueLast::leftJoin('mapel','mapel.mapel_id','=','report_value_last.mapel_id')
+            ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
+            ->where('report_value_last.class_id', '=', $graduation->santri_class)
+            ->where('report_value_last.tahun_pelajaran_id', '=', $graduation->tahun_pelajaran_id)
+            ->where('report_value_last.graduated_year', '=', $graduation->graduated_year)
+            ->where('report_value_last.santri_nisn', '=', $graduation->santri_nisn)
+            ->get();
+
+            // return $reportValuesLast;
+
+            $values = array();
+            $no = 1;
+            $nilaiTotal = 0;
+            foreach ($reportValuesLast as $reportValueLast) {
+                $value = array(
+                    'no' => $no++,
+                    'mapel_nama' => $reportValueLast->mapel_name,
+                    'nus' => $reportValueLast->nus,
+                );
+
+                $nilaiTotal = (float) $nilaiTotal + (float) $reportValueLast->nus;
+
+                $values[] = $value;
+            }
+
+            $average = $nilaiTotal / count($reportValuesLast);
+
+            $data = array(
+                'pps_nama' => $graduation->school_name,
+                'pps_level' => $graduation->class_level,
+                'pps_setara_level' => $setara,
+                'pps_npsn' => $graduation->school_npsn,
+                'pps_kota_prov' => $graduation->school_city . " Provinsi " . $graduation->school_province,
+                'pps_kota' => $graduation->school_city,
+                'pps_kepsek' => $kepsek->ustadz_name,
+                'ayah_nama' => $graduation->father_name,
+                'tahun_pelajaran' => $graduation->tahun_pelajaran_name,
+                'nomor_ujian' => $graduation->test_number,
+                'santri_nama' => $graduation->santri_name,
+                'santri_ttl' => $graduation->santri_born_place . ", " . tanggal($graduation->santri_born_date),
+                'santri_nama' => $graduation->father_name,
+                'santri_nism' => $graduation->santri_nism,
+                'santri_nisn' => $graduation->santri_nisn,
+                'santri_lulus' => $graduation->graduated_statement,
+                'nilai' => $values,
+                'nilai_rata_rata' => $average
+            );
+
+        // return $data;
+
+        $pdf = PDF::loadView('admin.page.graduation.graduated.graduation-print-letter', compact('data'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }

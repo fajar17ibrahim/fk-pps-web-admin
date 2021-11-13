@@ -60,7 +60,7 @@ Route::middleware(['verify', 'verified'])->group(function () {
     
     Route::get('graduation-add', [AdminGraduationController::class, 'graduationAdd'])->name('graduation-add');
         
-    Route::get('graduation-print-letter', [AdminGraduationController::class, 'graduationPrintLetter'])->name('graduation-print-letter');
+    Route::get('graduation-print-letter/{id}', [AdminGraduationController::class, 'graduationPrintLetter'])->name('graduation-print-letter');
        
     // Mutation
     Route::resource('mutation', AdminMutationController::class);

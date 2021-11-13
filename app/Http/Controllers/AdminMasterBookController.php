@@ -8,6 +8,10 @@ use App\Models\MasterBook;
 use App\Models\Santri;
 use App\Models\School;
 use App\Models\Kelas;
+use App\Models\ReportPrint;
+use App\Models\ReportValue;
+use App\Models\ReportExtrakurikuler;
+use App\Models\ReportAttendance;
 
 class AdminMasterBookController extends Controller
 {
@@ -120,17 +124,161 @@ class AdminMasterBookController extends Controller
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
             ->where('master_book.santri_nisn', $id)
-            ->get();
+            ->first();
 
-        $pdf = PDF::loadView('admin.page.masterbook.masterbook-santri-information', compact('masterBook'));
+            // return $masterBook;
+
+            $biodata = array(
+                'pps_nama' => $masterBook->school_name,
+                'pps_tingkat' => $masterBook->class_level,
+                'santri_nama' => $masterBook->santri_name,
+                'santri_nism' => $masterBook->santri_nism,
+                'santri_nisn' => $masterBook->santri_nisn,
+                'santri_jk' => $masterBook->santri_gender,
+                'santri_tl' => $masterBook->santri_born_place,
+                'santri_tgll' => tanggal($masterBook->santri_born_date),
+                'santri_anak_ke' => $masterBook->santri_child_of,
+                'santri_jml_sdr_kandung' =>  '',
+                'santri_jml_sdr_tiri' =>  '',
+                'santri_yatim_piatu' =>  '',
+                'santri_golongan_darah' =>  '',
+                'santri_riwayat_penyakit' =>  '',
+                'santri_tinggi' =>  '',
+                'santri_berat' =>  '',
+                'santri_pend_sebelum' =>  '',
+                'santri_sekolah_asal' =>  $masterBook->santri_last_school,
+                'santri_ijazah_no_asal' =>  '',
+                'santri_ijazah_tgl_asal' =>  '',
+                'santri_pindahan' =>  '',
+                'santri_alasan_pindah' => '',
+                'santri_diterima_di_kelas' => $masterBook->santri_class_start,
+                'santri_diterima_tanggal' => tanggal($masterBook->santri_class_start_date),
+                'ayah_nama' => $masterBook->father_name,
+                'ayah_nik' => $masterBook->father_nik,
+                'ayah_pendidikan' => $masterBook->father_education,
+                'ayah_kerja' => $masterBook->father_profession,
+                'ayah_penghasilan' => $masterBook->father_salary,
+                'ayah_alamat' => $masterBook->santri_address,
+                'ibu_nama' => $masterBook->mother_name,
+                'ibu_nik' => $masterBook->mother_nik,
+                'ibu_pendidikan' => $masterBook->mother_education,
+                'ibu_kerja' => $masterBook->mother_profession,
+                'ibu_penghasilan' => $masterBook->mother_salary,
+                'ibu_alamat' => $masterBook->santri_address,
+                'wali_nama' => $masterBook->wali_name,
+                'wali_nik' => $masterBook->wali_nik,
+                'wali_pendidikan' => $masterBook->wali_education,
+                'wali_kerja' => $masterBook->wali_profession,
+                'wali_penghasilan' => $masterBook->wali_salary,
+                'wali_alamat' => '',
+                'santri_lulus' => '',
+                'santri_lulus_tgl' => '',
+                'santri_pindah' => '',
+                'santri_ijazah_no' => '',
+                'santri_malanjutkan_ke' => '',
+            );
+
+            // return $biodata;
+
+        $pdf = PDF::loadView('admin.page.masterbook.masterbook-santri-information', compact('biodata'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }
 
-    public function masterbookReport()
+    public function masterbookReport($id)
     {
         //
-        $pdf = PDF::loadView('admin.page.masterbook.masterbook-report');
+
+        $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
+            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+            ->leftJoin('semester','semester.semester_id','=','tahun_pelajaran.tahun_pelajaran_semester')
+            ->where('report_print.santri_nisn','=', $id)
+            ->get();
+
+        $datas = array();
+        foreach ($reportPrints as $reportPrint) {
+            $biodata = array(
+                'pps_nama' => $reportPrint->school_name,
+                'pps_alamat' => $reportPrint->school_address,
+                'pps_tingkat' => $reportPrint->class_level,
+                'santri_nama' => $reportPrint->santri_name,
+                'nism' => $reportPrint->santri_nism,
+                'nisn' => $reportPrint->santri_nisn,
+                'kelas_nama' => $reportPrint->class_name,
+                'semester' => $reportPrint->semester_name,
+                'tahun_pelajaran' => $reportPrint->tahun_pelajaran_name
+            );
+
+            $reportValues = ReportValue::leftJoin('mapel','mapel.mapel_id','=','report_value.mapel_id')
+            ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
+            ->where('report_value.class_id', '=', $reportPrint->santri_class)
+            ->where('report_value.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
+            ->where('report_value.santri_nisn', '=', $id)
+            ->get();
+
+            // return $reportValues;
+
+            $values = array();
+            $no = 1;
+            foreach ($reportValues as $reportValue) {
+                $value = array(
+                    'no' => $no++,
+                    'mapel_nama' => $reportValue->mapel_name,
+                    'mapel_kkm' => $reportValue->report_kkm,
+                    'pas' => $reportValue->pas,
+                    'pre_pengetahuan' => $reportValue->knowledge_pre,
+                    'hpa' => $reportValue->hpa,
+                    'pre_keterampilan' => $reportValue->skills_pre,
+                );
+
+                $values[] = $value;
+            }
+
+            $reportExtras = ReportExtrakurikuler::where('report_extrakurikuler.class_id', '=', $reportPrint->santri_class)
+                ->where('report_extrakurikuler.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
+                ->where('report_extrakurikuler.santri_nisn', '=', $id)
+                ->get();
+
+            $dataExtra = array();
+            $no = 1;
+            foreach ($reportExtras as $reportExtra) {
+                $extra = array(
+                    'no' => $no++,
+                    'extra_nama' => $reportExtra->extra_name,
+                    'extra_nilai' => $reportExtra->extra_value,
+                    'extra_deskripsi' => $reportExtra->extra_description
+                );
+
+                $dataExtra[] = $extra;
+            }
+
+            $reportAttendance = ReportAttendance::where('report_attendance.class_id', '=', $reportPrint->santri_class)
+                ->where('report_attendance.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
+                ->where('report_attendance.santri_nisn', '=', $id)
+                ->first();
+
+            $attendance = array(
+                'sakit' => $reportAttendance->s,
+                'izin' => $reportAttendance->i,
+                'alfa' => $reportAttendance->a
+            );
+
+            $data = array(
+                'biodata' => $biodata,
+                'nilai' => $values,
+                'extra' => $dataExtra,
+                'kehadiran' => $attendance,
+            );
+
+            $datas[] = $data;
+        }
+
+        // return $datas;
+        $pdf = PDF::loadView('admin.page.masterbook.masterbook-report', compact('datas'));
+        // $pdf = PDF::loadView('admin.page.masterbook.masterbook-report', compact('reportPrints'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }
@@ -197,7 +345,7 @@ class AdminMasterBookController extends Controller
             $row = array();
             $row[] = $no;
             $row[] = $masterBook->santri_nism . " / " . $masterBook->santri_nisn;
-            $row[] = $masterBook->santri_name;
+            $row[] = '';
             $row[] = $masterBook->santri_gender;
             $row[] = $masterBook->master_book_date_download;
             $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $masterBook->masterbook_id . ')">Buku Induk</button>';

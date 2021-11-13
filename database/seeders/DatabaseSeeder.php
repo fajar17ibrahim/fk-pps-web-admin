@@ -32,7 +32,13 @@ class DatabaseSeeder extends Seeder
             ReportEquipmentSeeder::class,
             ReportPrintSeeder::class,
             MasterBookSeeder::class,
-            ReportValueSeeder::class
+            ReportValueSeeder::class,
+            ReportExtrakurikulerSeeder::class,
+            ReportAchievementSeeder::class,
+            ReportAttendanceSeeder::class,
+            ReportAttitudeSeeder::class,
+            ReportHomeRoomTeacherSeeder::class,
+            ReportValueLastSeeder::class
         ]);
     }
 }

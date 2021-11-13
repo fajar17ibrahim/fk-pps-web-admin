@@ -56,6 +56,7 @@
                                                 <th rowspan="3" style="width: 30%">Mata Pelajaran</th>
                                                 <th rowspan="3">KKM</th>
                                                 <th colspan="10">Hasil Penilaian Harian</th>
+                                                <th rowspan="3">PTS</th>
                                                 <th rowspan="3">HPTS</th>
                                             </tr>
                                             <tr>
@@ -93,6 +94,7 @@
                                                 <td>{{ $reportValue->k4 }}</td>
                                                 <td>{{ $reportValue->k5 }}</td>
                                                 <td>{{ $reportValue->pts }}</td>
+                                                <td>{{ $reportValue->pts }}</td>
                                             </tr>
                                             @php $no++ @endphp
                                             @endforeach
@@ -100,6 +102,9 @@
                                     </table>
                                     <table class="borderless" style="width: 100%;">
                                         <tbody>
+                                            <tr class="text-italic">
+                                                <td colspan="2">PTS =  Penilaian Tengah Semester (Khusus pada aspek Pengetahuan)</td>
+                                            </tr>
                                             <tr class="text-italic">
                                                 <td colspan="2">HPTS =  Hasil Penilaian Tengah Semester (Khusus pada aspek Pengetahuan)<br><br></td>
                                             </tr>

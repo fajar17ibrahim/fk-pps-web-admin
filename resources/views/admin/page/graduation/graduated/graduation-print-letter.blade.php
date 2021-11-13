@@ -16,15 +16,15 @@
                                                 <div class="text-size-14 text-bold text-uppercase text-center">Surat Keterangan Lulus</div>
                                                 <div class="text-size-14 text-bold text-uppercase text-center">Pendidikan Kesetaraan Pondok Pesantren Salafiyah</div>
                                                 <div class="text-size-14 text-bold text-uppercase text-center">Tingkat Ulya</div>
-                                                <div class="text-size-14 text-bold text-uppercase text-center">Tahun Pelajaran 2020/2021</div>
-                                                <div class="text-size-12 text-uppercase text-center">Nomor : 01/PPS-MDA/2021</div>
+                                                <div class="text-size-14 text-bold text-uppercase text-center">Tahun Pelajaran {{ $data['tahun_pelajaran'] }}</div>
+                                                <div class="text-size-12 text-uppercase text-center">Nomor : ..........................</div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <p class="text-justify">
                                                     Yang bertandatangan dibawah ini Kepala Pendidikan Kesetaraan Pondok Pesantren Salafiyah Madani
-                                                    Nomor Pokok Sekolah Nasional 69937082 Kota Bandung Provinsi Jawa Barat, menerangkan bahwa :
+                                                    Nomor Pokok Sekolah Nasional {{ $data['pps_npsn'] . " " . $data['pps_kota_prov'] }}, menerangkan bahwa :
                                                 </p>
                                             </td>
                                         </tr>
@@ -35,37 +35,37 @@
                                     <tbody>
                                         <tr>
                                             <td style="width:35%">Nama Lengkap</td>
-                                            <td>: Muhammad Fajar Ibrahim</td>
+                                            <td>: {{ $data['santri_nama'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Tempat, Tanggal Lahir</td>
-                                            <td>: Jakarta, 2 Januari 2000</td>
+                                            <td>: {{ $data['santri_ttl'] }}</td>
                                         </tr>   
                                         <tr>
                                             <td>Nama Orang Tua</td>
-                                            <td>: -</td>
+                                            <td>: {{ $data['ayah_nama'] }}</td>
                                         </tr> 
                                         <tr>
                                             <td>Nomor Induk Santri</td>
-                                            <td>: -</td>
+                                            <td>: {{ $data['santri_nism'] }}</td>
                                         </tr>  
                                         <tr>
                                             <td>Nomor Induk Santri Nasional</td>
-                                            <td>: -</td>
+                                            <td>: {{ $data['santri_nisn'] }}</td>
                                         </tr>  
                                         <tr>
                                             <td>Nomor Peserta Ujian Sekolah</td>
-                                            <td>: -</td>
+                                            <td>: {{ $data['nomor_ujian'] }}</td>
                                         </tr>  
-                                        <tr>
+                                        <!-- <tr>
                                             <td>Peminatan</td>
-                                            <td>: -</td>
-                                        </tr> 
+                                            <td>: </td>
+                                        </tr>  -->
                                     </tbody>
                                 </table>
 
                                 <br>
-                                <h2 class="text-bold text-center text-uppercase">Lulus</h2>
+                                <h2 class="text-bold text-center text-uppercase">{{ $data['santri_lulus'] }}</h2>
                                 <br>
                                 
                                 <table class="borderless align-center" style="width:80%;">
@@ -73,7 +73,7 @@
                                         <tr>
                                             <td>
                                                 <p class="text-justify ">
-                                                    dari Pendidikan Kesetaraan Pondok Pesantren Salafiyah Tingkat Ulya setara MA/SMA setelah
+                                                    dari Pendidikan Kesetaraan Pondok Pesantren Salafiyah Tingkat {{ $data['pps_level'] }} setara {{ $data['pps_setara_level'] }} setelah
                                                     memenuhi seluruh kriteriasesuai dengan perundang-undangan.
                                                 </p>
                                             </td>
@@ -90,89 +90,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($data['nilai'] as $nilai)
                                         <tr>
-                                            <td>1</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
+                                            <td>{{ $nilai['no'] }}</td>
+                                            <td class="text-left">{{ $nilai['mapel_nama'] }}</td>
+                                            <td>{{ $nilai['nus'] }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>11</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>12</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>13</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>14</td>
-                                            <td class="text-left">Bahasa Arab</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Rata - Rata</td>
-                                            <td>90</td>
+                                        @endforeach
+                                        <tr class="text-center text-bold">
+                                            <td colspan="2"> Rata-Rata</td>
+                                            <td>{{ $data['nilai_rata_rata'] }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -182,7 +109,7 @@
                                         <tr>
                                             <td>
                                                 <p class="text-justify ">
-                                                    Suarat Keterangan ini dapat dipergunakan untuk keperluan Penerimaan Mahasiswa Baru atau 
+                                                    Suarat Keterangan ini dapat dipergunakan untuk keperluan Penerimaan Siswa/i atau Mahasiswa/i Baru atau 
                                                     keperluan lainnya.
                                                 </p>
                                             </td>
@@ -193,11 +120,11 @@
                                 <table class="borderless align-center" style="width:80%;">
                                     <tbody>
                                         <tr>
-                                        <td style="width: 70%"></td>
+                                        <td style="width: 60%"></td>
                                             <td>
-                                                Bandung, 19 April 2021<br>
+                                                {{ $data['pps_kota'] . ", " . tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                                 Kepala<br><br><br><br><br><br>
-                                                <b>Adi Saputra S.Pd</b>
+                                                <b>{{ $data['pps_kepsek'] }}</b>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -74,9 +74,9 @@
                                         <thead>
                                             <tr>
                                             <th rowspan="2">No</th>
-                                                <th rowspan="2">NSM / NPSN</th>
+                                                <th rowspan="2">NSM / NISN</th>
                                                 <th rowspan="2">Nama Santri</th>
-                                                <th rowspan="2">L/P</th>
+                                                <th rowspan="2">Jenis Kelamin</th>
                                                 <th colspan="3" class="text-center">Extrakurikuler 1</th>
                                                 <th colspan="3" class="text-center">Extrakurikuler 2</th>
                                                 <th colspan="3" class="text-center">Extrakurikuler 3</th>

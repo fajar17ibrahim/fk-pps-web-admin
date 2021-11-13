@@ -197,11 +197,12 @@ class AdminMasterUstadzController extends Controller
     public function addUstadz()
     {
         //
-        $this->authorize('master-ustadz');
+        // $this->authorize('master-ustadz');
 
+        $kelass = Kelas::orderBy('class_name', 'asc')->get();
         $schools = School::orderBy('school_name', 'asc')->get();
         $address = Address::get();
-        return view('admin.page.master.ustadz.ustadz-add', compact('address'), compact('schools'));
+        return view('admin.page.master.ustadz.ustadz-add', compact('address'), compact('schools')->with('kelass'));
     }
 
     public function search($id) { 

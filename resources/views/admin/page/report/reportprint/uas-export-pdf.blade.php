@@ -42,14 +42,14 @@
                             <table id="table-attendance" class="border" style="width:100%">
                                 <thead class="text-center bg-light-info">
                                     <tr>
-                                        <th>Predikat</th>
+                                        <th width="20%">Predikat</th>
                                         <th>Deskripsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="table-text-top text-center">Sangat Baik</td>
-                                        <td class="table-text-top" style="height:80px;">Selalau menjalankan ibadah</td>
+                                        <td class="table-text-top text-center">{{ $data['sikap']['spiritual_pred'] }}</td>
+                                        <td class="table-text-top" style="height:80px;">{{ $data['sikap']['spiritual_baik_desc'] }} <br><br><i><b>Kurang </b><br></i>{{ $data['sikap']['spiritual_kurang_desc'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -57,14 +57,14 @@
                             <table id="table-attendance" class="border" style="width:100%">
                                 <thead class="text-center bg-light-info">
                                     <tr>
-                                        <th>Predikat</th>
+                                        <th width="20%">Predikat</th>
                                         <th>Deskripsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="table-text-top text-center">Sangat Baik</td>
-                                        <td class="table-text-top" style="height:80px;">Selalau menjalankan ibadah</td>
+                                        <td class="table-text-top text-center">{{ $data['sikap']['sosial_pred'] }}</td>
+                                        <td class="table-text-top" style="height:80px;">{{ $data['sikap']['sosial_baik_desc'] }} <br><br><i><b>Kurang </b></i><br>{{ $data['sikap']['sosial_kurang_desc'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -75,11 +75,9 @@
                                         <th rowspan="2">No</th>
                                         <th rowspan="2" style="width: 30%">Mata Pelajaran</th>
                                         <th rowspan="2">KKM</th>
-                                        <th rowspan="2">JP (B)</th>
                                         <th colspan="2">Pengetahuan</th>
                                         <th colspan="2">Keterampilan</th>
-                                        <th rowspan="2" style="width: 12%">Rata-Rata (N)</th>
-                                        <th rowspan="2" style="width: 8%">N x B</th>
+                                        <th rowspan="2" style="width: 12%">Rata-Rata</th>
                                     </tr>
                                     <tr>
                                         <th>Nilai</th>
@@ -91,32 +89,28 @@
                                 <tbody>
                                     @foreach ($data['nilai'] as $nilais)
                                     <tr class="text-bold bg-light-info" >
-                                        <td colspan="10" >{{ $nilais['kelompok'] }}</td>
+                                        <td colspan="8" >{{ $nilais['kelompok'] }}</td>
                                     </tr>
                                     @foreach ($nilais['mapel'] as $mapel)
                                     <tr>
                                         <td>{{ $mapel['no'] }}</td>
                                         <td class="text-left">{{ $mapel['mapel_nama'] }}</td>
                                         <td>{{ $mapel['kkm'] }}</td>
-                                        <td>{{ $mapel['kkm'] }}</td>
                                         <td>{{ $mapel['pas'] }}</td>
                                         <td>{{ $mapel['pre_pengetahuan'] }}</td>
                                         <td>{{ $mapel['hpa'] }}</td>
                                         <td>{{ $mapel['pre_keterampilan'] }}</td>
                                         <td>{{ $mapel['average'] }}</td>
-                                        <td>{{ $mapel['nxb'] }}</td>
                                     </tr>
                                     @endforeach
                                     @endforeach
                                     <tr>
                                         <td colspan="3">Jumlah</td>
-                                        <td>{{ $data['totol_jp'] }}</td>
-                                        <td>{{ $data['totol_pengetahuan'] }}</td>
+                                        <td>{{ $data['total_pengetahuan'] }}</td>
                                         <td></td>
-                                        <td>{{ $data['totol_keterampilan'] }}</td>
+                                        <td>{{ $data['total_keterampilan'] }}</td>
                                         <td></td>
-                                        <td>{{ $data['totol_average'] }}</td>
-                                        <td>{{ $data['totol_nxb'] }}</td>
+                                        <td>{{ $data['total_average'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -134,27 +128,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($data['kkm'] as $kkm) 
                                     <tr>
-                                        <td>73</td>
-                                        <td>Kurang dari 73</td>
-                                        <td>70 - 80</td>
-                                        <td>81 - 90</td>
-                                        <td>91 - 100</td>
+                                        <td>{{ $kkm['kkm'] }}</td>
+                                        <td>{{ $kkm['D'] }}</td>
+                                        <td>{{ $kkm['C'] }}</td>
+                                        <td>{{ $kkm['B'] }}</td>
+                                        <td>{{ $kkm['A'] }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>75</td>
-                                        <td>Kurang dari 75</td>
-                                        <td>70 - 80</td>
-                                        <td>81 - 90</td>
-                                        <td>91 - 100</td>
-                                    </tr>
-                                    <tr>
-                                        <td>80</td>
-                                        <td>Kurang dari 80</td>
-                                        <td>70 - 80</td>
-                                        <td>81 - 90</td>
-                                        <td>91 - 100</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="new-page"></div>
@@ -192,24 +174,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($data['extra'] as $extra)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Pramuka</td>
-                                        <td>80</td>
-                                        <td>Juara 1 LT</td>
+                                        <td>{{ $extra['no'] }}</td>
+                                        <td>{{ $extra['extra_nama'] }}</td>
+                                        <td class="text-center">{{ $extra['extra_nilai'] }}</td>
+                                        <td>{{ $extra['extra_deskripsi'] }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Pramuka</td>
-                                        <td>80</td>
-                                        <td>Juara 1 LT</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Pramuka</td>
-                                        <td>80</td>
-                                        <td>Juara 1 LT</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
@@ -223,20 +195,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($data['prestasi'] as $prestasi)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Kesenian</td>
-                                        <td>Juara 1 LT</td>
+                                        <td>{{ $prestasi['no'] }}</td>
+                                        <td>{{ $prestasi['prestasi_nama'] }}</td>
+                                        <td>{{ $prestasi['prestasi_deskripsi'] }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Keagamaan</td>
-                                        <td>Juara 1 LT</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
-                            <div class="text-bold">E. Ketidakhadiran</div>
+                            <div class="text-bold text-uppercase">E. Ketidakhadiran</div>
                             <table id="table-attendance" class="border" style="width:50%">
                                 <thead class="text-center bg-light-info">
                                     <tr>
@@ -247,28 +216,28 @@
                                 <tbody>
                                     <tr>
                                         <td>Sakit</td>
-                                        <td>5 Hari</td>
+                                        <td class="text-center">{{ $data['kehadiran']['izin'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Izin</td>
-                                        <td>5 Hari</td>
+                                        <td class="text-center">{{ $data['kehadiran']['sakit'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Tanpa Keterangan</td>
-                                        <td>5 Hari</td>
+                                        <td class="text-center">{{ $data['kehadiran']['alfa'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                             
-                            <br><br>
                             <div class="text-bold text-uppercase">F. Catatan Walikelas</div>
                             <table id="table-attendance" class="border" style="width:100%;">
                                 <tbody>
                                     <tr>
-                                        <td style="height:100px; vertical-align: top">Peringkat Nilai : dari 30 Siswa. Prestasinya sangat baik</td>
+                                        <td style="height:100px; vertical-align: top">Peringkat Nilai Ranking {{ $data['catatan_wali_kelas']['ranking'] . ". " . $data['catatan_wali_kelas']['catatan_ranking']  . ". " . $data['catatan_wali_kelas']['catatan_pilihan']}}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="new-page"></div>
                             <div class="text-bold text-uppercase">G. Tanggapan Orangtua / Wali</div>
                             <table id="table-attendance" class="border" style="width:100%; ">
                                 <tbody>
@@ -283,19 +252,19 @@
                                         <td>
                                             Mengetahui:<br>
                                             Orang Tua / Wali<br><br><br><br><br>
-                                            
+                                            {{ $data['biodata']['ayah_nama'] }}
                                         </td>
                                         <td style="width:30%">
-                                            Jakarta Timur, 18 September 2021<br>
+                                            {{ $data['biodata']['sekolah_kota']. ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                             Wali Kelas<br><br><br><br><br>
-                                            <b>RULI</b>
+                                            <b>{{ $data['biodata']['wali_kelas'] }}</b>
                                         </td>
                                     </tr>
                                     <tr class="text-center">
                                         <td colspan="2">
                                             Mengetahui:<br>
-                                            Kepala Ulya<br><br><br><br><br>
-                                            <b>Adi Saputra S.Pd</b>
+                                            Kepala {{ $data['biodata']['pps_tingkat'] }}<br><br><br><br><br>
+                                            <b>{{ $data['biodata']['kepala_sekolah'] }}</b>
                                         </td>
                                     </tr>
                                 </tbody>
