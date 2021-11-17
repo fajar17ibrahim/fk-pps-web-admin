@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Santri;
+use App\Models\SchoolYear;
+use App\Models\ReportAchievement;
 
 class AdminReportAchievementController extends Controller
 {
@@ -44,6 +46,60 @@ class AdminReportAchievementController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //
+            $nisns = $request['inNISN'];
+            $achievement1Name = $request['soAchievement1Name'];
+            $achievement1Desc = $request['taAchievement1Desc'];
+            $achievement2Name = $request['soAchievement2Name'];
+            $achievement2Desc = $request['taAchievement2Desc'];
+            $achievement3Name = $request['soAchievement3Name'];
+            $achievement3Desc = $request['taAchievement3Desc'];
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            foreach ($nisns as $index => $nisn) {
+                $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                    ->where('santri.santri_nisn', '=', $nisn)
+                    ->first();
+
+                $achievement = new ReportAchievement;
+                $achievement->santri_nisn = $santri->santri_nisn;
+                $achievement->class_id = $santri->santri_class;
+                $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $achievement->achievement_name = $achievement1Name[$index];
+                $achievement->achievement_description = $achievement1Desc[$index];
+                $save = $achievement->save();
+
+                $achievement = new ReportAchievement;
+                $achievement->santri_nisn = $santri->santri_nisn;
+                $achievement->class_id = $santri->santri_class;
+                $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $achievement->achievement_name = $achievement2Name[$index];
+                $achievement->achievement_description = $achievement2Desc[$index];
+                $save = $achievement->save();
+
+                $achievement = new ReportAchievement;
+                $achievement->santri_nisn = $santri->santri_nisn;
+                $achievement->class_id = $santri->santri_class;
+                $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $achievement->achievement_name = $achievement3Name[$index];
+                $achievement->achievement_description = $achievement3Desc[$index];
+                $save = $achievement->save();
+
+            }
+        
+            if ($save) {
+                return redirect()->route('report-achievement.index')
+                ->with('message_success', 'Data Prestasi berhasil disimpan.');
+            } else {
+                return redirect()->route('report-achievement.index')
+                ->with('message_error', 'Data Prestasi gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('report-achievement.index')
+            ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -144,24 +200,24 @@ class AdminReportAchievementController extends Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $santri->santri_nisn;
+            $row[] = $santri->santri_nisn . " / " . $santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<select class="single-select form-select">
-                        <option value="United States">Kesenian</option>
-                        <option value="United States">Keagamaan</option>
+            $row[] = '<select name="soAchievement1Name[]" class="single-select form-select">
+                        <option value="Kesenian">Kesenian</option>
+                        <option value="Keagamaan">Keagamaan</option>
                     </select>';
-            $row[] = '<textarea class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
-            $row[] = '<select class="single-select form-select">
-                        <option value="United States">Kesenian</option>
-                        <option value="United States">Keagamaan</option>
+            $row[] = '<textarea name="taAchievement1Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<select name="soAchievement2Name[]" class="single-select form-select">
+                        <option value="Kesenian">Kesenian</option>
+                        <option value="Keagamaan">Keagamaan</option>
                     </select>';
-            $row[] = '<textarea class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
-            $row[] = '<select class="single-select form-select">
-                        <option value="United States">Kesenian</option>
-                        <option value="United States">Keagamaan</option>
+            $row[] = '<textarea name="taAchievement2Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<select name="soAchievement3Name[]" class="single-select form-select">
+                        <option value="Kesenian">Kesenian</option>
+                        <option value="Keagamaan">Keagamaan</option>
                     </select>';
-            $row[] = '<textarea class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taAchievement3Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
             $data[] = $row;
         }
 

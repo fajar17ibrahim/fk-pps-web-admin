@@ -18,11 +18,6 @@ class CreateReportPrintTable extends Migration
             $table->string('santri_nisn', 12)->nullable();
             $table->string('report_print_date_download', 50)->nullable();
             $table->string('tahun_pelajaran_id', 12)->nullable();
-            $table->string('report_attiude', 12)->nullable();
-            $table->string('report_attendance', 12)->nullable();
-            $table->string('report_extrakurikuler', 12)->nullable();
-            $table->string('report_achievement', 12)->nullable();
-            $table->string('report_home_room_notes', 12)->nullable();
             $table->timestamps();
         });
     }

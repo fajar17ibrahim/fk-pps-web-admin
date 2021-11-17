@@ -196,7 +196,7 @@ class AdminReportPrintController extends Controller
     }
 
     public function uasExportPdf($id) {
-        
+        $errorMessage = "";
         $reportPrint = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
@@ -208,13 +208,6 @@ class AdminReportPrintController extends Controller
 
             // return $reportPrint;
 
-        $reportValues = ReportValue::leftJoin('mapel','mapel.mapel_id','=','report_value.mapel_id')
-        ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
-        ->where('report_value.class_id', '=', $reportPrint->santri_class)
-        ->where('report_value.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
-        ->where('report_value.santri_nisn', '=', $reportPrint->santri_nisn)
-        ->get();
-
         $user = Session::get('user');
 
         $schoolHeadship = Ustadz::leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
@@ -223,20 +216,26 @@ class AdminReportPrintController extends Controller
 
         // return $schoolHeadship;
 
-        $biodata = array(
-            'pps_nama' => $reportPrint->school_name,
-            'pps_alamat' => $reportPrint->school_address,
-            'pps_tingkat' => $reportPrint->class_level,
-            'santri_nama' => $reportPrint->santri_name,
-            'santri_no_induk' => $reportPrint->santri_nism,
-            'kelas_nama' => $reportPrint->class_name,
-            'wali_kelas' => $reportPrint->ustadz_name,
-            'semester' => $reportPrint->semester_name,
-            'tahun_pelajaran' => $reportPrint->tahun_pelajaran_name,
-            'ayah_nama' => $reportPrint->father_name,
-            'sekolah_kota' => $reportPrint->school_city,
-            'kepala_sekolah' => $schoolHeadship->ustadz_name
-        );
+        if ($reportPrint) {
+            $biodata = array(
+                'pps_nama' => $reportPrint->school_name,
+                'pps_alamat' => $reportPrint->school_address,
+                'pps_tingkat' => $reportPrint->class_level,
+                'santri_nama' => $reportPrint->santri_name,
+                'santri_no_induk' => $reportPrint->santri_nism,
+                'kelas_nama' => $reportPrint->class_name,
+                'wali_kelas' => $reportPrint->ustadz_name,
+                'semester' => $reportPrint->semester_name,
+                'tahun_pelajaran' => $reportPrint->tahun_pelajaran_name,
+                'ayah_nama' => $reportPrint->father_name,
+                'sekolah_kota' => $reportPrint->school_city,
+                'kepala_sekolah' => $schoolHeadship->ustadz_name
+            );
+        } else {
+            $errorMessage = "Biodata tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
+        }
 
         $reportReportAttitude = ReportAttitude::where('report_attitude.class_id', '=', $reportPrint->santri_class)
         ->where('report_attitude.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
@@ -245,99 +244,118 @@ class AdminReportPrintController extends Controller
 
         // return $reportReportAttitude;
 
-        $attitude = array(
-            'spiritual_pred' => $reportReportAttitude->spiritual_attitude_pred,
-            'spiritual_baik_desc' => $reportReportAttitude->good_spiritual_attitude,
-            'spiritual_kurang_desc' => $reportReportAttitude->lack_of_spiritual_attitude,
-            'sosial_pred' => $reportReportAttitude->sosial_attitude_pred,
-            'sosial_baik_desc' => $reportReportAttitude->good_sosial_attitude,
-            'sosial_kurang_desc' => $reportReportAttitude->lack_of_sosial_attitude,
-        );
-
-        $kelompokMapels = array();
-        $kelompokMapel = '';
-        foreach ($reportValues as $reportValue) {
-            if ($kelompokMapel != $reportValue->kelompok_name) {
-                $kelompokMapels[] = $reportValue->kelompok_name;
-            }
-            $kelompokMapel = $reportValue->kelompok_name;
+        if ($reportReportAttitude) {
+            $attitude = array(
+                'spiritual_pred' => $reportReportAttitude->spiritual_attitude_pred,
+                'spiritual_baik_desc' => $reportReportAttitude->good_spiritual_attitude,
+                'spiritual_kurang_desc' => $reportReportAttitude->lack_of_spiritual_attitude,
+                'sosial_pred' => $reportReportAttitude->sosial_attitude_pred,
+                'sosial_baik_desc' => $reportReportAttitude->good_sosial_attitude,
+                'sosial_kurang_desc' => $reportReportAttitude->lack_of_sosial_attitude,
+            );
+        } else {
+            $errorMessage = "Nilai Sikap tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
         }
 
-        $valuesByKelompok = array();
-        $kkms = array();
-        $kkmPreve = "";
-        $no = 0;
-        $sumJp = 0;
-        $sumKnowledgeValue = 0;
-        $sumSkillsValue = 0;
-        $sumAverage = 0;
-        $sumNxB = 0;
-        foreach ($kelompokMapels as $kelompokMapel) {
-            $values = array();
-            foreach ($reportValues as $reportValue) {
-                if ($reportValue->kelompok_name == $kelompokMapel) {
-                    $no++;
-                    $row = array(
-                        'no' => $no,
-                        'mapel_nama' => $reportValue->mapel_name,
-                        'kkm' => $reportValue->report_kkm,
-                        'jp' => $reportValue->jp,
-                        'p1' => $reportValue->p1,
-                        'p2' => $reportValue->p2,
-                        'p3' => $reportValue->p3,
-                        'p4' => $reportValue->p4,
-                        'p5' => $reportValue->p5,
-                        'p6' => $reportValue->p6,
-                        'p7' => $reportValue->p7,
-                        'p8' => $reportValue->p8,
-                        'p9' => $reportValue->p9,
-                        'p10' => $reportValue->p10,
-                        'rph' => $reportValue->rph,
-                        'pts' => $reportValue->pts,  
-                        'pas' => $reportValue->pas,
-                        'pre_pengetahuan' => $reportValue->knowledge_pre,
-                        'deskripsi_pengetahuan' => $reportValue->knowledge_desc,
-                        'k1' => $reportValue->k1,
-                        'k2' => $reportValue->k2,
-                        'k3' => $reportValue->k3,
-                        'k4' => $reportValue->k4,
-                        'k5' => $reportValue->k5,
-                        'k6' => $reportValue->k6,
-                        'k7' => $reportValue->k7,
-                        'k8' => $reportValue->k8,
-                        'k9' => $reportValue->k9,
-                        'k10' => $reportValue->k10,
-                        'hpa' => $reportValue->hpa,
-                        'pre_keterampilan' => $reportValue->skills_pre,  
-                        'deskripsi_keterampilan' => $reportValue->skills_desc,
-                        'average' => ((float) $reportValue->pas + (float) $reportValue->hpa) / 2
-                    );
-                    $values[] = $row;
-                    $sumKnowledgeValue += (float) $reportValue->pas;
-                    $sumSkillsValue += (float) $reportValue->hpa;
-                    $sumAverage += ((float) $reportValue->pas + (float) $reportValue->hpa) / 2;
-                
-                    if ($kkmPreve != $reportValue->report_kkm) {
-                        $intevalPred = (100 - (float) $reportValue->report_kkm) / 3;
-                        $predD = $reportValue->report_kkm;
-                        $predC = (float) $reportValue->report_kkm + $intevalPred;
-                        $predB = (float) $reportValue->report_kkm + ($intevalPred * 2);
-                        $predA = (float) $reportValue->report_kkm + ($intevalPred * 3);
-                        $kkms[] = array(
-                            'kkm' => $reportValue->report_kkm,
-                            'D' => "< " . round($predD),
-                            'C' => round($predD + 1) . " - " . round($predC),
-                            'B' => round($predC + 1) . " - " . round($predB),
-                            'A' => round($predB + 1) . " - " . round($predA));
-                    }
+        $reportValues = ReportValue::leftJoin('mapel','mapel.mapel_id','=','report_value.mapel_id')
+        ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
+        ->where('report_value.class_id', '=', $reportPrint->santri_class)
+        ->where('report_value.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
+        ->where('report_value.santri_nisn', '=', $reportPrint->santri_nisn)
+        ->get();
 
-                    $kkmPreve = $reportValue->report_kkm;
+        if ($reportValues) {
+            $kelompokMapels = array();
+            $kelompokMapel = '';
+            foreach ($reportValues as $reportValue) {
+                if ($kelompokMapel != $reportValue->kelompok_name) {
+                    $kelompokMapels[] = $reportValue->kelompok_name;
                 }
+                $kelompokMapel = $reportValue->kelompok_name;
             }
-            
-            $valuesByKelompok[] = array(
-                'kelompok' => $kelompokMapel,  
-                'mapel' => $values);
+
+            $valuesByKelompok = array();
+            $kkms = array();
+            $kkmPreve = "";
+            $no = 0;
+            $sumJp = 0;
+            $sumKnowledgeValue = 0;
+            $sumSkillsValue = 0;
+            $sumAverage = 0;
+            $sumNxB = 0;
+            foreach ($kelompokMapels as $kelompokMapel) {
+                $values = array();
+                foreach ($reportValues as $reportValue) {
+                    if ($reportValue->kelompok_name == $kelompokMapel) {
+                        $no++;
+                        $row = array(
+                            'no' => $no,
+                            'mapel_nama' => $reportValue->mapel_name,
+                            'kkm' => $reportValue->report_kkm,
+                            'jp' => $reportValue->jp,
+                            'p1' => $reportValue->p1,
+                            'p2' => $reportValue->p2,
+                            'p3' => $reportValue->p3,
+                            'p4' => $reportValue->p4,
+                            'p5' => $reportValue->p5,
+                            'p6' => $reportValue->p6,
+                            'p7' => $reportValue->p7,
+                            'p8' => $reportValue->p8,
+                            'p9' => $reportValue->p9,
+                            'p10' => $reportValue->p10,
+                            'rph' => $reportValue->rph,
+                            'pts' => $reportValue->pts,  
+                            'pas' => $reportValue->pas,
+                            'pre_pengetahuan' => $reportValue->knowledge_pre,
+                            'deskripsi_pengetahuan' => $reportValue->knowledge_desc,
+                            'k1' => $reportValue->k1,
+                            'k2' => $reportValue->k2,
+                            'k3' => $reportValue->k3,
+                            'k4' => $reportValue->k4,
+                            'k5' => $reportValue->k5,
+                            'k6' => $reportValue->k6,
+                            'k7' => $reportValue->k7,
+                            'k8' => $reportValue->k8,
+                            'k9' => $reportValue->k9,
+                            'k10' => $reportValue->k10,
+                            'hpa' => $reportValue->hpa,
+                            'pre_keterampilan' => $reportValue->skills_pre,  
+                            'deskripsi_keterampilan' => $reportValue->skills_desc,
+                            'average' => ((float) $reportValue->pas + (float) $reportValue->hpa) / 2
+                        );
+                        $values[] = $row;
+                        $sumKnowledgeValue += (float) $reportValue->pas;
+                        $sumSkillsValue += (float) $reportValue->hpa;
+                        $sumAverage += ((float) $reportValue->pas + (float) $reportValue->hpa) / 2;
+                    
+                        if ($kkmPreve != $reportValue->report_kkm) {
+                            $intevalPred = (100 - (float) $reportValue->report_kkm) / 3;
+                            $predD = $reportValue->report_kkm;
+                            $predC = (float) $reportValue->report_kkm + $intevalPred;
+                            $predB = (float) $reportValue->report_kkm + ($intevalPred * 2);
+                            $predA = (float) $reportValue->report_kkm + ($intevalPred * 3);
+                            $kkms[] = array(
+                                'kkm' => $reportValue->report_kkm,
+                                'D' => "< " . round($predD),
+                                'C' => round($predD + 1) . " - " . round($predC),
+                                'B' => round($predC + 1) . " - " . round($predB),
+                                'A' => round($predB + 1) . " - " . round($predA));
+                        }
+
+                        $kkmPreve = $reportValue->report_kkm;
+                    }
+                }
+                
+                $valuesByKelompok[] = array(
+                    'kelompok' => $kelompokMapel,  
+                    'mapel' => $values);
+            }
+        } else {
+            $errorMessage = "Nilai Mapel tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
         }
 
         $reportExtras = ReportExtrakurikuler::where('report_extrakurikuler.class_id', '=', $reportPrint->santri_class)
@@ -347,17 +365,23 @@ class AdminReportPrintController extends Controller
 
         // return $reportExtras;
 
-        $dataExtra = array();
-        $no = 1;
-        foreach ($reportExtras as $reportExtra) {
-            $extra = array(
-                'no' => $no++,
-                'extra_nama' => $reportExtra->extra_name,
-                'extra_nilai' => $reportExtra->extra_value,
-                'extra_deskripsi' => $reportExtra->extra_description
-            );
+        if ($reportExtras) {
+            $dataExtra = array();
+            $no = 1;
+            foreach ($reportExtras as $reportExtra) {
+                $extra = array(
+                    'no' => $no++,
+                    'extra_nama' => $reportExtra->extra_name,
+                    'extra_nilai' => $reportExtra->extra_value,
+                    'extra_deskripsi' => $reportExtra->extra_description
+                );
 
-            $dataExtra[] = $extra;
+                $dataExtra[] = $extra;
+            }
+        } else {
+            $errorMessage = "Nilai Extrakurikuler tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
         }
 
         $reportAchievements = ReportAchievement::where('report_achievement.class_id', '=', $reportPrint->santri_class)
@@ -365,16 +389,22 @@ class AdminReportPrintController extends Controller
         ->where('report_achievement.santri_nisn', '=', $id)
         ->get();
 
-        $dataAchievement = array();
-        $no = 1;
-        foreach ($reportAchievements as $reportAchievement) {
-            $achievement = array(
-                'no' => $no++,
-                'prestasi_nama' => $reportAchievement->achievement_name,
-                'prestasi_deskripsi' => $reportAchievement->achievement_description
-            );
+        if ($reportAchievements) {
+            $dataAchievement = array();
+            $no = 1;
+            foreach ($reportAchievements as $reportAchievement) {
+                $achievement = array(
+                    'no' => $no++,
+                    'prestasi_nama' => $reportAchievement->achievement_name,
+                    'prestasi_deskripsi' => $reportAchievement->achievement_description
+                );
 
-            $dataAchievement[] = $achievement;
+                $dataAchievement[] = $achievement;
+            }
+        } else {
+            $errorMessage = "Nilai tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
         }
 
         $reportAttendance = ReportAttendance::where('report_attendance.class_id', '=', $reportPrint->santri_class)
@@ -382,22 +412,36 @@ class AdminReportPrintController extends Controller
         ->where('report_attendance.santri_nisn', '=', $reportPrint->santri_nisn)
         ->first();
 
-        $attendance = array(
-            'sakit' => $reportAttendance->s,
-            'izin' => $reportAttendance->i,
-            'alfa' => $reportAttendance->a
-        );
+        // return $reportPrint->santri_nisn;
+
+        if ($reportAttendance) {
+            $attendance = array(
+                'sakit' => $reportAttendance->s,
+                'izin' => $reportAttendance->i,
+                'alfa' => $reportAttendance->a
+            );
+        } else {
+            $errorMessage = "Nilai Absensi tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
+        }
 
         $reportHomeRoomTeacherNote = ReportHomeRoomTeacher::where('report_home_room_teacher.class_id', '=', $reportPrint->santri_class)
         ->where('report_home_room_teacher.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
         ->where('report_home_room_teacher.santri_nisn', '=', $reportPrint->santri_nisn)
         ->first();
 
-        $homeroomteachernotes = array(
-            'ranking' => $reportHomeRoomTeacherNote->ranking,
-            'catatan_ranking' => $reportHomeRoomTeacherNote->notes_by_ranking,
-            'catatan_pilihan' => $reportHomeRoomTeacherNote->notes_by_option
-        );
+        if ($reportHomeRoomTeacherNote) {
+            $homeroomteachernotes = array(
+                'ranking' => $reportHomeRoomTeacherNote->ranking,
+                'catatan_ranking' => $reportHomeRoomTeacherNote->notes_by_ranking,
+                'catatan_pilihan' => $reportHomeRoomTeacherNote->notes_by_option
+            );
+        } else {
+            $errorMessage = "Catatan Wali Kelas tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
+        }
 
         // return $dataAchievement;
 
@@ -418,8 +462,9 @@ class AdminReportPrintController extends Controller
         // return $data;
             // $dataRaport = json_encode($data);
             
-        $pdf = PDF::loadView('admin.page.report.reportprint.uas-export-pdf', compact('data'));
-        $pdf->setPaper('a4', 'potrait');
-        return $pdf->stream();
+            $pdf = PDF::loadView('admin.page.report.reportprint.uas-export-pdf', compact('data'));
+            $pdf->setPaper('a4', 'potrait');
+            return $pdf->stream();
+            
     }
 }

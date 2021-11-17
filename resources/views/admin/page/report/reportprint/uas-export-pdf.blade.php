@@ -255,7 +255,7 @@
                                             {{ $data['biodata']['ayah_nama'] }}
                                         </td>
                                         <td style="width:30%">
-                                            {{ $data['biodata']['sekolah_kota']. ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
+                                            {{ trim(strstr($data['biodata']['sekolah_kota'], " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                             Wali Kelas<br><br><br><br><br>
                                             <b>{{ $data['biodata']['wali_kelas'] }}</b>
                                         </td>

@@ -115,7 +115,7 @@
                                                     {{ $reportPrint->father_name }}
                                                 </td>
                                                 <td style="width: 30%">
-                                                {{ $reportPrint->school_city . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
+                                                {{ trim(strstr($reportPrint->school_city, " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                                     Wali Kelas<br><br><br><br><br>
                                                     <b>{{ $reportPrint->ustadz_name }}</b>
                                                 </td>

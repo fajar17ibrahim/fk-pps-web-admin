@@ -18,7 +18,7 @@ class ReportAchievementSeeder extends Seeder
     {
         //
 
-        $santri = Santri::orderBy('santri_name', 'asc')->first();
+        $santri = Santri::orderBy('santri_id', 'asc')->first();
         $schoolYears = SchoolYear::get();
         foreach ($schoolYears as $schoolYear) {
             $reportAchievement = new ReportAchievement;

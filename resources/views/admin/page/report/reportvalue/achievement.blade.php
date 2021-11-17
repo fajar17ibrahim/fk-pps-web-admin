@@ -73,62 +73,91 @@
                         <br>
                         <div class="card">
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
-                                        <thead>
-                                            <tr>
-                                            <th rowspan="2">No</th>
-                                                <th rowspan="2">NSM / NPSN</th>
-                                                <th rowspan="2">Nama Santri</th>
-                                                <th rowspan="2">L/P</th>
-                                                <th colspan="2" class="text-center">Prenstasi 1</th>
-                                                <th colspan="2" class="text-center">Prenstasi 2</th>
-                                                <th colspan="2" class="text-center">Prenstasi 3</th>
-                                            </tr>
-                                            <tr>
-                                                <th>Jenis Prestasi</th>
-                                                <th>Keterangan</th>
-                                                <th>Jenis Prestasi</th>
-                                                <th>Keterangan</th>
-                                                <th>Jenis Prestasi</th>
-                                                <th>Keterangan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>510031750032 / 69985167</td>
-                                                <td>EKO RAPORT</td>
-                                                <td>L</td>
-                                                <td>
-                                                    <select class="single-select">
-                                                        <option value="United States">Kesenian</option>
-                                                        <option value="United States">Keagamaan</option>
-                                                    </select>
-                                                </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td>
-                                                    <select class="single-select">
-                                                        <option value="United States">Kesenian</option>
-                                                        <option value="United States">Keagamaan</option>
-                                                    </select>
-                                                </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                                <td>
-                                                    <select class="single-select">
-                                                        <option value="United States">Kesenian</option>
-                                                        <option value="United States">Keagamaan</option>
-                                                    </select>
-                                                </td>
-                                                <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <br>
-                                <div class="d-flex align-items-center">
-                                    <input type="button" class="btn btn-success px-4  ms-auto" value="Simpan" />
-                                </div> 
+                                @if(Session::has('message_success'))
+                                    <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Berhasil Update Data</h6>
+                                                <div class="text-white">{{ Session::get('message_success') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @if(Session::has('message_error'))
+                                    <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Gagal Update Data!</h6>
+                                                <div class="text-white">{{ Session::get('message_error') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <form method="post" action="{{ route('report-achievement.store') }}">
+                                    @csrf
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-striped table-borderless " style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                <th rowspan="2">No</th>
+                                                    <th rowspan="2">NIS / NISN</th>
+                                                    <th rowspan="2">Nama Santri</th>
+                                                    <th rowspan="2">Jenis Kelamin</th>
+                                                    <th colspan="2" class="text-center">Prenstasi 1</th>
+                                                    <th colspan="2" class="text-center">Prenstasi 2</th>
+                                                    <th colspan="2" class="text-center">Prenstasi 3</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Jenis Prestasi</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Jenis Prestasi</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Jenis Prestasi</th>
+                                                    <th>Keterangan</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>510031750032 / 69985167</td>
+                                                    <td>EKO RAPORT</td>
+                                                    <td>L</td>
+                                                    <td>
+                                                        <select class="single-select">
+                                                            <option value="United States">Kesenian</option>
+                                                            <option value="United States">Keagamaan</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                    <td>
+                                                        <select class="single-select">
+                                                            <option value="United States">Kesenian</option>
+                                                            <option value="United States">Keagamaan</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                    <td>
+                                                        <select class="single-select">
+                                                            <option value="United States">Kesenian</option>
+                                                            <option value="United States">Keagamaan</option>
+                                                        </select>
+                                                    </td>
+                                                    <td><textarea class="form-control" id="inputDescription" placeholder="" rows="3"></textarea></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <br>
+                                    <div class="d-flex align-items-center">
+                                        <input type="submit" class="btn btn-success px-4  ms-auto" value="Simpan" />
+                                    </div> 
+                                </form>
                             </div>
                         </div>
                     </div>

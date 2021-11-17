@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Santri;
+use App\Models\SchoolYear;
+use App\Models\ReportHomeRoomTeacher;
 
 class AdminReportHomeRoomTeacherNotesController extends Controller
 {
@@ -44,6 +46,41 @@ class AdminReportHomeRoomTeacherNotesController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //
+            $nisns = $request['inNISN'];
+            $ranking = $request['soRanking'];
+            $taNotes = $request['taNotes'];
+            $soNotes = $request['soNotes'];
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            foreach ($nisns as $index => $nisn) {
+                $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                    ->where('santri.santri_nisn', '=', $nisn)
+                    ->first();
+
+                $homeroomTeacherNotes = new ReportHomeRoomTeacher;
+                $homeroomTeacherNotes->santri_nisn = $santri->santri_nisn;
+                $homeroomTeacherNotes->class_id = $santri->santri_class;
+                $homeroomTeacherNotes->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $homeroomTeacherNotes->ranking = $ranking[$index];
+                $homeroomTeacherNotes->notes_by_ranking = $taNotes[$index];
+                $homeroomTeacherNotes->notes_by_option = $soNotes[$index];
+                $save = $homeroomTeacherNotes->save();
+            }
+        
+            if ($save) {
+                return redirect()->route('report-homeroom-teacher-notes.index')
+                ->with('message_success', 'Catatan Wali Kelas berhasil disimpan.');
+            } else {
+                return redirect()->route('report-homeroom-teacher-notes.index')
+                ->with('message_error', 'Catatan Wali Kelas gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e) { 
+            return redirect()->route('report-homeroom-teacher-notes.index')
+            ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -144,25 +181,25 @@ class AdminReportHomeRoomTeacherNotesController extends Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $santri->santri_nisn;
+            $row[] = $santri->santri_nisn . " / " . $santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<select class="single-select form-select" style="width:80px">
-                        <option value="United States">1</option>
-                        <option value="United States">2</option>
-                        <option value="United States">3</option>
-                        <option value="United States">4</option>
-                        <option value="United States">5</option>
-                        <option value="United States">6</option>
+            $row[] = '<select name="soRanking[]" class="single-select form-select" style="width:80px">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
                     </select>';
-            $row[] = '<textarea class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">Prestasinya sangat baik, perlu dipertahankan</textarea>';
-            $row[] = '<select class="single-select form-select" style="width:550px">
-                        <option value="United States">Selalu berusaha untuk mematuhi tata tertib sekolah dan patuh terhadap Guru.</option>
-                        <option value="United States">Selalu berusaha untuk mandiri dan tepat waktu dalam mengerjakan tugas.</option>
-                        <option value="United States">Mempunyai kemampuan dan motivasi yang tinggi untuk menggunakan waktu secara efisien.</option>
-                        <option value="United States">Diharapkan merubah penampilannya menjadi lebih rapi. Seperti tentang potong rambut dan cara berpakaian.</option>
-                        <option value="United States">Masih perlu memperbanyak teman bergaul dan teman diskusi, kurangi aktifitas menyendiri.</option>
-                        <option value="United States">Diharapkan dapat meningkatkan komitmennya untuk lebih serius saat mengerjakan tugas dan tidak mudah menyerah.</option>
+            $row[] = '<textarea name="taNotes[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">Prestasinya sangat baik, perlu dipertahankan</textarea>';
+            $row[] = '<select name="soNotes[]" class="single-select form-select" style="width:550px">
+                        <option>Selalu berusaha untuk mematuhi tata tertib sekolah dan patuh terhadap Guru.</option>
+                        <option>Selalu berusaha untuk mandiri dan tepat waktu dalam mengerjakan tugas.</option>
+                        <option>Mempunyai kemampuan dan motivasi yang tinggi untuk menggunakan waktu secara efisien.</option>
+                        <option>Diharapkan merubah penampilannya menjadi lebih rapi. Seperti tentang potong rambut dan cara berpakaian.</option>
+                        <option>Masih perlu memperbanyak teman bergaul dan teman diskusi, kurangi aktifitas menyendiri.</option>
+                        <option>Diharapkan dapat meningkatkan komitmennya untuk lebih serius saat mengerjakan tugas dan tidak mudah menyerah.</option>
                     </select>';
             $data[] = $row;
         }

@@ -19,7 +19,7 @@ class ReportValueSeeder extends Seeder
     public function run()
     {
         //
-        $santri = Santri::orderBy('santri_name', 'asc')->first();
+        $santri = Santri::orderBy('santri_id', 'asc')->first();
         $schoolYears = SchoolYear::get();
         $mapels = MapelTeacher::where('class_id', '=', $santri->santri_class)->get();
         foreach ($schoolYears as $schoolYear) {

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Santri;
+use App\Models\SchoolYear;
+use App\Models\ReportAttendance;
 
 class AdminReportAttendanceController extends Controller
 {
@@ -44,6 +46,41 @@ class AdminReportAttendanceController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //
+            $nisns = $request['inNISN'];
+            $s = $request['inS'];
+            $i = $request['inI'];
+            $a = $request['inA'];
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            foreach ($nisns as $index => $nisn) {
+                $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                    ->where('santri.santri_nisn', '=', $nisn)
+                    ->first();
+
+                $attendance = new ReportAttendance;
+                $attendance->santri_nisn = $santri->santri_nisn;
+                $attendance->class_id = $santri->santri_class;
+                $attendance->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $attendance->s = $s[$index];
+                $attendance->i = $i[$index];
+                $attendance->a = $a[$index];
+                $save = $attendance->save();
+            }
+        
+                if ($save) {
+                    return redirect()->route('report-attendance.index')
+                    ->with('message_success', 'Absensi berhasil disimpan.');
+                } else {
+                    return redirect()->route('report-attendance.index')
+                    ->with('message_error', 'Absensi gagal disimpan.');
+                }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('report-attendance.index')
+            ->with('message_error', $e->getMessage());
+        } 
     }
 
     /**
@@ -144,12 +181,12 @@ class AdminReportAttendanceController extends Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $santri->santri_nisn;
+            $row[] = $santri->santri_nism . " / " . $santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<input type="text" class="form-control" value="0" />';
-            $row[] = '<input type="text" class="form-control" value="0" />';
-            $row[] = '<input type="text" class="form-control" value="0" />';
+            $row[] = '<input name="inS[]" type="number" class="form-control" value="0" />';
+            $row[] = '<input name="inI[]" type="number" class="form-control" value="0" />';
+            $row[] = '<input name="inA[]" type="number" class="form-control" value="0" />';
             $data[] = $row;
         }
 
