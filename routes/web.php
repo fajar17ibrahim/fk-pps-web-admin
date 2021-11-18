@@ -179,6 +179,8 @@ Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::get('report-value-settings', [AdminReportValueController::class, 'reportValueSettings'])->name('report-value-settings');
 
+    Route::post('report-value-settings/save', [AdminReportValueController::class, 'reportValueSettingsSave'])->name('report-value-settings.save');
+
     Route::get('report-value/data/{level}/{school}/{kelas}/{mapel}', [AdminReportValueController::class, 'listData'])->name('report-value.data');
     
     // Report Attitude

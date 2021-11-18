@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use App\Models\Santri;
 use App\Models\Kelas;
@@ -10,6 +11,8 @@ use App\Models\Mapel;
 use App\Models\SchoolYear;
 use App\Models\ReportValue;
 use App\Models\ReportPrint;
+use App\Models\KDKnowledge;
+use App\Models\KDSkills;
 
 class AdminReportValueController extends Controller
 {
@@ -22,12 +25,21 @@ class AdminReportValueController extends Controller
     {
         //
         $this->authorize('report-value');
+        $user = Session::get('user');
+
+        $kdKnowledges = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        ->orderBy('p_id', 'asc')->get();
+
+        $kdSkills = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        ->orderBy('k_id', 'asc')->get();
 
         $schools = School::orderBy('school_name', 'asc')->get();
         $santris = Santri::orderBy('santri_name', 'asc')->get();
         $kelass = Kelas::orderBy('class_name', 'asc')->get();
         $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
         return view('admin.page.report.reportvalue.report-value', compact('santris'), compact('schools'))
+        ->with(array('kdSkills' => $kdSkills))
+        ->with(array('kdKnowledges' => $kdKnowledges))
         ->with(array('kelass' => $kelass))
         ->with(array('mapels' => $mapels));
     }
@@ -284,24 +296,24 @@ class AdminReportValueController extends Controller
                 $p8 = $reportValueCheck->p8;
                 $p9 = $reportValueCheck->p9;
                 $p10 = $reportValueCheck->p10;
-                $reportValueCheck->rph;
-                $reportValueCheck->pts;
-                $reportValueCheck->pas;
-                $reportValueCheck->knowledge_pre;
-                $reportValueCheck->knowledge_desc;
-                $reportValueCheck->k1;
-                $reportValueCheck->k2;
-                $reportValueCheck->k3;
-                $reportValueCheck->k4;
-                $reportValueCheck->k5;
-                $reportValueCheck->k6;
-                $reportValueCheck->k7;
-                $reportValueCheck->k8;
-                $reportValueCheck->k9;
-                $reportValueCheck->k10;
-                $reportValueCheck->hpa;
-                $reportValueCheck->skills_pre;
-                $reportValueCheck->skills_desc;
+                $rph = $reportValueCheck->rph;
+                $pts = $reportValueCheck->pts;
+                $pas = $reportValueCheck->pas;
+                $ppre = $reportValueCheck->knowledge_pre;
+                $pdesc = $reportValueCheck->knowledge_desc;
+                $k1 = $reportValueCheck->k1;
+                $k2 = $reportValueCheck->k2;
+                $k3 = $reportValueCheck->k3;
+                $k4 = $reportValueCheck->k4;
+                $k5 = $reportValueCheck->k5;
+                $k6 = $reportValueCheck->k6;
+                $k7 = $reportValueCheck->k7;
+                $k8 = $reportValueCheck->k8;
+                $k9 = $reportValueCheck->k9;
+                $k10 = $reportValueCheck->k10;
+                $hpa = $reportValueCheck->hpa;
+                $kpre = $reportValueCheck->skills_pre;
+                $kdesc = $reportValueCheck->skills_desc;
             } else {
                 $kkm = "";
                 $p1 = "";
@@ -314,6 +326,24 @@ class AdminReportValueController extends Controller
                 $p8 = "";
                 $p9 = "";
                 $p10 = "";
+                $rph = "";
+                $pts = "";
+                $pas = "";
+                $ppre = "";
+                $pdesc = "";
+                $k1 = "";
+                $k2 = "";
+                $k3 = "";
+                $k4 = "";
+                $k5 = "";
+                $k6 = "";
+                $k7 = "";
+                $k8 = "";
+                $k9 = "";
+                $k10 = "";
+                $hpa = "";
+                $kpre = "";
+                $kdesc = "";
             }
 
             $no++;
@@ -325,33 +355,32 @@ class AdminReportValueController extends Controller
             $row[] = '<input name="inKKM[]" type="number" style="width:80px;" class="form-control" value="'. $kkm . '" onchange="calculate('. $no-1 . ')" required />';
             $row[] = '<input name="inP1[]" type="number" style="width:80px;" class="form-control" value="'. $p1 . '" onchange="calculate('. $no-1 . ')" />';
             $row[] = '<input name="inP2[]" type="number" style="width:80px;" class="form-control" value="'. $p2 . '" onchange="calculate('. $no-1 . ')"/>';
-            $row[] = '<input name="inP3[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP4[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP5[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP6[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP7[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP8[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP9[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inP10[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inRPH[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inPTS[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inPAS[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inHPE[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inPPRE[]" type="text" class="form-control" value="" readonly />';
-            $row[] = '<textarea name="taDailyDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3"></textarea>';
-            $row[] = '<input name="inK1[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK2[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK3[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK4[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK5[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK6[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK7[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK8[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK9[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inK10[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inHPA[]" type="number" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<input name="inKPRE[]" type="text" style="width:80px;" class="form-control" value="" />';
-            $row[] = '<textarea name="taSkillsDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<input name="inP3[]" type="number" style="width:80px;" class="form-control" value="'. $p3 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP4[]" type="number" style="width:80px;" class="form-control" value="'. $p4 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP5[]" type="number" style="width:80px;" class="form-control" value="'. $p5 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP6[]" type="number" style="width:80px;" class="form-control" value="'. $p6 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP7[]" type="number" style="width:80px;" class="form-control" value="'. $p7 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP8[]" type="number" style="width:80px;" class="form-control" value="'. $p8 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP9[]" type="number" style="width:80px;" class="form-control" value="'. $p9 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inP10[]" type="number" style="width:80px;" class="form-control" value="'. $p10 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inRPH[]" type="number" style="width:80px;" class="form-control" value="'. $rph . '" onchange="calculate('. $no-1 . ')" readonly  />';
+            $row[] = '<input name="inPTS[]" type="number" style="width:80px;" class="form-control" value="'. $pts . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inPAS[]" type="number" style="width:80px;" class="form-control" value="'. $pas . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inHPA[]" type="number" style="width:80px;" class="form-control" value="'. $hpa . '" readonly />';
+            $row[] = '<input name="inPPRE[]" type="text" class="form-control" value="'. $ppre . '" readonly />';
+            $row[] = '<textarea name="taDailyDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3" readonly>'. $pdesc . '</textarea>';
+            $row[] = '<input name="inK1[]" type="number" style="width:80px;" class="form-control" value="'. $k1 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK2[]" type="number" style="width:80px;" class="form-control" value="'. $k2 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK3[]" type="number" style="width:80px;" class="form-control" value="'. $k3 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK4[]" type="number" style="width:80px;" class="form-control" value="'. $k4 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK5[]" type="number" style="width:80px;" class="form-control" value="'. $k5 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK6[]" type="number" style="width:80px;" class="form-control" value="'. $k6 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK7[]" type="number" style="width:80px;" class="form-control" value="'. $k7 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK8[]" type="number" style="width:80px;" class="form-control" value="'. $k8 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK9[]" type="number" style="width:80px;" class="form-control" value="'. $k9 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inK10[]" type="number" style="width:80px;" class="form-control" value="'. $k10 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inKPRE[]" type="text" style="width:80px;" class="form-control" value="'. $kpre . '" onchange="calculate('. $no-1 . ')" readonly />';
+            $row[] = '<textarea name="taSkillsDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3" readonly>'. $kdesc . '</textarea>';
             $data[] = $row;
         }
 
@@ -362,14 +391,97 @@ class AdminReportValueController extends Controller
     public function reportValueSettings()
     {
         //
-        return view('admin.page.report.reportvalue.report-value-settings');
+        $user = Session::get('user');
+
+        $kdKnowledges = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        ->orderBy('p_id', 'asc')->get();
+
+        // return $kdKnowledges;   
+
+        $kdSkills = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        ->orderBy('k_id', 'asc')->get();
+
+        return view('admin.page.report.reportvalue.report-value-settings')
+            ->with('kdKnowledges', $kdKnowledges)
+            ->with('kdSkills', $kdSkills);
     }
 
-
-    public function reportAttendance()
+    public function reportValueSettingsSave(Request $request) 
     {
-        //
-        return view('admin.page.report.reportvalue.attendance');
+        try {
+            $user = Session::get('user');
+
+            $kdp = array(
+                    $request['inKDP1'],
+                    $request['inKDP2'],
+                    $request['inKDP3'],
+                    $request['inKDP4'],
+                    $request['inKDP5'],
+                    $request['inKDP6'],
+                    $request['inKDP7'],
+                    $request['inKDP8'],
+                    $request['inKDP9'],
+                    $request['inKDP10']
+                );
+
+                $kdk = array(
+                    $request['inKDK1'],
+                    $request['inKDK2'],
+                    $request['inKDK3'],
+                    $request['inKDK4'],
+                    $request['inKDK5'],
+                    $request['inKDK6'],
+                    $request['inKDK7'],
+                    $request['inKDK8'],
+                    $request['inKDK9'],
+                    $request['inKDK10']
+                );
+
+            $kdKnowledges = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+            ->orderBy('p_id', 'asc')->get();
+
+            if ($kdKnowledges) {
+                for ($i = 1 ; $i <=10; $i++) {
+                    $kdKnowledge = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+                        ->where('p_id', '=', $i)
+                        ->first();
+
+                        $kdKnowledge->desc = $kdp[$i-1];
+                        if ($kdKnowledge) {
+                            $kdKnowledge->update();
+                        } else {
+                            $kdKnowledge->p_id = $i;
+                            $kdKnowledge->save();                    
+                        }
+                }
+            }
+
+            $kdSkills = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+            ->orderBy('k_id', 'asc')->get();
+
+            if ($kdSkills) {
+                for ($i = 1 ; $i <=10; $i++) {
+                    $kdSkill = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+                        ->where('k_id', '=', $i)
+                        ->first();
+
+                        $kdSkill->desc = $kdk[$i-1];
+                        if ($kdSkill) {
+                            $kdSkill->update();
+                        } else {
+                            $kdSkill->k_id = $i;
+                            $kdSkill->save();                    
+                        }
+                }
+            }
+
+            return redirect()->route('report-value.index')
+            ->with('message_success', 'Pengaturan berhasil disimpan.');
+
+        } catch(\Illuminate\Database\QueryException $e) { 
+            return redirect()->route('report-value.index')
+            ->with('message_error', $e->getMessage());
+        }
     }
 
 }

@@ -109,46 +109,12 @@
                                                 <div class="modal-body">
                                                     <table class="table table-sm mb-0">
                                                         <tbody>
+                                                            @foreach ($kdKnowledges as $kdKnowledge)
                                                             <tr>
-                                                                <th scope="row">P-1</th>
-                                                                <td>Kompetensi P-1 a. Al-Qur'an Hadist</td>
+                                                                <th name="thKnowledgeId" scope="row">P - {{ $kdKnowledge->p_id }}</th>
+                                                                <td id="p{{ $kdKnowledge->p_id }}">{{ $kdKnowledge->desc }}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <th scope="row">P-2</th>
-                                                                <td>Kompetensi P-2 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-3</th>
-                                                                <td>Kompetensi P-3 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-4</th>
-                                                                <td>Kompetensi P-4 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-5</th>
-                                                                <td>Kompetensi P-5 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-6</th>
-                                                                <td>Kompetensi P-6 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-7</th>
-                                                                <td>Kompetensi P-7 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-8</th>
-                                                                <td>Kompetensi P-8 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-9</th>
-                                                                <td>Kompetensi P-9 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">P-10</th>
-                                                                <td>Kompetensi P-10 a. Al-Qur'an Hadist</td>
-                                                            </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -168,81 +134,12 @@
                                                 <div class="modal-body">
                                                     <table class="table table-sm mb-0">
                                                         <tbody>
+                                                            @foreach ($kdSkills as $kdSkill)
                                                             <tr>
-                                                                <th scope="row">K-1</th>
-                                                                <td>Kompetensi K-1 a. Al-Qur'an Hadist</td>
+                                                                <th name="thSkillsId" scope="row">K - {{ $kdSkill->k_id }}</th>
+                                                                <td id="k{{ $kdSkill->k_id }}" >{{ $kdSkill->desc }}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <th scope="row">K-2</th>
-                                                                <td>Kompetensi K-2 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-3</th>
-                                                                <td>Kompetensi K-3 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-4</th>
-                                                                <td>Kompetensi K-4 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-5</th>
-                                                                <td>Kompetensi K-5 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-6</th>
-                                                                <td>Kompetensi K-6 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-7</th>
-                                                                <td>Kompetensi K-7 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-8</th>
-                                                                <td>Kompetensi K-8 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-9</th>
-                                                                <td>Kompetensi K-9 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th scope="row">K-10</th>
-                                                                <td>Kompetensi K-10 a. Al-Qur'an Hadist</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" data-bs-target="#intervalNilaiModal">Interval Nilai</button>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="intervalNilaiModal" tabindex="-1" aria-hidden="true">
-                                        <div class="modal-dialog modal-sm">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Interval Nilai</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <table class="table table-sm mb-0">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>94 - 100</td>
-                                                                <th scope="row">A</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>87 - 93</td>
-                                                                <th scope="row">B</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td> - 86</td>
-                                                                <th scope="row">C</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>0 - 79</td>
-                                                                <th scope="row">D</th>
-                                                            </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -298,7 +195,6 @@
                                                     <th rowspan="2">PRE</th>
                                                     <th rowspan="2" style="width:500px">Deskripsi</th>
                                                     <th colspan="10" class="text-center">Penilaian Keterampilan</th>
-                                                    <th rowspan="2">HPA</th>
                                                     <th rowspan="2">PRE</th>
                                                     <th rowspan="2" style="width:500px">Deskripsi</th>
                                                 </tr>
@@ -334,7 +230,7 @@
                                     </div>
                                     <br>
                                     <div class="d-flex align-items-center">
-                                        <input type="submit" class="btn btn-success px-4  ms-auto" value="Simpan" />
+                                        <input type="submit" class="btn btn-success px-4 ms-auto" value="Simpan" />
                                     </div>
                                 </form>
                             </div>
@@ -371,7 +267,12 @@
                             success: function(response){
                                 table.ajax.url("report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
                                 $('#inMapel').val(mapel);
-                                // $('#title').text(response); 
+                                let mapelName = $("#soMapelFilter option:selected").text();
+                                if (mapelName != "Semua") {
+                                    $('#title').text("Input Nilai Raport Mapel " + mapelName); 
+                                } else {
+                                    $('#title').text("Input Nilai Raport"); 
+                                }
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
@@ -382,7 +283,7 @@
                     // Validation
                     function validateForm() {
                         let x = document.forms["formReportValue"]["inMapel"].value;
-                        if (x == "") {
+                        if (x == "" || x == "0") {
                             alert("Pilih Mapel terlebih dahulu dan tekan tombol Tampilkan Data");
                             return false;
                         }
@@ -402,7 +303,25 @@
                         let p9 = document.getElementsByName('inP9[]');
                         let p10 = document.getElementsByName('inP10[]');
                         let rph = document.getElementsByName('inRPH[]');
+                        let pts = document.getElementsByName('inPTS[]');
+                        let pas = document.getElementsByName('inPAS[]');
+                        let hpa = document.getElementsByName('inHPA[]');
                         let pred = document.getElementsByName('inPPRE[]');
+                        let pDesc = document.getElementsByName('taDailyDesc[]');
+                        
+                        let k1 = document.getElementsByName('inK1[]');
+                        let k2 = document.getElementsByName('inK2[]');
+                        let k3 = document.getElementsByName('inK3[]');
+                        let k4 = document.getElementsByName('inK4[]');
+                        let k5 = document.getElementsByName('inK5[]');
+                        let k6 = document.getElementsByName('inK6[]');
+                        let k7 = document.getElementsByName('inK7[]');
+                        let k8 = document.getElementsByName('inK8[]');
+                        let k9 = document.getElementsByName('inK9[]');
+                        let k10 = document.getElementsByName('inK10[]');
+                        let kPred = document.getElementsByName('inKPRE[]');
+                        let kDesc = document.getElementsByName('taSkillsDesc[]');
+
                         let kkmValue = Math.round(kkm[$index].value);
                         let p1Value = Math.round(p1[$index].value);
                         let p2Value = Math.round(p2[$index].value);
@@ -414,9 +333,14 @@
                         let p8Value = Math.round(p8[$index].value);
                         let p9Value = Math.round(p9[$index].value);
                         let p10Value = Math.round(p10[$index].value);
+                        let ptsValue = Math.round(pts[$index].value);
+                        let pasValue = Math.round(pas[$index].value);
                         
-                        let rphValue = Math.round((p1Value + p2Value + p3Value + p4Value + p5Value + p6Value + p7Value + p8Value  + p9Value + p10Value) / 5)
+                        let rphValue = Math.round((p1Value + p2Value + p3Value + p4Value + p5Value + p6Value + p7Value + p8Value  + p9Value + p10Value) / 10);
                         rph[$index].value = rphValue;
+
+                        let hpaValue = Math.round((2 * rphValue + ptsValue + pasValue) / 4);
+                        hpa[$index].value = hpaValue;
                         
                         let predInterval = Math.round((100 - kkmValue) / 3);
                         let predC = kkmValue + predInterval;
@@ -433,6 +357,121 @@
                         } else {
                             pred[$index].value = "E";
                         }
+
+                        let sKDKnowledge = "";
+                        if (p1Value != "") {
+                            sKDKnowledge += document.getElementById("p1").innerText + ". ";
+                        }
+                        
+                        if (p2Value != "") {
+                            sKDKnowledge += document.getElementById("p2").innerText + ". ";
+                        } 
+                        
+                        if (p3Value != "") {
+                            sKDKnowledge += document.getElementById("p3").innerText + ". ";
+                        } 
+                        
+                        if (p4Value != "") {
+                            sKDKnowledge += document.getElementById("p4").innerText + ". ";
+                        } 
+                        
+                        if (p5Value != "") {
+                            sKDKnowledge += document.getElementById("p5").innerText + ". ";
+                        } 
+                        
+                        if (p6Value != "") {
+                            sKDKnowledge += document.getElementById("p6").innerText + ". ";
+                        } 
+                        
+                        if (p7Value != "") {
+                            sKDKnowledge += document.getElementById("p7").innerText + ". ";
+                        } 
+                        
+                        if (p8Value != "") {
+                            sKDKnowledge += document.getElementById("p8").innerText + ". ";
+                        } 
+                        
+                        if (p9Value != "") {
+                            sKDKnowledge += document.getElementById("p9").innerText + ". ";
+                        } 
+                        
+                        if (p10Value != "") {
+                            sKDKnowledge += document.getElementById("p10").innerText + ". ";
+                        } 
+                        
+                        pDesc[$index].value = sKDKnowledge;
+                
+                        let k1Value = Math.round(k1[$index].value);
+                        let k2Value = Math.round(k2[$index].value);
+                        let k3Value = Math.round(k3[$index].value);
+                        let k4Value = Math.round(k4[$index].value);
+                        let k5Value = Math.round(k5[$index].value);
+                        let k6Value = Math.round(k6[$index].value);
+                        let k7Value = Math.round(k7[$index].value);
+                        let k8Value = Math.round(k8[$index].value);
+                        let k9Value = Math.round(k9[$index].value);
+                        let k10Value = Math.round(k10[$index].value);
+
+                        let rpkValue = Math.round((k1Value + k2Value + k3Value + k4Value + k5Value + k6Value + k7Value + k8Value  + k9Value + k10Value) / 10);
+                        
+                        let kPredInterval = Math.round((100 - 25) / 3);
+                        let kPredC = 25 + kPredInterval;
+                        let kPredB = 25 + kPredInterval * 2;
+                        let kPredSB =  25 + kPredInterval * 3;
+                        if (rpkValue < 25) {
+                            kPred[$index].value = "D";
+                        } else if (rpkValue >= 25 && rpkValue < predC) {               
+                            kPred[$index].value = "C";
+                        } else if (rpkValue >= predC && rpkValue < predB) {
+                            kPred[$index].value = "B";
+                        } else if (rpkValue >= predB && rpkValue <= kPredSB) {
+                            kPred[$index].value = "SB";
+                        } else if (rpkValue == 0) {
+                            kPred[$index].value = "";
+                        }
+
+                        let sKDSkills = "";
+                        if (k1Value != "") {
+                            sKDSkills += document.getElementById("k1").innerText + ". ";
+                        }
+                        
+                        if (k2Value != "") {
+                            sKDSkills += document.getElementById("k2").innerText + ". ";
+                        } 
+                        
+                        if (k3Value != "") {
+                            sKDSkills += document.getElementById("k3").innerText + ". ";
+                        } 
+                        
+                        if (k4Value != "") {
+                            sKDSkills += document.getElementById("k4").innerText + ". ";
+                        } 
+                        
+                        if (k5Value != "") {
+                            sKDSkills += document.getElementById("k5").innerText + ". ";
+                        } 
+                        
+                        if (k6Value != "") {
+                            sKDSkills += document.getElementById("k6").innerText + ". ";
+                        } 
+                        
+                        if (k7Value != "") {
+                            sKDSkills += document.getElementById("k7").innerText + ". ";
+                        } 
+                        
+                        if (k8Value != "") {
+                            sKDSkills += document.getElementById("k8").innerText + ". ";
+                        } 
+                        
+                        if (k9Value != "") {
+                            sKDSkills += document.getElementById("k9").innerText + ". ";
+                        } 
+                        
+                        if (k10Value != "") {
+                            sKDSkills += document.getElementById("k10").innerText + ". ";
+                        } 
+                        
+                        kDesc[$index].value = sKDSkills;
                     }
 
                 </script>

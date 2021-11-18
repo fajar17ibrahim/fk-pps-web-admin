@@ -140,92 +140,91 @@
                                             <div class="row mb-3 position-relative">
                                                 <label for="inSantriNISN" class="col-sm-3 col-form-label">Selalu Dilakukan</label>
                                                 <div class="col-sm-9 text-secondary">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Berdoa sebelum dan sesudah melakukan kegiatanx</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Menjalankan ibadah sesuai dengan agamanya</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Memberi salam pada saat awal dan akhir kegiatan</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur atas nikmat dan karunia Tuhan Yang Maha Esa</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Mensyukuri kemampuan manusia dalam mengendalikan diri</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur ketika berhasil mengerjakan sesuatu</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Berserah diri (tawakal) kepada Tuhan setelah berikhtiar atau melakukan usaha</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Memelihara hubungan baik dengan sesama umat</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur sebagai bangsa Indonesia</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
-                                                </div>
-                                                    <div class="invalid-tooltip">NISN Santri tidak boleh kosong</div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Berdoa sebelum dan sesudah melakukan kegiatanx</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Menjalankan ibadah sesuai dengan agamanya</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Memberi salam pada saat awal dan akhir kegiatan</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur atas nikmat dan karunia Tuhan Yang Maha Esa</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Mensyukuri kemampuan manusia dalam mengendalikan diri</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur ketika berhasil mengerjakan sesuatu</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Berserah diri (tawakal) kepada Tuhan setelah berikhtiar atau melakukan usaha</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Memelihara hubungan baik dengan sesama umat</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur sebagai bangsa Indonesia</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row mb-3 position-relative">
                                                 <label for="inSantriNISN" class="col-sm-3 col-form-label">Mulai Bekembang</label>
                                                 <div class="col-sm-9 text-secondary">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Berdoa sebelum dan sesudah melakukan kegiatanx</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Menjalankan ibadah sesuai dengan agamanya</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Memberi salam pada saat awal dan akhir kegiatan</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur atas nikmat dan karunia Tuhan Yang Maha Esa</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Mensyukuri kemampuan manusia dalam mengendalikan diri</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur ketika berhasil mengerjakan sesuatu</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Berserah diri (tawakal) kepada Tuhan setelah berikhtiar atau melakukan usaha</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Memelihara hubungan baik dengan sesama umat</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur sebagai bangsa Indonesia</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
-                                                </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Berdoa sebelum dan sesudah melakukan kegiatanx</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Menjalankan ibadah sesuai dengan agamanya</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Memberi salam pada saat awal dan akhir kegiatan</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur atas nikmat dan karunia Tuhan Yang Maha Esa</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Mensyukuri kemampuan manusia dalam mengendalikan diri</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur ketika berhasil mengerjakan sesuatu</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Berserah diri (tawakal) kepada Tuhan setelah berikhtiar atau melakukan usaha</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Memelihara hubungan baik dengan sesama umat</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur sebagai bangsa Indonesia</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
+                                                    </div>
                                                     <div class="invalid-tooltip">NISN Santri tidak boleh kosong</div>
                                                 </div>
                                             </div>
@@ -234,46 +233,46 @@
                                             <div class="row mb-3 position-relative">
                                                 <label for="inSantriNISN" class="col-sm-3 col-form-label">Selalu Dilakukan</label>
                                                 <div class="col-sm-9 text-secondary">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Berdoa sebelum dan sesudah melakukan kegiatanx</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Menjalankan ibadah sesuai dengan agamanya</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Memberi salam pada saat awal dan akhir kegiatan</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur atas nikmat dan karunia Tuhan Yang Maha Esa</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Mensyukuri kemampuan manusia dalam mengendalikan diri</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur ketika berhasil mengerjakan sesuatu</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Berserah diri (tawakal) kepada Tuhan setelah berikhtiar atau melakukan usaha</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Memelihara hubungan baik dengan sesama umat</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Bersyukur sebagai bangsa Indonesia</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
-                                                </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Berdoa sebelum dan sesudah melakukan kegiatanx</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Menjalankan ibadah sesuai dengan agamanya</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Memberi salam pada saat awal dan akhir kegiatan</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur atas nikmat dan karunia Tuhan Yang Maha Esa</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Mensyukuri kemampuan manusia dalam mengendalikan diri</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur ketika berhasil mengerjakan sesuatu</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Berserah diri (tawakal) kepada Tuhan setelah berikhtiar atau melakukan usaha</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Memelihara hubungan baik dengan sesama umat</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Bersyukur sebagai bangsa Indonesia</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Menghormati orang lain yang menjalankan ibadah sesuai dengan agamanya</label>
+                                                    </div>
                                                     <div class="invalid-tooltip">NISN Santri tidak boleh kosong</div>
                                                 </div>
                                             </div>
@@ -293,7 +292,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <h6 class="text-bold"><b>A. Sikap yang Menonjol</b></h6>
+                                            <h6 class="text-bold"><b>A. Sikap yang Selalu dilakukan</b></h6>
                                             <br>
                                             <div class="row mb-3 position-relative">
                                                 <label for="inSantriNISN" class="col-sm-3 col-form-label">Sangat Baik</label>
@@ -339,11 +338,9 @@
                                                         <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 2</label>
                                                     </div>
                                                 </div>
-                                                    <div class="invalid-tooltip">NISN Santri tidak boleh kosong</div>
-                                                </div>
                                             </div>
                                             <div class="row mb-3 position-relative">
-                                                <label for="inSantriNISN" class="col-sm-3 col-form-label">Sangat Baik</label>
+                                                <label for="inSantriNISN" class="col-sm-3 col-form-label">Baik</label>
                                                 <div class="col-sm-9 text-secondary">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -386,11 +383,9 @@
                                                         <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 2</label>
                                                     </div>
                                                 </div>
-                                                    <div class="invalid-tooltip">NISN Santri tidak boleh kosong</div>
-                                                </div>
                                             </div>
                                             <div class="row mb-3 position-relative">
-                                                <label for="inSantriNISN" class="col-sm-3 col-form-label">Sangat Baik</label>
+                                                <label for="inSantriNISN" class="col-sm-3 col-form-label">Kurang</label>
                                                 <div class="col-sm-9 text-secondary">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -433,11 +428,71 @@
                                                         <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 2</label>
                                                     </div>
                                                 </div>
-                                                    <div class="invalid-tooltip">NISN Santri tidak boleh kosong</div>
+                                            </div>
+                                            <h6 class="text-bold"><b>B. Sikap yang mulai Meningkat</b></h6>
+                                            <br>
+                                            <div class="row mb-3 position-relative">
+                                                <label for="inSantriNISN" class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-9 text-secondary">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Jujur</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Disiplin</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Tanggung jawab</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Santun</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Percaya diri</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Peduli</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Toleransi</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Gotong Royong</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 1</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">Sikap Tambahan 2</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            
-                                            
+                                            <div class="card-title d-flex align-items-center ">
+                                                <h5 class="mb-0 text-success">Catatan Manual (Jika dibutuhkan)</h5>
+                                            </div>
+                                            <hr>
+                                            <div class="row mb-3 position-relative">
+                                                <label for="inSantriNISM" class="col-sm-3 col-form-label">Catatan</label>
+                                                <div class="col-sm-9 text-secondary">
+                                                <textarea name="taSkillsDesc[]" style="height:100px" class="form-control" id="inputDescription" placeholder="" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3 position-relative">
+                                                <label for="inSantriNISM" class="col-sm-3 col-form-label"></label>
+                                                <div class="col-sm-9 text-secondary">
+                                                    <input type="submit" class="btn btn-success px-4 ms-auto" value="Simpan" />
+                                                </div>
+                                            </div>
+                                        </div>  
                                     </div>
                                 </form>
                             </div>

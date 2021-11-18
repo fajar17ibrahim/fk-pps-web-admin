@@ -38,7 +38,9 @@ class DatabaseSeeder extends Seeder
             ReportAttendanceSeeder::class,
             ReportAttitudeSeeder::class,
             ReportHomeRoomTeacherSeeder::class,
-            ReportValueLastSeeder::class
+            ReportValueLastSeeder::class,
+            KDSkillsSeeder::class,
+            KDKnowledgeSeeder::class
         ]);
     }
 }
