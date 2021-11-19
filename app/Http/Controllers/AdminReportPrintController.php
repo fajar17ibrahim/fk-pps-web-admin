@@ -190,6 +190,8 @@ class AdminReportPrintController extends Controller
             ->where('report_value.santri_nisn', '=', $reportPrint->santri_nisn)
             ->get();
 
+            // return $reportValues;
+
         $pdf = PDF::loadView('admin.page.report.reportprint.uts-export-pdf', compact('reportPrint'), compact('reportValues'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();

@@ -69,49 +69,57 @@ class AdminReportExtrakurikulerController extends Controller
                     ->where('santri.santri_nisn', '=', $nisn)
                     ->first();
 
-                $extrakurikuler = new ReportExtrakurikuler;
-                $extrakurikuler->santri_nisn = $santri->santri_nisn;
-                $extrakurikuler->class_id = $santri->santri_class;
-                $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $extrakurikuler->extra_name = $extra1Name[$index];
-                $extrakurikuler->extra_value = $extra1Value[$index];
-                $extrakurikuler->extra_description = $extra1Desc[$index];
-                $save = $extrakurikuler->save();
+                if ($extra1Name[$index] != "") {
+                    $extrakurikuler = new ReportExtrakurikuler;
+                    $extrakurikuler->santri_nisn = $santri->santri_nisn;
+                    $extrakurikuler->class_id = $santri->santri_class;
+                    $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $extrakurikuler->extra_name = $extra1Name[$index];
+                    $extrakurikuler->extra_value = $extra1Value[$index];
+                    $extrakurikuler->extra_description = $extra1Desc[$index];
+                    $save = $extrakurikuler->save();
+                }
 
-                $extrakurikuler = new ReportExtrakurikuler;
-                $extrakurikuler->santri_nisn = $santri->santri_nisn;
-                $extrakurikuler->class_id = $santri->santri_class;
-                $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $extrakurikuler->extra_name = $extra2Name[$index];
-                $extrakurikuler->extra_value = $extra2Value[$index];
-                $extrakurikuler->extra_description = $extra2Desc[$index];
-                $save = $extrakurikuler->save();
+                if ($extra2Name[$index] != "") {
+                    $extrakurikuler = new ReportExtrakurikuler;
+                    $extrakurikuler->santri_nisn = $santri->santri_nisn;
+                    $extrakurikuler->class_id = $santri->santri_class;
+                    $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $extrakurikuler->extra_name = $extra2Name[$index];
+                    $extrakurikuler->extra_value = $extra2Value[$index];
+                    $extrakurikuler->extra_description = $extra2Desc[$index];
+                    $save = $extrakurikuler->save();
+                }
 
-                $extrakurikuler = new ReportExtrakurikuler;
-                $extrakurikuler->santri_nisn = $santri->santri_nisn;
-                $extrakurikuler->class_id = $santri->santri_class;
-                $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $extrakurikuler->extra_name = $extra3Name[$index];
-                $extrakurikuler->extra_value = $extra3Value[$index];
-                $extrakurikuler->extra_description = $extra3Desc[$index];
-                $save = $extrakurikuler->save();
+                if ($extra3Name[$index] != "") {
+                    $extrakurikuler = new ReportExtrakurikuler;
+                    $extrakurikuler->santri_nisn = $santri->santri_nisn;
+                    $extrakurikuler->class_id = $santri->santri_class;
+                    $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $extrakurikuler->extra_name = $extra3Name[$index];
+                    $extrakurikuler->extra_value = $extra3Value[$index];
+                    $extrakurikuler->extra_description = $extra3Desc[$index];
+                    $save = $extrakurikuler->save();
+                }
 
-                $extrakurikuler = new ReportExtrakurikuler;
-                $extrakurikuler->santri_nisn = $santri->santri_nisn;
-                $extrakurikuler->class_id = $santri->santri_class;
-                $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $extrakurikuler->extra_name = $extra4Name[$index];
-                $extrakurikuler->extra_value = $extra4Value[$index];
-                $extrakurikuler->extra_description = $extra4Desc[$index];
-                $save = $extrakurikuler->save();
+                if ($extra4Name[$index] != "") {
+                    $extrakurikuler = new ReportExtrakurikuler;
+                    $extrakurikuler->santri_nisn = $santri->santri_nisn;
+                    $extrakurikuler->class_id = $santri->santri_class;
+                    $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $extrakurikuler->extra_name = $extra4Name[$index];
+                    $extrakurikuler->extra_value = $extra4Value[$index];
+                    $extrakurikuler->extra_description = $extra4Desc[$index];
+                    $save = $extrakurikuler->save();
+                }
             }
         
             if ($save) {
                 return redirect()->route('report-extrakurikuler.index')
-                ->with('message_success', 'Absensi berhasil disimpan.');
+                ->with('message_success', 'Nilai Extrakurikuler berhasil disimpan.');
             } else {
                 return redirect()->route('report-extrakurikuler.index')
-                ->with('message_error', 'Absensi gagal disimpan.');
+                ->with('message_error', 'Nilai Extrakurikuler gagal disimpan.');
             }
         } catch(\Illuminate\Database\QueryException $e){ 
             return redirect()->route('report-extrakurikuler.index')
@@ -221,6 +229,7 @@ class AdminReportExtrakurikulerController extends Controller
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
             $row[] = '<select name="soExtra1Name[]" class="single-select form-select" style="width:250px">
+                        <option value="">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -234,6 +243,7 @@ class AdminReportExtrakurikulerController extends Controller
                     </select>';
             $row[] = '<textarea name="taExtra1Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
             $row[] = '<select name="soExtra2Name[]" class="single-select form-select" style="width:250px">
+                        <option value="">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -247,6 +257,7 @@ class AdminReportExtrakurikulerController extends Controller
                     </select>';
             $row[] = '<textarea name="taExtra2Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
             $row[] = '<select name="soExtra3Name[]" class="single-select form-select" style="width:250px">
+                        <option value="">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -260,6 +271,7 @@ class AdminReportExtrakurikulerController extends Controller
                     </select>';
             $row[] = '<textarea name="taExtra3Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
             $row[] = '<select name="soExtra4Name[]" class="single-select form-select" style="width:250px">
+                        <option value="">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>

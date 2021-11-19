@@ -7,6 +7,8 @@ use App\Models\Santri;
 use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Mapel;
+use App\Models\ReportAttitude;
+use App\Models\schoolYear;
 
 class AdminReportAttitudeController extends Controller
 {
@@ -20,10 +22,15 @@ class AdminReportAttitudeController extends Controller
         //
         $this->authorize('report-attitude');
 
+        $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->get();
+
         $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = Kelas::orderBy('class_name', 'asc')->get();
         return view('admin.page.report.reportvalue.attitude', compact('schools'))
-        ->with(array('kelass' => $kelass));
+        ->with(array('kelass' => $kelass))
+        ->with(array('santris' => $santris));
     }
 
     /**
@@ -45,6 +52,94 @@ class AdminReportAttitudeController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //
+            $nisn = $request['soSantriNISN'];
+            $pred = $request['soPred'];
+            $attitudeAlwaysDos = $request['cbAttitudeAlwaysDo'];
+            $attitudeEvolves = $request['cbAttitudeEvolve'];
+            $attitudeNotStandOuts = $request['cbAttitudeNotStandOut'];
+            $predSocialAttitude = $request['soPredSocialAttitude'];
+            $attitudeVeryGoods = $request['cbAttitudeVeryGood'];
+            $attitudeNotGoods = $request['cbAttitudeNotGood'];
+            $attitudeEvolveSocials = $request['cbAttitudeEvolveSocial'];
+            $notes = $request['taNotes'];
+
+            $goodSpiritualAttitude = "";
+            foreach ($attitudeAlwaysDos as $attitudeAlwaysDo) {
+                $goodSpiritualAttitude .= $attitudeAlwaysDo . ". ";
+            }
+
+            foreach ($attitudeEvolves as $attitudeEvolve) {
+                $goodSpiritualAttitude .= $attitudeEvolve . ". ";
+            }
+
+            $lackSpiritualAttitude = "";
+            foreach ($attitudeNotStandOuts as $attitudeNotStandOut) {
+                $lackSpiritualAttitude .= $attitudeNotStandOut . ". ";
+            }
+
+            $goodSocialAttitude = "";
+            foreach ($attitudeVeryGoods as $attitudeVeryGood) {
+                $goodSocialAttitude .= $attitudeVeryGood . ". ";
+            }
+
+            foreach ($attitudeEvolveSocials as $attitudeEvolveSocial) {
+                $goodSocialAttitude .= $attitudeEvolveSocial . ". ";
+            }
+
+            $lackSocialAttitude = "";
+            foreach ($attitudeNotGoods as $attitudeNotGood) {
+                $lackSocialAttitude .= $attitudeNotGood . ". ";
+            }
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+
+            $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                    ->where('santri.santri_nisn', '=', $nisn)
+                    ->first();
+
+            $attitudeCheck = ReportAttitude::where('santri_nisn', '=', $santri->santri_nisn)
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->where('class_id', '=', $santri->santri_class)
+                    ->first();
+
+            if ($attitudeCheck) {
+                $attitude = $attitudeCheck;
+            } else {
+                $attitude = new ReportAttitude;
+            }
+
+            $attitude->santri_nisn = $nisn;
+            $attitude->class_id = $santri->santri_class;
+            $attitude->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+            $attitude->spiritual_attitude_pred = $pred;
+            $attitude->good_spiritual_attitude = $goodSpiritualAttitude;
+            $attitude->lack_of_spiritual_attitude = $lackSpiritualAttitude;
+            $attitude->sosial_attitude_pred = $predSocialAttitude;
+            $attitude->good_sosial_attitude = $goodSocialAttitude;
+            $attitude->lack_of_sosial_attitude = $lackSocialAttitude;
+
+            if ($attitudeCheck) {
+                $saved = $attitude->update();
+            } else {
+                $saved = $attitude->save();
+            }
+
+            if ($saved) {
+                return redirect()->route('report-attitude.index')
+                ->with('message_success', 'Nilai Sikap berhasil disimpan.');
+            } else {
+                return redirect()->route('report-attitude.index')
+                ->with('message_error', 'Nilai Sikap gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e) { 
+            return redirect()->route('report-attitude.index')
+            ->with('message_error', $e->getMessage());
+        }
+
+
     }
 
     /**
@@ -92,7 +187,7 @@ class AdminReportAttitudeController extends Controller
         //
     }
 
-    public function listData($level, $school, $kelas, $mapel) {
+    public function listData($level, $school, $kelas) {
         if ($level != 0 && $school != 0 && $kelas != 0) {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
@@ -138,6 +233,9 @@ class AdminReportAttitudeController extends Controller
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
             ->get();
         }
+
+        
+        return $santris;
         
         $no = 0;
         $data = array();

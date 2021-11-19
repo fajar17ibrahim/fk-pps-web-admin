@@ -186,7 +186,7 @@ Route::middleware(['verify', 'verified'])->group(function () {
     // Report Attitude
     Route::resource('report-attitude', AdminReportAttitudeController::class);
 
-    Route::get('report-attitude/data/{level}/{school}/{kelas}/{mapel}', [AdminReportAttitudeController::class, 'listData'])->name('report-attitude.data');
+    Route::get('report-attitude/data/{level}/{school}/{kelas}', [AdminReportAttitudeController::class, 'listData'])->name('report-attitude.data');
 
     // Report Attendance
     Route::resource('report-attendance', AdminReportAttendanceController::class);

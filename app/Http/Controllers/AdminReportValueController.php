@@ -108,6 +108,7 @@ class AdminReportValueController extends Controller
 
                 $reportValueCheck = ReportValue::where('santri_nisn', '=', $santri->santri_nisn)
                 ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                ->where('class_id', '=', $santri->santri_class)
                 ->first();
 
                 if (!$reportValueCheck) {
@@ -174,7 +175,7 @@ class AdminReportValueController extends Controller
                 ->with('message_success', 'Nilai Rapor berhasil disimpan.');
             } else {
                 return redirect()->route('report-value.index')
-                ->with('message_error', 'Nilai Rapor gagal disimpan.' . $save);
+                ->with('message_error', 'Nilai Rapor gagal disimpan.');
             }
         } catch(\Illuminate\Database\QueryException $e) { 
             return redirect()->route('report-value.index')
