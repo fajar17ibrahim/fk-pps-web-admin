@@ -6,7 +6,7 @@
 					
 					<div class="container">
 						<div class="main-body">
-							<form method="post" action="{{ route('master-ustadz.store') }}" class="row g-3 needs-validation" novalidate>
+							<form method="post" action="{{ route('master-ustadz.store') }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 							@csrf
 								<div class="row">
 									<div class="col-lg-4">
@@ -21,7 +21,7 @@
 												</div>
 												<br>
 												<div class="input-group">
-													<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+													<input name="inUstadzPhoto" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 												</div>
 											</div>
 										</div>
@@ -217,7 +217,7 @@
 														<div class="invalid-tooltip">Desa / Kelurahan tidak boleh kosong</div>
 														<datalist id="datalistOptions">
 														@foreach ($address as $addressData)
-															<option value="{{ $addressData->address_village . ', ' . $addressData->address_districts  }}">{{ $addressData->address_kab_or_city_name . ', ' . $addressData->address_province }}</option>
+															<option value="{{ $addressData->address_village . ', ' . $addressData->address_districts }}">{{ $addressData->address_kab_or_city_name . ', ' . $addressData->address_province }}</option>
 														@endforeach
 														</datalist>
 													</div>

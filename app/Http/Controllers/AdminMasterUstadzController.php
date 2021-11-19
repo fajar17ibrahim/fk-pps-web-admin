@@ -19,7 +19,7 @@ class AdminMasterUstadzController extends Controller
     public function index()
     {
         //
-        // $this->authorize('master-ustadz');
+        $this->authorize('master-teacher');
         
         $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = Kelas::orderBy('class_name', 'asc')->get();
@@ -47,8 +47,15 @@ class AdminMasterUstadzController extends Controller
         //
         try {
             //
-            $this->authorize('master-ustadz');
+            $this->authorize('master-teacher');
 
+            $ustadzPhoto = $request['inUstadzPhoto'];
+            if ($ustadzPhoto) {
+                $photoName = $request['inUstadzNIK'] . "_" . time().'.' . $request->inUstadzPhoto->extension();
+                $request->inUstadzPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "avatar.png";
+            }
             $ustadz = new Ustadz;
             $ustadz->ustadz_nik = $request['inUstadzNIK'];
             $ustadz->ustadz_name = $request['inUstadzName'];
@@ -76,6 +83,7 @@ class AdminMasterUstadzController extends Controller
             $ustadz->ustadz_school = $request['soPKPPS'];
             $ustadz->ustadz_class = $request['soLevelClass'];
             $ustadz->status = 'Aktif';
+            $ustadz->ustadz_photo = $photoName;
             $saveUstadz = $ustadz->save();
     
             if ($saveUstadz) {
@@ -126,7 +134,15 @@ class AdminMasterUstadzController extends Controller
         //
         try {
             //
-            $this->authorize('master-ustadz');
+            $this->authorize('master-teacher');
+
+            $ustadzPhoto = $request['inUstadzPhoto'];
+            if ($ustadzPhoto) {
+                $photoName = $request['inUstadzNIK'] . "_" . time().'.' . $request->inUstadzPhoto->extension();
+                $request->inUstadzPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "avatar.png";
+            }
 
             $ustadz = Ustadz::find($id);
             $ustadz->ustadz_nik = $request['inUstadzNIK'];
@@ -155,6 +171,7 @@ class AdminMasterUstadzController extends Controller
             $ustadz->ustadz_school = $request['soPKPPS'];
             $ustadz->ustadz_class = $request['soLevelClass'];
             $ustadz->status = 'Aktif';
+            $ustadz->ustadz_photo = $photoName;
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {
@@ -185,24 +202,30 @@ class AdminMasterUstadzController extends Controller
     public function editUstadz($id)
     {
         //
-        $this->authorize('master-ustadz');
+        $this->authorize('master-teacher');
 
-        $ustadz = Ustadz::leftJoin('school','ustadz.npsn','=','school.school_npsn')->find($id);
+        $kelass = Kelas::orderBy('class_id', 'asc')->get();
+        $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')
+                ->find($id);
         $schools = School::orderBy('school_name', 'asc')->get();
         $address = Address::get();
         return view('admin.page.master.ustadz.ustadz-edit', compact('address'), compact('schools'))
-        ->with('ustadz', $ustadz);
+        ->with('ustadz', $ustadz)
+        ->with('kelass', $kelass);
     }
 
     public function addUstadz()
     {
         //
-        // $this->authorize('master-ustadz');
+        $this->authorize('master-teacher');
 
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        $kelass = Kelas::orderBy('class_id', 'asc')->get();
         $schools = School::orderBy('school_name', 'asc')->get();
         $address = Address::get();
-        return view('admin.page.master.ustadz.ustadz-add', compact('address'), compact('schools')->with('kelass'));
+        return view('admin.page.master.ustadz.ustadz-add')
+        ->with('schools', $schools)
+        ->with('address', $address)
+        ->with('kelass', $kelass);
     }
 
     public function search($id) { 
@@ -239,7 +262,7 @@ class AdminMasterUstadzController extends Controller
             $row = array();
             $row[] = $no;
             $row[] = '<div class="d-flex align-items-center">
-                            <img src="assets/images/avatars/'. $ustadz->ustadz_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
+                            <img src="images/'. $ustadz->ustadz_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
                         </div>';
             $row[] = $ustadz->ustadz_nik;
             $row[] = $ustadz->ustadz_name;  
@@ -256,8 +279,6 @@ class AdminMasterUstadzController extends Controller
                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="master-ustadz-details/'. $ustadz->ustadz_nik.'">Details</a>
-                                </li>
                                 <li><a class="dropdown-item" href="master-ustadz-edit/'. $ustadz->ustadz_id.'">Edit</a>
                                 </li>
                                 <li><a class="dropdown-item" href="#">Aktif</a>

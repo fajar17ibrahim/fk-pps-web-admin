@@ -5,7 +5,7 @@
                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 					<div class="container">
 						<div class="main-body">
-							<form method="post" action="{{ route('master-santri.store') }}" class="row g-3 needs-validation" novalidate>
+							<form method="post" action="{{ route('master-santri.store') }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 								@csrf
 								<div class="row">
 									<div class="col-lg-4">
@@ -20,7 +20,7 @@
 												</div>
 												<br>
 												<div class="input-group">
-													<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+													<input name="inSantriPhoto" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 												</div>
 											</div>
 										</div>
@@ -36,7 +36,7 @@
 												<div class="row mb-3 position-relative">
 													<label for="inSantriNISM" class="col-sm-3 col-form-label">NISM</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSantriNISM" type="number" id="inSantriNISM" class="form-control" value="" max="10" required/>
+														<input name="inSantriNISM" type="number" id="inSantriNISM" class="form-control" value="" />
 														<div class="invalid-tooltip">NISM Santri tidak boleh kosong</div>
 													</div>
 												</div>
@@ -414,6 +414,7 @@
 														<input name="inAddress" type="text" id="inAddress" class="form-control" value="" />
 													</div>
 												</div>
+																								
 												<div class="row mb-3 position-relative">
 													<label for="soVillage" class="col-sm-3 col-form-label">Desa / Kelurahan</label>
 													<div class="col-sm-3 text-secondary">
@@ -426,6 +427,7 @@
 														@endforeach
 														</datalist>
 													</div>
+													
 													<label for="inRTRW" class="col-sm-2 col-form-label">RT / RW</label>
 													<div class="col-sm-2 text-secondary">
 														<input name="inRT" type="text" id="inRTRW" class="form-control" value="" />

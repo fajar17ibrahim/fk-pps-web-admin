@@ -1,0 +1,2 @@
+school_id,school_statistic_number,school_npsn,school_name,school_email,school_phone,school_address,school_village,school_rt_rw,school_districts,school_city,school_province,school_pos_code,school_country,school_santri_total,school_photo,school_status,school_headship,created_at,updated_at
+1,987654321,1234567890 ,PPS Admin,pps-admin@gmail.com,85000000000 ,Jl Mangga No 21,Gebang Putih,001/001,Sukolilo,Kota Surabaya,Jawa Timur,670000,Indonesia,NULL,logo_fk_pkpps.jpg,Aktif,351315120000000 ,11/12/2021 1:28,11/12/2021 1:28

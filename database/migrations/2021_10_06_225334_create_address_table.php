@@ -18,7 +18,7 @@ class CreateAddressTable extends Migration
             $table->string('address_province', 50)->nullable();
             $table->string('address_kab_or_city', 50)->nullable();
             $table->string('address_kab_or_city_name', 50)->nullable();
-            $table->string('address_distic', 50)->nullable();
+            $table->string('address_districts', 50)->nullable();
             $table->string('address_village', 50)->nullable();
             $table->string('address_pos_code', 10)->nullable();
             $table->timestamps();

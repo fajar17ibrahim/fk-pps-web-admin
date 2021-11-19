@@ -6,7 +6,7 @@
 					
 					<div class="container">
 						<div class="main-body">
-							<form method="post" action="/user-profile/{{ $ustadz[0]->ustadz_id }}" class="row g-3 needs-validation" novalidate>
+							<form method="post" action="user-profile/{{ $ustadz[0]->ustadz_id }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 							@method('PUT')
 							@csrf
 								<div class="row">
@@ -42,7 +42,7 @@
 										<div class="card">
 											<div class="card-body">
 												<div class="d-flex flex-column align-items-center text-center">
-													<img src="{{ asset('assets/images/avatars/avatar.png') }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
+													<img src="images/{{ $ustadz[0]->ustadz_photo }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
 													<div class="mt-3">
 														<h5>Foto</h5>
 														<p class="text-secondary mb-1">Ustadz</p>
@@ -50,7 +50,7 @@
 												</div>
 												<br>
 												<div class="input-group">
-													<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+													<input name="inUstadzPhoto" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 												</div>
 											</div>
 										</div>

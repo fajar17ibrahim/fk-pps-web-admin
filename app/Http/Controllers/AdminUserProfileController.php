@@ -85,6 +85,13 @@ class AdminUserProfileController extends Controller
             //
             $this->authorize('user-profile');
 
+            $ustadzPhoto = $request['inUstadzPhoto'];
+            if ($ustadzPhoto) {
+                $photoName = $request['inUstadzNIK'] . "_" . time().'.' . $request->inUstadzPhoto->extension();
+                $request->inUstadzPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "avatar.png";
+            }
             $ustadz = Ustadz::find($id);
             $ustadz->ustadz_nik = $request['inUstadzNIK'];
             $ustadz->ustadz_name = $request['inUstadzName'];
@@ -110,6 +117,7 @@ class AdminUserProfileController extends Controller
             $ustadz->ustadz_email = $request['inUstadzEmail'];
             $ustadz->ustadz_phone = $request['inUstadzPhone'];
             $ustadz->status = 'Aktif';
+            $ustadz->ustadz_photo = $photoName;
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {

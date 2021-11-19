@@ -23,7 +23,10 @@ class AdminMasterSantriController extends Controller
         $schools = School::orderBy('school_name', 'asc')->get();
         $santris = Santri::orderBy('santri_name', 'asc')->get();
         $kelass = Kelas::orderBy('class_name', 'asc')->get();
-        return view('admin.page.master.santri.index', compact('santris'), compact('schools'))->with(array('kelass' => $kelass));
+        return view('admin.page.master.santri.index')
+        ->with(array('santris' => $santris))
+        ->with(array('schools' => $schools))
+        ->with(array('kelass' => $kelass));
     }
 
     /**
@@ -48,6 +51,14 @@ class AdminMasterSantriController extends Controller
         try {
             //
             $this->authorize('master-santri');
+
+            $santriPhoto = $request['inSantriPhoto'];
+            if ($santriPhoto) {
+                $photoName = $request['inSantriNISN'] . "_" . time().'.' . $request->inSantriPhoto->extension();
+                $request->inSantriPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "avatar-santri.jpg";
+            }
 
             $user = Session::get('user');
             $santri = new Santri;
@@ -93,13 +104,14 @@ class AdminMasterSantriController extends Controller
             $santri->santri_province = $request['inProvince'];
             $santri->santri_pos_code = $request['inPosCode'];
             $santri->santri_country = $request['inCountry'];
-            $santri->santri_class = $request['inSantriSchoolFrom'];
+            $santri->santri_class = $request['soLevelClass'];
             $santri->santri_school = $user[0]->school_npsn;
             $santri->santri_status = 'Aktif';
+            $santri->santri_photo = $photoName;
             $saveSantri = $santri->save();
 
             $reportEquipment = new ReportEquipment;
-            $reportEquipment->santri_id->$request['inSantriNISN'];
+            $reportEquipment->santri_id = $request['inSantriNISN'];
             $saveEquipment = $reportEquipment->save();
     
             if ($saveSantri && $saveEquipment) {
@@ -309,7 +321,7 @@ class AdminMasterSantriController extends Controller
             $row = array();
             $row[] = $no;
             $row[] = '<div class="d-flex align-items-center">
-                            <img src="assets/images/avatars/'. $santri->santri_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
+                            <img src="images/'. $santri->santri_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
                         </div>';
             $row[] = $santri->santri_nism . "/" .$santri->santri_nisn;
             $row[] = $santri->santri_name;  

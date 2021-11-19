@@ -215,7 +215,9 @@ Route::middleware(['verify', 'verified'])->group(function () {
     Route::resource('school-profile', AdminSchoolProfileController::class);
 
     // Curriculum
-    Route::get('/curriculum', [AdminCurriculumController::class, 'index'])->name('curriculum');
+    Route::resource('curriculum', AdminCurriculumController::class);
+
+    Route::get('curriculum/{level}/{desc}', [AdminCurriculumController::class, 'download'])->name('curriculum.download');
 
     // User
     Route::get('user/data', [AdminUserController::class, 'listData'])->name('user.data');
