@@ -15,13 +15,13 @@ class CreateMutationTable extends Migration
     {
         Schema::create('mutation', function (Blueprint $table) {
             $table->increments('mutation_id', 12);
-            $table->string('mutation_santri', 20);
-            $table->string('mutation_class', 20);
-            $table->string('mutation_school', 20);
-            $table->string('mutation_class_destination', 20);
-            $table->string('mutation_school_destination', 20);
-            $table->string('mutation_statement', 20);
-            $table->string('reason', 20);
+            $table->string('mutation_santri', 20)->nullable();
+            $table->string('mutation_class', 20)->nullable();
+            $table->string('mutation_school', 20)->nullable();
+            $table->string('mutation_class_destination', 20)->nullable();
+            $table->string('mutation_school_destination', 20)->nullable();
+            $table->string('mutation_statement', 20)->nullable();
+            $table->string('reason', 20)->nullable();
             $table->timestamps();
         });
     }

@@ -7,8 +7,11 @@ use Session;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\School;
+use App\Models\Santri;
+use App\Models\Mapel;
 use App\Models\Graduation;
 use App\Models\Ustadz;
+use App\Models\SchoolYear;
 use App\Models\ReportValueLast;
 
 class AdminGraduationController extends Controller
@@ -24,16 +27,25 @@ class AdminGraduationController extends Controller
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $schools = School::orderBy('school_name', 'asc')->get();
-            $kelass = Kelas::orderBy('class_name', 'asc')->get();
+            $kelass = Kelas::orderBy('class_id', 'asc')->get();
+            $santris = Santri::orderBy('santri_name', 'asc')->get();
         } else {
             $schools = School::orderBy('school_name', 'asc')
             ->where('school.school_npsn', '=', $user[0]->ustadz_school)
             ->get();
-            $kelass = Kelas::orderBy('class_name', 'asc')
+
+            $kelass = Kelas::orderBy('class_id', 'asc')
             ->where('kelas.class_level', '=', $user[0]->class_level)
             ->get();
+
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+                ->get();
         }
-        return view('admin.page.graduation.graduated.index', compact('schools'), compact('kelass'));
+        return view('admin.page.graduation.graduated.index', compact('schools'), compact('kelass'))
+        ->with(array('santris' => $santris));
     }
 
     /**
@@ -55,6 +67,91 @@ class AdminGraduationController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //
+
+            $user = Session::get('user');
+            $satriNISN = $request['soSantri'];
+
+            $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+                ->where('santri.santri_nisn', '=', $satriNISN)
+                ->first();
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+
+            $graduationCheck = Graduation::where('graduation_santri', '=', $satriNISN)
+                ->where('graduation_class', '=', $santri->santri_class)
+                ->where('graduation_school','=', $santri->santri_school)
+                ->first();
+
+            if (!$graduationCheck) {
+                $graduation = new Graduation;
+            } else {
+                $graduation = $graduationCheck;
+            }
+            
+            $graduation->test_number = $request['inTaskNumber'];
+            $graduation->graduation_santri = $satriNISN;
+            $graduation->graduation_class = $santri->santri_class;
+            $graduation->graduation_school = $santri->santri_school;
+            $graduation->graduated_statement = $request['rbLulusTidak'];
+            $graduation->graduated_year = $request['inGraduatedYear'];
+            $graduation->tahun_pelajaran = $schoolYear->tahun_pelajaran_id;
+            $graduation->continue_statement = $request['rbMelanjutkanTidak'];
+            $graduation->reason = $request['inTidakMelanjutkNReason'];
+            $graduation->continue_to = $request['soJenjangTujuan'];
+            $graduation->continue_to_school_status = $request['soStatusSekolahTujuan'];
+            
+            if (!$graduationCheck) {
+                $graduationSaved = $graduation->save();
+            } else {
+                $graduationSaved = $graduation->update();
+            }
+            
+            $mapelIds = $request['inMapelId'];
+            $nuss = $request['inNUS'];
+            foreach ($mapelIds as $index => $mapelId) {
+
+                $reportValueLastCheck = ReportValueLast::where('mapel_id', '=', $mapelId)
+                ->where('class_id', '=', $santri->santri_class)
+                ->where('santri_nisn','=', $satriNISN)
+                ->first();
+
+                if (!$reportValueLastCheck) {
+                    $reportValueLast = new ReportValueLast;
+                } else {
+                    $reportValueLast = $reportValueLastCheck;
+                }
+
+                $reportValueLast->mapel_id = $mapelId;
+                $reportValueLast->class_id = $santri->santri_class;
+                $reportValueLast->santri_nisn = $satriNISN;
+                $reportValueLast->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $reportValueLast->graduated_year = $request['inGraduatedYear'];
+                $reportValueLast->nus = $nuss[$index];
+
+                if (!$reportValueLastCheck) {
+                    $reportValueLastSaved = $reportValueLast->save();
+                } else {
+                    $reportValueLastSaved = $reportValueLast->update();
+                }
+                
+            }
+
+            if ($graduationSaved && $reportValueLastSaved) {
+                return redirect()->route('graduation.index')
+                ->with('message_success', 'Data berhasil disimpan.');
+            } else {
+                return redirect()->route('graduation.index')
+                ->with('message_error', 'Data gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('graduation.index')
+            ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -105,7 +202,20 @@ class AdminGraduationController extends Controller
     public function graduationAdd()
     {
         //
-        return view('admin.page.graduation.graduated.graduation-add');
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $santris = Santri::orderBy('santri_name', 'asc')->get();
+        } else {
+
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+                ->get();
+        }
+
+        $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
+        return view('admin.page.graduation.graduated.graduation-add', compact('santris'), compact('mapels'));
     }
 
     public function graduationPrintLetter($id) {
@@ -131,13 +241,18 @@ class AdminGraduationController extends Controller
 
         $reportValuesLast = ReportValueLast::leftJoin('mapel','mapel.mapel_id','=','report_value_last.mapel_id')
             ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
-            ->where('report_value_last.class_id', '=', $graduation->santri_class)
+            ->where('report_value_last.class_id', '=', $graduation->graduation_class)
             ->where('report_value_last.tahun_pelajaran_id', '=', $graduation->tahun_pelajaran_id)
             ->where('report_value_last.graduated_year', '=', $graduation->graduated_year)
             ->where('report_value_last.santri_nisn', '=', $graduation->santri_nisn)
             ->get();
 
             // return $reportValuesLast;
+
+            if (count($reportValuesLast) == 0) {
+                return redirect()->route('graduation.index')
+                ->with('message_error', 'Nilai Akhir belum di input.');
+            }
 
             $values = array();
             $no = 1;
@@ -168,13 +283,13 @@ class AdminGraduationController extends Controller
                 'tahun_pelajaran' => $graduation->tahun_pelajaran_name,
                 'nomor_ujian' => $graduation->test_number,
                 'santri_nama' => $graduation->santri_name,
-                'santri_ttl' => $graduation->santri_born_place . ", " . tanggal($graduation->santri_born_date),
+                'santri_ttl' => $graduation->graduation_born_place . ", " . tanggal($graduation->santri_born_date),
                 'santri_nama' => $graduation->father_name,
                 'santri_nism' => $graduation->santri_nism,
                 'santri_nisn' => $graduation->santri_nisn,
                 'santri_lulus' => $graduation->graduated_statement,
                 'nilai' => $values,
-                'nilai_rata_rata' => $average
+                'nilai_rata_rata' => round($average)
             );
 
         // return $data;
@@ -202,7 +317,7 @@ class AdminGraduationController extends Controller
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
             ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
             ->leftJoin('school','school.school_npsn','=','graduation.graduation_school')
-            ->where('santri.santri_school', '=', $school)
+            ->where('graduation.graduation_school', '=', $school)
             ->get();
         } else {
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')

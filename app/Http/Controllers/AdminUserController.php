@@ -51,13 +51,12 @@ class AdminUserController extends Controller
             $user = new User;
             $user->name = $request['inName'];
             $user->email = $request['inEmail'];
-            $user->role = $request['soRole'];
+            $user->role_id = $request['soRole'];
             $user->status = $request['soStatus'];
             $user->password = Hash::make('password');
             $save = $user->save();
             // return response()->json(compact('user','token'), 201);
             
-
             if ($save) {
                 return redirect()->route('user.index')
                 ->with('message_success', 'Tahun User berhasil disimpan.');
@@ -95,7 +94,7 @@ class AdminUserController extends Controller
         $data = array(
             'id' => $user->id, 
             'name' => $user->name,
-            'level' => $user->role,
+            'level' => $user->role_id,
             'email' => $user->email,
             'status' => $user->status);
         return json_encode($data);
@@ -114,7 +113,7 @@ class AdminUserController extends Controller
         try {
             //
             $user = User::find($id);
-            $user->role = $request['soRoleEdit'];
+            $user->role_id = $request['soRoleEdit'];
             $user->status = $request['soStatusEdit'];
             $updated = $user->update();
             
@@ -150,12 +149,20 @@ class AdminUserController extends Controller
 
     public function listData() {
         $user = Session::get('user');
-
-        $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
-        ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
-        ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
-        ->where('kelas.class_level', '=', $user[0]->class_level)
-        ->get();
+        if ($user[0]->role_id == 1) {
+            $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
+            ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
+            ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
+            ->select('role_name', 'name', 'email', 'users.id', 'users.status')
+            ->get();
+        } else {
+            $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
+            ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
+            ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
+            ->where('kelas.class_level', '=', $user[0]->class_level)
+            ->select('role_name', 'name', 'email', 'users.id', 'users.status')
+            ->get();
+        }
         
         $no = 0;
         $data = array();

@@ -34,7 +34,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" name="soRoleEdit" id="soRoleEdit" tabindex="-1">
                                                                 @foreach ($roles as $role)
-                                                                <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
+                                                                <option value="{{ $role->id }}">{{ $role->role_name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

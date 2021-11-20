@@ -15,7 +15,7 @@
                                 <br><br>
                                 <p class="text-uppercase text-size-16">NS : {{ $santri[0]->school_statistic_number }} - NPSN : {{ $santri[0]->school_npsn }}</p>
                                 <br><br>
-                                <img src="assets/images/logo-lembaga.jpg" width="180" heigth="180">
+                                <img src="images/{{ $santri[0]->school_photo }}" width="180" heigth="180">
                                 <br><br>
                                 <h2>Nama Peserta Didik</h2>
                                 <h1 id="vSantriName" class="text-uppercase border align-center width-50">{{ $santri[0]->santri_name }}</h1> 

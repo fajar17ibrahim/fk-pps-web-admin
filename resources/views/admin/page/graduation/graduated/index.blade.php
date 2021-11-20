@@ -58,12 +58,38 @@
 					</div>
 					<div class="card">
 						<div class="card-body">
+                            @if(Session::has('message_success'))
+                                <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-white">Berhasil</h6>
+                                            <div class="text-white">{{ Session::get('message_success') }}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+                            @if(Session::has('message_error'))
+                                <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-white">Gagal!</h6>
+                                            <div class="text-white">{{ Session::get('message_error') }}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
 							<div class="table-responsive">
 								<table id="dataTable" class="table table-striped table-borderless " style="width:100%">
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>NPSN</th>
+											<th>NISN</th>
 											<th>Nama Santri</th>
 											<th>Jenis Kelamin</th>
 											<th>Jenjang</th>
@@ -74,33 +100,6 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>510031750032 / 69985167</td>
-											<td>EKO RAPORT</td>
-											<td>L</td>
-											<td>Ula</td>
-											<td>
-												<span class="badge bg-warning text-dark">Lulus</span>
-											</td>
-											<td>2020</td>
-											<td><a href="graduation-print-letter">Cetak</a></td>
-											<td>
-												<div class="col">
-													<div class="btn-group">
-														<button type="button" class="btn btn-success">Aksi</button>
-														<button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">	<span class="visually-hidden">Toggle Dropdown</span>
-														</button>
-														<ul class="dropdown-menu">
-															<li><a class="dropdown-item" href="#">Edit</a>
-															</li>
-															<li><a class="dropdown-item" href="#">Hapus</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</td>
-										</tr>
 									</tbody>
 								</table>
 							</div>

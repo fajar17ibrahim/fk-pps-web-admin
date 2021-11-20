@@ -20,7 +20,7 @@ class CreateNewsTable extends Migration
             $table->string('news_post_time', 10);
             $table->text('news_description');
             $table->string('news_poster', 20);
-            $table->string('news_photo', 100);
+            $table->string('news_photo', 100)->nullable();
             $table->timestamps();
         });
     }

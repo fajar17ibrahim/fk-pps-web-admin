@@ -142,7 +142,7 @@
 													</div>
 													<label for="inSantriJoinDate" class="col-sm-3 col-form-label">Tanggal Masuk</label>
 													<div class="col-sm-3 text-secondary">
-														<input name="inSantriJoinDate" type="date" id="inSantriJoinDate" class="form-control">
+														<input name="inSantriJoinDate" type="date" id="inSantriJoinDate" class="form-control" required>
 													</div>
 												</div>
 											</div>

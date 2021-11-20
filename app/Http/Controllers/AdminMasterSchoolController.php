@@ -44,6 +44,7 @@ class AdminMasterSchoolController extends Controller
             //
             $rtLength =  strlen($request['inRT']);
             $angkaNol = "0";
+            $rt = "";
             if ($rtLength < 3) {
                 for ($i = 1; $i < 3 - $rtLength; $i++) {
                     $angkaNol .= $angkaNol;
@@ -53,11 +54,20 @@ class AdminMasterSchoolController extends Controller
             
             $rwLength =  strlen($request['inRW']);
             $angkaNol = "0";
+            $rw = "";
             if ($rwLength < 3) {
                 for ($i = 1; $i < 3 - $rwLength; $i++) {
                     $angkaNol .= $angkaNol;
                 }
                 $rw = $angkaNol . $request['inRW'];
+            }
+
+            $schoolPhoto = $request['inSchoolPhoto'];
+            if ($schoolPhoto) {
+                $photoName = $request['inSchoolNPSN'] . "_" . time().'.' . $request->inSchoolPhoto->extension();
+                $request->inSchoolPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "logo_fk_pkpps.jpg";
             }
 
             $school = new School;
@@ -76,6 +86,7 @@ class AdminMasterSchoolController extends Controller
             $school->school_country = $request['inCountry'];
             $school->school_status = 'Aktif';
             $school->school_headship = $request['soKepsek'];
+            $school->school_photo = $photoName;
             $saveschool = $school->save();
     
             if ($saveschool) {
@@ -128,6 +139,7 @@ class AdminMasterSchoolController extends Controller
             //
             $rtLength =  strlen($request['inRT']);
             $angkaNol = "0";
+            $rt = "";
             if ($rtLength < 3) {
                 for ($i = 1; $i < 3 - $rtLength; $i++) {
                     $angkaNol .= $angkaNol;
@@ -137,11 +149,20 @@ class AdminMasterSchoolController extends Controller
             
             $rwLength =  strlen($request['inRW']);
             $angkaNol = "0";
+            $rw = "";
             if ($rwLength < 3) {
                 for ($i = 1; $i < 3 - $rwLength; $i++) {
                     $angkaNol .= $angkaNol;
                 }
                 $rw = $angkaNol . $request['inRW'];
+            }
+
+            $schoolPhoto = $request['inSchoolPhoto'];
+            if ($schoolPhoto) {
+                $photoName = $request['inSchoolNPSN'] . "_" . time().'.' . $request->inSchoolPhoto->extension();
+                $request->inSchoolPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "logo_fk_pkpps.jpg";
             }
 
             $school = School::find($id);
@@ -159,7 +180,8 @@ class AdminMasterSchoolController extends Controller
             $school->school_pos_code = $request['inPosCode'];
             $school->school_country = $request['inCountry'];
             $school->school_status = 'Aktif';
-            $school->school_headship = $request['soKepsek'];;
+            $school->school_headship = $request['soKepsek'];
+            $school->school_photo = $photoName;
             $saveschool = $school->update();
     
             if ($saveschool) {
@@ -246,7 +268,7 @@ class AdminMasterSchoolController extends Controller
                         <span>' . $school->school_status .'</span>
                     </div>';
             $row[] = '<div class="d-flex align-items-center">
-                            <img src="assets/images/logo_fk_pkpps.jpg" alt="" class="p-1 border bg-white"  width="90" height="90">
+                            <img src="images/'. $school->school_photo .'" alt="" class="p-1 border bg-white"  width="90" height="90">
                         </div>';
             $row[] = '<div class="col">
                         <div class="btn-group">

@@ -15,17 +15,17 @@ class CreateGraduationTable extends Migration
     {
         Schema::create('graduation', function (Blueprint $table) {
             $table->increments('graduation_id', 12);
-            $table->string('test_number', 20);
-            $table->string('graduation_santri', 20);
-            $table->string('graduation_class', 20);
-            $table->string('graduation_school', 20);
-            $table->string('graduated_statement', 20);
-            $table->string('graduated_year', 12);
-            $table->string('tahun_pelajaran', 12);
-            $table->string('continue_statement', 20);
-            $table->string('reason');
-            $table->string('continue_to', 20);
-            $table->string('continue_to_school_status', 20);
+            $table->string('test_number', 20)->nullable();
+            $table->string('graduation_santri', 20)->nullable();
+            $table->string('graduation_class', 20)->nullable();
+            $table->string('graduation_school', 20)->nullable();
+            $table->string('graduated_statement', 20)->nullable();
+            $table->string('graduated_year', 12)->nullable();
+            $table->string('tahun_pelajaran', 12)->nullable();
+            $table->string('continue_statement', 20)->nullable();
+            $table->string('reason')->nullable();
+            $table->string('continue_to', 20)->nullable();
+            $table->string('continue_to_school_status', 20)->nullable();
             $table->timestamps();
         });
     }

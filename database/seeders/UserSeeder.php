@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         $user->role_id = "1";
         $user->status = "Aktif";
         $user->login_date = tanggal('now');
-        $user->password = Hash::make('1234567890');
+        $user->password = Hash::make('adminmasterceo');
         $user->save();
 
         $user = new User;
