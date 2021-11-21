@@ -132,17 +132,27 @@
 												</div>
 												<hr>
 												<div class="row mb-3">
-													<label for="soLevelClass" class="col-sm-3 col-form-label">Di Kelas</label>
+													<label for="soLevelClassStart" class="col-sm-3 col-form-label">Di Kelas</label>
 													<div class="col-sm-3 text-secondary" >
-														<select name="soLevelClass" class="form-select form-control" id="soLevelClass">
+														<select name="soLevelClassStart" class="form-select form-control" id="soLevelClassStart">
 														@foreach ($kelass as $kelas)
-															<option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+															<option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
 														@endforeach
 														</select>
 													</div>
 													<label for="inSantriJoinDate" class="col-sm-3 col-form-label">Tanggal Masuk</label>
 													<div class="col-sm-3 text-secondary">
 														<input name="inSantriJoinDate" type="date" id="inSantriJoinDate" class="form-control" required>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<label for="soLevelClass" class="col-sm-3 col-form-label">Kelas Sekarang</label>
+													<div class="col-sm-9 text-secondary" >
+														<select name="soLevelClass" class="form-select form-control" id="soLevelClass">
+														@foreach ($kelass as $kelas)
+															<option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
+														@endforeach
+														</select>
 													</div>
 												</div>
 											</div>
@@ -180,7 +190,6 @@
 													<label for="soAyahJob" class="col-sm-3 col-form-label">Pekerjaan Ayah</label>
 													<div class="col-sm-9 text-secondary">
 														<select name="soAyahJob" class="form-select form-control" id="soAyahJob">
-															<option value=""></option>
 															<option value="Buruh (Tani / Pabrik / Bangunan)">Buruh (Tani / Pabrik / Bangunan)</option>
 															<option value="Dokter / Bidan / Perawat">Dokter / Bidan / Perawat</option>
 															<option value="Guru / Dosen">Guru / Dosen</option>
@@ -221,7 +230,7 @@
 													<label for="soAyahSalery" class="col-sm-3 col-form-label">Penghasilan</label>
 													<div class="col-sm-9 text-secondary">
 														<select name="soAyahSalery" class="form-select form-control" id="soAyahSalery">
-															<option value="Tidak memiliki Pendidikan Formal">Tidak Berpenghasilan</option>
+															<option value="Tidak Berpenghasilan Tetap">Tidak Berpenghasilan Tetap</option>
 															<option value="< Rp. 500.000">< Rp. 500.000</option>
 															<option value="Rp. 500.000 - Rp. 1.000.000">Rp. 500.000 - Rp. 1.000.000</option>
 															<option value="Rp. 1.000.000 - Rp. 2.000.000">Rp. 1.000.000 - Rp. 2.000.000</option>
@@ -301,7 +310,7 @@
 													<label for="soIbuSalery" class="col-sm-3 col-form-label">Penghasilan</label>
 													<div class="col-sm-9 text-secondary">
 														<select name="soIbuSalery" class="form-select form-control" id="soIbuSalery">
-															<option value="Tidak memiliki Pendidikan Formal">Tidak Berpenghasilan</option>
+															<option value="Tidak Berpenghasilan Tetap">Tidak Berpenghasilan Tetap</option>
 															<option value="< Rp. 500.000">< Rp. 500.000</option>
 															<option value="Rp. 500.000 - Rp. 1.000.000">Rp. 500.000 - Rp. 1.000.000</option>
 															<option value="Rp. 1.000.000 - Rp. 2.000.000">Rp. 1.000.000 - Rp. 2.000.000</option>
@@ -344,7 +353,6 @@
 													<label for="soWaliJob" class="col-sm-3 col-form-label">Pekerjaan Wali</label>
 													<div class="col-sm-9 text-secondary">
 														<select name="soWaliJob" class="form-select form-control" id="soWaliJob">
-															<option value=""></option>
 															<option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
 															<option value="Buruh (Tani / Pabrik / Bangunan)">Buruh (Tani / Pabrik / Bangunan)</option>
 															<option value="Dokter / Bidan / Perawat">Dokter / Bidan / Perawat</option>
@@ -363,7 +371,6 @@
 													<label for="soWaliEducation" class="col-sm-3 col-form-label">Pendidikan Wali</label>
 													<div class="col-sm-9 text-secondary">
 														<select name="soWaliEducation" class="form-select form-control" id="soWaliEducation">
-															<option value=""></option>	
 															<option value="Tidak memiliki Pendidikan Formal">Tidak memiliki Pendidikan Formal</option>
 															<option value="SD / MI Sederajat">SD / MI Sederajat</option>
 															<option value="SMP / MTS Sederajat">SMP / MTS Sederajat</option>
@@ -387,8 +394,7 @@
 													<label for="soWaliSalery" class="col-sm-3 col-form-label">Penghasilan</label>
 													<div class="col-sm-9 text-secondary">
 														<select name="soWaliSalery" class="form-select form-control" id="soWaliSalery">
-															<option value=""></option>
-															<option value="Tidak memiliki Pendidikan Formal">Tidak Berpenghasilan</option>
+															<option value="Tidak Berpenghasilan Tetap">Tidak Berpenghasilan Tetap</option>
 															<option value="< Rp. 500.000">< Rp. 500.000</option>
 															<option value="Rp. 500.000 - Rp. 1.000.000">Rp. 500.000 - Rp. 1.000.000</option>
 															<option value="Rp. 1.000.000 - Rp. 2.000.000">Rp. 1.000.000 - Rp. 2.000.000</option>

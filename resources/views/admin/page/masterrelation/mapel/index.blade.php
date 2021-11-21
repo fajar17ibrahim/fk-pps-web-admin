@@ -104,6 +104,7 @@
                                                 <th>Kode Mapel</th>
                                                 <th>Nama Mapel</th>
                                                 <th>Kelas</th>
+                                                <th>PPS</th>
                                                 <th>Ustadz</th>
                                                 <th width="10%">Aksi</th>
                                             </tr>

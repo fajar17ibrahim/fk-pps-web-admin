@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Session;
+use Session;  
+use URL;  
 use Illuminate\Http\Request;
 use App\Models\Address;
 use App\Models\Santri;
@@ -74,7 +75,7 @@ class AdminMasterSantriController extends Controller
             $santri->santri_home_status = $request['soSantriStatus'];
             $santri->santri_child_of = $request['inSantriAnakKe'];
             $santri->santri_last_school = $request['inSantriSchoolFrom'];
-            $santri->santri_class_start = $request['soLevelClass'];
+            $santri->santri_class_start = $request['soLevelClassStart'];
             $santri->santri_class_start_date = $request['inSantriJoinDate'];
             $santri->no_kk = $request['inAyahNoKK'];
             $santri->father_nik = $request['inAyahNoNIK'];
@@ -206,6 +207,95 @@ class AdminMasterSantriController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            //
+            $this->authorize('master-santri');
+
+            $user = Session::get('user');
+            $santri = Santri::find($id);
+
+            $santriPhoto = $request['inSantriPhoto'];
+            if ($santriPhoto) {
+                $photoName = $request['inSantriNISN'] . "_" . time().'.' . $request->inSantriPhoto->extension();
+                $request->inSantriPhoto->move(public_path('images'), $photoName);
+            } else {
+                if ($santri->santri_photo) {
+                    $photoName = $santri->santri_photo;
+                } else {
+                    $photoName = "avatar-santri.jpg";
+                }
+            }
+
+            $santri->santri_name = $request['inSantriName'];
+            $santri->santri_nism = $request['inSantriNISM'];
+            $santri->santri_nisn = $request['inSantriNISN'];
+            $santri->santri_gender = $request['soSantriGender'];
+            $santri->santri_born_place = $request['inSantriPlaceBorn'];
+            $santri->santri_born_date = $request['inSantriDateBorn'];
+            $santri->santri_religion = $request['inSantriReligion'];
+            $santri->santri_hobby = $request['inSantriHobi'];
+            $santri->santri_goal = $request['inSantriCita'];
+            $santri->santri_home_status = $request['soSantriStatus'];
+            $santri->santri_child_of = $request['inSantriAnakKe'];
+            $santri->santri_last_school = $request['inSantriSchoolFrom'];
+            $santri->santri_class_start = $request['soLevelClassStart'];
+            $santri->santri_class_start_date = $request['inSantriJoinDate'];
+            $santri->no_kk = $request['inAyahNoKK'];
+            $santri->father_nik = $request['inAyahNoNIK'];
+            $santri->father_name = $request['inAyahNama'];
+            $santri->father_profession = $request['soAyahJob'];
+            $santri->father_education = $request['soAyahEducation'];
+            $santri->father_phone = $request['inAyahPhone'];
+            $santri->father_salary = $request['soAyahSalery'];
+            $santri->mother_nik = $request['inIbuNoNIK'];
+            $santri->mother_name = $request['inIbuNama'];
+            $santri->mother_profession = $request['soIbuJob'];
+            $santri->mother_education = $request['soIbuEducation'];
+            $santri->mother_phone = $request['inIbuPhone'];
+            $santri->mother_salary = $request['soIbuSalery'];
+            $santri->wali_no_kk = $request['inWaliNoKK'];
+            $santri->wali_nik = $request['inWaliNoNIK'];
+            $santri->wali_name = $request['inWaliNama'];
+            $santri->wali_profession = $request['soWaliJob'];
+            $santri->wali_education = $request['soWaliEducation'];
+            $santri->wali_phone = $request['inWaliPhone'];
+            $santri->wali_salary = $request['soWaliSalery'];
+            $santri->santri_address = $request['inAddress'];
+            $santri->santri_village = $request['soVillage'];
+            $santri->santri_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $santri->santri_districts = $request['inDistrict'];
+            $santri->santri_city = $request['inKabOrCity'];
+            $santri->santri_province = $request['inProvince'];
+            $santri->santri_pos_code = $request['inPosCode'];
+            $santri->santri_country = $request['inCountry'];
+            $santri->santri_class = $request['soLevelClass'];
+            $santri->santri_school = $user[0]->school_npsn;
+            $santri->santri_status = 'Aktif';
+            $santri->santri_photo = $photoName;
+            $saveSantri = $santri->update();
+
+            $reportEquipment = ReportEquipment::where('santri_id', '=', $request['inSantriNISN'])
+                    ->first();
+
+            $reportEquipment->santri_id = $request['inSantriNISN'];
+            if ($reportEquipment) {
+                $saveEquipment = $reportEquipment->update();
+            } else {
+                $reportEquipment = new ReportEquipment;
+                $saveEquipment = $reportEquipment->save();
+            }
+    
+            if ($saveSantri && $saveEquipment) {
+                return redirect()->route('master-santri.index')
+                ->with('message_success', 'Santri berhasil disimpan.');
+            } else {
+                return redirect()->route('master-santri.index')
+                ->with('message_error', 'Santri gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('master-santri.index')
+            ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -219,12 +309,96 @@ class AdminMasterSantriController extends Controller
         //
     }
 
-    public function editSantri()
+    public function editSantri($id)
     {
         //
         $this->authorize('master-santri');
+
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+                foreach($kelassCheck as $kelas) {
+                    $data = array(
+                        'id' => $kelas->class_id,
+                        'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                    );
+
+                    $kelass[] = $data;
+                }
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+                foreach($kelassCheck as $kelas) {
+                    $data = array(
+                        'id' => $kelas->class_id,
+                        'name' => $kelas->class_name,
+                    );
+
+                    $kelass[] = $data;
+                }
+        }
+        $address = Address::get();
+
+        $santri = Santri::leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+                ->leftJoin('kelas', 'kelas.class_id', '=', 'santri.santri_class')
+                ->find($id);
+        $data = array(
+            'id' => $santri->santri_id,
+            'photo' => $santri->santri_photo,
+            'school' => $santri->school_name,
+            'nism' => $santri->santri_nism, 
+            'nisn' => $santri->santri_nisn, 
+            'name' => $santri->santri_name, 
+            'gender' => $santri->santri_gender, 
+            'tempat_lahir' => $santri->santri_born_place, 
+            'tanggal_lahir' => $santri->santri_born_date, 
+            'agama' => $santri->santri_religion, 
+            'hobi' => $santri->santri_hobby, 
+            'cita_cita' => $santri->santri_goal, 
+            'status_rumah' => $santri->santri_home_status, 
+            'anak_ke' => $santri->santri_child_of, 
+            'sekolah_asal' => $santri->santri_last_school, 
+            'diterima_di_kelas' => $santri->santri_class_start, 
+            'diterima_tangal' => $santri->santri_class_start_date,
+            'kelas_id' => $santri->class_id,  
+            'kelas' => $santri->class_name,  
+            'no_kk' => $santri->no_kk, 
+            'nik_ayah' => $santri->father_nik, 
+            'nama_ayah' => $santri->father_name, 
+            'pekerjaan_ayah' => $santri->father_profession, 
+            'pendidikan_ayah' => $santri->father_education, 
+            'telepon_ayah' => $santri->father_phone, 
+            'gaji_ayah' => $santri->father_salary, 
+            'nik_ibu' => $santri->mother_nik, 
+            'nama_ibu' => $santri->mother_name, 
+            'pekerjaan_ibu' => $santri->mother_profession, 
+            'pendidikan_ibu' => $santri->mother_education, 
+            'telepon_ibu' => $santri->mother_phone, 
+            'gaji_ibu' => $santri->mother_salary, 
+            'no_kk_wali' => $santri->wali_no_kk, 
+            'nik_wali' => $santri->wali_nik, 
+            'nama_wali' => $santri->wali_name, 
+            'pekerjaan_wali' => $santri->wali_profession, 
+            'pendidikan_wali' => $santri->wali_education, 
+            'telepon_wali' => $santri->wali_phone, 
+            'gaji_wali' => $santri->wali_salary, 
+            'alamat' => $santri->santri_address, 
+            'desa' => $santri->santri_village, 
+            'rt_rw' => $santri->santri_rt_rw, 
+            'kecamatan' => $santri->santri_districts, 
+            'kab_kota' => $santri->santri_city, 
+            'provinsi' => $santri->santri_province, 
+            'kode_pos' => $santri->santri_pos_code, 
+            'negara' => $santri->santri_country);
         
-        return view('admin.page.master.santri.santri-edit');
+        return view('admin.page.master.santri.santri-edit', compact('address'), compact('kelass'))
+            ->with('santri', $data);
     }
 
     public function addSantri()
@@ -234,11 +408,32 @@ class AdminMasterSantriController extends Controller
 
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
-            $kelass = Kelas::orderBy('class_name', 'asc')->get();
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+                foreach($kelassCheck as $kelas) {
+                    $data = array(
+                        'id' => $kelas->class_id,
+                        'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                    );
+
+                    $kelass[] = $data;
+                }
         } else {
-            $kelass = Kelas::orderBy('class_name', 'asc')
-            ->where('kelas.class_level', '=', $user[0]->class_level)
-            ->get();
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+                foreach($kelassCheck as $kelas) {
+                    $data = array(
+                        'id' => $kelas->class_id,
+                        'name' => $kelas->class_name,
+                    );
+
+                    $kelass[] = $data;
+                }
         }
         $address = Address::get();
         return view('admin.page.master.santri.santri-add', compact('address'), compact('kelass'));
@@ -323,11 +518,10 @@ class AdminMasterSantriController extends Controller
             $row[] = '<div class="d-flex align-items-center">
                             <img src="images/'. $santri->santri_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
                         </div>';
-            $row[] = $santri->santri_nism . "/" .$santri->santri_nisn;
+            $row[] = "NIS : " . $santri->santri_nism . "<br>NISN : " .$santri->santri_nisn;
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = $santri->santri_born_place;
-            $row[] = $santri->santri_born_date;
+            $row[] = $santri->santri_born_place . ",<br>" . tanggal($santri->santri_born_date);
             $row[] = '<div class="d-flex align-items-center text-success">	
                         <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
                         <span>Aktif</span>
@@ -338,10 +532,10 @@ class AdminMasterSantriController extends Controller
                             <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="master-santri-details?id='. $santri->santri_id.'">Details</a>
+                                <li><a class="dropdown-item" href="'. URL::to('/') .'/master-santri-details?id='. $santri->santri_id.'">Details</a>
                                 </li>
-                                <!-- <li><a class="dropdown-item" href="/master-santri-edit">Edit</a>
-                                </li> -->
+                                <li><a class="dropdown-item" href="'. URL::to('/') .'/master-santri-edit/'. $santri->santri_id.'">Edit</a>
+                                </li>
                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                 </li>
                                 <li><a class="dropdown-item" href="#">Nonaktif</a>

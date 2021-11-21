@@ -105,11 +105,10 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Foto</th>
-                                                <th>NISM / NISN</th>
+                                                <th>NIS / NISN</th>
                                                 <th>Nama Santri</th>
                                                 <th>Jenis Kelamin</th>
-                                                <th>Tempat Lahir</th>
-                                                <th>Tanggal Lahir</th>
+                                                <th>TTL</th>
                                                 <th>Status</th>
                                                 <th>Opsi</th>
                                             </tr>

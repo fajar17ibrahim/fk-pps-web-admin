@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Session;
 use Illuminate\Http\Request;
-use App\Models\Kelompokmapel;
-use App\Models\mapel;
+use App\Models\KelompokMapel;
+use App\Models\Mapel;
 
 class AdminMastermapelController extends Controller
 {

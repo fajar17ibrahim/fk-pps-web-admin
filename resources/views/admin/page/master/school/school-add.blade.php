@@ -132,7 +132,7 @@
 												<div class="row mb-3 position-relative">
 													<label for="soKepsek" class="col-sm-3 col-form-label">NIK Kepala Sekolah</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="soKepsek" class="form-control" list="datalistOptionsKepsek" id="soKepsek" placeholder="Cari NIK Kepala Sekolah..." required>
+														<input name="soKepsek" class="form-control" list="datalistOptionsKepsek" id="soKepsek" placeholder="Cari NIK Kepala Sekolah..." >
 														<div class="invalid-tooltip">Kepala Sekolah tidak boleh kosong</div>
 														<datalist id="datalistOptionsKepsek">
 														@foreach ($ustadzs as $ustadz)

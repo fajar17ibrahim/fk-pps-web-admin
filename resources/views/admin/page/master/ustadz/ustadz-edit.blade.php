@@ -190,17 +190,14 @@
 									</div>
 								</div>
 								<div class="row mb-3">
-									<label for="soLevelClass" class="col-sm-3 col-form-label">Di Kelas</label>
-									<div class="col-sm-3 text-secondary" >
+									<label for="soLevelClass" class="col-sm-3 col-form-label">Guru Kelas</label>
+									<div class="col-sm-9 text-secondary" >
 										<select name="soLevelClass" class="form-select form-control" id="soLevelClass">
+										<option value="{{ $ustadz->class_id }}">{{ $ustadz->class_name }}</option>
 										@foreach ($kelass as $kelas)
-											<option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+											<option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
 										@endforeach
 										</select>
-									</div>
-									<label for="inSantriJoinDate" class="col-sm-3 col-form-label">Tanggal Masuk</label>
-									<div class="col-sm-3 text-secondary">
-										<input name="inSantriJoinDate" type="date" id="inSantriJoinDate" class="form-control">
 									</div>
 								</div>
 							</div>

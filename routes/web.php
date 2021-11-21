@@ -80,7 +80,7 @@ Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::get('master-santri-add', [AdminMasterSantriController::class, 'addSantri'])->name('master-santri-add');
 
-    Route::get('master-santri-edit', [AdminMasterSantriController::class, 'editSantri'])->name('master-santri-edit');
+    Route::get('master-santri-edit/{id}', [AdminMasterSantriController::class, 'editSantri'])->name('master-santri-edit');
 
     Route::get('master-santri-details', [AdminMasterSantriController::class, 'detailsSantri'])->name('master-santri.details');
 

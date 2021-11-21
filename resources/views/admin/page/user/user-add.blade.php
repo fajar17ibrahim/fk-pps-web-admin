@@ -33,7 +33,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" name="soRole" id="soRole" tabindex="-1">
                                                                 @foreach ($roles as $role)
-                                                                <option value="{{ $role->id }}" @if ($role->id == 5) {{ "selected" }} @endif>{{ $role->role_name }}</option>
+                                                                <option value="{{ $role['role_id'] }}">{{ $role['name'] }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

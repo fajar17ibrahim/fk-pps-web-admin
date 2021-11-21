@@ -394,13 +394,57 @@ class AdminReportValueController extends Controller
         //
         $user = Session::get('user');
 
-        $kdKnowledges = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        $kdKnowledgesCheck = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
         ->orderBy('p_id', 'asc')->get();
+
+        $kdKnowledges = array();
+        if (count($kdKnowledgesCheck) > 0) {
+            foreach ($kdKnowledgesCheck as $kdKnowledge) {
+                $data = array(
+                    'kd_id' => $kdKnowledge->p_id,
+                    'kd_desc' => $kdKnowledge->desc
+                );
+
+                $kdKnowledges[] = $data; 
+            }
+        } else {
+            for ($i = 1; $i <= 10; $i++) {
+                $data = array(
+                    'kd_id' => $i,
+                    'kd_desc' => ''
+                );
+
+                $kdKnowledges[] = $data; 
+            }
+        }
 
         // return $kdKnowledges;   
 
-        $kdSkills = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        $kdSkillsCheck = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
         ->orderBy('k_id', 'asc')->get();
+
+        $kdSkills = array();
+        if (count($kdKnowledgesCheck) > 0) {
+            foreach ($kdSkillsCheck as $kdSkill) {
+                $data = array(
+                    'kd_id' => $kdSkill->k_id,
+                    'kd_desc' => $kdSkill->desc
+                );
+
+                $kdSkills[] = $data; 
+            }
+        } else {
+            for ($i = 1; $i <= 10; $i++) {
+                $data = array(
+                    'kd_id' => $i,
+                    'kd_desc' => ''
+                );
+
+                $kdSkills[] = $data; 
+            }
+        }
+
+        // return $kdSkills; 
 
         return view('admin.page.report.reportvalue.report-value-settings')
             ->with('kdKnowledges', $kdKnowledges)
@@ -438,43 +482,42 @@ class AdminReportValueController extends Controller
                     $request['inKDK10']
                 );
 
-            $kdKnowledges = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
-            ->orderBy('p_id', 'asc')->get();
-
-            if ($kdKnowledges) {
                 for ($i = 1 ; $i <=10; $i++) {
-                    $kdKnowledge = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+                    $kdKnowledgeCheck = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
                         ->where('p_id', '=', $i)
                         ->first();
 
-                        $kdKnowledge->desc = $kdp[$i-1];
-                        if ($kdKnowledge) {
-                            $kdKnowledge->update();
+                        if ($kdKnowledgeCheck) {
+                            $kdKnowledgeCheck->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdKnowledgeCheck->desc = $kdp[$i-1];
+                            $kdKnowledgeCheck->update();
                         } else {
+                            $kdKnowledge = new KDKnowledge;
                             $kdKnowledge->p_id = $i;
+                            $kdKnowledge->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdKnowledge->desc = $kdp[$i-1];
                             $kdKnowledge->save();                    
                         }
                 }
-            }
 
-            $kdSkills = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
-            ->orderBy('k_id', 'asc')->get();
-
-            if ($kdSkills) {
                 for ($i = 1 ; $i <=10; $i++) {
-                    $kdSkill = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+                    $kdSkillCheck = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
                         ->where('k_id', '=', $i)
                         ->first();
 
-                        $kdSkill->desc = $kdk[$i-1];
-                        if ($kdSkill) {
-                            $kdSkill->update();
+                        if ($kdSkillCheck) {
+                            $kdSkillCheck->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdSkillCheck->desc = $kdk[$i-1];
+                            $kdSkillCheck->update();
                         } else {
+                            $kdSkill = new KDSkills;
                             $kdSkill->k_id = $i;
+                            $kdSkill->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdSkill->desc = $kdk[$i-1];
                             $kdSkill->save();                    
                         }
+                
                 }
-            }
 
             return redirect()->route('report-value.index')
             ->with('message_success', 'Pengaturan berhasil disimpan.');

@@ -148,6 +148,7 @@ class AdminMasterRelationMapelController extends Controller
             if ($level != 0 && $school != 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $level)
                 ->where('kelas.class_school', '=', $school)
@@ -156,6 +157,7 @@ class AdminMasterRelationMapelController extends Controller
             } else if ($level != 0 && $school != 0 && $kelas == 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $level)
                 ->where('kelas.class_school', '=', $school)
@@ -163,6 +165,7 @@ class AdminMasterRelationMapelController extends Controller
             } else if ($level != 0 && $school == 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $level)
                 ->where('kelas.class_id', '=', $class)
@@ -170,6 +173,7 @@ class AdminMasterRelationMapelController extends Controller
             } else if ($level == 0 && $school != 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_school', '=', $school)
                 ->where('kelas.class_id', '=', $class)
@@ -177,30 +181,35 @@ class AdminMasterRelationMapelController extends Controller
             } else if ($level == 0 && $school == 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_id', '=', $class)
                 ->get();
             } else if ($level == 0 && $school != 0 && $kelas == 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_school', '=', $school)
                 ->get();
             } else if ($level != 0 && $school == 0 && $kelas == 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $level)
                 ->get();
             } else {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->get();
             }
         } else {
             $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $user[0]->class_level)
                 ->where('kelas.class_school', '=', $user[0]->ustadz_school)
@@ -216,6 +225,7 @@ class AdminMasterRelationMapelController extends Controller
             $row[] = $mapelTeacher->mapel_teacher_id;
             $row[] = $mapelTeacher->mapel_name;
             $row[] = $mapelTeacher->class_name;
+            $row[] = $mapelTeacher->school_name;
             $row[] = $mapelTeacher->ustadz_name;
             $row[] = '<div class="col">
                         <div class="btn-group">

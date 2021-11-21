@@ -9,7 +9,8 @@
                             </div>
                             <div class="ms-3">
                                 <h5 class="mb-0 text-dark">Perhatian!</h5>
-                                <div class="text-dark">Sebelum melakukan pengisian data Nilai pastikan pilih <b>Mapel</b> terlebih dahulu dan menekan tombol <b>Tampilkan Data</b></div>
+                                <div class="text-dark">1. Sebelum melakukan pengisian data Nilai pastikan pilih <b>Mapel</b> terlebih dahulu dan menekan tombol <b>Tampilkan Data</b>. 
+                                <br>2. Jika belum melakukan input <b>KD Pengetahuan dan Keterampilan</b> silahkan masuk ke menu <b>Pengaturan.</b></div>
                             </div>
                         </div>
                     </div>
@@ -111,7 +112,7 @@
                                                         <tbody>
                                                             @foreach ($kdKnowledges as $kdKnowledge)
                                                             <tr>
-                                                                <th name="thKnowledgeId" scope="row">P - {{ $kdKnowledge->p_id }}</th>
+                                                                <th width="15%" name="thKnowledgeId" scope="row">P - {{ $kdKnowledge->p_id }}</th>
                                                                 <td id="p{{ $kdKnowledge->p_id }}">{{ $kdKnowledge->desc }}</td>
                                                             </tr>
                                                             @endforeach
@@ -136,7 +137,7 @@
                                                         <tbody>
                                                             @foreach ($kdSkills as $kdSkill)
                                                             <tr>
-                                                                <th name="thSkillsId" scope="row">K - {{ $kdSkill->k_id }}</th>
+                                                                <th width="15%" name="thSkillsId" scope="row">K - {{ $kdSkill->k_id }}</th>
                                                                 <td id="k{{ $kdSkill->k_id }}" >{{ $kdSkill->desc }}</td>
                                                             </tr>
                                                             @endforeach

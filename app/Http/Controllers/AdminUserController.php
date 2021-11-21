@@ -23,7 +23,20 @@ class AdminUserController extends Controller
     {
         //
         $ustadzs = Ustadz::get();
-        $roles = Role::get();
+        $rolesCheck = Role::get();
+        $roles = array();
+        foreach ($rolesCheck as $role) {
+            if ($role->id > 1) {
+                $data = array(
+                    'role_id' => $role->id,
+                    'name' => roleName($role->role_name)
+                );
+                
+                $roles[] = $data;
+            }
+        }
+
+        // return $roles;
         return view('admin.page.user.index', compact('ustadzs'), compact('roles'));
     }
 
@@ -160,6 +173,7 @@ class AdminUserController extends Controller
             ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
             ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
             ->where('kelas.class_level', '=', $user[0]->class_level)
+            ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
             ->select('role_name', 'name', 'email', 'users.id', 'users.status')
             ->get();
         }
@@ -173,7 +187,7 @@ class AdminUserController extends Controller
             $row[] = $userData->id;
             $row[] = $userData->name;
             $row[] = $userData->email;
-            $row[] = $userData->role_name;
+            $row[] = roleName($userData->role_name);
             $row[] = '<div class="d-flex align-items-center text-success">	
                         <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
                         <span>' . $userData->status . '</span>
