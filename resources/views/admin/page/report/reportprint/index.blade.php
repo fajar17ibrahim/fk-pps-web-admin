@@ -98,9 +98,8 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>NSM / NISN</th>
+                                                <th>NIS / NISN</th>
                                                 <th>Nama Santri</th>
-                                                <th>Jenis Kelamin</th>
                                                 <th>Tanggal Download</th>
                                                 <th>Cetak Nilai UTS</th>
                                                 <th>Cetak Nilai UAS</th>

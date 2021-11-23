@@ -47,7 +47,7 @@
                                     <select class="single-select" name="soKelasFilter" id="soKelasFilter">
                                         <option value="0">Semua</option>
                                         @foreach ($kelass as $kelas)
-                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        <option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -63,8 +63,8 @@
                     @endif
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                            <h6 class="mb-0 text-uppercase">Daftar Mata Pelajaran</h6>   
-                            <button type="button" class="btn btn-warning px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addMapelTeacherModal"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Kelas</button>
+                            <h6 class="mb-0 text-uppercase">Daftar Guru Mapel</h6>   
+                            <button type="button" class="btn btn-warning px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addMapelTeacherModal"><i class='bx bx-plus-circle mr-1'></i>Tambah Guru Mapel</button>
                             @include('admin/page/masterrelation/mapel/mapel-relation-add')
                         </div>
                         <div class="card">
@@ -143,7 +143,7 @@
                         $.ajax({
                             url: "master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                alert(response  );
+                                // alert(response  );
                                 table.ajax.url("master-relation-mapel/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {

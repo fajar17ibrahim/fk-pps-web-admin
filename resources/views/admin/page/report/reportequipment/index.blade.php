@@ -73,9 +73,8 @@
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>NSM / NISN</th>
+												<th>NIS / NISN</th>
 												<th>Nama Santri</th>
-												<th>Jenis Kelamin</th>
 												<th>Tanggal Download</th>
 												<th>Link Download</th>
 												<th>Aksi</th>

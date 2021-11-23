@@ -18,9 +18,57 @@ class AdminMasterRelationClassController extends Controller
     public function index()
     {
         //
+        $user = Session::get('user');
+
+        $kelass = array();
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+
+            $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')->get();
+            
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+
+            $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')
+                ->where('ustadz_class', '=', $user[0]->ustadz_class)
+                ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                ->get();
+        }
+
+        $ustadzs = array();
+        foreach($ustadzsCheck as $ustadz) {
+            $data = array(
+                'nik' => $ustadz->ustadz_nik,
+                'name' =>  $ustadz->ustadz_name . ' - ' . $ustadz->ustadz_nik,
+            );
+
+            $ustadzs[] = $data;
+        }
+        
         $schools = School::orderBy('school_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
-        $ustadzs = Ustadz::orderBy('ustadz_name', 'asc')->get();
         return view('admin.page.masterrelation.class.index', compact('schools'), compact('kelass'))
             ->with('ustadzs', $ustadzs);
     }
@@ -55,11 +103,20 @@ class AdminMasterRelationClassController extends Controller
     public function show($id)
     {
         //
+        
         $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
         ->find($id);
+
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $name = $kelas->school_name . ' - ' . $kelas->class_name;
+        } else {
+            $name = $kelas->class_name;
+        }
+
         $data = array(
             'id' => $kelas->class_id, 
-            'name' => $kelas->class_name,
+            'name' => $name,
             'wali' => $kelas->homeroom_teacher);
         return json_encode($data);
     }
@@ -153,7 +210,7 @@ class AdminMasterRelationClassController extends Controller
             ->get();
             
         }
-        
+
         $no = 0;
         $data = array();
         foreach ($kelass as $kelas) {

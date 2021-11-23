@@ -159,9 +159,8 @@ class AdminReportPrintController extends Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $report_print->santri_nism . " / " . $report_print->santri_nisn;
+            $row[] = "NIS : " . $report_print->santri_nism . "<br>NISN :  " . $report_print->santri_nisn;
             $row[] = $report_print->santri_name;
-            $row[] = $report_print->santri_gender;
             $row[] = $report_print->report_print_date_download;
             $row[] = '<a href="report-uts-print-pdf/' . $report_print->report_id . '">rapor-uts.pdf</a>';
             $row[] = '<a href="/report-uas-print-pdf/' . $report_print->report_id . '">rapor-uas.pdf</a>';

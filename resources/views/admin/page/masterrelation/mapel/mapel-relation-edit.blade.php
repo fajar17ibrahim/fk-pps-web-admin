@@ -25,7 +25,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select name="soKelasEdit" class="form-select form-control" id="soKelasEdit">
                                                                 @foreach ($kelass as $kelas)
-                                                                <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                                                <option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -35,7 +35,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select name="soUstadzEdit" class="form-select form-control" id="soUstadzEdit" tabindex="-1">
                                                                 @foreach ($ustadzs as $ustadz)
-                                                                <option value="{{ $ustadz->ustadz_nik }}">{{ $ustadz->ustadz_name }}</option>
+                                                                <option value="{{ $ustadz['nik'] }}">{{ $ustadz['name'] }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

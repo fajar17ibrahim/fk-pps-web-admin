@@ -157,9 +157,8 @@ class AdminReportEquipmentController extends Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $equipment->santri_nism . " / " . $equipment->santri_nisn;
+            $row[] = "NIS : " . $equipment->santri_nism . "<br>NISN :  " . $equipment->santri_nisn;
             $row[] = $equipment->santri_name;
-            $row[] = $equipment->santri_gender;
             $row[] = $equipment->equipment_date_download;
             $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $equipment->equipment_id . ')">Pelengkap Rapor</button>';
             $row[] = '<input type="button" class="btn btn-danger" value="Blok" />';

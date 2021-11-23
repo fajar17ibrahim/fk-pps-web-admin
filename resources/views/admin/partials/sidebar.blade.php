@@ -69,9 +69,9 @@
                 <li> <a href="{{ URL::to('/') }}/master-class"><i class="bx bx-right-arrow-alt"></i>Kelas</a>
                 </li>
                 @endif
+                @if(Session::get('user')[0]['role_id'] == 1)
                 <li> <a href="{{ URL::to('/') }}/master-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
                 </li>
-                @if(Session::get('user')[0]['role_id'] == 1)
                 <li> <a href="{{ URL::to('/') }}/master-school"><i class="bx bx-right-arrow-alt"></i>PKPPS</a>
                 </li>
                 <li> <a href="{{ URL::to('/') }}/master-semester"><i class="bx bx-right-arrow-alt"></i>Semester</a>

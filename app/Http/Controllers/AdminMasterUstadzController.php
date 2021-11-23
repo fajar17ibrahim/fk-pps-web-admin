@@ -59,8 +59,17 @@ class AdminMasterUstadzController extends Controller
             } else {
                 $photoName = "avatar.png";
             }
-            $ustadz = new Ustadz;
-            $ustadz->ustadz_nik = $request['inUstadzNIK'];
+
+            $nik = $request['inUstadzNIK'];;
+            $ustadzCheck = Ustadz::where('ustadz_nik', '=', $nik)->first();
+            
+            if ($ustadzCheck) {
+                $ustadz = $ustadzCheck;
+            } else {
+                $ustadz = new Ustadz;
+            }
+            
+            $ustadz->ustadz_nik = $nikl;
             $ustadz->ustadz_name = $request['inUstadzName'];
             $ustadz->ustadz_born_place = $request['inUstadzPlaceBorn'];
             $ustadz->ustadz_born_date = $request['inUstadzDateBorn'];
@@ -87,8 +96,13 @@ class AdminMasterUstadzController extends Controller
             $ustadz->ustadz_class = $request['soLevelClass'];
             $ustadz->status = 'Aktif';
             $ustadz->ustadz_photo = $photoName;
-            $saveUstadz = $ustadz->save();
-    
+
+            if ($ustadzCheck) {
+                $saveUstadz = $ustadz->update();
+            } else {
+                $saveUstadz = $ustadz->save();
+            }
+            
             if ($saveUstadz) {
                 return redirect()->route('master-ustadz.index')
                 ->with('message_success', 'Ustadz berhasil disimpan.');

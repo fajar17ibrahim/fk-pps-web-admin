@@ -20,10 +20,59 @@ class AdminMasterRelationMapelController extends Controller
     public function index()
     {
         //
+        $user = Session::get('user');
+        $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')->get();
+
+        $kelass = array();
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+
+            $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')->get();
+            
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+
+            $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')
+                ->where('ustadz_class', '=', $user[0]->ustadz_class)
+                ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                ->get();
+        }
+
+        $ustadzs = array();
+        foreach($ustadzsCheck as $ustadz) {
+            $data = array(
+                'nik' => $ustadz->ustadz_nik,
+                'name' =>  $ustadz->ustadz_name . ' - ' . $ustadz->ustadz_nik,
+            );
+
+            $ustadzs[] = $data;
+        }
+        
         $schools = School::orderBy('school_name', 'asc')->get();
         $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
-        $ustadzs = Ustadz::orderBy('ustadz_name', 'asc')->get();
         return view('admin.page.masterrelation.mapel.index', compact('mapels'), compact('kelass'))
         ->with('schools', $schools)
         ->with('ustadzs', $ustadzs);
@@ -50,11 +99,30 @@ class AdminMasterRelationMapelController extends Controller
         //
         try {
             //
-            $mapelTeacher = new MapelTeacher;
-            $mapelTeacher->mapel_id = $request['soMapel'];
-            $mapelTeacher->class_id = $request['soKelas'];
-            $mapelTeacher->ustadz_nik = $request['soUstadz'];
-            $saved = $mapelTeacher->save();
+
+            $mapel = $request['soMapel'];
+            $kelas = $request['soKelas'];
+            $ustadz = $request['soUstadz'];
+            $mapelTeacherCheck = MapelTeacher::where('mapel_id', '=', $mapel)
+                    ->where('class_id', '=', $kelas)
+                    ->where('ustadz_nik', '=', $ustadz)
+                    ->first();
+
+            if ($mapelTeacherCheck) {
+                $mapelTeacher = $mapelTeacherCheck;
+            } else {
+                $mapelTeacher = new MapelTeacher;
+            }
+
+            $mapelTeacher->mapel_id = $mapel;
+            $mapelTeacher->class_id = $kelas;
+            $mapelTeacher->ustadz_nik = $ustadz;
+
+            if ($mapelTeacherCheck) {
+                $saved = $mapelTeacher->update();
+            } else {
+                $saved = $mapelTeacher->save();
+            }
     
             if ($saved) {
                 return redirect()->route('master-relation-mapel.index')
@@ -152,7 +220,7 @@ class AdminMasterRelationMapelController extends Controller
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $level)
                 ->where('kelas.class_school', '=', $school)
-                ->where('kelas.class_id', '=', $class)
+                ->where('kelas.class_id', '=', $kelas)
                 ->get();
             } else if ($level != 0 && $school != 0 && $kelas == 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
@@ -168,7 +236,7 @@ class AdminMasterRelationMapelController extends Controller
                 ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_level', '=', $level)
-                ->where('kelas.class_id', '=', $class)
+                ->where('kelas.class_id', '=', $kelas)
                 ->get();
             } else if ($level == 0 && $school != 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
@@ -176,14 +244,14 @@ class AdminMasterRelationMapelController extends Controller
                 ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
                 ->where('kelas.class_school', '=', $school)
-                ->where('kelas.class_id', '=', $class)
+                ->where('kelas.class_id', '=', $kelas)
                 ->get();
             } else if ($level == 0 && $school == 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_npsn')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
-                ->where('kelas.class_id', '=', $class)
+                ->where('kelas.class_id', '=', $kelas)
                 ->get();
             } else if ($level == 0 && $school != 0 && $kelas == 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')

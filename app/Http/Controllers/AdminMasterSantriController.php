@@ -62,10 +62,23 @@ class AdminMasterSantriController extends Controller
             }
 
             $user = Session::get('user');
-            $santri = new Santri;
+
+            $nisn = $request['inSantriNISN'];
+            $nism = $request['inSantriNISM'];
+
+            $santriCheck = Santri::where('santri_nism', '=', $nism)
+                    ->where('santri_nisn', '=', $nisn)
+                    ->first();
+
+            if ($santriCheck) {
+                $santri = $santriCheck;
+            } else {
+                $santri = new Santri;
+            } 
+            
             $santri->santri_name = $request['inSantriName'];
-            $santri->santri_nism = $request['inSantriNISM'];
-            $santri->santri_nisn = $request['inSantriNISN'];
+            $santri->santri_nism = $nism;
+            $santri->santri_nisn = $nisn;
             $santri->santri_gender = $request['soSantriGender'];
             $santri->santri_born_place = $request['inSantriPlaceBorn'];
             $santri->santri_born_date = $request['inSantriDateBorn'];
@@ -109,11 +122,23 @@ class AdminMasterSantriController extends Controller
             $santri->santri_school = $user[0]->school_npsn;
             $santri->santri_status = 'Aktif';
             $santri->santri_photo = $photoName;
-            $saveSantri = $santri->save();
 
-            $reportEquipment = new ReportEquipment;
-            $reportEquipment->santri_id = $request['inSantriNISN'];
-            $saveEquipment = $reportEquipment->save();
+            if ($santriCheck) {
+                $saveSantri = $santri->update();
+            } else {
+                $saveSantri = $santri->save();
+            } 
+
+            $reportEquipmentCheck = ReportEquipment::where('santri_id', '=', $nisn)->first();
+
+            if ($reportEquipmentCheck) {
+                $reportEquipmentCheck->santri_id = $nisn;
+                $saveEquipment = $reportEquipmentCheck->update();
+            } else {
+                $reportEquipment = new ReportEquipment;
+                $reportEquipment->santri_id = $nisn;
+                $saveEquipment = $reportEquipment->save();
+            }
     
             if ($saveSantri && $saveEquipment) {
                 return redirect()->route('master-santri.index')

@@ -11,7 +11,7 @@
 										<div class="widgets-icons rounded-circle mx-auto bg-white text-danger mb-3"><i class='lni lni-book'></i>
 										</div>
 										<h4 class="my-1 text-white">Nilai Rapor</h4>
-										<p class="mb-0 text-white">Nilai Rapor UTS dan UAS</p>
+										<p class="mb-0 text-white">UTS dan UAS</p>
 									</div>
 								</div>
 							</div>
@@ -68,7 +68,7 @@
 										<div class="widgets-icons rounded-circle mx-auto bg-whte text-primary mb-3"><i class='lni lni-cup'></i>
 										</div>
 										<h4 class="my-1 text-white">Prestasi</h4>
-										<p class="mb-0 text-white">Nilai Lomba dan Prestasi</p>
+										<p class="mb-0 text-white">Lomba dan Prestasi</p>
 									</div>
 								</div>
 							</div>
