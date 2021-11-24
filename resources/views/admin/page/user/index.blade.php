@@ -85,7 +85,7 @@
                     {				
                         email = $(this).val();
                         $.ajax({
-                            url: "user/search/" + email,
+                            url: "{{ URL::to('/') }}/user/search/" + email,
                             dataType: "JSON",
                             success: function(response){
                                 $('#addUserModal').modal('show');
@@ -100,9 +100,9 @@
 
                     // Form Edit User
                     function editForm($id) {
-                        url = "user/" + $id;
+                        url = "{{ URL::to('/') }}/user/" + $id;
                         $.ajax({
-                            url: "user/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/user/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

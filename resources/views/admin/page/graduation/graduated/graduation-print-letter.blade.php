@@ -120,7 +120,7 @@
                                 <table class="borderless align-center" style="width:80%;">
                                     <tbody>
                                         <tr>
-                                        <td style="width: 65%"></td>
+                                        <td style="width: 60%"></td>
                                             <td>
                                                 {{ trim(strstr($data['pps_kota'], " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                                 Kepala<br><br><br><br><br><br>

@@ -491,13 +491,13 @@
                     {				
                         var id = $(this).val();
                         $.ajax({
-                            url: "master-santri-add/search/" + id,
+                            url: "{{ URL::to('/') }}/master-santri-add/search/" + id,
                             dataType: "JSON",
                             success: function(response){
 								$('#inAddressId').val(response[0].address_id);
 								$('#soVillage').val(response[0].address_village);
                                 $('#inDistrict').val(response[0].address_districts);
-                                $('#inKabOrCity').val(response[0].address_kab_or_city_name);
+                                $('#inKabOrCity').val(response[0].address_kab_or_city + " " + response[0].address_kab_or_city_name);
 								$('#inProvince').val(response[0].address_province);
 								$('#inPosCode').val(response[0].address_pos_code);
                             } ,
