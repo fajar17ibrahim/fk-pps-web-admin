@@ -60,6 +60,8 @@ Route::middleware(['verify', 'verified'])->group(function () {
     
     Route::get('graduation-add', [AdminGraduationController::class, 'graduationAdd'])->name('graduation-add');
         
+    Route::get('graduation-edit/{id}', [AdminGraduationController::class, 'graduationEdit'])->name('graduation-edit');
+        
     Route::get('graduation-print-letter/{id}', [AdminGraduationController::class, 'graduationPrintLetter'])->name('graduation-print-letter');
        
     // Mutation
@@ -68,8 +70,10 @@ Route::middleware(['verify', 'verified'])->group(function () {
     Route::get('mutation/data/{level}/{school}', [AdminMutationController::class, 'listData'])->name('mutation.data');
     
     Route::get('mutation-add', [AdminMutationController::class, 'mutationAdd'])->name('mutation-add');
+    
+    Route::get('mutation-edit/{id}', [AdminMutationController::class, 'mutationEdit'])->name('mutation-edit');
         
-    Route::get('mutation-print-letter', [AdminMutationController::class, 'mutationPrintLetter'])->name('mutation-print-letter');
+    Route::get('mutation-print-letter/{id}', [AdminMutationController::class, 'mutationPrintLetter'])->name('mutation-print-letter');
         
     // Santri
     Route::get('master-santri/data/{level}/{school}/{kelas}', [AdminMasterSantriController::class, 'listData'])->name('master-santri.data');

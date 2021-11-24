@@ -37,7 +37,7 @@
 								<div class="d-flex align-items-center">
 									<div>
 										<p class="mb-0 text-secondary">Total Pengajar</p>
-										<h4 class="my-1">{{ $ustadzs }} Ustadz / Ustadzah</h4>
+										<h4 class="my-1">{{ $ustadzs }} Ustadz(ah)</h4>
 									</div>
 									<div class="widgets-icons bg-light-primary text-primary ms-auto"><i class='lni lni-users'></i>
 									</div>

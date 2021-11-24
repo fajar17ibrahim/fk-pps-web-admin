@@ -240,8 +240,10 @@ class AdminMasterSantriController extends Controller
             $santri = Santri::find($id);
 
             $santriPhoto = $request['inSantriPhoto'];
+            $santriNISN = $request['inSantriNISN'];
+
             if ($santriPhoto) {
-                $photoName = $request['inSantriNISN'] . "_" . time().'.' . $request->inSantriPhoto->extension();
+                $photoName = $santriNISN . "_" . time().'.' . $request->inSantriPhoto->extension();
                 $request->inSantriPhoto->move(public_path('images'), $photoName);
             } else {
                 if ($santri->santri_photo) {
@@ -253,7 +255,7 @@ class AdminMasterSantriController extends Controller
 
             $santri->santri_name = $request['inSantriName'];
             $santri->santri_nism = $request['inSantriNISM'];
-            $santri->santri_nisn = $request['inSantriNISN'];
+            $santri->santri_nisn = $santriNISN;
             $santri->santri_gender = $request['soSantriGender'];
             $santri->santri_born_place = $request['inSantriPlaceBorn'];
             $santri->santri_born_date = $request['inSantriDateBorn'];
@@ -299,14 +301,15 @@ class AdminMasterSantriController extends Controller
             $santri->santri_photo = $photoName;
             $saveSantri = $santri->update();
 
-            $reportEquipment = ReportEquipment::where('santri_id', '=', $request['inSantriNISN'])
+            $reportEquipment = ReportEquipment::where('santri_id', '=', $santriNISN)
                     ->first();
 
-            $reportEquipment->santri_id = $request['inSantriNISN'];
             if ($reportEquipment) {
+                $reportEquipment->santri_id = $santriNISN;
                 $saveEquipment = $reportEquipment->update();
             } else {
                 $reportEquipment = new ReportEquipment;
+                $reportEquipment->santri_id = $santriNISN;
                 $saveEquipment = $reportEquipment->save();
             }
     

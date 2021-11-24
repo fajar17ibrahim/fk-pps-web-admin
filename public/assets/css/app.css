@@ -1300,7 +1300,7 @@ a {
 	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important
 }
 .bg-login {
-	background-image: url(../images/login-images/bg-login-img.jpg);
+	background-image: url(../images/login-images/bg-login.jpg);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;

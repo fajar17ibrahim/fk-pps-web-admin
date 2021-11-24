@@ -52,26 +52,48 @@
                     @endif
 					<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 						<h6 class="mb-0 text-uppercase">Data Mutasi Santri</h6>
-						<a class="ms-auto" href="/mutation-add"> 
+						<a class="ms-auto" href="{{ URL::to('/') }}/mutation-add"> 
                                 <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Mutasi</button>
 						</a>
 					</div>
 					<div class="card">
 						<div class="card-body">
+                            @if(Session::has('message_success'))
+                                <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-white">Berhasil</h6>
+                                            <div class="text-white">{{ Session::get('message_success') }}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+                            @if(Session::has('message_error'))
+                                <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 text-white">Gagal!</h6>
+                                            <div class="text-white">{{ Session::get('message_error') }}</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
 							<div class="table-responsive">
 								<table id="dataTable" class="table table-striped table-borderless " style="width:100%">
 									<thead>
 										<tr>
 											<th>No</th>
-											<th>NSM / NPSN</th>
+											<th>NIS</th>
 											<th>Nama Santri</th>
-											<th>L/P</th>
-											<th>Sekolah Asal</th>
-											<th>Sekolah Tujuan</th>
 											<th>Melanjutkan / Tidak</th>
-											<th>Alasan Tidak Melanjutkan</th>
 											<th>Surat Mutasi</th>
-											<th>Opsi</th>
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>

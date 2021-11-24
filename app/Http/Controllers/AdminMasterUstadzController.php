@@ -69,7 +69,7 @@ class AdminMasterUstadzController extends Controller
                 $ustadz = new Ustadz;
             }
             
-            $ustadz->ustadz_nik = $nikl;
+            $ustadz->ustadz_nik = $nik;
             $ustadz->ustadz_name = $request['inUstadzName'];
             $ustadz->ustadz_born_place = $request['inUstadzPlaceBorn'];
             $ustadz->ustadz_born_date = $request['inUstadzDateBorn'];

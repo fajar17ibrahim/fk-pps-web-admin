@@ -75,10 +75,10 @@ class AdminGraduationController extends Controller
 
             $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
-                ->where('school.school_npsn', '=', $user[0]->ustadz_school)
                 ->where('santri.santri_nisn', '=', $satriNISN)
                 ->first();
+
+                // return $santri;
 
             $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
 
@@ -186,6 +186,71 @@ class AdminGraduationController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            $user = Session::get('user');
+            $satriNISN = $request['soSantri'];
+
+            $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('santri.santri_nisn', '=', $satriNISN)
+                ->first();
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+
+            $graduation = Graduation::find($id);
+            $graduation->test_number = $request['inTaskNumber'];
+            $graduation->graduation_santri = $satriNISN;
+            $graduation->graduation_class = $request['soKelas'];
+            $graduation->graduation_school = $santri->santri_school;
+            $graduation->graduated_statement = $request['rbLulusTidak'];
+            $graduation->graduated_year = $request['inGraduatedYear'];
+            $graduation->tahun_pelajaran = $schoolYear->tahun_pelajaran_id;
+            $graduation->continue_statement = $request['rbMelanjutkanTidak'];
+            $graduation->reason = $request['inTidakMelanjutkNReason'];
+            $graduation->continue_to = $request['soJenjangTujuan'];
+            $graduation->continue_to_school_status = $request['soStatusSekolahTujuan'];
+            $graduationSaved = $graduation->update();
+            
+            $mapelIds = $request['inMapelId'];
+            $nuss = $request['inNUS'];
+            foreach ($mapelIds as $index => $mapelId) {
+                $reportValueLastCheck = ReportValueLast::where('mapel_id', '=', $mapelId)
+                ->where('class_id', '=', $santri->santri_class)
+                ->where('santri_nisn','=', $satriNISN)
+                ->first();
+
+                if (!$reportValueLastCheck) {
+                    $reportValueLast = new ReportValueLast;
+                } else {
+                    $reportValueLast = $reportValueLastCheck;
+                }
+
+                $reportValueLast->mapel_id = $mapelId;
+                $reportValueLast->class_id = $santri->santri_class;
+                $reportValueLast->santri_nisn = $satriNISN;
+                $reportValueLast->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                $reportValueLast->graduated_year = $request['inGraduatedYear'];
+                $reportValueLast->nus = $nuss[$index];
+
+                if (!$reportValueLastCheck) {
+                    $reportValueLastSaved = $reportValueLast->save();
+                } else {
+                    $reportValueLastSaved = $reportValueLast->update();
+                }
+                
+            }
+
+            if ($graduationSaved && $reportValueLastSaved) {
+                return redirect()->route('graduation.index')
+                ->with('message_success', 'Data berhasil diperbarui.');
+            } else {
+                return redirect()->route('graduation.index')
+                ->with('message_error', 'Data gagal diperbarui.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('graduation.index')
+            ->with('message_error', $e->getMessage());
+        }
     }
 
     /**
@@ -216,6 +281,128 @@ class AdminGraduationController extends Controller
 
         $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
         return view('admin.page.graduation.graduated.graduation-add', compact('santris'), compact('mapels'));
+    }
+
+    public function graduationEdit($id)
+    {
+        //
+        $user = Session::get('user');
+        $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')->get();
+
+        $kelass = array();
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+
+            $santris = Santri::orderBy('santri_name', 'asc')->get();
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+                ->get();
+        }
+
+        $graduationCheck = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','graduation.tahun_pelajaran')
+            ->leftJoin('school','school.school_npsn','=','graduation.graduation_school')
+            ->where('graduation.graduation_id', '=', $id)
+            ->first();
+
+        if (!$graduationCheck) {
+            return redirect()->route('graduation.index')
+            ->with('message_error', 'Data tidak ditemukan.');
+        }
+
+        $reportValuesLasts = ReportValueLast::leftJoin('mapel','mapel.mapel_id','=','report_value_last.mapel_id')
+            ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
+            ->where('report_value_last.class_id', '=', $graduationCheck->graduation_class)
+            ->where('report_value_last.tahun_pelajaran_id', '=', $graduationCheck->tahun_pelajaran_id)
+            ->where('report_value_last.graduated_year', '=', $graduationCheck->graduated_year)
+            ->where('report_value_last.santri_nisn', '=', $graduationCheck->santri_nisn)
+            ->get();
+
+        if (count($reportValuesLasts) == 0) {
+            return redirect()->route('graduation.index')
+            ->with('message_error', 'Nilai Akhir belum di input.');
+        }
+
+        $lastValue = array();
+        foreach($reportValuesLasts as $reportValuesLast) {
+            $data = array(
+                'mapel_kode' => $reportValuesLast->mapel_id,
+                'mapel_nama' => $reportValuesLast->mapel_name,
+                'nus' => $reportValuesLast->nus
+            );
+
+            $lastValue[] = $data;
+        }
+
+        $lulus = '';
+        $tidak = '';
+        if ($graduationCheck->graduated_statement == 'Lulus') {
+            $lulus = 'checked';
+        } else {
+            $tidak = 'checked';
+        }
+
+        $melanjutkan = '';
+        $tidak_melanjutkan = '';
+        if ($graduationCheck->continue_statement == 'Melanjutkan') {
+            $melanjutkan = 'checked';
+        } else {
+            $tidak_melanjutkan = 'checked';
+        }
+
+        $graduation = array(
+            'id' => $graduationCheck->graduation_id,
+            'nisn' => $graduationCheck->santri_nisn,
+            'santri_nama' => $graduationCheck->santri_nisn . " - " . $graduationCheck->santri_name,
+            'kelas_jenjang' => $graduationCheck->class_level,
+            'kelas_kode' => $graduationCheck->class_id,
+            'kelas_nama' => $graduationCheck->class_name,
+            'lulus' => $lulus,
+            'tidak' => $tidak,
+            'lulus_tahun' => $graduationCheck->graduated_year,
+            'nomor_ujian' => $graduationCheck->test_number,
+            'melanjutkan' => $melanjutkan,
+            'melanjutkan_tidak' => $tidak_melanjutkan,
+            'alasan' => $graduationCheck->reason,
+            'sekolah_dest_level' => $graduationCheck->continue_to,
+            'sekolah_dest_status' => $graduationCheck->continue_to_school_status,
+            'nilai_akhir' => $lastValue
+        );
+
+        // return $graduation;
+
+        return view('admin.page.graduation.graduated.graduation-edit', compact('santris'))
+            ->with('graduation', $graduation)
+            ->with('kelass', $kelass);
     }
 
     public function graduationPrintLetter($id) {
@@ -283,8 +470,7 @@ class AdminGraduationController extends Controller
                 'tahun_pelajaran' => $graduation->tahun_pelajaran_name,
                 'nomor_ujian' => $graduation->test_number,
                 'santri_nama' => $graduation->santri_name,
-                'santri_ttl' => $graduation->graduation_born_place . ", " . tanggal($graduation->santri_born_date),
-                'santri_nama' => $graduation->father_name,
+                'santri_ttl' => $graduation->santri_born_place . ", " . tanggal($graduation->santri_born_date),
                 'santri_nism' => $graduation->santri_nism,
                 'santri_nisn' => $graduation->santri_nisn,
                 'santri_lulus' => $graduation->graduated_statement,
@@ -334,21 +520,17 @@ class AdminGraduationController extends Controller
             $row[] = $no;
             $row[] = $graduation->santri_nisn;
             $row[] = $graduation->santri_name;  
-            $row[] = $graduation->santri_gender;
-            $row[] = $graduation->class_level;
-            $row[] = '<span class="badge bg-warning text-dark">'. $graduation->graduated_statement .'</span>';
+            if ($graduation->graduated_statement == 'Lulus') {
+                $label = 'success';
+            } else {
+                $label = 'danger';
+            }
+            $row[] = '<span class="badge bg-'. $label .'">'. $graduation->graduated_statement .'</span>';
             $row[] = $graduation->graduated_year;
             $row[] = '<a href="graduation-print-letter/'. $graduation->graduation_id .'">Cetak</a>';
             $row[] = '<div class="col">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success">Aksi</button>
-                            <button type="button" class="btn btn-success split-bg-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"><span class="visually-hidden">Toggle Dropdown</span></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="graduation-edit/'. $graduation->graduation_id .'">Edit</a>
-                                </li>
-                                <li><a class="dropdown-item" href="graduation-details/'. $graduation->graduation_id .'">Details</a>
-                                </li>
-                            </ul>
+                            <a href="graduation-edit/'. $graduation->graduation_id .'" class="btn btn-success px-4 ms-auto"><i class="bx bx-edit"></i>Edit</a>
                         </div>
                     </div>';
             $data[] = $row;

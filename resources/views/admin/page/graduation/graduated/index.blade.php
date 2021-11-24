@@ -52,7 +52,7 @@
                     @endif
 					<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
 						<h6 class="mb-0 text-uppercase">Data Lulusan</h6>
-						<a class="ms-auto" href="/graduation-add"> 
+						<a class="ms-auto" href="{{ URL::to('/') }}/graduation-add"> 
                                 <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Kelulusan</button>
 						</a>
 					</div>
@@ -91,12 +91,10 @@
 											<th>No</th>
 											<th>NISN</th>
 											<th>Nama Santri</th>
-											<th>Jenis Kelamin</th>
-											<th>Jenjang</th>
-											<th>Lulus / Tidak Lulus</th>
+											<th>Keterangan</th>
 											<th>Tahun Lulus</th>
 											<th>Surat Kelulusan</th>
-											<th>Opsi</th>
+											<th>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
