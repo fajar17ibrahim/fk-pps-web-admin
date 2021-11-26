@@ -50,7 +50,7 @@
                                     <select class="single-select" name="soKelasFilter" id="soKelasFilter">
                                         <option value="0">Semua</option>
                                         @foreach ($kelass as $kelas)
-                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        <option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -71,13 +71,39 @@
 						<br>
 						<div class="card">
 							<div class="card-body">
+                            @if(Session::has('message_success'))
+                                    <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Berhasil</h6>
+                                                <div class="text-white">{{ Session::get('message_success') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                @if(Session::has('message_error'))
+                                    <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <h6 class="mb-0 text-white">Gagal!</h6>
+                                                <div class="text-white">{{ Session::get('message_error') }}</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
 								@include('admin/page/masterbook/masterbook-page-list')
 								<div class="table-responsive">
 									<table id="dataTable" class="table table-striped table-borderless " style="width:100%">
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>NSM / NISN</th>
+												<th>NIS / NISN</th>
 												<th>Nama Santri</th>
 												<th>Jenis Kelamin</th>
 												<th>Tanggal Download</th>

@@ -77,7 +77,7 @@
                                             <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
                                             </div>
                                             <div class="ms-3">
-                                                <h6 class="mb-0 text-white">Berhasil Update Data</h6>
+                                                <h6 class="mb-0 text-white">Berhasil</h6>
                                                 <div class="text-white">{{ Session::get('message_success') }}</div>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                             <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
                                             </div>
                                             <div class="ms-3">
-                                                <h6 class="mb-0 text-white">Gagal Update Data!</h6>
+                                                <h6 class="mb-0 text-white">Gagal!</h6>
                                                 <div class="text-white">{{ Session::get('message_error') }}</div>
                                             </div>
                                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use Session;
 use Illuminate\Http\Request;
 use App\Models\MasterBook;
 use App\Models\Santri;
@@ -24,7 +25,36 @@ class AdminMasterBookController extends Controller
     {
         //
         $schools = School::orderBy('school_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        $user = Session::get('user');
+        $kelass = array();
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+        }
         return view('admin.page.masterbook.index', compact('schools'), compact('kelass'));
     }
 
@@ -188,7 +218,6 @@ class AdminMasterBookController extends Controller
     public function masterbookReport($id)
     {
         //
-
         $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
@@ -221,50 +250,69 @@ class AdminMasterBookController extends Controller
 
             // return $reportValues;
 
+            if (count($reportValues) > 0) {
             $values = array();
             $no = 1;
-            foreach ($reportValues as $reportValue) {
-                $value = array(
-                    'no' => $no++,
-                    'mapel_nama' => $reportValue->mapel_name,
-                    'mapel_kkm' => $reportValue->report_kkm,
-                    'pas' => $reportValue->pas,
-                    'pre_pengetahuan' => $reportValue->knowledge_pre,
-                    'hpa' => $reportValue->hpa,
-                    'pre_keterampilan' => $reportValue->skills_pre,
-                );
+                foreach ($reportValues as $reportValue) {
+                    $value = array(
+                        'no' => $no++,
+                        'mapel_nama' => $reportValue->mapel_name,
+                        'mapel_kkm' => $reportValue->report_kkm,
+                        'pas' => $reportValue->pas,
+                        'pre_pengetahuan' => $reportValue->knowledge_pre,
+                        'hpa' => $reportValue->hpa,
+                        'pre_keterampilan' => $reportValue->skills_pre,
+                    );
 
-                $values[] = $value;
+                    $values[] = $value;
+                }
+            } else {
+                $errorMessage = "Nilai Rapor belum diisi";
+                return redirect()->route('masterbook.index')
+                        ->with('message_error', $errorMessage);
             }
-
+ 
             $reportExtras = ReportExtrakurikuler::where('report_extrakurikuler.class_id', '=', $reportPrint->santri_class)
                 ->where('report_extrakurikuler.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
                 ->where('report_extrakurikuler.santri_nisn', '=', $id)
                 ->get();
 
-            $dataExtra = array();
-            $no = 1;
-            foreach ($reportExtras as $reportExtra) {
-                $extra = array(
-                    'no' => $no++,
-                    'extra_nama' => $reportExtra->extra_name,
-                    'extra_nilai' => $reportExtra->extra_value,
-                    'extra_deskripsi' => $reportExtra->extra_description
-                );
+            if (count($reportExtras) > 0) {
+                $dataExtra = array();
+                $no = 1;
+                foreach ($reportExtras as $reportExtra) {
+                    $extra = array(
+                        'no' => $no++,
+                        'extra_nama' => $reportExtra->extra_name,
+                        'extra_nilai' => $reportExtra->extra_value,
+                        'extra_deskripsi' => $reportExtra->extra_description
+                    );
 
-                $dataExtra[] = $extra;
+                    $dataExtra[] = $extra;
+                }
+            } else {
+                $errorMessage = "Nilai Extrakurkuler belum diisi";
+                return redirect()->route('masterbook.index')
+                        ->with('message_error', $errorMessage);
             }
 
+            
             $reportAttendance = ReportAttendance::where('report_attendance.class_id', '=', $reportPrint->santri_class)
                 ->where('report_attendance.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
                 ->where('report_attendance.santri_nisn', '=', $id)
                 ->first();
 
-            $attendance = array(
-                'sakit' => $reportAttendance->s,
-                'izin' => $reportAttendance->i,
-                'alfa' => $reportAttendance->a
-            );
+            if (count($reportAttendance) > 0) {
+                $attendance = array(
+                    'sakit' => $reportAttendance->s,
+                    'izin' => $reportAttendance->i,
+                    'alfa' => $reportAttendance->a
+                );
+            } else {
+                $errorMessage = "Nilai Kehadiran belum diisi";
+                return redirect()->route('masterbook.index')
+                        ->with('message_error', $errorMessage);
+            }
 
             $data = array(
                 'biodata' => $biodata,
@@ -344,8 +392,8 @@ class AdminMasterBookController extends Controller
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $masterBook->santri_nism . " / " . $masterBook->santri_nisn;
-            $row[] = '';
+            $row[] = "NIS : " . $masterBook->santri_nism . "<br>NISN : " . $masterBook->santri_nisn;
+            $row[] = $masterBook->santri_name;
             $row[] = $masterBook->santri_gender;
             $row[] = $masterBook->master_book_date_download;
             $row[] = '<button type="button" class="btn btn-outline-success radius-30" data-bs-toggle="modal" onclick="listForm(' . $masterBook->masterbook_id . ')">Buku Induk</button>';

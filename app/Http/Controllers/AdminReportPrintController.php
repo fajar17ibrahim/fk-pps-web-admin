@@ -27,8 +27,40 @@ class AdminReportPrintController extends Controller
     public function index()
     {
         //
+        $this->authorize('master-class');
+            
+        $user = Session::get('user');
+        $kelass = array();
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+        }
         $schools = School::orderBy('school_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        // $kelass = Kelas::orderBy('class_name', 'asc')->get();
         return view('admin.page.report.reportprint.index', compact('schools'), compact('kelass'));
     }
 
@@ -103,6 +135,7 @@ class AdminReportPrintController extends Controller
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('kelas.class_level', '=', $level)
             ->where('santri.santri_school', '=', $school)
             ->where('kelas.class_id', '=', $kelas)
@@ -111,6 +144,7 @@ class AdminReportPrintController extends Controller
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('kelas.class_level', '=', $level)
             ->where('kelas.class_id', '=', $kelas)
             ->get();
@@ -118,6 +152,7 @@ class AdminReportPrintController extends Controller
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('santri.santri_school', '=', $school)
             ->where('kelas.class_id', '=', $kelas)
             ->get();
@@ -125,6 +160,7 @@ class AdminReportPrintController extends Controller
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('kelas.class_level', '=', $level)
             ->where('santri.santri_school', '=', $school)
             ->get();
@@ -132,24 +168,28 @@ class AdminReportPrintController extends Controller
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('kelas.class_level', '=', $level)
             ->get();
         } else if ($level == 0 && $school != 0 && $kelas == 0) {
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('santri.santri_school', '=', $school)
             ->get();
         } else if ($level == 0 && $school == 0 && $kelas != 0) {
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->where('kelas.class_id', '=', $kelas)
             ->get();
         }else {
             $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->get();
         }
 
@@ -161,7 +201,7 @@ class AdminReportPrintController extends Controller
             $row[] = $no;
             $row[] = "NIS : " . $report_print->santri_nism . "<br>NISN :  " . $report_print->santri_nisn;
             $row[] = $report_print->santri_name;
-            $row[] = $report_print->report_print_date_download;
+            $row[] = $report_print->tahun_pelajaran_name . " - " . $report_print->tahun_pelajaran_semester;
             $row[] = '<a href="report-uts-print-pdf/' . $report_print->report_id . '">rapor-uts.pdf</a>';
             $row[] = '<a href="/report-uas-print-pdf/' . $report_print->report_id . '">rapor-uas.pdf</a>';
             $row[] = '<input type="button" class="btn btn-danger" value="Blok Rapor" />';
@@ -308,7 +348,7 @@ class AdminReportPrintController extends Controller
                             'p10' => $reportValue->p10,
                             'rph' => $reportValue->rph,
                             'pts' => $reportValue->pts,  
-                            'pas' => $reportValue->pas,
+                            'pas' => round($reportValue->pas),
                             'pre_pengetahuan' => $reportValue->knowledge_pre,
                             'deskripsi_pengetahuan' => $reportValue->knowledge_desc,
                             'k1' => $reportValue->k1,
@@ -324,7 +364,7 @@ class AdminReportPrintController extends Controller
                             'hpa' => $reportValue->hpa,
                             'pre_keterampilan' => $reportValue->skills_pre,  
                             'deskripsi_keterampilan' => $reportValue->skills_desc,
-                            'average' => ((float) $reportValue->pas + (float) $reportValue->hpa) / 2
+                            'average' => round(((float) $reportValue->pas + (float) $reportValue->hpa) / 2)
                         );
                         $values[] = $row;
                         $sumKnowledgeValue += (float) $reportValue->pas;
@@ -366,7 +406,7 @@ class AdminReportPrintController extends Controller
 
         // return $reportExtras;
 
-        if ($reportExtras) {
+        if (count($reportExtras) > 0) {
             $dataExtra = array();
             $no = 1;
             foreach ($reportExtras as $reportExtra) {
@@ -380,9 +420,14 @@ class AdminReportPrintController extends Controller
                 $dataExtra[] = $extra;
             }
         } else {
-            $errorMessage = "Nilai Extrakurikuler tidak lengkap";
-            return redirect()->route('report-print.index')
-                    ->with('message_error', $errorMessage);
+            $extra = array(
+                'no' => '-',
+                'extra_nama' => '-',
+                'extra_nilai' => '-',
+                'extra_deskripsi' => '-'
+            );
+
+            $dataExtra[] = $extra;
         }
 
         $reportAchievements = ReportAchievement::where('report_achievement.class_id', '=', $reportPrint->santri_class)
@@ -390,7 +435,7 @@ class AdminReportPrintController extends Controller
         ->where('report_achievement.santri_nisn', '=', $id)
         ->get();
 
-        if ($reportAchievements) {
+        if (count($reportAchievements) > 0) {
             $dataAchievement = array();
             $no = 1;
             foreach ($reportAchievements as $reportAchievement) {
@@ -403,9 +448,13 @@ class AdminReportPrintController extends Controller
                 $dataAchievement[] = $achievement;
             }
         } else {
-            $errorMessage = "Nilai tidak lengkap";
-            return redirect()->route('report-print.index')
-                    ->with('message_error', $errorMessage);
+            $achievement = array(
+                'no' => '-',
+                'prestasi_nama' => '-',
+                'prestasi_deskripsi' => '-'
+            );
+
+            $dataAchievement[] = $achievement;
         }
 
         $reportAttendance = ReportAttendance::where('report_attendance.class_id', '=', $reportPrint->santri_class)

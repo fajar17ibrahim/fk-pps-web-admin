@@ -11,7 +11,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="d-flex flex-column align-items-center text-center">
-                                                <img src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white mt-4"  width="120" height="150">
+                                                <img id="photo" src="assets/images/avatars/avatar-santri.jpg" alt="" class="p-1 border bg-white mt-4"  width="120" height="140">
                                                 <div class="mt-4">
                                                     <h5 id="vSantriNameCard">-</h5>
                                                     <p class="text-secondary mb-1">Santri</p>
@@ -233,7 +233,8 @@
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {
-                                console.log(data)
+                                console.log('images/' + data.photo)
+                                $('#photo').attr('src', 'images/' + data.photo);
                                 $('#vSchool').text(data.school);
                                 $('#vSantriNameCard').text(data.name);
                                 $('#vSantriName').text(": " + data.name);

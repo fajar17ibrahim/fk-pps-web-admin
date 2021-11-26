@@ -13,7 +13,7 @@
 										<div class="card">
 											<div class="card-body">
 												<div class="d-flex flex-column align-items-center text-center">
-													<img src="assets/images/school-building.jpg" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
+													<img src="assets/images/logo_fk_pkpps.jpg" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
 													<div class="mt-3">
 														<p class="text-secondary mb-1">Gambar</p>
 														<h5>Logo Sekolah</h5>

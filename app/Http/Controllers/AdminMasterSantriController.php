@@ -23,7 +23,36 @@ class AdminMasterSantriController extends Controller
         //
         $schools = School::orderBy('school_name', 'asc')->get();
         $santris = Santri::orderBy('santri_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        $user = Session::get('user');
+        $kelass = array();
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+        }
         return view('admin.page.master.santri.index')
         ->with(array('santris' => $santris))
         ->with(array('schools' => $schools))
@@ -165,6 +194,7 @@ class AdminMasterSantriController extends Controller
         $santri = Santri::leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
         ->find($id);
         $data = array(
+            'photo' => $santri->santri_photo,
             'school' => $santri->school_name,
             'nism' => $santri->santri_nism, 
             'nisn' => $santri->santri_nisn, 

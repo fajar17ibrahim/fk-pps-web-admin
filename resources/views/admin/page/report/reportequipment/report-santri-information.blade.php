@@ -179,7 +179,7 @@
                 <table class="borderless align-center" style="width:80%;">
                     <tbody>
                         <tr >
-                            <td class="text-right" rowspan="3" style="width:40%;"><img src="images/{{ $santri[0]->santri_photo }}" alt="" class="border bg-white"  width="100" height="130"></td>
+                            <td class="text-right" rowspan="3" style="width:40%;"><img src="images/{{ $santri[0]->santri_photo }}" alt="" class="bg-white"  width="100" height="130"></td>
                             <!-- <td rowspan="4">Kepaa Ulya</td> -->
                             <td>
                                 {{ trim(strstr($santri[0]->school_city, " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }} <br>

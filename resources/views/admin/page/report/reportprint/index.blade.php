@@ -47,7 +47,7 @@
                                     <select class="single-select" name="soKelasFilter" id="soKelasFilter">
                                         <option value="0">Semua</option>
                                         @foreach ($kelass as $kelas)
-                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        <option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -100,7 +100,7 @@
                                                 <th>No</th>
                                                 <th>NIS / NISN</th>
                                                 <th>Nama Santri</th>
-                                                <th>Tanggal Download</th>
+                                                <th>TA / Semester</th>
                                                 <th>Cetak Nilai UTS</th>
                                                 <th>Cetak Nilai UAS</th>
                                                 <th width="10%">Aksi</th>

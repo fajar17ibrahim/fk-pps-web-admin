@@ -78,11 +78,9 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Foto</th>
-                                                <th>NIK</th>
-                                                <th>Nama Ustadz</th>
+                                                <th>Informasi</th>
                                                 <th>Jenis Kelamin</th>
-                                                <th>Tempat Lahir</th>
-                                                <th>Tanggal Lahir</th>
+                                                <th>TTL</th>
                                                 <th>Status</th>
                                                 <th>Opsi</th>
                                             </tr>

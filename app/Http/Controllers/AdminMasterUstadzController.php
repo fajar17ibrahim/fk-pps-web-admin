@@ -343,11 +343,9 @@ class AdminMasterUstadzController extends Controller
             $row[] = '<div class="d-flex align-items-center">
                             <img src="images/'. $ustadz->ustadz_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
                         </div>';
-            $row[] = $ustadz->ustadz_nik;
-            $row[] = $ustadz->ustadz_name;  
+            $row[] = $ustadz->ustadz_name .'<br>NIK : '. $ustadz->ustadz_nik;
             $row[] = $ustadz->ustadz_gender;
-            $row[] = $ustadz->ustadz_born_place;
-            $row[] = $ustadz->ustadz_born_date;
+            $row[] = $ustadz->ustadz_born_place . ",<br>" . tanggal($ustadz->ustadz_born_date);
             $row[] = '<div class="d-flex align-items-center text-success">	
                         <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
                         <span>' . $ustadz->status . '</span>
