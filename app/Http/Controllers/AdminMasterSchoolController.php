@@ -278,7 +278,6 @@ class AdminMasterSchoolController extends Controller
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="master-school-edit/'. $school->school_id .'">Edit</a>
                                 </li>
-                                <li><a class="dropdown-item" href="master-school-details">Details</a>
                                 <li><a class="dropdown-item" href="#">Aktif</a>
                                 </li>
                                 <li><a class="dropdown-item" href="#">Nonaktif</a>

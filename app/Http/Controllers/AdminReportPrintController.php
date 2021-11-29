@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use URL;
 use PDF;
 use Session;
 use Illuminate\Http\Request;
@@ -202,8 +203,8 @@ class AdminReportPrintController extends Controller
             $row[] = "NIS : " . $report_print->santri_nism . "<br>NISN :  " . $report_print->santri_nisn;
             $row[] = $report_print->santri_name;
             $row[] = $report_print->tahun_pelajaran_name . " - " . $report_print->tahun_pelajaran_semester;
-            $row[] = '<a href="report-uts-print-pdf/' . $report_print->report_id . '">rapor-uts.pdf</a>';
-            $row[] = '<a href="/report-uas-print-pdf/' . $report_print->report_id . '">rapor-uas.pdf</a>';
+            $row[] = '<a href="' . URL::to('/') .'/report-uts-print-pdf/' . $report_print->report_id . '">rapor-uts.pdf</a>';
+            $row[] = '<a href="' . URL::to('/') .'/report-uas-print-pdf/' . $report_print->report_id . '">rapor-uas.pdf</a>';
             $row[] = '<input type="button" class="btn btn-danger" value="Blok Rapor" />';
             $data[] = $row;
         }

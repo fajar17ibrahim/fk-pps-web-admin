@@ -88,7 +88,7 @@
 									<div class="col-sm-12">
 										<div class="d-flex align-items-center">
 											<div class="">
-												<img src="assets/images/avatars/avatar.png" class="rounded-circle" width="60" height="60" alt="" />
+												<img src="{{ URL::to('/') }}/images/{{ $login->ustadz_photo }}" class="rounded-circle" width="60" height="60" alt="" />
 											</div>
 											<div class="ms-2">
 												<h6 class="mb-1"><b>{{ $login->ustadz_name }}</b></h6>

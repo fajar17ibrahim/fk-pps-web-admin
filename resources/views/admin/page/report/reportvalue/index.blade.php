@@ -3,7 +3,7 @@
 
                 @section('content')
 				<div class="row row-cols-1 row-cols-md-3 row-cols-xl-5">
-					<a href="report-value">
+					<a href="{{ URL::to('/') }}/report-value">
 						<div class="col">
 							<div class="card radius-10 bg-danger bg-gradient">
 								<div class="card-body">
@@ -18,7 +18,7 @@
 						</div>
 					</a>
 					@if(Session::get('user')[0]['role_id'] != 4)
-					<a href="report-attitude">
+					<a href="{{ URL::to('/') }}/report-attitude">
 						<div class="col">
 							<div class="card radius-10 bg-primary bg-gradient">
 								<div class="card-body">
@@ -32,7 +32,7 @@
 							</div>
 						</div>
 					</a>
-					<a href="report-attendance">
+					<a href="{{ URL::to('/') }}/report-attendance">
 						<div class="col">
 							<div class="card radius-10 bg-success bg-gradient">
 								<div class="card-body">
@@ -46,7 +46,7 @@
 							</div>
 						</div>
 					</a>
-					<a href="report-extrakurikuler">
+					<a href="{{ URL::to('/') }}/report-extrakurikuler">
 						<div class="col">
 							<div class="card radius-10 bg-warning bg-gradient">
 								<div class="card-body">
@@ -60,7 +60,7 @@
 							</div>
 						</div>
 					</a>
-					<a href="/report-achievement">
+					<a href="{{ URL::to('/') }}/report-achievement">
 						<div class="col">
 							<div class="card radius-10 bg-primary bg-gradient">
 								<div class="card-body">
@@ -78,7 +78,7 @@
 				<!--end row-->
 
 				<div class="row row-cols-1 row-cols-md-3 row-cols-xl-5">
-					<a href="report-homeroom-teacher-notes">
+					<a href="{{ URL::to('/') }}/report-homeroom-teacher-notes">
 						<div class="col">
 							<div class="card radius-10 bg-warning bg-gradient">
 								<div class="card-body">

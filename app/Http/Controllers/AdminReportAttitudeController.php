@@ -96,31 +96,45 @@ class AdminReportAttitudeController extends Controller
             $notes = $request['taNotes'];
 
             $goodSpiritualAttitude = "";
-            foreach ($attitudeAlwaysDos as $attitudeAlwaysDo) {
-                $goodSpiritualAttitude .= $attitudeAlwaysDo . ". ";
+            if ($attitudeAlwaysDos) {
+                foreach ($attitudeAlwaysDos as $attitudeAlwaysDo) {
+                    $goodSpiritualAttitude .= $attitudeAlwaysDo . ". ";
+                }
             }
 
-            foreach ($attitudeEvolves as $attitudeEvolve) {
-                $goodSpiritualAttitude .= $attitudeEvolve . ". ";
+            $goodSpiritualAttitude = "";
+            if ($attitudeEvolves) {
+                foreach ($attitudeEvolves as $attitudeEvolve) {
+                    $goodSpiritualAttitude .= $attitudeEvolve . ". ";
+                }
             }
 
             $lackSpiritualAttitude = "";
-            foreach ($attitudeNotStandOuts as $attitudeNotStandOut) {
-                $lackSpiritualAttitude .= $attitudeNotStandOut . ". ";
+            if ($attitudeNotStandOuts) {
+                foreach ($attitudeNotStandOuts as $attitudeNotStandOut) {
+                    $lackSpiritualAttitude .= $attitudeNotStandOut . ". ";
+                }
             }
 
             $goodSocialAttitude = "";
-            foreach ($attitudeVeryGoods as $attitudeVeryGood) {
-                $goodSocialAttitude .= $attitudeVeryGood . ". ";
+            if ($attitudeVeryGoods) {
+                foreach ($attitudeVeryGoods as $attitudeVeryGood) {
+                    $goodSocialAttitude .= $attitudeVeryGood . ". ";
+                }
             }
 
-            foreach ($attitudeEvolveSocials as $attitudeEvolveSocial) {
-                $goodSocialAttitude .= $attitudeEvolveSocial . ". ";
+            $goodSocialAttitude = "";
+            if ($attitudeEvolveSocials) {
+                foreach ($attitudeEvolveSocials as $attitudeEvolveSocial) {
+                    $goodSocialAttitude .= $attitudeEvolveSocial . ". ";
+                }
             }
 
             $lackSocialAttitude = "";
-            foreach ($attitudeNotGoods as $attitudeNotGood) {
-                $lackSocialAttitude .= $attitudeNotGood . ". ";
+            if ($attitudeNotGoods) {
+                foreach ($attitudeNotGoods as $attitudeNotGood) {
+                    $lackSocialAttitude .= $attitudeNotGood . ". ";
+                }
             }
 
             $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
@@ -168,7 +182,6 @@ class AdminReportAttitudeController extends Controller
             return redirect()->route('report-attitude.index')
             ->with('message_error', $e->getMessage());
         }
-
 
     }
 

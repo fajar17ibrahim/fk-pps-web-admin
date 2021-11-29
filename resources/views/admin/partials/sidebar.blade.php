@@ -18,13 +18,13 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="{{ URL::to('/') }}/user-profile">
                 <div class="parent-icon"><i class="bx bx-user-circle"></i>
                 </div>
                 <div class="menu-title">Profil User</div>
             </a>
-        </li>
+        </li> -->
         @if(Session::get('user')[0]['role_id'] != 4)
         <li>
             <a href="{{ URL::to('/') }}/school-profile">

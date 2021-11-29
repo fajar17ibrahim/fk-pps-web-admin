@@ -21,6 +21,7 @@ class AdminReportAchievementController extends Controller
     {
         //
         $this->authorize('report-achievement');
+        $user = Session::get('user');
 
         $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = array();
