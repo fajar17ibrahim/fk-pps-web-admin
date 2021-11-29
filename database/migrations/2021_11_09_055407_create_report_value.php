@@ -46,6 +46,7 @@ class CreateReportValue extends Migration
             $table->string('k8', 5)->nullable();
             $table->string('k9', 5)->nullable();
             $table->string('k10', 5)->nullable();
+            $table->string('rpk', 5)->nullable();
             $table->string('hpa', 5)->nullable();
             $table->string('skills_pre', 5)->nullable();
             $table->text('skills_desc')->nullable();

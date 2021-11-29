@@ -17,7 +17,7 @@ class CreateSchoolTable extends Migration
             $table->increments('school_id', 12)->unique();
             $table->string('school_statistic_number', 25)->unique()->nullable();
             $table->string('school_npsn', 25)->unique()->nullable();
-            $table->string('school_name', 100)->nullable();
+            $table->string('school_name')->nullable();
             $table->string('school_email', 50)->nullable();
             $table->string('school_phone', 20)->nullable();
             $table->string('school_address')->nullable();

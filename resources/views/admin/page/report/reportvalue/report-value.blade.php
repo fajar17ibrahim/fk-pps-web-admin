@@ -196,6 +196,7 @@
                                                     <th rowspan="2">PRE</th>
                                                     <th rowspan="2" style="width:500px">Deskripsi</th>
                                                     <th colspan="10" class="text-center">Penilaian Keterampilan</th>
+                                                    <th rowspan="2">RPK</th>
                                                     <th rowspan="2">PRE</th>
                                                     <th rowspan="2" style="width:500px">Deskripsi</th>
                                                 </tr>
@@ -320,6 +321,7 @@
                         let k8 = document.getElementsByName('inK8[]');
                         let k9 = document.getElementsByName('inK9[]');
                         let k10 = document.getElementsByName('inK10[]');
+                        let krpk = document.getElementsByName('inRPK[]');
                         let kPred = document.getElementsByName('inKPRE[]');
                         let kDesc = document.getElementsByName('taSkillsDesc[]');
 
@@ -336,8 +338,71 @@
                         let p10Value = Math.round(p10[$index].value);
                         let ptsValue = Math.round(pts[$index].value);
                         let pasValue = Math.round(pas[$index].value);
+
+                        let rphValueCount = 0;
+                        let rphValue = 0;
+                        let sKDKnowledge = "";
+                        if (p1Value != "") {
+                            rphValueCount++;
+                            rphValue += p1Value;
+                            sKDKnowledge += document.getElementById("p1").innerText + ". ";
+                        }
                         
-                        let rphValue = Math.round((p1Value + p2Value + p3Value + p4Value + p5Value + p6Value + p7Value + p8Value  + p9Value + p10Value) / 10);
+                        if (p2Value != "") {
+                            rphValueCount++;
+                            rphValue += p2Value;
+                            sKDKnowledge += document.getElementById("p2").innerText + ". ";
+                        } 
+                        
+                        if (p3Value != "") {
+                            rphValueCount++;
+                            rphValue += p3Value;
+                            sKDKnowledge += document.getElementById("p3").innerText + ". ";
+                        } 
+                        
+                        if (p4Value != "") {
+                            rphValueCount++;
+                            rphValue += p4Value;
+                            sKDKnowledge += document.getElementById("p4").innerText + ". ";
+                        } 
+                        
+                        if (p5Value != "") {
+                            rphValueCount++;
+                            rphValue += p5Value;
+                            sKDKnowledge += document.getElementById("p5").innerText + ". ";
+                        } 
+                        
+                        if (p6Value != "") {
+                            rphValueCount++;
+                            rphValue += p6Value;
+                            sKDKnowledge += document.getElementById("p6").innerText + ". ";
+                        } 
+                        
+                        if (p7Value != "") {
+                            rphValueCount++;
+                            rphValue += p7Value;
+                            sKDKnowledge += document.getElementById("p7").innerText + ". ";
+                        } 
+                        
+                        if (p8Value != "") {
+                            rphValueCount++;
+                            rphValue += p8Value;
+                            sKDKnowledge += document.getElementById("p8").innerText + ". ";
+                        } 
+                        
+                        if (p9Value != "") {
+                            rphValueCount++;
+                            rphValue += p9Value;
+                            sKDKnowledge += document.getElementById("p9").innerText + ". ";
+                        } 
+                        
+                        if (p10Value != "") {
+                            rphValueCount++;
+                            rphValue += p10Value;
+                            sKDKnowledge += document.getElementById("p10").innerText + ". ";
+                        } 
+                        
+                        rphValue = Math.round(rphValue / rphValueCount);
                         rph[$index].value = rphValue;
 
                         let hpaValue = Math.round((2 * rphValue + ptsValue + pasValue) / 4);
@@ -358,47 +423,6 @@
                         } else {
                             pred[$index].value = "E";
                         }
-
-                        let sKDKnowledge = "";
-                        if (p1Value != "") {
-                            sKDKnowledge += document.getElementById("p1").innerText + ". ";
-                        }
-                        
-                        if (p2Value != "") {
-                            sKDKnowledge += document.getElementById("p2").innerText + ". ";
-                        } 
-                        
-                        if (p3Value != "") {
-                            sKDKnowledge += document.getElementById("p3").innerText + ". ";
-                        } 
-                        
-                        if (p4Value != "") {
-                            sKDKnowledge += document.getElementById("p4").innerText + ". ";
-                        } 
-                        
-                        if (p5Value != "") {
-                            sKDKnowledge += document.getElementById("p5").innerText + ". ";
-                        } 
-                        
-                        if (p6Value != "") {
-                            sKDKnowledge += document.getElementById("p6").innerText + ". ";
-                        } 
-                        
-                        if (p7Value != "") {
-                            sKDKnowledge += document.getElementById("p7").innerText + ". ";
-                        } 
-                        
-                        if (p8Value != "") {
-                            sKDKnowledge += document.getElementById("p8").innerText + ". ";
-                        } 
-                        
-                        if (p9Value != "") {
-                            sKDKnowledge += document.getElementById("p9").innerText + ". ";
-                        } 
-                        
-                        if (p10Value != "") {
-                            sKDKnowledge += document.getElementById("p10").innerText + ". ";
-                        } 
                         
                         pDesc[$index].value = sKDKnowledge;
                 
@@ -412,8 +436,72 @@
                         let k8Value = Math.round(k8[$index].value);
                         let k9Value = Math.round(k9[$index].value);
                         let k10Value = Math.round(k10[$index].value);
+                        let krpkValue = Math.round(krpk[$index].value);
 
-                        let rpkValue = Math.round((k1Value + k2Value + k3Value + k4Value + k5Value + k6Value + k7Value + k8Value  + k9Value + k10Value) / 10);
+                        let rpkValue = 0;
+                        let rpkValueCount = 0;
+                        let sKDSkills = "";
+                        if (k1Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k1Value;
+                            sKDSkills += document.getElementById("k1").innerText + ". ";
+                        }
+                        
+                        if (k2Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k2Value;
+                            sKDSkills += document.getElementById("k2").innerText + ". ";
+                        } 
+                        
+                        if (k3Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k3Value;
+                            sKDSkills += document.getElementById("k3").innerText + ". ";
+                        } 
+                        
+                        if (k4Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k4Value;
+                            sKDSkills += document.getElementById("k4").innerText + ". ";
+                        } 
+                        
+                        if (k5Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k5Value;
+                            sKDSkills += document.getElementById("k5").innerText + ". ";
+                        } 
+                        
+                        if (k6Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k6Value;
+                            sKDSkills += document.getElementById("k6").innerText + ". ";
+                        } 
+                        
+                        if (k7Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k7Value;
+                            sKDSkills += document.getElementById("k7").innerText + ". ";
+                        } 
+                        
+                        if (k8Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k8Value;
+                            sKDSkills += document.getElementById("k8").innerText + ". ";
+                        } 
+                        
+                        if (k9Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k9Value;
+                            sKDSkills += document.getElementById("k9").innerText + ". ";
+                        } 
+                        
+                        if (k10Value != "") {
+                            rpkValueCount++;
+                            rpkValue += k10Value;
+                            sKDSkills += document.getElementById("k10").innerText + ". ";
+                        } 
+                        
+                        rpkValue = Math.round(rpkValue / rpkValueCount);
                         
                         let kPredInterval = Math.round((100 - 25) / 3);
                         let kPredC = 25 + kPredInterval;
@@ -431,47 +519,7 @@
                             kPred[$index].value = "";
                         }
 
-                        let sKDSkills = "";
-                        if (k1Value != "") {
-                            sKDSkills += document.getElementById("k1").innerText + ". ";
-                        }
-                        
-                        if (k2Value != "") {
-                            sKDSkills += document.getElementById("k2").innerText + ". ";
-                        } 
-                        
-                        if (k3Value != "") {
-                            sKDSkills += document.getElementById("k3").innerText + ". ";
-                        } 
-                        
-                        if (k4Value != "") {
-                            sKDSkills += document.getElementById("k4").innerText + ". ";
-                        } 
-                        
-                        if (k5Value != "") {
-                            sKDSkills += document.getElementById("k5").innerText + ". ";
-                        } 
-                        
-                        if (k6Value != "") {
-                            sKDSkills += document.getElementById("k6").innerText + ". ";
-                        } 
-                        
-                        if (k7Value != "") {
-                            sKDSkills += document.getElementById("k7").innerText + ". ";
-                        } 
-                        
-                        if (k8Value != "") {
-                            sKDSkills += document.getElementById("k8").innerText + ". ";
-                        } 
-                        
-                        if (k9Value != "") {
-                            sKDSkills += document.getElementById("k9").innerText + ". ";
-                        } 
-                        
-                        if (k10Value != "") {
-                            sKDSkills += document.getElementById("k10").innerText + ". ";
-                        } 
-                        
+                        krpk[$index].value = rpkValue;
                         kDesc[$index].value = sKDSkills;
                     }
 

@@ -16,7 +16,7 @@ class CreateUstadzTable extends Migration
         Schema::create('ustadz', function (Blueprint $table) {
             $table->increments('ustadz_id', 12);
             $table->string('ustadz_nik', 25)->nullable();
-            $table->string('ustadz_name', 50)->nullable();
+            $table->string('ustadz_name')->nullable();
             $table->string('ustadz_born_place', 50)->nullable();
             $table->string('ustadz_born_date', 20)->nullable();
             $table->string('ustadz_gender', 20)->nullable();

@@ -124,6 +124,7 @@ class AdminReportValueController extends Controller
             $k9 = $request['inK9'];
             $k10 = $request['inK10'];
             $hpa = $request['inHPA'];
+            $rpk = $request['inRPK'];
             $kpre = $request['inKPRE'];
             $skillsDesc = $request['taSkillsDesc'];
 
@@ -176,6 +177,7 @@ class AdminReportValueController extends Controller
                 $reportValue->k9 = $k9[$index];
                 $reportValue->k10 = $k10[$index];
                 $reportValue->hpa = $hpa[$index];
+                $reportValue->rpk = $rpk[$index];
                 $reportValue->skills_pre = $kpre[$index];
                 $reportValue->skills_desc = $skillsDesc[$index];
                 
@@ -349,6 +351,7 @@ class AdminReportValueController extends Controller
                 $k8 = $reportValueCheck->k8;
                 $k9 = $reportValueCheck->k9;
                 $k10 = $reportValueCheck->k10;
+                $rpk = $reportValueCheck->rpk;
                 $hpa = $reportValueCheck->hpa;
                 $kpre = $reportValueCheck->skills_pre;
                 $kdesc = $reportValueCheck->skills_desc;
@@ -380,6 +383,7 @@ class AdminReportValueController extends Controller
                 $k9 = "";
                 $k10 = "";
                 $hpa = "";
+                $rpk = "";
                 $kpre = "";
                 $kdesc = "";
             }
@@ -417,6 +421,7 @@ class AdminReportValueController extends Controller
             $row[] = '<input name="inK8[]" type="number" style="width:80px;" class="form-control" value="'. $k8 . '" onchange="calculate('. $no-1 . ')" />';
             $row[] = '<input name="inK9[]" type="number" style="width:80px;" class="form-control" value="'. $k9 . '" onchange="calculate('. $no-1 . ')" />';
             $row[] = '<input name="inK10[]" type="number" style="width:80px;" class="form-control" value="'. $k10 . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inRPK[]" type="number" style="width:80px;" class="form-control" value="'. $rpk . '" onchange="calculate('. $no-1 . ')" readonly  />';
             $row[] = '<input name="inKPRE[]" type="text" style="width:80px;" class="form-control" value="'. $kpre . '" onchange="calculate('. $no-1 . ')" readonly />';
             $row[] = '<textarea name="taSkillsDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3" readonly>'. $kdesc . '</textarea>';
             $data[] = $row;
