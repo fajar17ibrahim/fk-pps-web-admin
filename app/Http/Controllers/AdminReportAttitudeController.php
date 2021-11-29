@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use Illuminate\Http\Request;
 use App\Models\Santri;
 use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Mapel;
 use App\Models\ReportAttitude;
-use App\Models\schoolYear;
+use App\Models\SchoolYear;
 
 class AdminReportAttitudeController extends Controller
 {
@@ -27,7 +28,36 @@ class AdminReportAttitudeController extends Controller
             ->get();
 
         $schools = School::orderBy('school_name', 'asc')->get();
-        $kelass = Kelas::orderBy('class_name', 'asc')->get();
+        $kelass = array();
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+                ->orderBy('class_id', 'asc')
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' =>  $kelas->school_name . ' - ' . $kelas->class_name,
+                );
+    
+                $kelass[] = $data;
+            }
+        } else {
+            $kelassCheck = Kelas::orderBy('class_id', 'asc')
+                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->get();
+
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
+
+                $kelass[] = $data;
+            }
+        }
         return view('admin.page.report.reportvalue.attitude', compact('schools'))
         ->with(array('kelass' => $kelass))
         ->with(array('santris' => $santris));
@@ -188,54 +218,64 @@ class AdminReportAttitudeController extends Controller
     }
 
     public function listData($level, $school, $kelas) {
-        if ($level != 0 && $school != 0 && $kelas != 0) {
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0 && $kelas != 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas != 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $level)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas != 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school != 0 && $kelas == 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas == 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas == 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level == 0 && $school == 0 && $kelas != 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            }else {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->get();
+            }
+        } else {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas != 0) {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_level', '=', $level)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas != 0) {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school != 0 && $kelas == 0) {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas == 0) {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas == 0) {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level == 0 && $school == 0 && $kelas != 0) {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        }else {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
-            ->get();
+                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+                ->get();
         }
+        
 
         
-        return $santris;
+        // return $santris;
         
         $no = 0;
         $data = array();

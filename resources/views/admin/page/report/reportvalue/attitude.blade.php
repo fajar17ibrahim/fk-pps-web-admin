@@ -51,7 +51,7 @@
                                     <select class="single-select" name="soKelasFilter" id="soKelasFilter">
                                         <option value="0">Semua</option>
                                         @foreach ($kelass as $kelas)
-                                        <option value="{{ $kelas->class_id }}">{{ $kelas->class_name }}</option>
+                                        <option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
