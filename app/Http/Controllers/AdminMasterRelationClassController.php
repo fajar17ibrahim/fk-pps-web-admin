@@ -22,7 +22,7 @@ class AdminMasterRelationClassController extends Controller
 
         $kelass = array();
         if ($user[0]->role_id == 1) {
-            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
 
@@ -104,7 +104,7 @@ class AdminMasterRelationClassController extends Controller
     {
         //
         
-        $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+        $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
         ->find($id);
 
         $user = Session::get('user');
@@ -130,7 +130,7 @@ class AdminMasterRelationClassController extends Controller
     public function edit($id)
     {
         //
-        $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+        $kelas = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
         ->find($id);
         $data = array(
             'id' => $kelas->class_id, 
@@ -182,31 +182,31 @@ class AdminMasterRelationClassController extends Controller
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             if ($level != 0 && $school != 0) {
-                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
                 ->where('kelas.class_level', '=', $level)
                 ->where('kelas.class_school', '=', $school)
                 ->get();
             } else if ($level != 0 && $school == 0) {
-                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
                 ->where('kelas.class_level', '=', $level)
                 ->get();
             } else if ($level == 0 && $school != 0) {
-                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
                 ->where('kelas.class_school', '=', $school)
                 ->get();
             } else {
-                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+                $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
                 ->get();
             }
         } else {
-            $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_npsn')
+            $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
             ->where('kelas.class_level', '=', $user[0]->class_level)
-            ->where('school.school_npsn', '=', $user[0]->ustadz_school)
+            ->where('school.school_id', '=', $user[0]->ustadz_school)
             ->get();
             
         }

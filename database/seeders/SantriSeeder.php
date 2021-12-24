@@ -59,7 +59,7 @@ class SantriSeeder extends Seeder
         $santri->santri_province = 'Jawa Timur';
         $santri->santri_pos_code = '670000';
         $santri->santri_country = 'Indonesia';
-        $santri->santri_school = '1234567890';
+        $santri->santri_school = '1';
         $santri->santri_class = '1';
         $saveSantri = $santri->save();
 
@@ -107,7 +107,7 @@ class SantriSeeder extends Seeder
         $santri->santri_province = 'Jawa Timur';
         $santri->santri_pos_code = '670000';
         $santri->santri_country = 'Indonesia';
-        $santri->santri_school = '1234567890';
+        $santri->santri_school = '1';
         $santri->santri_class = '1';
         $saveSantri = $santri->save();
 
@@ -155,7 +155,7 @@ class SantriSeeder extends Seeder
         $santri->santri_province = 'Jawa Timur';
         $santri->santri_pos_code = '670000';
         $santri->santri_country = 'Indonesia';
-        $santri->santri_school = '1234567890';
+        $santri->santri_school = '1';
         $santri->santri_class = '1';
         $saveSantri = $santri->save();
 

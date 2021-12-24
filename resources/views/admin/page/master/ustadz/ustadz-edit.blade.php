@@ -36,17 +36,17 @@
 								</div>
 								<hr>
 								<div class="row mb-3 position-relative">
-									<label for="inUstadzNIK" class="col-sm-3 col-form-label">NIK</label>
-									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzNIK" type="text" id="inUstadzNIK" class="form-control" value="{{ $ustadz->ustadz_nik }}" required />
-										<div class="invalid-tooltip">NIK tidak boleh kosong</div>
-									</div>
-								</div>
-								<div class="row mb-3 position-relative">
 									<label for="inUstadzName" class="col-sm-3 col-form-label">Nama Lengkap</label>
 									<div class="col-sm-9 text-secondary">
 										<input name="inUstadzName" type="text" id="inUstadzName" class="form-control" value="{{ $ustadz->ustadz_name }}" required />
 										<div class="invalid-tooltip">Nama tidak boleh kosong</div>
+									</div>
+								</div>
+								<div class="row mb-3 position-relative">
+									<label for="inUstadzNIK" class="col-sm-3 col-form-label">NIK</label>
+									<div class="col-sm-9 text-secondary">
+										<input name="inUstadzNIK" type="text" id="inUstadzNIK" class="form-control" value="{{ $ustadz->ustadz_nik }}" required />
+										<div class="invalid-tooltip">NIK tidak boleh kosong</div>
 									</div>
 								</div>
 								<div class="row mb-3 position-relative">
@@ -182,21 +182,10 @@
 									<label for="soPKPPS" class="col-sm-3 col-form-label">PKPPS</label>
 									<div class="col-sm-9 text-secondary" >
 										<select name="soPKPPS" class="form-select form-control" name="soPKPPS" id="soPKPPS">
-											<option value="{{ $ustadz->school_npsn }}">{{ $ustadz->school_name }}</option>
+											<option value="{{ $ustadz->school_id }}">{{ $ustadz->school_name }}</option>
 											@foreach ($schools as $school)
-											<option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+											<option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
 											@endforeach
-										</select>
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="soLevelClass" class="col-sm-3 col-form-label">Guru Kelas</label>
-									<div class="col-sm-9 text-secondary" >
-										<select name="soLevelClass" class="form-select form-control" id="soLevelClass">
-										<option value="{{ $ustadz->class_id }}">{{ $ustadz->class_name }}</option>
-										@foreach ($kelass as $kelas)
-											<option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
-										@endforeach
 										</select>
 									</div>
 								</div>

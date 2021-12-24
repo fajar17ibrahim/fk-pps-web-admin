@@ -3,46 +3,14 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    <!-- <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="">
-                                    <h5 class="mb-1">Filter</h5>
-                                </div>
-                            </div>
-                            <hr>
-                            <br>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">PKPPS</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
-                                        <option value="0">Semua</option>
-                                        @foreach ($schools as $school)
-                                        <option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3"></div>
-                                <div class="col-sm-9 text-secondary">
-                                    <button type="button" onclick="filter()" class="btn btn-success px-4">Tampilkan Data</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
 
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                        <h6 class="mb-0 text-uppercase">Daftar PKPPS</h6>
-                            <a class="ms-auto" href="/master-school-add"> 
-                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah PKPPS</button>
-                            </a>
+                        <h6 class="mb-0 text-uppercase">Daftar Admin</h6>
                         </div>
                         <div class="card">
                             <div class="card-body">
+                                @include('admin/page/masterrelation/admin/admin-edit')
                                 @if(Session::has('message_success'))
                                     <div class="alert alert-success border-0 bg-success alert-dismissible fade show py-2">
                                         <div class="d-flex align-items-center">
@@ -76,10 +44,9 @@
                                                 <th>No</th>
                                                 <th>NPSN</th>
                                                 <th>Nama PPS</th>
-                                                <th>Alamat</th>
-                                                <th>Status</th>
-                                                <th>Logo</th>
-                                                <th>Opsi</th>
+                                                <th>Jenjang</th>
+                                                <th>Nama Admin</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -100,25 +67,49 @@
                         // Menampilkan data Lembaga
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-school/data/" + school,
+                                "url": "{{ URL::to('/') }}/master-relation-admin/data",
                                 "type": "GET"
                             }
                         });
                     });
 
-                    // Filter
-                    function filter() {				
-                        school = $('#soSchoolFilter').val();
+                    // Form Edit Admin
+                    function editForm($id) {
                         $.ajax({
-                            url: "master-school/data/" + school,
-                            success: function(response){
-                                table.ajax.url("master-school/data/" + school).load(); 
+                            url: "{{ URL::to('/') }}/master-relation-admin/" + $id + "/edit",
+                            type: "GET",
+                            dataType: "JSON",
+                            success: function(data) {
+                                url = "{{ URL::to('/') }}/master-relation-admin/" + $id;
+                                $('#editAdminModal').modal('show');
+                                $('.modal-title').text('Form Edit Admin');
+                                $('#formEdit').attr('action', url);
+                                $('#inEmailEdit').val(data.email);
+                                $('#inNameEdit').val(data.name).attr('readonly','true');
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
                             }
                         });
-                    };
+                    }
+
+                    // Email ketika ada event change
+                    $("#inEmailEdit").change(function()
+                    {				
+                        email = $(this).val();
+                        $.ajax({
+                            url: "{{ URL::to('/') }}/master-relation-admin/ustadz/search/" + email,
+                            dataType: "JSON",
+                            success: function(response){
+                                $('#editAdminModal').modal('show');
+                                $('.modal-title').text('Form Edit Admin');
+                                $('#inNameEdit').val(response.name).attr('readonly','true');
+                            } ,
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    })
 
                 </script>
                 @endsection

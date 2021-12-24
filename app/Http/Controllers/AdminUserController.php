@@ -133,10 +133,10 @@ class AdminUserController extends Controller
         
             if ($updated) {
                 return redirect()->route('user.index')
-                ->with('message_success', 'Tahun User berhasil diperbarui.');
+                ->with('message_success', 'User berhasil diperbarui.');
             } else {
                 return redirect()->route('user.index')
-                ->with('message_error', 'Tahun User gagal diperbarui.');
+                ->with('message_error', 'User gagal diperbarui.');
             }
         } catch(\Illuminate\Database\QueryException $e){ 
             return redirect()->route('user.index')

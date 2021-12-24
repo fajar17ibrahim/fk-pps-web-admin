@@ -25,6 +25,8 @@ use App\Http\Controllers\AdminMasterSchoolYearController;
 use App\Http\Controllers\AdminMasterSemesterController;
 use App\Http\Controllers\AdminMasterRelationClassController;
 use App\Http\Controllers\AdminMasterRelationMapelController;
+use App\Http\Controllers\AdminMasterRelationAdminController;
+use App\Http\Controllers\AdminMasterRelationHeadMasterController;
 use App\Http\Controllers\AdminSchoolProfileController;
 use App\Http\Controllers\AdminAuthLoginController;
 use App\Http\Controllers\AdminUserController;
@@ -142,6 +144,20 @@ Route::middleware(['verify', 'verified'])->group(function () {
     
     Route::resource('master-relation-mapel', AdminMasterRelationMapelController::class);
 
+    // Relation Admin Jenjang
+    Route::get('master-relation-admin/data', [AdminMasterRelationAdminController::class, 'listData'])->name('master-relation-admin.data');
+    
+    Route::get('master-relation-admin/ustadz/search/{email}', [AdminMasterRelationAdminController::class, 'search'])->name('master-relation-admin.search');
+    
+    Route::resource('master-relation-admin', AdminMasterRelationAdminController::class);
+
+    // Relation Kepala Sekolah
+    Route::get('master-relation-headmaster/data', [AdminMasterRelationHeadMasterController::class, 'listData'])->name('master-relation-headmaster.data');
+    
+    Route::get('master-relation-headmaster/ustadz/search/{email}', [AdminMasterRelationHeadMasterController::class, 'search'])->name('master-relation-headmaster.search');
+    
+    Route::resource('master-relation-headmaster', AdminMasterRelationHeadMasterController::class);
+
     // Report Print
     Route::get('masterbook/data/{level}/{school}/{kelas}', [AdminMasterBookController::class, 'listData'])->name('masterbook.data');
 
@@ -158,13 +174,13 @@ Route::middleware(['verify', 'verified'])->group(function () {
     
     Route::resource('report-equipment', AdminReportEquipmentController::class);
 
-    Route::get('/report-equipment-cover/{id}', [AdminReportEquipmentController::class, 'reportCover'])->name('report-equipment-cover');
+    Route::get('report-equipment-cover/{id}', [AdminReportEquipmentController::class, 'reportCover'])->name('report-equipment-cover');
 
-    Route::get('/report-equipment-lembaga/{id}', [AdminReportEquipmentController::class, 'reportLembaga'])->name('report-equipment-lembaga');
+    Route::get('report-equipment-lembaga/{id}', [AdminReportEquipmentController::class, 'reportLembaga'])->name('report-equipment-lembaga');
 
-    Route::get('/report-equipment-santri/{id}', [AdminReportEquipmentController::class, 'reportSantri'])->name('report-equipment-santri');
+    Route::get('report-equipment-santri/{id}', [AdminReportEquipmentController::class, 'reportSantri'])->name('report-equipment-santri');
 
-    Route::get('/report-equipment-mutation/{id}', [AdminReportEquipmentController::class, 'reportMutation'])->name('report-equipment-mutation');
+    Route::get('report-equipment-mutation/{id}', [AdminReportEquipmentController::class, 'reportMutation'])->name('report-equipment-mutation');
 
     // Report Print
     Route::get('report-print/data/{level}/{school}/{kelas}', [AdminReportPrintController::class, 'listData'])->name('report-print.data');

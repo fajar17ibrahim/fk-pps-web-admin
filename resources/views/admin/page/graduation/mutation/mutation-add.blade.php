@@ -47,7 +47,7 @@
                                                     <div class="col-sm-9 text-secondary">
                                                         <select name="soSchoolDest" class="single-select" id="soSchoolDest">
                                                             @foreach ($schools as $school)
-                                                            <option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+                                                            <option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

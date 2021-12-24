@@ -40,13 +40,13 @@ class UstadzSeeder extends Seeder
         $ustadz->ustadz_email = 'ceo@gmail.com';
         $ustadz->ustadz_phone = '081000000000';
         $ustadz->ustadz_photo = 'avatar.png';
-        $ustadz->ustadz_school = '1234567890';
+        $ustadz->ustadz_school = '1';
         $ustadz->ustadz_class = '1';
         $ustadz->status = 'Aktif';
         $saveUstadz = $ustadz->save();
 
         $ustadz = new Ustadz;
-        $ustadz->ustadz_nik = '351315100000000';
+        $ustadz->ustadz_nik = '351315100000001';
         $ustadz->ustadz_name = 'Admin Ula';
         $ustadz->ustadz_born_place = 'Surabaya';
         $ustadz->ustadz_born_date = '1991-01-01';
@@ -70,13 +70,13 @@ class UstadzSeeder extends Seeder
         $ustadz->ustadz_email = 'admin-ula@gmail.com';
         $ustadz->ustadz_phone = '081000000000';
         $ustadz->ustadz_photo = 'avatar.png';
-        $ustadz->ustadz_school = '1234567890';
+        $ustadz->ustadz_school = '1';
         $ustadz->ustadz_class = '1';
         $ustadz->status = 'Aktif';
         $saveUstadz = $ustadz->save();
 
         $ustadz = new Ustadz;
-        $ustadz->ustadz_nik = '351315110000000';
+        $ustadz->ustadz_nik = '351315110000003';
         $ustadz->ustadz_name = 'Admin Wustha';
         $ustadz->ustadz_born_place = 'Surabaya';
         $ustadz->ustadz_born_date = '1991-01-01';
@@ -100,14 +100,14 @@ class UstadzSeeder extends Seeder
         $ustadz->ustadz_email = 'admin-wustha@gmail.com';
         $ustadz->ustadz_phone = '081000000000';
         $ustadz->ustadz_photo = 'avatar.png';
-        $ustadz->ustadz_school = '1234567890';
+        $ustadz->ustadz_school = '1';
         $ustadz->ustadz_class = '2';
         $ustadz->status = 'Aktif';
         $saveUstadz = $ustadz->save();
 
         
         $ustadz = new Ustadz;
-        $ustadz->ustadz_nik = '351315120000000';
+        $ustadz->ustadz_nik = '351315120000004';
         $ustadz->ustadz_name = 'Admin Ulya';
         $ustadz->ustadz_born_place = 'Surabaya';
         $ustadz->ustadz_born_date = '1991-01-01';
@@ -131,13 +131,13 @@ class UstadzSeeder extends Seeder
         $ustadz->ustadz_email = 'admin-ulya@gmail.com';
         $ustadz->ustadz_phone = '081000000000';
         $ustadz->ustadz_photo = 'avatar.png';
-        $ustadz->ustadz_school = '1234567890';
+        $ustadz->ustadz_school = '1';
         $ustadz->ustadz_class = '3';
         $ustadz->status = 'Aktif';
         $saveUstadz = $ustadz->save();
 
         $ustadz = new Ustadz;
-        $ustadz->ustadz_nik = '351315200000000';
+        $ustadz->ustadz_nik = '351315200000005';
         $ustadz->ustadz_name = 'Wali Kelas';
         $ustadz->ustadz_born_place = 'Surabaya';
         $ustadz->ustadz_born_date = '1991-01-01';
@@ -161,13 +161,13 @@ class UstadzSeeder extends Seeder
         $ustadz->ustadz_email = 'walikelas@gmail.com';
         $ustadz->ustadz_phone = '081000000000';
         $ustadz->ustadz_photo = 'avatar.png';
-        $ustadz->ustadz_school = '1234567890';
+        $ustadz->ustadz_school = '1';
         $ustadz->ustadz_class = '1';
         $ustadz->status = 'Aktif';
         $saveUstadz = $ustadz->save();
 
         $ustadz = new Ustadz;
-        $ustadz->ustadz_nik = '351315300000000';
+        $ustadz->ustadz_nik = '351315300000006';
         $ustadz->ustadz_name = 'Guru';
         $ustadz->ustadz_born_place = 'Surabaya';
         $ustadz->ustadz_born_date = '1991-01-01';
@@ -191,7 +191,7 @@ class UstadzSeeder extends Seeder
         $ustadz->ustadz_email = 'guru@gmail.com';
         $ustadz->ustadz_phone = '081000000000';
         $ustadz->ustadz_photo = 'avatar.png';
-        $ustadz->ustadz_school = '1234567890';
+        $ustadz->ustadz_school = '1';
         $ustadz->ustadz_class = '1';
         $ustadz->status = 'Aktif';
         $saveUstadz = $ustadz->save();

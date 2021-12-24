@@ -12,19 +12,12 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="/">
+            <a href="{{ URL::to('/') }}">
                 <div class="parent-icon"><i class="bx bx-home-circle"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        <!-- <li>
-            <a href="{{ URL::to('/') }}/user-profile">
-                <div class="parent-icon"><i class="bx bx-user-circle"></i>
-                </div>
-                <div class="menu-title">Profil User</div>
-            </a>
-        </li> -->
         @if(Session::get('user')[0]['role_id'] != 4)
         <li>
             <a href="{{ URL::to('/') }}/school-profile">
@@ -96,6 +89,10 @@
                 <li> <a href="{{ URL::to('/') }}/master-relation-class"><i class="bx bx-right-arrow-alt"></i>Wali Kelas</a>
                 </li>
                 <li> <a href="{{ URL::to('/') }}/master-relation-mapel"><i class="bx bx-right-arrow-alt"></i>Guru Mapel</a>
+                </li>
+                <li> <a href="{{ URL::to('/') }}/master-relation-admin"><i class="bx bx-right-arrow-alt"></i>Admin Jenjang</a>
+                </li>
+                <li> <a href="{{ URL::to('/') }}/master-relation-headmaster"><i class="bx bx-right-arrow-alt"></i>Kepala Sekolah</a>
                 </li>
             </ul>
         </li>

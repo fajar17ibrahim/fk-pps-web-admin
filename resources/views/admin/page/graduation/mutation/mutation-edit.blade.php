@@ -47,7 +47,7 @@
                                                         <select name="soSchoolDest" class="single-select" id="soSchoolDest">
                                                             <option value="{{ $mutation['pps_npsn'] }}">{{ $mutation['pps_nama'] }}</option>
                                                             @foreach ($schools as $school)
-                                                            <option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+                                                            <option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

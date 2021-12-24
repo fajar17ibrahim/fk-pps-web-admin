@@ -21,29 +21,29 @@ class AdminDashboardController extends Controller
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-                ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
                 ->count();
 
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
             ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
-            ->leftJoin('school','school.school_npsn','=','graduation.graduation_school')
+            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
             ->count();
 
-            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')
+            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
             ->count();
         } else {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('santri.santri_school', '=', $user[0]->ustadz_school)
             ->count();
 
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
             ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
-            ->leftJoin('school','school.school_npsn','=','graduation.graduation_school')
+            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
             ->where('graduation.graduation_school', '=', $user[0]->ustadz_school)
             ->count();
 
-            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')
+            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
             ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
             ->count();
         }

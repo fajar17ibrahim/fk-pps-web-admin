@@ -19,6 +19,7 @@ class SchoolSeeder extends Seeder
         $school->school_statistic_number = '0987654321';
         $school->school_npsn = '1234567890';
         $school->school_name = 'PPS Admin';
+        $school->school_level = 'Ula';
         $school->school_email = 'pps-admin@gmail.com';
         $school->school_phone = '085000000000';
         $school->school_photo = 'logo_fk_pkpps.jpg';

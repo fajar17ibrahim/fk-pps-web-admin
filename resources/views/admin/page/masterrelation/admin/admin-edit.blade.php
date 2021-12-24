@@ -1,9 +1,9 @@
                                     <!-- Modal -->
-                                    <div class="modal fade" id="editUserModal"  aria-hidden="true">
+                                    <div class="modal fade" id="editAdminModal"  aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-scrollable">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Form Edit User</h5>
+                                                    <h5 class="modal-title">Form Edit Admin</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <form id="formEdit" method="post" class="row g-3 needs-validation" novalidate>
@@ -23,29 +23,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3  position-relative">
-                                                        <label for="inNameEdit" class="col-sm-3 col-form-label">Nama User</label>
+                                                        <label for="inNameEdit" class="col-sm-3 col-form-label">Nama Admin</label>
                                                         <div class="col-sm-9 text-secondary">
                                                             <input type="text" name="inNameEdit" class="form-control"  maxlength="50" id="inNameEdit" placeholder="Sugeng" required readonly/>
-                                                            <div class="invalid-tooltip">Nama User tidak boleh kosong</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 position-relative">
-                                                        <label for="soRoleEdit" class="col-sm-3 col-form-label">Role</label>
-                                                        <div class="col-sm-9 text-secondary" >
-                                                            <select class="form-select form-control" name="soRoleEdit" id="soRoleEdit" tabindex="-1">
-                                                                @foreach ($roles as $role)
-                                                                <option value="{{ $role['role_id'] }}" >{{ $role['name'] }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 position-relative">
-                                                        <label for="soStatusEdit" class="col-sm-3 col-form-label">Status</label>
-                                                        <div class="col-sm-9 text-secondary" >
-                                                            <select class="form-select form-control" name="soStatusEdit" id="soStatusEdit" tabindex="-1">
-                                                                <option value="Aktif">Aktif</option>
-                                                                <option value="Nonactive">Nonactive</option>
-                                                            </select>
+                                                            <div class="invalid-tooltip">Nama Admin tidak boleh kosong</div>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -36,6 +36,13 @@
 												</div>
 												<hr>
 												<div class="row mb-3 position-relative">
+													<label for="inSchoolName" class="col-sm-3 col-form-label">Nama PKPPS</label>
+													<div class="col-sm-9 text-secondary">
+														<input name="inSchoolName" type="text" id="inSchoolName" class="form-control" value="{{ $school->school_name }}" required/>
+														<div class="invalid-tooltip">Nama tidak boleh kosong</div>
+													</div>
+												</div>
+												<div class="row mb-3 position-relative">
 													<label for="inSchoolNPSN" class="col-sm-3 col-form-label">NPSN</label>
 													<div class="col-sm-9 text-secondary">
 														<input name="inSchoolNPSN" type="text" id="inSchoolNPSN" class="form-control" value="{{ $school->school_npsn }}" required/>
@@ -50,10 +57,14 @@
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
-													<label for="inSchoolName" class="col-sm-3 col-form-label">Nama PKPPS</label>
+													<label for="soSchoolLevel" class="col-sm-3 col-form-label">Jenjang</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSchoolName" type="text" id="inSchoolName" class="form-control" value="{{ $school->school_name }}" required/>
-														<div class="invalid-tooltip">Nama tidak boleh kosong</div>
+														<select class="form-select form-control" name="soSchoolLevel" id="soSchoolLevel" >
+															<option value="{{ $school->school_level }}" class="form-control">{{ $school->school_level }}</option>
+															<option value="Ula" class="form-control">Ula</option>
+															<option value="Wustha" class="form-control">Wustha</option>
+															<option value="Ulya" class="form-control">Ulya</option>
+														</select>
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
@@ -120,10 +131,16 @@
 														<input name="inCountry" type="text" id="inCountry" class="form-control" value="Indonesia" />
 													</div>
 												</div>
+												<div class="row">
+													<div class="col-sm-3"></div>
+													<div class="col-sm-9 text-secondary">
+														<input type="submit" class="btn btn-success px-4" value="Simpan" />
+													</div>
+												</div>
 											</div>
 										</div>
 
-										<div class="card">
+										<!-- <div class="card">
 											<div class="card-body">
 												<div class="card-title d-flex align-items-center">
 													<div><i class="bx bx-user me-1 font-22 text-success"></i></div>
@@ -154,14 +171,9 @@
 														<input name="inKepsekEmail" type="text" id="inKepsekEmail" class="form-control" value="{{ $school->ustadz_email }}" readonly/>
 													</div>
 												</div>
-												<div class="row">
-													<div class="col-sm-3"></div>
-													<div class="col-sm-9 text-secondary">
-														<input type="submit" class="btn btn-success px-4" value="Simpan" />
-													</div>
-												</div>
+												
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</form>
@@ -193,22 +205,22 @@
 						});
 					})
 
-					$("#soKepsek").change(function()
-					{				
-						var nik = $(this).val();
-						$.ajax({
-							url: "{{ URL::to('/') }}/master-school-add/search-kepsek/" + nik,
-							dataType: "JSON",
-							success: function(response){
-								// alert('Tidak dapat menampilkan Data');
-								$('#inKepsekName').val(response[0].ustadz_name);
-								$('#inKepsekEmail').val(response[0].ustadz_email);
-							} ,
-							error: function() {
-								alert('Tidak dapat menampilkan Data');
-							}
-						});
-					})
+					// $("#soKepsek").change(function()
+					// {				
+					// 	var nik = $(this).val();
+					// 	$.ajax({
+					// 		url: "{{ URL::to('/') }}/master-school-add/search-kepsek/" + nik,
+					// 		dataType: "JSON",
+					// 		success: function(response){
+					// 			// alert('Tidak dapat menampilkan Data');
+					// 			$('#inKepsekName').val(response[0].ustadz_name);
+					// 			$('#inKepsekEmail').val(response[0].ustadz_email);
+					// 		} ,
+					// 		error: function() {
+					// 			alert('Tidak dapat menampilkan Data');
+					// 		}
+					// 	});
+					// })
 
 				</script>
 				@endsection

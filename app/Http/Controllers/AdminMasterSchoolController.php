@@ -44,7 +44,7 @@ class AdminMasterSchoolController extends Controller
             //
             $rtLength =  strlen($request['inRT']);
             $angkaNol = "0";
-            $rt = "";
+            $rt = $request['inRT'];
             if ($rtLength < 3) {
                 for ($i = 1; $i < 3 - $rtLength; $i++) {
                     $angkaNol .= $angkaNol;
@@ -54,7 +54,7 @@ class AdminMasterSchoolController extends Controller
             
             $rwLength =  strlen($request['inRW']);
             $angkaNol = "0";
-            $rw = "";
+            $rw = $request['inRW'];
             if ($rwLength < 3) {
                 for ($i = 1; $i < 3 - $rwLength; $i++) {
                     $angkaNol .= $angkaNol;
@@ -74,6 +74,7 @@ class AdminMasterSchoolController extends Controller
             $school->school_statistic_number = $request['inSchoolNSP'];
             $school->school_npsn = $request['inSchoolNPSN'];
             $school->school_name = $request['inSchoolName'];
+            $school->school_level = $request['soSchoolLevel'];
             $school->school_email = $request['inSchoolEmail'];
             $school->school_phone = $request['inSchoolPhone'];
             $school->school_address = $request['inAddress'];
@@ -139,7 +140,7 @@ class AdminMasterSchoolController extends Controller
             //
             $rtLength =  strlen($request['inRT']);
             $angkaNol = "0";
-            $rt = "";
+            $rt = $request['inRT'];
             if ($rtLength < 3) {
                 for ($i = 1; $i < 3 - $rtLength; $i++) {
                     $angkaNol .= $angkaNol;
@@ -149,7 +150,7 @@ class AdminMasterSchoolController extends Controller
             
             $rwLength =  strlen($request['inRW']);
             $angkaNol = "0";
-            $rw = "";
+            $rw = $request['inRW'];
             if ($rwLength < 3) {
                 for ($i = 1; $i < 3 - $rwLength; $i++) {
                     $angkaNol .= $angkaNol;
@@ -169,6 +170,7 @@ class AdminMasterSchoolController extends Controller
             $school->school_statistic_number = $request['inSchoolNSP'];
             $school->school_npsn = $request['inSchoolNPSN'];
             $school->school_name = $request['inSchoolName'];
+            $school->school_level = $request['soSchoolLevel'];
             $school->school_email = $request['inSchoolEmail'];
             $school->school_phone = $request['inSchoolPhone'];
             $school->school_address = $request['inAddress'];
@@ -256,7 +258,8 @@ class AdminMasterSchoolController extends Controller
             $row = array();
             $row[] = $no;
             $row[] = $school->school_npsn;
-            $row[] = $school->school_name;
+            $row[] = $school->school_name . '<br>('. 
+                    $school->school_level . ")";
             $row[] = $school->school_address .'<br>'. 
                     $school->school_village .', '.
                     $school->school_districts .'<br>'. 

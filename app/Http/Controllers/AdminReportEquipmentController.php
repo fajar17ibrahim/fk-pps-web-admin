@@ -24,7 +24,7 @@ class AdminReportEquipmentController extends Controller
         $user = Session::get('user');
         $kelass = array();
         if ($user[0]->role_id == 1) {
-            $kelassCheck = Kelas::leftJoin('school', 'school.school_npsn', '=', 'kelas.class_school')
+            $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
 
@@ -86,7 +86,7 @@ class AdminReportEquipmentController extends Controller
         //
         $equipment = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
         ->leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
-        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->where('equipment.equipment_id', $id)
         ->get();
         return json_encode($equipment);
@@ -130,7 +130,7 @@ class AdminReportEquipmentController extends Controller
         if ($level != 0 && $school != 0 && $kelas != 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('kelas.class_level', '=', $level)
             ->where('santri.santri_school', '=', $school)
             ->where('kelas.class_id', '=', $kelas)
@@ -138,46 +138,46 @@ class AdminReportEquipmentController extends Controller
         } else if ($level != 0 && $school == 0 && $kelas != 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('kelas.class_level', '=', $level)
             ->where('kelas.class_id', '=', $kelas)
             ->get();
         } else if ($level == 0 && $school != 0 && $kelas != 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('santri.santri_school', '=', $school)
             ->where('kelas.class_id', '=', $kelas)
             ->get();
         } else if ($level != 0 && $school != 0 && $kelas == 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('kelas.class_level', '=', $level)
             ->where('santri.santri_school', '=', $school)
             ->get();
         } else if ($level != 0 && $school == 0 && $kelas == 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('kelas.class_level', '=', $level)
             ->get();
         } else if ($level == 0 && $school != 0 && $kelas == 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('santri.santri_school', '=', $school)
             ->get();
         } else if ($level == 0 && $school == 0 && $kelas != 0) {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('kelas.class_id', '=', $kelas)
             ->get();
         }else {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_npsn')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->get();
         }
 
@@ -203,7 +203,7 @@ class AdminReportEquipmentController extends Controller
     {
         //
         $santri = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
-        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->where('santri_nisn', '=', $id)->get();
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-cover', compact('santri'));
         $pdf->setPaper('a4', 'potrait');
@@ -215,7 +215,7 @@ class AdminReportEquipmentController extends Controller
     {
         //
         $santri = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
-        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->where('santri_nisn', '=', $id)->get();
 
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-pkpps-information', compact('santri'));
@@ -228,7 +228,7 @@ class AdminReportEquipmentController extends Controller
     {
         //
         $santri = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
-        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->leftJoin('ustadz', 'ustadz.ustadz_nik', '=', 'school.school_headship')
         ->where('santri_nisn', '=', $id)->get();
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-santri-information', compact('santri'));
@@ -241,7 +241,7 @@ class AdminReportEquipmentController extends Controller
     {
         //
         $santri = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
-        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_npsn')
+        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->where('santri_nisn', '=', $id)->get();
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-mutation', compact('santri'));
         $pdf->setPaper('a4', 'potrait');
