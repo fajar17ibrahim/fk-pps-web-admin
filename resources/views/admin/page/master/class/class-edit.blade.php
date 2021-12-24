@@ -41,7 +41,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" name="soSchoolEdit" id="soSchoolEdit">
                                                                 @foreach ($schools as $school)
-                                                                <option value="{{ $school->school_npsn }}">{{ $school->school_name }}</option>
+                                                                <option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

@@ -465,6 +465,7 @@ class AdminMasterSantriController extends Controller
         $this->authorize('master-santri');
 
         $user = Session::get('user');
+        $kelass = array();
         if ($user[0]->role_id == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')

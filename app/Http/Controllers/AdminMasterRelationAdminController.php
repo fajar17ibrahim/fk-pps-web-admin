@@ -127,10 +127,20 @@ class AdminMasterRelationAdminController extends Controller
 
     public function listData() {
         // $schools = School::get();
-        $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
                 ->leftJoin('users','ustadz.ustadz_email','=','users.email')
                 ->where('users.role_id', '=', 2)
                 ->get();
+        } else {
+            $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
+                ->leftJoin('users','ustadz.ustadz_email','=','users.email')
+                ->where('users.role_id', '=', 2)
+                ->where('school.school_level', '=', $user[0]->class_level)
+                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->get();
+        }
         
         $no = 0;
         $data = array();
