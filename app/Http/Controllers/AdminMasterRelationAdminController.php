@@ -126,27 +126,32 @@ class AdminMasterRelationAdminController extends Controller
     }
 
     public function listData() {
-        $schools = School::get();
+        // $schools = School::get();
+        $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
+                ->leftJoin('users','ustadz.ustadz_email','=','users.email')
+                ->where('users.role_id', '=', 2)
+                ->get();
         
         $no = 0;
         $data = array();
         foreach ($schools as $school) {
-            $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->leftJoin('users','ustadz.ustadz_email','=','users.email')
-                ->where('school.school_id', '=', $school->school_id)
-                ->where('users.role_id', '=', 2)
-                ->first();
-
+            // $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
+            //     ->leftJoin('users','ustadz.ustadz_email','=','users.email')
+            //     ->where('school.school_id', '=', $school->school_id)
+            //     ->where('users.role_id', '=', 2)
+            //     ->first();
+                
+                // return $ustadz;
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $school->school_npsn;
             $row[] = $school->school_name;
             $row[] = $school->school_level;
-            $row[] = $ustadz->ustadz_name;
+            $row[] = $school->ustadz_name;
             $row[] = '<div class="col">
                         <div class="btn-group">
-                            <a href="#" onclick="editForm(' . $ustadz->id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
+                            <a href="#" onclick="editForm(' . $school->id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
                         </div>
                     </div>';
             $data[] = $row;

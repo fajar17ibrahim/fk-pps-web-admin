@@ -23,10 +23,6 @@ class AdminReportAttitudeController extends Controller
         //
         $this->authorize('report-attitude');
 
-        $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->get();
-
         $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = array();
         $user = Session::get('user');
@@ -43,6 +39,10 @@ class AdminReportAttitudeController extends Controller
     
                 $kelass[] = $data;
             }
+
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
+            ->get();
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
                 ->where('class_level', '=', $user[0]->class_level)
@@ -57,6 +57,12 @@ class AdminReportAttitudeController extends Controller
 
                 $kelass[] = $data;
             }
+
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
+            ->where('class_level', '=', $user[0]->class_level)
+            ->where('class_school', '=', $user[0]->ustadz_school)
+            ->get();
         }
         return view('admin.page.report.reportvalue.attitude', compact('schools'))
         ->with(array('kelass' => $kelass))

@@ -37,7 +37,7 @@
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                         <h6 class="mb-0 text-uppercase">Daftar PKPPS</h6>
-                            <a class="ms-auto" href="/master-school-add"> 
+                            <a class="ms-auto" href="{{ URL::to('/') }}/master-school-add"> 
                                 <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah PKPPS</button>
                             </a>
                         </div>

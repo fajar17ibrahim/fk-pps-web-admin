@@ -30,7 +30,7 @@ class AdminAuthLoginController extends Controller
             $user = Auth::user();
             $ustadz = Ustadz::leftJoin('users', 'users.email', '=', 'ustadz.ustadz_email')
             ->leftJoin('role', 'role.id', '=', 'users.role_id')
-            ->leftJoin('school', 'school.school_npsn', '=', 'ustadz.ustadz_school')
+            ->leftJoin('school', 'school.school_id', '=', 'ustadz.ustadz_school')
             ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
             ->where('ustadz_email' , '=', $user->email)
                 ->get();

@@ -6,7 +6,7 @@
 					
 					<div class="container">
 						<div class="main-body">
-							<form method="post" action="school-profile/{{ $school[0]->school_id }}" class="row g-3 needs-validation" novalidate>
+							<form method="post" action="{{ URL::to('/') }}/school-profile/{{ $school[0]->school_id }}" class="row g-3 needs-validation" novalidate>
 								@method('PUT')
 								@csrf
 								<div class="row">
