@@ -127,58 +127,68 @@ class AdminReportEquipmentController extends Controller
     }
 
     public function listData($level, $school, $kelas) {
-        if ($level != 0 && $school != 0 && $kelas != 0) {
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0 && $kelas != 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas != 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas != 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school != 0 && $kelas == 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas == 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas == 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level == 0 && $school == 0 && $kelas != 0) {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            }else {
+                $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->get();
+            }
+        } else {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas != 0) {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas != 0) {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school != 0 && $kelas == 0) {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas == 0) {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas == 0) {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level == 0 && $school == 0 && $kelas != 0) {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        }else {
-            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->get();
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->get();
         }
 
         $no = 0;
@@ -231,6 +241,8 @@ class AdminReportEquipmentController extends Controller
         ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->leftJoin('ustadz', 'ustadz.ustadz_nik', '=', 'school.school_headship')
         ->where('santri_nisn', '=', $id)->get();
+
+        // return $santri;
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-santri-information', compact('santri'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();

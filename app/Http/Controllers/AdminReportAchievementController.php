@@ -226,11 +226,20 @@ class AdminReportAchievementController extends Controller
                 ->get();
             }
         } else {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            if ($kelas != 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_id')
+                    ->where('kelas.class_level', '=', $user[0]->class_level)
+                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('kelas.class_id', '=', $kelas)
+                    ->get();
+            } else {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
                 ->where('kelas.class_level', '=', $user[0]->class_level)
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
+            }
         }
         
         

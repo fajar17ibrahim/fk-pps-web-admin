@@ -137,7 +137,7 @@
 													<label for="soLevelClassStart" class="col-sm-3 col-form-label">Di Kelas</label>
 													<div class="col-sm-3 text-secondary" >
 														<select name="soLevelClassStart" class="form-select form-control" id="soLevelClassStart">
-														<option value="{{ $santri['diterima_di_kelas'] }}" class="form-control">{{ $santri['diterima_di_kelas'] }}</option>	
+														<option value="{{ $santri['diterima_di_kelas'] }}" class="form-control">{{ $santri['diterima_di_kelas_name'] }}</option>	
 														@foreach ($kelass as $kelas)
 															<option value="{{ $kelas['id'] }}">{{ $kelas['name'] }}</option>
 														@endforeach

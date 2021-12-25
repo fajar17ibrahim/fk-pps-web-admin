@@ -406,6 +406,10 @@ class AdminMasterSantriController extends Controller
         $santri = Santri::leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
                 ->leftJoin('kelas', 'kelas.class_id', '=', 'santri.santri_class')
                 ->find($id);
+
+        $kelasStart = Kelas::where('kelas.class_id', '=', $santri->santri_class_start)
+                ->first();
+
         $data = array(
             'id' => $santri->santri_id,
             'photo' => $santri->santri_photo,
@@ -422,7 +426,8 @@ class AdminMasterSantriController extends Controller
             'status_rumah' => $santri->santri_home_status, 
             'anak_ke' => $santri->santri_child_of, 
             'sekolah_asal' => $santri->santri_last_school, 
-            'diterima_di_kelas' => $santri->santri_class_start, 
+            'diterima_di_kelas' => $kelasStart->class_id, 
+            'diterima_di_kelas_name' => $kelasStart->class_name, 
             'diterima_tangal' => $santri->santri_class_start_date,
             'kelas_id' => $santri->class_id,  
             'kelas' => $santri->class_name,  

@@ -307,11 +307,20 @@ class AdminReportValueController extends Controller
                 ->get();
             }
         } else {
-            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            if ($kelas != 0) {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_id')
+                    ->where('kelas.class_level', '=', $user[0]->class_level)
+                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('kelas.class_id', '=', $kelas)
+                    ->get();
+            } else {
+                $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
                 ->where('kelas.class_level', '=', $user[0]->class_level)
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
+            }
         }
         
         $no = 0;
@@ -389,40 +398,41 @@ class AdminReportValueController extends Controller
             }
 
             $no++;
+            $index = (int) $no -1;
             $row = array();
             $row[] = $no;
             $row[] = $santri->santri_nisn . " / " . $santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<input name="inKKM[]" type="number" style="width:80px;" class="form-control" value="'. $kkm . '" onchange="calculate('. $no-1 . ')" required />';
-            $row[] = '<input name="inP1[]" type="number" style="width:80px;" class="form-control" value="'. $p1 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP2[]" type="number" style="width:80px;" class="form-control" value="'. $p2 . '" onchange="calculate('. $no-1 . ')"/>';
-            $row[] = '<input name="inP3[]" type="number" style="width:80px;" class="form-control" value="'. $p3 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP4[]" type="number" style="width:80px;" class="form-control" value="'. $p4 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP5[]" type="number" style="width:80px;" class="form-control" value="'. $p5 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP6[]" type="number" style="width:80px;" class="form-control" value="'. $p6 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP7[]" type="number" style="width:80px;" class="form-control" value="'. $p7 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP8[]" type="number" style="width:80px;" class="form-control" value="'. $p8 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP9[]" type="number" style="width:80px;" class="form-control" value="'. $p9 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inP10[]" type="number" style="width:80px;" class="form-control" value="'. $p10 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inRPH[]" type="number" style="width:80px;" class="form-control" value="'. $rph . '" onchange="calculate('. $no-1 . ')" readonly  />';
-            $row[] = '<input name="inPTS[]" type="number" style="width:80px;" class="form-control" value="'. $pts . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inPAS[]" type="number" style="width:80px;" class="form-control" value="'. $pas . '" onchange="calculate('. $no-1 . ')" />';
+            $row[] = '<input name="inKKM[]" type="number" style="width:80px;" class="form-control" value="'. $kkm . '" onchange="calculate('. $index . ')" required />';
+            $row[] = '<input name="inP1[]" type="number" style="width:80px;" class="form-control" value="'. $p1 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP2[]" type="number" style="width:80px;" class="form-control" value="'. $p2 . '" onchange="calculate('. $index . ')"/>';
+            $row[] = '<input name="inP3[]" type="number" style="width:80px;" class="form-control" value="'. $p3 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP4[]" type="number" style="width:80px;" class="form-control" value="'. $p4 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP5[]" type="number" style="width:80px;" class="form-control" value="'. $p5 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP6[]" type="number" style="width:80px;" class="form-control" value="'. $p6 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP7[]" type="number" style="width:80px;" class="form-control" value="'. $p7 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP8[]" type="number" style="width:80px;" class="form-control" value="'. $p8 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP9[]" type="number" style="width:80px;" class="form-control" value="'. $p9 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inP10[]" type="number" style="width:80px;" class="form-control" value="'. $p10 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inRPH[]" type="number" style="width:80px;" class="form-control" value="'. $rph . '" onchange="calculate('. $index . ')" readonly  />';
+            $row[] = '<input name="inPTS[]" type="number" style="width:80px;" class="form-control" value="'. $pts . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inPAS[]" type="number" style="width:80px;" class="form-control" value="'. $pas . '" onchange="calculate('. $index . ')" />';
             $row[] = '<input name="inHPA[]" type="number" style="width:80px;" class="form-control" value="'. $hpa . '" readonly />';
             $row[] = '<input name="inPPRE[]" type="text" class="form-control" value="'. $ppre . '" readonly />';
             $row[] = '<textarea name="taDailyDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3" readonly>'. $pdesc . '</textarea>';
-            $row[] = '<input name="inK1[]" type="number" style="width:80px;" class="form-control" value="'. $k1 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK2[]" type="number" style="width:80px;" class="form-control" value="'. $k2 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK3[]" type="number" style="width:80px;" class="form-control" value="'. $k3 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK4[]" type="number" style="width:80px;" class="form-control" value="'. $k4 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK5[]" type="number" style="width:80px;" class="form-control" value="'. $k5 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK6[]" type="number" style="width:80px;" class="form-control" value="'. $k6 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK7[]" type="number" style="width:80px;" class="form-control" value="'. $k7 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK8[]" type="number" style="width:80px;" class="form-control" value="'. $k8 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK9[]" type="number" style="width:80px;" class="form-control" value="'. $k9 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inK10[]" type="number" style="width:80px;" class="form-control" value="'. $k10 . '" onchange="calculate('. $no-1 . ')" />';
-            $row[] = '<input name="inRPK[]" type="number" style="width:80px;" class="form-control" value="'. $rpk . '" onchange="calculate('. $no-1 . ')" readonly  />';
-            $row[] = '<input name="inKPRE[]" type="text" style="width:80px;" class="form-control" value="'. $kpre . '" onchange="calculate('. $no-1 . ')" readonly />';
+            $row[] = '<input name="inK1[]" type="number" style="width:80px;" class="form-control" value="'. $k1 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK2[]" type="number" style="width:80px;" class="form-control" value="'. $k2 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK3[]" type="number" style="width:80px;" class="form-control" value="'. $k3 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK4[]" type="number" style="width:80px;" class="form-control" value="'. $k4 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK5[]" type="number" style="width:80px;" class="form-control" value="'. $k5 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK6[]" type="number" style="width:80px;" class="form-control" value="'. $k6 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK7[]" type="number" style="width:80px;" class="form-control" value="'. $k7 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK8[]" type="number" style="width:80px;" class="form-control" value="'. $k8 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK9[]" type="number" style="width:80px;" class="form-control" value="'. $k9 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inK10[]" type="number" style="width:80px;" class="form-control" value="'. $k10 . '" onchange="calculate('. $index . ')" />';
+            $row[] = '<input name="inRPK[]" type="number" style="width:80px;" class="form-control" value="'. $rpk . '" onchange="calculate('. $index . ')" readonly  />';
+            $row[] = '<input name="inKPRE[]" type="text" style="width:80px;" class="form-control" value="'. $kpre . '" onchange="calculate('. $index . ')" readonly />';
             $row[] = '<textarea name="taSkillsDesc[]" style="width:300px; height:100px" class="form-control" id="inputDescription" placeholder="" rows="3" readonly>'. $kdesc . '</textarea>';
             $data[] = $row;
         }

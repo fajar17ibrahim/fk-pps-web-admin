@@ -132,66 +132,88 @@ class AdminReportPrintController extends Controller
     }
 
     public function listData($level, $school, $kelas) {
-        if ($level != 0 && $school != 0 && $kelas != 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas != 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas != 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school != 0 && $kelas == 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas == 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas == 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level == 0 && $school == 0 && $kelas != 0) {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        }else {
-            $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-            ->get();
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0 && $kelas != 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas != 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas != 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school != 0 && $kelas == 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas == 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas == 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level == 0 && $school == 0 && $kelas != 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            }else {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                ->get();
+            }
+        } else {
+            if ($kelas != 0) {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                    ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_id')
+                    ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                    ->where('kelas.class_level', '=', $user[0]->class_level)
+                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('kelas.class_id', '=', $kelas)
+                    ->get();
+            } else {
+                $reportPrints = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
+                    ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','kelas.class_school','=','school.school_id')
+                    ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
+                    ->where('kelas.class_level', '=', $user[0]->class_level)
+                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->get();
+            }
         }
 
         $no = 0;
@@ -252,11 +274,16 @@ class AdminReportPrintController extends Controller
 
         $user = Session::get('user');
 
-        $schoolHeadship = Ustadz::leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
-        ->where('ustadz.ustadz_nik', '=', $user[0]->school_headship)
+        $schoolHeadship = Ustadz::where('ustadz.ustadz_nik', '=', $user[0]->school_headship)
         ->first();
 
         // return $schoolHeadship;
+
+        if ($schoolHeadship == null) {
+            $errorMessage = "Kepala Sekolah tidak lengkap";
+            return redirect()->route('report-print.index')
+                    ->with('message_error', $errorMessage);
+        }
 
         if ($reportPrint) {
             $biodata = array(
