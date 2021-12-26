@@ -58,6 +58,8 @@
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li><a class="dropdown-item" href="{{ URL::to('/') }}/user-profile"><i class="bx bx-user"></i><span>Profil User</span></a>
 							</li>
+							<li><a class="dropdown-item" href="{{ URL::to('/') }}/changepassword"><i class="bx bx-key"></i><span>Ganti Password</span></a>
+							</li>
 							<li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bx bx-log-out-circle"></i><span>Keluar</span></a>
 							</li>
 						</ul>

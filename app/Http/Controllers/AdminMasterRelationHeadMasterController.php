@@ -15,9 +15,13 @@ class AdminMasterRelationHeadMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
+
+        $this->authorize('master-relation-headmaster');
+
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $ustadzs = Ustadz::get();
@@ -71,6 +75,9 @@ class AdminMasterRelationHeadMasterController extends Controller
     public function edit($id)
     {
         //
+
+        $this->authorize('master-relation-headmaster');
+
         $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_nik','=','school.school_headship')
                 ->where('school.school_id', '=', $id)
                 ->first();
@@ -101,6 +108,9 @@ class AdminMasterRelationHeadMasterController extends Controller
         //
         try {
             //
+
+            $this->authorize('master-relation-headmaster');
+
             $school = School::find($id);
             $school->school_headship = $request['inNIKEdit'];
             $updated = $school->update();
@@ -131,6 +141,9 @@ class AdminMasterRelationHeadMasterController extends Controller
     }
 
     public function listData() {
+
+        $this->authorize('master-relation-headmaster');
+
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $schools = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')
@@ -166,6 +179,8 @@ class AdminMasterRelationHeadMasterController extends Controller
     }
 
     public function search($nik) { 
+        $this->authorize('master-relation-headmaster');
+
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $ustadz = Ustadz::where('ustadz_nik', '=', $nik)->first();

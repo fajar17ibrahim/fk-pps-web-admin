@@ -86,6 +86,5 @@ class AdminAuthLoginController extends Controller
 
         return response()->json(compact('user','token'), 201);
     }
-
     
 }

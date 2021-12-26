@@ -20,6 +20,8 @@ class AdminMasterRelationAdminController extends Controller
     public function index()
     {
         //
+        $this->authorize('master-relation-admin');
+
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $ustadzs = Ustadz::get();
@@ -73,6 +75,8 @@ class AdminMasterRelationAdminController extends Controller
     public function edit($id)
     {
         //
+        $this->authorize('master-relation-admin');
+        
         $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
                 ->leftJoin('users','ustadz.ustadz_email','=','users.email')
                 ->where('users.role_id', '=', 2)
@@ -96,6 +100,8 @@ class AdminMasterRelationAdminController extends Controller
         //
         try {
             //
+            $this->authorize('master-relation-admin');
+
             $user = User::find($id);
             $user->email = $request['inEmailEdit'];
             $updated = $user->update();
@@ -126,7 +132,9 @@ class AdminMasterRelationAdminController extends Controller
     }
 
     public function listData() {
-        // $schools = School::get();
+
+        $this->authorize('master-relation-admin');
+
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
@@ -145,13 +153,6 @@ class AdminMasterRelationAdminController extends Controller
         $no = 0;
         $data = array();
         foreach ($schools as $school) {
-            // $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-            //     ->leftJoin('users','ustadz.ustadz_email','=','users.email')
-            //     ->where('school.school_id', '=', $school->school_id)
-            //     ->where('users.role_id', '=', 2)
-            //     ->first();
-                
-                // return $ustadz;
             $no++;
             $row = array();
             $row[] = $no;
@@ -172,6 +173,9 @@ class AdminMasterRelationAdminController extends Controller
     }
 
     public function search($email) { 
+
+        $this->authorize('master-relation-admin');
+        
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             $ustadz = Ustadz::where('ustadz_email', '=', $email)->first();

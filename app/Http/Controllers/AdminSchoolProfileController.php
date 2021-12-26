@@ -22,7 +22,7 @@ class AdminSchoolProfileController extends Controller
         $ustadz = Ustadz::where('ustadz_email' , '=', $user->email)
         ->get();
         $school = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')
-        ->where('school.school_npsn' , '=' , $ustadz[0]->ustadz_school)
+        ->where('school.school_id' , '=' , $ustadz[0]->ustadz_school)
         ->get();
         // return $ustadz;
         $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')->get();

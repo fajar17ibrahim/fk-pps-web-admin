@@ -30,6 +30,7 @@ use App\Http\Controllers\AdminMasterRelationHeadMasterController;
 use App\Http\Controllers\AdminSchoolProfileController;
 use App\Http\Controllers\AdminAuthLoginController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -245,6 +246,12 @@ Route::middleware(['verify', 'verified'])->group(function () {
     Route::get('user/search/{email}', [AdminUserController::class, 'search'])->name('user.search');
     
     Route::resource('user', AdminUserController::class);
+
+    // Change Password
+    Route::resource('changepassword', AdminChangePasswordController::class);
+
+    Route::post('changepassword-request', [AdminChangePasswordController::class, 'store'])->name('chengepassword-request');
+
 
 });
 

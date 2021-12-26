@@ -130,7 +130,6 @@ class AdminUserController extends Controller
             $user->status = $request['soStatusEdit'];
             $updated = $user->update();
             
-        
             if ($updated) {
                 return redirect()->route('user.index')
                 ->with('message_success', 'User berhasil diperbarui.');

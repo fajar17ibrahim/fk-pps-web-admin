@@ -103,14 +103,23 @@ class PermissionSeeder extends Seeder
             ],
             [
                  'permission_name' => 'report-homeroom-teacher' // 29
-            ]            
+            ],
+            [
+                 'permission_name' => 'master-relation-admin' // 30
+            ],
+            [
+                 'permission_name' => 'master-relation-headmaster' // 31
+            ],
+            [
+                 'permission_name' => 'changepassword' // 32
+            ]           
         ]);
 
         $ceo = Role::where('role_name', 'ceo')->first();
-        $ceo->permission()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
+        $ceo->permission()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
 
         $admin = Role::where('role_name', 'admin')->first();
-        $admin->permission()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]);
+        $admin->permission()->attach([1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]);
 
         $homeroomTeacher = Role::where('role_name', 'homeroom-teacher')->first();
         $homeroomTeacher->permission()->attach([1, 2, 3, 4, 5, 6, 7, 9, 13, 17, 18, 19, 24, 25, 26, 27, 28, 29]);
