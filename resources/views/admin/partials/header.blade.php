@@ -6,7 +6,7 @@
 					@if(Session::has('pkpps'))
 					<div class="search-bar flex-grow-1">
 						<div class="position-relative search-bar-box">
-							<h5><b class="text text-success">E-Raport</b> {{ Session::get('pkpps') . " (" . Session::get('user')[0]['class_level'] . ")" }}</h5>
+							<h5><b class="text text-success">E-Raport</b> {{ Session::get('pkpps') . " (" . Session::get('user')[0]['school_level'] . ")" }}</h5>
 						</div>
 					</div>
 					@endif

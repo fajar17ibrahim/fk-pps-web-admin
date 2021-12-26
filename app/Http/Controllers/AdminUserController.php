@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Ustadz;
 use App\Models\Role;
+use App\Mail\EMail;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,16 +68,24 @@ class AdminUserController extends Controller
             $user->email = $request['inEmail'];
             $user->role_id = $request['soRole'];
             $user->status = $request['soStatus'];
-            $user->password = Hash::make('password');
+            $random_password = Str::random(8);
+            $user->password = Hash::make($random_password);
             $save = $user->save();
             // return response()->json(compact('user','token'), 201);
             
             if ($save) {
+                $details = [
+                    'title' => 'Password Login',
+                    'body' => 'Password Anda : ' . $random_password
+                ];
+
+                Mail::to($request['inEmail'])->send(new EMail($details));
+
                 return redirect()->route('user.index')
-                ->with('message_success', 'Tahun User berhasil disimpan.');
+                ->with('message_success', 'User berhasil disimpan.');
             } else {
                 return redirect()->route('user.index')
-                ->with('message_error', 'Tahun User gagal disimpan.');
+                ->with('message_error', 'User gagal disimpan.');
             }
         } catch(\Illuminate\Database\QueryException $e){ 
             return redirect()->route('user.index')
