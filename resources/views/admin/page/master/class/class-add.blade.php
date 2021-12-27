@@ -21,7 +21,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" name="soLevel" id="soLevel" tabindex="-1">
                                                                 @if(Session::get('user')[0]['role_id'] != 1)
-                                                                <option value="{{ Session::get('user')[0]['class_level'] }}" class="form-control">{{ Session::get('user')[0]['class_level'] }}</option>
+                                                                <option value="{{ Session::get('user')[0]['school_level'] }}" class="form-control">{{ Session::get('user')[0]['school_level'] }}</option>
                                                                 @else
                                                                 <option value="Ula" class="form-control">Ula</option>
                                                                 <option value="Wustha" class="form-control">Wustha</option>
@@ -35,7 +35,7 @@
                                                         <div class="col-sm-9 text-secondary" >
                                                             <select class="form-select form-control" name="soSchool" id="soSchool">
                                                                 @foreach ($schools as $school)
-                                                                <option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
+                                                                <option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

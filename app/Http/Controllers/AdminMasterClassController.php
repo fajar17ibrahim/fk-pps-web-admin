@@ -18,20 +18,36 @@ class AdminMasterClassController extends Controller
     {
         //
         $this->authorize('master-class');
-            
         $user = Session::get('user');
+
         if ($user[0]->role_id == 1) {
-            $schools = School::orderBy('school_name', 'asc')->get();
-            $kelass = Kelas::orderBy('class_name', 'asc')->get();
+            $schoolsData = School::orderBy('school_name', 'asc')->get();
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
+            }
         } else {
-            $schools = School::orderBy('school_name', 'asc')
+            $schoolsData = School::orderBy('school_name', 'asc')
             ->where('school.school_id', '=', $user[0]->ustadz_school)
             ->get();
-            $kelass = Kelas::orderBy('class_name', 'asc')
-            ->where('kelas.class_level', '=', $user[0]->class_level)
-            ->get();
+
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
+            }
+
         }
-        return view('admin.page.master.class.index', compact('schools'), compact('kelass'));
+        return view('admin.page.master.class.index', compact('schools'));
     }
 
     /**
@@ -166,12 +182,12 @@ class AdminMasterClassController extends Controller
         if ($user[0]->role_id == 1) {
             if ($level != 0 && $school != 0) {
                 $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('kelas.class_level', '=', $level)
+                ->where('school.school_level', '=', $level)
                 ->where('kelas.class_school', '=', $school)
                 ->get();
             } else if ($level != 0 && $school == 0) {
                 $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('kelas.class_level', '=', $level)
+                ->where('school.school_level', '=', $level)
                 ->get();
             } else if ($level == 0 && $school != 0) {
                 $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
@@ -183,7 +199,6 @@ class AdminMasterClassController extends Controller
             }
         } else {
             $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $user[0]->class_level)
             ->where('school.school_id', '=', $user[0]->ustadz_school)
             ->get();
             
@@ -197,7 +212,7 @@ class AdminMasterClassController extends Controller
             $row[] = $no;
             $row[] = $kelas->class_id;
             $row[] = $kelas->class_name;
-            $row[] = $kelas->class_level;
+            $row[] = $kelas->school_level;
             $row[] = $kelas->school_name;
             if ($user[0]->role_id == 1 || $user[0]->role_id == 2) {
             $row[] = '<div class="col">

@@ -181,7 +181,6 @@ class AdminUserController extends Controller
             $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
             ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
             ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
-            ->where('kelas.class_level', '=', $user[0]->class_level)
             ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
             ->select('role_name', 'name', 'email', 'users.id', 'users.status')
             ->get();
