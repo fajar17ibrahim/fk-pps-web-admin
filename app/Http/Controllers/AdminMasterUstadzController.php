@@ -275,7 +275,7 @@ class AdminMasterUstadzController extends Controller
                 }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_level', '=', $user[0]->school_level)
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
 
@@ -323,7 +323,7 @@ class AdminMasterUstadzController extends Controller
                 }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_level', '=', $user[0]->school_level)
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
 
@@ -365,9 +365,8 @@ class AdminMasterUstadzController extends Controller
                 ->get();
             }
         } else {
-            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->leftJoin('kelas','kelas.class_id','=','ustadz.ustadz_class')    
-                ->where('kelas.class_level', '=', $user[0]->class_level)
+            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')    
+                ->where('school.school_level', '=', $user[0]->school_level)
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
         }

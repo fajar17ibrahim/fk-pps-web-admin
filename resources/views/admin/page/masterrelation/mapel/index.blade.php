@@ -129,7 +129,7 @@
                         // Menampilkan data Guru Mapel
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
+                                "url": "{{ URL::to('/') }}/master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
                                 "type": "GET"
                             }
                         });                    
@@ -141,10 +141,10 @@
                         school = $('#soSchoolFilter').val();
                         kelas = $('#soKelasFilter').val();
                         $.ajax({
-                            url: "master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/master-relation-mapel/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
                                 // alert(response  );
-                                table.ajax.url("master-relation-mapel/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/master-relation-mapel/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
@@ -154,10 +154,10 @@
 
                     // Form Edit Guru Mapel
                     function editForm($id) {
-                        url = "master-relation-mapel/" + $id;
+                        url = "{{ URL::to('/') }}/master-relation-mapel/" + $id;
                         $('.modal-title').text('Edit Kelas');
                         $.ajax({
-                            url: "master-relation-mapel/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/master-relation-mapel/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

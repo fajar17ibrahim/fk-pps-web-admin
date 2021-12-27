@@ -115,7 +115,7 @@
                         // Menampilkan data Lulusan
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "graduation/data/" + level + "/" + school,
+                                "url": "{{ URL::to('/') }}/graduation/data/" + level + "/" + school,
                                 "type": "GET"
                             }
                         });                    
@@ -126,9 +126,9 @@
                         level = $('#soLevelFilter').val();
                         school = $('#soSchoolFilter').val();
                         $.ajax({
-                            url: "graduation/data/" + level + "/" + school,
+                            url: "{{ URL::to('/') }}/graduation/data/" + level + "/" + school,
                             success: function(response){
-                                table.ajax.url("graduation/data/" + level + "/" + school).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/graduation/data/" + level + "/" + school).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

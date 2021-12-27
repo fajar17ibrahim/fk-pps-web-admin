@@ -100,7 +100,7 @@
                         // Menampilkan data Equipment
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "report-equipment/data/" + level + "/" + school + "/" + kelas,
+                                "url": "{{ URL::to('/') }}/report-equipment/data/" + level + "/" + school + "/" + kelas,
                                 "type": "GET"
                             }
                         });
@@ -113,9 +113,9 @@
                         school = $('#soSchoolFilter').val();
                         kelas = $('#soKelasFilter').val();
                         $.ajax({
-                            url: "report-equipment/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/report-equipment/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                table.ajax.url("report-equipment/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/report-equipment/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
@@ -126,7 +126,7 @@
 					// Form List Equipment
                     function listForm($id) {
                         $.ajax({
-                            url: "report-equipment/" + $id,
+                            url: "{{ URL::to('/') }}/report-equipment/" + $id,
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

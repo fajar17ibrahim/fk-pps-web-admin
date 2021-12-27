@@ -131,7 +131,7 @@
                         // Menampilkan data MasterBook
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "masterbook/data/" + level + "/" + school + "/" + kelas,
+                                "url": "{{ URL::to('/') }}/masterbook/data/" + level + "/" + school + "/" + kelas,
                                 "type": "GET"
                             }
                         });
@@ -144,9 +144,9 @@
                         school = $('#soSchoolFilter').val();
                         kelas = $('#soKelasFilter').val();
                         $.ajax({
-                            url: "masterbook/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/masterbook/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                table.ajax.url("masterbook/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/masterbook/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
@@ -158,7 +158,7 @@
                     function listForm($id) {
                         $('#masterBookListModal').modal('show');
                         $.ajax({
-                            url: "masterbook/" + $id,
+                            url: "{{ URL::to('/') }}/masterbook/" + $id,
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

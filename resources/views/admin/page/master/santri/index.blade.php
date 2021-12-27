@@ -133,7 +133,7 @@
                         // Menampilkan data Sanri
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-santri/data/" + level + "/" + school+ "/" + kelas,
+                                "url": "{{ URL::to('/') }}/master-santri/data/" + level + "/" + school+ "/" + kelas,
                                 "type": "GET"
                             }
                         });
@@ -146,9 +146,9 @@
                         school = $('#soSchoolFilter').val();
                         kelas = $('#soKelasFilter').val();
                         $.ajax({
-                            url: "master-santri/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/master-santri/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                table.ajax.url("master-santri/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/master-santri/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

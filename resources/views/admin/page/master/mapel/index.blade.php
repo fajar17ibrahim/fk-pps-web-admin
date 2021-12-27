@@ -80,7 +80,7 @@
                                 title: "Aksi"
                             }],
                             ajax: {
-                                "url": "master-mapel/data",
+                                "url": "{{ URL::to('/') }}/master-mapel/data",
                                 "type": "GET"
                             }
                         });
@@ -89,10 +89,10 @@
 
                     // Form Edit Mapel
                     function editForm($id) {
-                        url = "master-mapel/" + $id;
+                        url = "{{ URL::to('/') }}/master-mapel/" + $id;
                         $('.modal-title').text('Edit Mapel');
                         $.ajax({
-                            url: "master-mapel/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/master-mapel/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

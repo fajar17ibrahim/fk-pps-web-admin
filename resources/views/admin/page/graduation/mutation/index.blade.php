@@ -114,7 +114,7 @@
                         // Menampilkan data Mutasi
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "mutation/data/" + level + "/" + school,
+                                "url": "{{ URL::to('/') }}/mutation/data/" + level + "/" + school,
                                 "type": "GET"
                             }
                         });                    
@@ -125,9 +125,9 @@
                         level = $('#soLevelFilter').val();
                         school = $('#soSchoolFilter').val();
                         $.ajax({
-                            url: "mutation/data/" + level + "/" + school,
+                            url: "{{ URL::to('/') }}/mutation/data/" + level + "/" + school,
                             success: function(response){
-                                table.ajax.url("mutation/data/" + level + "/" + school).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/mutation/data/" + level + "/" + school).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

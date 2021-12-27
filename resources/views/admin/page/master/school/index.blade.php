@@ -100,7 +100,7 @@
                         // Menampilkan data Lembaga
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-school/data/" + school,
+                                "url": "{{ URL::to('/') }}/master-school/data/" + school,
                                 "type": "GET"
                             }
                         });
@@ -110,9 +110,9 @@
                     function filter() {				
                         school = $('#soSchoolFilter').val();
                         $.ajax({
-                            url: "master-school/data/" + school,
+                            url: "{{ URL::to('/') }}/master-school/data/" + school,
                             success: function(response){
-                                table.ajax.url("master-school/data/" + school).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/master-school/data/" + school).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

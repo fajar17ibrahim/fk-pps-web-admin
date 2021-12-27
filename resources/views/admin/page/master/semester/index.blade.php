@@ -72,7 +72,7 @@
                                 title: "Aksi"
                             }],
                             ajax: {
-                                "url": "master-semester/data",
+                                "url": "{{ URL::to('/') }}/master-semester/data",
                                 "type": "GET"
                             }
                         });
@@ -87,10 +87,10 @@
 
                     // Form Edit Semester
                     function editForm($id) {
-                        url = "master-semester/" + $id;
+                        url = "{{ URL::to('/') }}/master-semester/" + $id;
                         $('.modal-title').text('Edit Semester');
                         $.ajax({
-                            url: "master-semester/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/master-semester/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

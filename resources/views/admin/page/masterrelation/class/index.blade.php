@@ -113,7 +113,7 @@
                         // Menampilkan data kelas
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-relation-class/data/" + level + "/" + school,
+                                "url": "{{ URL::to('/') }}/master-relation-class/data/" + level + "/" + school,
                                 "type": "GET"
                             }
                         });                    
@@ -124,7 +124,7 @@
                         level = $('#soLevelFilter').val();
                         school = $('#soSchoolFilter').val();
                         $.ajax({
-                            url: "master-relation-class/data/" + level + "/" + school,
+                            url: "{{ URL::to('/') }}/master-relation-class/data/" + level + "/" + school,
                             success: function(response){
                                 table.ajax.url("master-relation-class/data/" + level + "/" + school).load(); 
                             },
@@ -136,10 +136,10 @@
 
                     // Form Edit Kelas
                     function editForm($id) {
-                        url = "master-relation-class/" + $id;
+                        url = "{{ URL::to('/') }}/master-relation-class/" + $id;
                         $('.modal-title').text('Edit Kelas');
                         $.ajax({
-                            url: "master-relation-class/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/master-relation-class/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

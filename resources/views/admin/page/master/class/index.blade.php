@@ -142,10 +142,10 @@
 
                     // Form Edit Kelas
                     function editForm($id) {
-                        url = "master-class/" + $id;
+                        url = "{{ URL::to('/') }}/master-class/" + $id;
                         $('.modal-title').text('Edit Kelas');
                         $.ajax({
-                            url: "master-class/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/master-class/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

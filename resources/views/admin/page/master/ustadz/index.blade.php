@@ -103,7 +103,7 @@
                         // Menampilkan data Ustadz
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "master-ustadz/data/" + school,
+                                "url": "{{ URL::to('/') }}/master-ustadz/data/" + school,
                                 "type": "GET"
                             }
                         });
@@ -114,7 +114,7 @@
                     function filter() {				
                         school = $('#soSchoolFilter').val();
                         $.ajax({
-                            url: "master-ustadz/data/" + school,
+                            url: "{{ URL::to('/') }}/master-ustadz/data/" + school,
                             success: function(response){
                                 table.ajax.url("master-ustadz/data/" + school).load(); 
                             },

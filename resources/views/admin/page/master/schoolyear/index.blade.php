@@ -78,7 +78,7 @@
                                 title: "Aksi"
                             }],
                             ajax: {
-                                "url": "master-school-year/data",
+                                "url": "{{ URL::to('/') }}/master-school-year/data",
                                 "type": "GET"
                             }
                         });
@@ -87,10 +87,10 @@
 
                     // Form Edit Tahun Pelajaran
                     function editForm($id) {
-                        url = "master-school-year/" + $id;
+                        url = "{{ URL::to('/') }}/master-school-year/" + $id;
                         $('.modal-title').text('Edit Tahun Pelajaran');
                         $.ajax({
-                            url: "master-school-year/" + $id + "/edit",
+                            url: "{{ URL::to('/') }}/master-school-year/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {

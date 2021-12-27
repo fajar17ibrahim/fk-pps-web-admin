@@ -142,7 +142,7 @@
                         // Menampilkan data Report Value
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "report-attendance/data/" + level + "/" + school + "/" + kelas,
+                                "url": "{{ URL::to('/') }}/report-attendance/data/" + level + "/" + school + "/" + kelas,
                                 "type": "GET"
                             }
                         });
@@ -155,9 +155,9 @@
                         kelas = $('#soKelasFilter').val();
                         mapel = $('#soMapelFilter').val();
                         $.ajax({
-                            url: "report-attendance/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/report-attendance/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                table.ajax.url("report-attendance/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/report-attendance/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

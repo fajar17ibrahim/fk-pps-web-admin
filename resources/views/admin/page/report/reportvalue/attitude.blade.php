@@ -500,7 +500,7 @@
                         // Menampilkan data Report Value
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "report-attitude/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                                "url": "{{ URL::to('/') }}/report-attitude/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
                                 "type": "GET"
                             }
                         });
@@ -513,7 +513,7 @@
                         kelas = $('#soKelasFilter').val();
                         mapel = $('#soMapelFilter').val();
                         $.ajax({
-                            url: "report-attitude/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/report-attitude/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
                                 $('#soSantriNISM').empty();
                                 $.each(response, function(key, value) {

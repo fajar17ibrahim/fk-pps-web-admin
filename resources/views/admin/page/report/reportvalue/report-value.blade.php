@@ -252,7 +252,7 @@
                         // Menampilkan data Report Value
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                                "url": "{{ URL::to('/') }}/report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
                                 "type": "GET"
                             }
                         });
@@ -265,9 +265,9 @@
                         kelas = $('#soKelasFilter').val();
                         mapel = $('#soMapelFilter').val();
                         $.ajax({
-                            url: "report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                            url: "{{ URL::to('/') }}/report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
                             success: function(response){
-                                table.ajax.url("report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
+                                table.ajax.url("{{ URL::to('/') }}/report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
                                 $('#inMapel').val(mapel);
                                 let mapelName = $("#soMapelFilter option:selected").text();
                                 if (mapelName != "Semua") {

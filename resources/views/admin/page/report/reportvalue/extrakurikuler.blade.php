@@ -150,7 +150,7 @@
                         // Menampilkan data Santri
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "report-extrakurikuler/data/" + level + "/" + school + "/" + kelas,
+                                "url": "{{ URL::to('/') }}/report-extrakurikuler/data/" + level + "/" + school + "/" + kelas,
                                 "type": "GET"
                             }
                         });
@@ -162,9 +162,9 @@
                         school = $('#soSchoolFilter').val();
                         kelas = $('#soKelasFilter').val();
                         $.ajax({
-                            url: "report-extrakurikuler/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/report-extrakurikuler/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                table.ajax.url("report-extrakurikuler/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/report-extrakurikuler/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

@@ -126,7 +126,7 @@
                         // Menampilkan data Sanri
                         table = $('#dataTable').DataTable({
                             ajax: {
-                                "url": "report-print/data/" + level + "/" + school+ "/" + kelas,
+                                "url": "{{ URL::to('/') }}/report-print/data/" + level + "/" + school+ "/" + kelas,
                                 "type": "GET"
                             }
                         });
@@ -139,9 +139,9 @@
                         school = $('#soSchoolFilter').val();
                         kelas = $('#soKelasFilter').val();
                         $.ajax({
-                            url: "report-print/data/" + level + "/" + school + "/" + kelas,
+                            url: "{{ URL::to('/') }}/report-print/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                table.ajax.url("report-print/data/" + level + "/" + school+ "/" + kelas).load(); 
+                                table.ajax.url("{{ URL::to('/') }}/report-print/data/" + level + "/" + school+ "/" + kelas).load(); 
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
