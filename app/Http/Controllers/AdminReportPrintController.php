@@ -210,8 +210,7 @@ class AdminReportPrintController extends Controller
                     ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','kelas.class_school','=','school.school_id')
                     ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-                    ->where('kelas.class_level', '=', $user[0]->class_level)
-                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('santri.santri_school', '=', $user[0]->ustadz_school)
                     ->get();
             }
         }

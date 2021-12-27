@@ -186,7 +186,6 @@ class AdminReportEquipmentController extends Controller
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
                 ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
         }
