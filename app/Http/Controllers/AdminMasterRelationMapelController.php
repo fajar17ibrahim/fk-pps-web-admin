@@ -42,7 +42,7 @@ class AdminMasterRelationMapelController extends Controller
             
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_level', '=', $user[0]->school_level)
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
 

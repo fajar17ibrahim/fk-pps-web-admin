@@ -15,7 +15,7 @@ class CreateKdKnowledgeTable extends Migration
     {
         Schema::create('kd_knowledge', function (Blueprint $table) {
             $table->id();
-            $table->string('ustadz_nik')->nullable();
+            $table->string('mapel_teacher')->nullable();
             $table->bigInteger('p_id')->unsigned();
             $table->text('desc', 15)->nullable();
             $table->timestamps();

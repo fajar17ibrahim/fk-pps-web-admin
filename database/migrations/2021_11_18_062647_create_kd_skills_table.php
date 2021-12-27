@@ -15,7 +15,7 @@ class CreateKdSkillsTable extends Migration
     {
         Schema::create('kd_skills', function (Blueprint $table) {
             $table->id();
-            $table->string('ustadz_nik')->nullable();
+            $table->string('mapel_teacher')->nullable();
             $table->bigInteger('k_id')->unsigned();
             $table->text('desc', 15)->nullable();
             $table->timestamps();

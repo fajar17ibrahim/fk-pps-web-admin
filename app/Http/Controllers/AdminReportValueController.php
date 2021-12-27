@@ -13,6 +13,7 @@ use App\Models\ReportValue;
 use App\Models\ReportPrint;
 use App\Models\KDKnowledge;
 use App\Models\KDSkills;
+use App\Models\MapelTeacher;
 
 class AdminReportValueController extends Controller
 {
@@ -26,11 +27,12 @@ class AdminReportValueController extends Controller
         //
         $this->authorize('report-value');
         $user = Session::get('user');
+        $mapel = Session::get('mapel');
 
-        $kdKnowledges = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        $kdKnowledges = KDKnowledge::where('mapel_teacher', '=', $mapel)
         ->orderBy('p_id', 'asc')->get();
 
-        $kdSkills = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        $kdSkills = KDSkills::where('mapel_teacher', '=', $mapel)
         ->orderBy('k_id', 'asc')->get();
 
         $schools = School::orderBy('school_name', 'asc')->get();
@@ -259,6 +261,15 @@ class AdminReportValueController extends Controller
 
     public function listData($level, $school, $kelas, $mapel) {
         $user = Session::get('user');
+
+        $mapelData = MapelTeacher::where('mapel_teacher_id', '=', $mapel)
+                ->where('ustadz_nik', $user[0]->ustadz_nik)->first();
+
+        if ($mapelData != null) {
+            Session::put('mapel', $mapelData->mapel_teacher_id);
+        }
+        
+        $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             if ($level != 0 && $school != 0 && $kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
@@ -442,8 +453,9 @@ class AdminReportValueController extends Controller
     {
         //
         $user = Session::get('user');
+        $mapel = Session::get('mapel');
 
-        $kdKnowledgesCheck = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        $kdKnowledgesCheck = KDKnowledge::where('mapel_teacher', '=', $mapel)
         ->orderBy('p_id', 'asc')->get();
 
         $kdKnowledges = array();
@@ -469,7 +481,7 @@ class AdminReportValueController extends Controller
 
         // return $kdKnowledges;   
 
-        $kdSkillsCheck = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+        $kdSkillsCheck = KDSkills::where('mapel_teacher', '=', $mapel)
         ->orderBy('k_id', 'asc')->get();
 
         $kdSkills = array();
@@ -504,6 +516,7 @@ class AdminReportValueController extends Controller
     {
         try {
             $user = Session::get('user');
+            $mapel = Session::get('mapel');
 
             $kdp = array(
                     $request['inKDP1'],
@@ -532,36 +545,36 @@ class AdminReportValueController extends Controller
                 );
 
                 for ($i = 1 ; $i <=10; $i++) {
-                    $kdKnowledgeCheck = KDKnowledge::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+                    $kdKnowledgeCheck = KDKnowledge::where('mapel_teacher', '=', $mapel)
                         ->where('p_id', '=', $i)
                         ->first();
 
                         if ($kdKnowledgeCheck) {
-                            $kdKnowledgeCheck->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdKnowledgeCheck->mapel_teacher = $mapel;
                             $kdKnowledgeCheck->desc = $kdp[$i-1];
                             $kdKnowledgeCheck->update();
                         } else {
                             $kdKnowledge = new KDKnowledge;
                             $kdKnowledge->p_id = $i;
-                            $kdKnowledge->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdKnowledge->mapel_teacher = $mapel;
                             $kdKnowledge->desc = $kdp[$i-1];
                             $kdKnowledge->save();                    
                         }
                 }
 
                 for ($i = 1 ; $i <=10; $i++) {
-                    $kdSkillCheck = KDSkills::where('ustadz_nik', '=', $user[0]->ustadz_nik)
+                    $kdSkillCheck = KDSkills::where('mapel_teacher', '=', $mapel)
                         ->where('k_id', '=', $i)
                         ->first();
 
                         if ($kdSkillCheck) {
-                            $kdSkillCheck->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdSkillCheck->mapel_teacher = $mapel;
                             $kdSkillCheck->desc = $kdk[$i-1];
                             $kdSkillCheck->update();
                         } else {
                             $kdSkill = new KDSkills;
                             $kdSkill->k_id = $i;
-                            $kdSkill->ustadz_nik = $user[0]->ustadz_nik;
+                            $kdSkill->mapel_teacher = $mapel;
                             $kdSkill->desc = $kdk[$i-1];
                             $kdSkill->save();                    
                         }
