@@ -182,9 +182,9 @@
 									<label for="soPKPPS" class="col-sm-3 col-form-label">PKPPS</label>
 									<div class="col-sm-9 text-secondary" >
 										<select name="soPKPPS" class="form-select form-control" name="soPKPPS" id="soPKPPS">
-											<option value="{{ $ustadz->school_id }}">{{ $ustadz->school_name }}</option>
+											<option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
 											@foreach ($schools as $school)
-											<option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
+												<option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
 											@endforeach
 										</select>
 									</div>
