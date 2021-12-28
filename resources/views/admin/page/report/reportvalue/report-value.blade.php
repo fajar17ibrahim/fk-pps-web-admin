@@ -108,7 +108,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <table class="table table-sm mb-0">
+                                                    <table id="tbKdP" class="table table-sm mb-0">
                                                         <tbody>
                                                             @foreach ($kdKnowledges as $kdKnowledge)
                                                             <tr>
@@ -133,7 +133,7 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <table class="table table-sm mb-0">
+                                                    <table id="tbKdK" class="table table-sm mb-0">
                                                         <tbody>
                                                             @foreach ($kdSkills as $kdSkill)
                                                             <tr>
@@ -247,12 +247,26 @@
                     var school = 0;
                     var kelas = 0;
                     var mapel = 0;
-                    var table;
+                    var table, tableKDP, tableKDK;
                     $(function() {
                         // Menampilkan data Report Value
                         table = $('#dataTable').DataTable({
                             ajax: {
                                 "url": "{{ URL::to('/') }}/report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                                "type": "GET"
+                            }
+                        });
+
+                        tableKDK = $('#tbKdK').DataTable({
+                            ajax: {
+                                "url": "{{ URL::to('/') }}/report-value/kdk",
+                                "type": "GET"
+                            }
+                        });
+
+                        tableKDP = $('#tbKdP').DataTable({
+                            ajax: {
+                                "url": "{{ URL::to('/') }}/report-value/kdp",
                                 "type": "GET"
                             }
                         });
@@ -267,7 +281,10 @@
                         $.ajax({
                             url: "{{ URL::to('/') }}/report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
                             success: function(response){
+                                location.reload();
                                 table.ajax.url("{{ URL::to('/') }}/report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
+                                tableKDK.ajax.url("{{ URL::to('/') }}/report-value/kdk/").load();
+                                tableKDP.ajax.url("{{ URL::to('/') }}/report-value/kdp/").load();
                                 $('#inMapel').val(mapel);
                                 let mapelName = $("#soMapelFilter option:selected").text();
                                 if (mapelName != "Semua") {
@@ -275,6 +292,22 @@
                                 } else {
                                     $('#title').text("Input Nilai Raport"); 
                                 }
+                                // updateKD(mapel);
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+                    };
+
+                    // Filter
+                    function updateKD(mapel) {			
+                        $.ajax({
+                            url: "{{ URL::to('/') }}/report-value/kd/" + mapel,
+                            success: function(response){
+                                foreach()
+                                $('#tbKdK').val(mapel);
+
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

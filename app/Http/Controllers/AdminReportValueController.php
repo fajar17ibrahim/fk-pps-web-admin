@@ -259,6 +259,31 @@ class AdminReportValueController extends Controller
         //
     }
 
+    public function listKDK() {
+        $kdSkills = KDSkills::where('mapel_teacher', '=', $mapel)
+        ->orderBy('k_id', 'asc')->get();
+
+        $no = 0;
+        $data = array();
+        foreach ($kdSkills as $kdSkill) {
+
+            $row = array();
+            $row[] = '<tr>
+                    <th width="15%" name="thKnowledgeId" scope="row">P - ' . $kdKnowledge->p_id . '</th>
+                    <td id="p' . $kdKnowledge->p_id .'">' . $kdKnowledge->desc .' </td>
+                </tr>';
+                $data[] = $row;
+        }
+
+        $output = array("data" => $data);
+        return response()->json($output);
+    }
+
+    public function listKDP() {
+        $kdKnowledges = KDKnowledge::where('mapel_teacher', '=', $mapel)
+        ->orderBy('p_id', 'asc')->get();
+    }
+
     public function listData($level, $school, $kelas, $mapel) {
         $user = Session::get('user');
 
