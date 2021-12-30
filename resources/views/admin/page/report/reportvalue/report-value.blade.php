@@ -110,12 +110,6 @@
                                                 <div class="modal-body">
                                                     <table id="tbKdP" class="table table-sm mb-0">
                                                         <tbody>
-                                                            @foreach ($kdKnowledges as $kdKnowledge)
-                                                            <tr>
-                                                                <th width="15%" name="thKnowledgeId" scope="row">P - {{ $kdKnowledge->p_id }}</th>
-                                                                <td id="p{{ $kdKnowledge->p_id }}">{{ $kdKnowledge->desc }}</td>
-                                                            </tr>
-                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -135,12 +129,6 @@
                                                 <div class="modal-body">
                                                     <table id="tbKdK" class="table table-sm mb-0">
                                                         <tbody>
-                                                            @foreach ($kdSkills as $kdSkill)
-                                                            <tr>
-                                                                <th width="15%" name="thSkillsId" scope="row">K - {{ $kdSkill->k_id }}</th>
-                                                                <td id="k{{ $kdSkill->k_id }}" >{{ $kdSkill->desc }}</td>
-                                                            </tr>
-                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -256,20 +244,6 @@
                                 "type": "GET"
                             }
                         });
-
-                        tableKDK = $('#tbKdK').DataTable({
-                            ajax: {
-                                "url": "{{ URL::to('/') }}/report-value/kdk",
-                                "type": "GET"
-                            }
-                        });
-
-                        tableKDP = $('#tbKdP').DataTable({
-                            ajax: {
-                                "url": "{{ URL::to('/') }}/report-value/kdp",
-                                "type": "GET"
-                            }
-                        });
                     });
 
 					// Filter
@@ -281,10 +255,8 @@
                         $.ajax({
                             url: "{{ URL::to('/') }}/report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
                             success: function(response){
-                                location.reload();
                                 table.ajax.url("{{ URL::to('/') }}/report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
-                                tableKDK.ajax.url("{{ URL::to('/') }}/report-value/kdk/").load();
-                                tableKDP.ajax.url("{{ URL::to('/') }}/report-value/kdp/").load();
+                                showKD()
                                 $('#inMapel').val(mapel);
                                 let mapelName = $("#soMapelFilter option:selected").text();
                                 if (mapelName != "Semua") {
@@ -292,7 +264,6 @@
                                 } else {
                                     $('#title').text("Input Nilai Raport"); 
                                 }
-                                // updateKD(mapel);
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
@@ -300,13 +271,30 @@
                         });
                     };
 
-                    // Filter
-                    function updateKD(mapel) {			
+                    function showKD() {				
                         $.ajax({
-                            url: "{{ URL::to('/') }}/report-value/kd/" + mapel,
+                            url: "{{ URL::to('/') }}/report-value/data/kdk",
                             success: function(response){
-                                foreach()
-                                $('#tbKdK').val(mapel);
+                                var content = '';
+                                for (i = 0; i <= response.length - 1; i++) {
+                                    content += '<tr><th width="15%" name="thSkillsId" scope="row">K - ' + response[i].id + '</th><td id="k' + response[i].id + '">' + response[i].deskripsi + '</td></tr>';
+                                };
+                                $('#tbKdK > tbody:last-child').html(content);
+
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
+                            }
+                        });
+
+                        $.ajax({
+                            url: "{{ URL::to('/') }}/report-value/data/kdp",
+                            success: function(response){
+                                var content = '';
+                                for (i = 0; i <= response.length - 1; i++) {
+                                    content += '<tr><th width="15%" name="thKnowledgeId" scope="row">P - ' + response[i].id + '</th><td id="p' + response[i].id + '">' + response[i].deskripsi + '</td></tr>';
+                                };
+                                $('#tbKdP > tbody:last-child').html(content);
 
                             },
                             error: function() {
@@ -378,61 +366,101 @@
                         if (p1Value != "") {
                             rphValueCount++;
                             rphValue += p1Value;
-                            sKDKnowledge += document.getElementById("p1").innerText + ". ";
+                            var desc = document.getElementById("p1").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         }
                         
                         if (p2Value != "") {
                             rphValueCount++;
                             rphValue += p2Value;
-                            sKDKnowledge += document.getElementById("p2").innerText + ". ";
+                            var desc = document.getElementById("p2").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p3Value != "") {
                             rphValueCount++;
                             rphValue += p3Value;
-                            sKDKnowledge += document.getElementById("p3").innerText + ". ";
+                            var desc = document.getElementById("p3").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p4Value != "") {
                             rphValueCount++;
                             rphValue += p4Value;
-                            sKDKnowledge += document.getElementById("p4").innerText + ". ";
+                            var desc = document.getElementById("p4").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p5Value != "") {
                             rphValueCount++;
                             rphValue += p5Value;
-                            sKDKnowledge += document.getElementById("p5").innerText + ". ";
+                            var desc = document.getElementById("p5").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p6Value != "") {
                             rphValueCount++;
                             rphValue += p6Value;
-                            sKDKnowledge += document.getElementById("p6").innerText + ". ";
+                            var desc = document.getElementById("p6").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p7Value != "") {
                             rphValueCount++;
                             rphValue += p7Value;
-                            sKDKnowledge += document.getElementById("p7").innerText + ". ";
+                            var desc = document.getElementById("p7").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p8Value != "") {
                             rphValueCount++;
                             rphValue += p8Value;
-                            sKDKnowledge += document.getElementById("p8").innerText + ". ";
+                            var desc = document.getElementById("p8").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p9Value != "") {
                             rphValueCount++;
                             rphValue += p9Value;
-                            sKDKnowledge += document.getElementById("p9").innerText + ". ";
+                            var desc = document.getElementById("p9").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         if (p10Value != "") {
                             rphValueCount++;
                             rphValue += p10Value;
-                            sKDKnowledge += document.getElementById("p10").innerText + ". ";
+                            var desc = document.getElementById("p10").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDKnowledge += desc;
                         } 
                         
                         rphValue = Math.round(rphValue / rphValueCount);
@@ -477,61 +505,101 @@
                         if (k1Value != "") {
                             rpkValueCount++;
                             rpkValue += k1Value;
-                            sKDSkills += document.getElementById("k1").innerText + ". ";
+                            var desc = document.getElementById("k1").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         }
                         
                         if (k2Value != "") {
                             rpkValueCount++;
                             rpkValue += k2Value;
-                            sKDSkills += document.getElementById("k2").innerText + ". ";
+                            var desc = document.getElementById("k2").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k3Value != "") {
                             rpkValueCount++;
                             rpkValue += k3Value;
-                            sKDSkills += document.getElementById("k3").innerText + ". ";
+                            var desc = document.getElementById("k3").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k4Value != "") {
                             rpkValueCount++;
                             rpkValue += k4Value;
-                            sKDSkills += document.getElementById("k4").innerText + ". ";
+                            var desc = document.getElementById("k4").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k5Value != "") {
                             rpkValueCount++;
                             rpkValue += k5Value;
-                            sKDSkills += document.getElementById("k5").innerText + ". ";
+                            var desc = document.getElementById("k5").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k6Value != "") {
                             rpkValueCount++;
                             rpkValue += k6Value;
-                            sKDSkills += document.getElementById("k6").innerText + ". ";
+                            var desc = document.getElementById("k6").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k7Value != "") {
                             rpkValueCount++;
                             rpkValue += k7Value;
-                            sKDSkills += document.getElementById("k7").innerText + ". ";
+                            var desc = document.getElementById("k7").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k8Value != "") {
                             rpkValueCount++;
                             rpkValue += k8Value;
-                            sKDSkills += document.getElementById("k8").innerText + ". ";
+                            var desc = document.getElementById("k8").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k9Value != "") {
                             rpkValueCount++;
                             rpkValue += k9Value;
-                            sKDSkills += document.getElementById("k9").innerText + ". ";
+                            var desc = document.getElementById("k9").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         if (k10Value != "") {
                             rpkValueCount++;
                             rpkValue += k10Value;
-                            sKDSkills += document.getElementById("k10").innerText + ". ";
+                            var desc = document.getElementById("k10").innerText;
+                            if (desc != "") {
+                                desc += ". ";
+                            }
+                            sKDSkills += desc;
                         } 
                         
                         rpkValue = Math.round(rpkValue / rpkValueCount);

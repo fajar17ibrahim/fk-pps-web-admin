@@ -204,9 +204,9 @@ Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::get('report-value/data/{level}/{school}/{kelas}/{mapel}', [AdminReportValueController::class, 'listData'])->name('report-value.data');
     
-    Route::get('report-value/kdk', [AdminReportValueController::class, 'listKDK'])->name('report-value.kdk');
+    Route::get('report-value/data/kdk', [AdminReportValueController::class, 'listKDK'])->name('report-value.kdk');
 
-    Route::get('report-value/kdp', [AdminReportValueController::class, 'listKDP'])->name('report-value.kdp');
+    Route::get('report-value/data/kdp', [AdminReportValueController::class, 'listKDP'])->name('report-value.kdp');
 
     // Report Attitude
     Route::resource('report-attitude', AdminReportAttitudeController::class);

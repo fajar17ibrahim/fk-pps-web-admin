@@ -39,7 +39,6 @@ class AdminMasterRelationClassController extends Controller
             
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
 
@@ -53,7 +52,6 @@ class AdminMasterRelationClassController extends Controller
             }
 
             $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')
-                ->where('ustadz_class', '=', $user[0]->ustadz_class)
                 ->where('ustadz_school', '=', $user[0]->ustadz_school)
                 ->get();
         }
@@ -205,7 +203,7 @@ class AdminMasterRelationClassController extends Controller
         } else {
             $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
-            ->where('kelas.class_level', '=', $user[0]->class_level)
+            ->where('kelas.class_level', '=', $user[0]->school_level)
             ->where('school.school_id', '=', $user[0]->ustadz_school)
             ->get();
             

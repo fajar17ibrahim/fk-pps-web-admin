@@ -42,7 +42,6 @@ class AdminMasterBookController extends Controller
             }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
 
@@ -332,58 +331,65 @@ class AdminMasterBookController extends Controller
     }
 
     public function listData($level, $school, $kelas) {
-        if ($level != 0 && $school != 0 && $kelas != 0) {
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0 && $kelas != 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas != 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas != 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('santri.santri_school', '=', $school)
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            } else if ($level != 0 && $school != 0 && $kelas == 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0 && $kelas == 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0 && $kelas == 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else if ($level == 0 && $school == 0 && $kelas != 0) {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->where('kelas.class_id', '=', $kelas)
+                ->get();
+            }else {
+                $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
+                ->get();
+            }
+        } else {
             $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas != 0) {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas != 0) {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('santri.santri_school', '=', $school)
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        } else if ($level != 0 && $school != 0 && $kelas == 0) {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0 && $kelas == 0) {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0 && $kelas == 0) {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('santri.santri_school', '=', $school)
-            ->get();
-        } else if ($level == 0 && $school == 0 && $kelas != 0) {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('kelas.class_id', '=', $kelas)
-            ->get();
-        }else {
-            $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
-            ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
-            ->get();
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
+                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->get();
         }
 
         $no = 0;

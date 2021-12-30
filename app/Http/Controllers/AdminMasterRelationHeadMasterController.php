@@ -150,7 +150,7 @@ class AdminMasterRelationHeadMasterController extends Controller
                 ->get();
         } else {
             $schools = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')
-                ->where('school.school_level', '=', $user[0]->class_level)
+                ->where('school.school_level', '=', $user[0]->school_level)
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
         }

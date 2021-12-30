@@ -56,7 +56,6 @@ class AdminMasterRelationMapelController extends Controller
             }
 
             $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')
-                ->where('ustadz_class', '=', $user[0]->ustadz_class)
                 ->where('ustadz_school', '=', $user[0]->ustadz_school)
                 ->get();
         }
@@ -276,10 +275,9 @@ class AdminMasterRelationMapelController extends Controller
             }
         } else {
             $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
-                ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
+                ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')    
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
                 ->where('kelas.class_school', '=', $user[0]->ustadz_school)
                 ->get();
         }

@@ -4,7 +4,7 @@ $(function() {
 	    $(document).ready(function() {
 			$('#dataTable').DataTable();
 		  } );
-		    
+
 		  $(document).ready(function() {
 			var table = $('#example2').DataTable( {
 				lengthChange: false,

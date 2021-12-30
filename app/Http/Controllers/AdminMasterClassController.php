@@ -200,8 +200,7 @@ class AdminMasterClassController extends Controller
         } else {
             $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('school.school_id', '=', $user[0]->ustadz_school)
-            ->get();
-            
+            ->get();   
         }
         
         $no = 0;

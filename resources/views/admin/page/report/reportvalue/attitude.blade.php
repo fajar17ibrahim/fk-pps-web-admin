@@ -137,9 +137,9 @@
                                                 <label for="soSantriNISN" class="col-sm-3 col-form-label">Nama Santri</label>
                                                 <div class="col-sm-9 text-secondary">
                                                     <select class="form-select form-control" name="soSantriNISN" id="soSantriNISN" >
-                                                        @foreach ($santris as $santri)
+                                                        <!-- @foreach ($santris as $santri)
                                                             <option value="{{ $santri->santri_nisn }}" class="form-control">{{ $santri->santri_nisn . " - " .$santri->santri_name }}</option>
-                                                        @endforeach
+                                                        @endforeach -->
                                                     </select>
                                                 </div>
                                             </div>
@@ -515,10 +515,10 @@
                         $.ajax({
                             url: "{{ URL::to('/') }}/report-attitude/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
-                                $('#soSantriNISM').empty();
+                                $('#soSantriNISN').empty();
                                 $.each(response, function(key, value) {
                                     // location.reload();
-                                    $('#soSantriNISM').append(new Option(value.santri_nisn + " - " + value.santri_name, value.santri_nisn));
+                                    $('#soSantriNISN').append(new Option(value.santri_nisn + " - " + value.santri_name, value.santri_nisn));
                                     // alert(key);
                                 });
                             },

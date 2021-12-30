@@ -65,7 +65,19 @@ class AdminReportValueController extends Controller
                 $kelass[] = $data;
             }
         }
-        $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
+
+        $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
+                    ->orderBy('mapel_name', 'asc')->get();
+
+        $mapels = array();
+        $mapelOld = "";
+        foreach ($mapelsData as $mapel) {
+            if ($mapelOld != $mapel->mapel_id) {
+                $mapels[] = $mapel;
+            }
+            $mapelOld = $mapel->mapel_id;
+        }
+
         return view('admin.page.report.reportvalue.report-value', compact('santris'), compact('schools'))
         ->with(array('kdSkills' => $kdSkills))
         ->with(array('kdKnowledges' => $kdKnowledges))
@@ -138,6 +150,7 @@ class AdminReportValueController extends Controller
 
                 $reportValueCheck = ReportValue::where('santri_nisn', '=', $santri->santri_nisn)
                 ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                ->where('mapel_id', '=', $mapel)
                 ->where('class_id', '=', $santri->santri_class)
                 ->first();
 
@@ -260,41 +273,69 @@ class AdminReportValueController extends Controller
     }
 
     public function listKDK() {
+        $mapel = Session::get('mapel');
         $kdSkills = KDSkills::where('mapel_teacher', '=', $mapel)
-        ->orderBy('k_id', 'asc')->get();
+                ->orderBy('k_id', 'asc')
+                ->get();
+
+        // return $kdSkills;
 
         $no = 0;
         $data = array();
         foreach ($kdSkills as $kdSkill) {
-
-            $row = array();
-            $row[] = '<tr>
-                    <th width="15%" name="thKnowledgeId" scope="row">P - ' . $kdKnowledge->p_id . '</th>
-                    <td id="p' . $kdKnowledge->p_id .'">' . $kdKnowledge->desc .' </td>
-                </tr>';
-                $data[] = $row;
+            $desc = $kdSkill->desc;
+            if ($desc == null) {
+                $desc = "";
+            }
+            $row = array(
+                'id' => $kdSkill->k_id,
+                'deskripsi' => $desc
+            );
+            $data[] = $row;
         }
 
-        $output = array("data" => $data);
-        return response()->json($output);
+        return $data;
     }
 
     public function listKDP() {
+        $mapel = Session::get('mapel');
         $kdKnowledges = KDKnowledge::where('mapel_teacher', '=', $mapel)
         ->orderBy('p_id', 'asc')->get();
+
+        // return $kdKnowledges;
+
+        $no = 0;
+        $data = array();
+        foreach ($kdKnowledges as $kdKnowledge) {
+            $desc = $kdKnowledge->desc;
+            if ($desc == null) {
+                $desc = "";
+            }
+            $row = array(
+                'id' => $kdKnowledge->p_id,
+                'deskripsi' => $desc
+            );
+            $data[] = $row;
+        }
+
+        return $data;
     }
 
     public function listData($level, $school, $kelas, $mapel) {
         $user = Session::get('user');
 
-        $mapelData = MapelTeacher::where('mapel_teacher_id', '=', $mapel)
-                ->where('ustadz_nik', $user[0]->ustadz_nik)->first();
+        $mapelData = MapelTeacher::where('mapel_id', '=', $mapel)
+                ->where('class_id', $kelas)
+                ->first();
 
         if ($mapelData != null) {
             Session::put('mapel', $mapelData->mapel_teacher_id);
+        } else {
+            Session::put('mapel', 0);
         }
+
+        // return Session::get('mapel');
         
-        $user = Session::get('user');
         if ($user[0]->role_id == 1) {
             if ($level != 0 && $school != 0 && $kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
@@ -479,6 +520,8 @@ class AdminReportValueController extends Controller
         //
         $user = Session::get('user');
         $mapel = Session::get('mapel');
+
+        // return $mapel;
 
         $kdKnowledgesCheck = KDKnowledge::where('mapel_teacher', '=', $mapel)
         ->orderBy('p_id', 'asc')->get();
