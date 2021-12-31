@@ -38,6 +38,8 @@ class AdminReportValueController extends Controller
         $schools = School::orderBy('school_name', 'asc')->get();
         $santris = Santri::orderBy('santri_name', 'asc')->get();
         $kelass = array();
+        $mapels = array();
+        $mapelOld = "";
         if ($user[0]->role_id == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
@@ -51,7 +53,11 @@ class AdminReportValueController extends Controller
     
                 $kelass[] = $data;
             }
-        } else {
+
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
+                    ->orderBy('mapel_name', 'asc')->get();
+            
+        } else if ($user[0]->role_id == 2) {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
@@ -64,13 +70,16 @@ class AdminReportValueController extends Controller
 
                 $kelass[] = $data;
             }
+
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
+                    ->orderBy('mapel_name', 'asc')->get();
+        } else {
+
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
+                ->where('mapel_teacher.class_id', '=', $user[0]->ustadz_class)       
+                ->orderBy('mapel_name', 'asc')->get();
         }
 
-        $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
-                    ->orderBy('mapel_name', 'asc')->get();
-
-        $mapels = array();
-        $mapelOld = "";
         foreach ($mapelsData as $mapel) {
             if ($mapelOld != $mapel->mapel_id) {
                 $mapels[] = $mapel;
@@ -382,7 +391,7 @@ class AdminReportValueController extends Controller
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->get();
             }
-        } else {
+        } else if ($user[0]->role_id == 2) {
             if ($kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
@@ -395,7 +404,13 @@ class AdminReportValueController extends Controller
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
             }
-        }
+        } else {
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','santri.santri_school','=','school.school_id')
+                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('kelas.class_id', '=', $user[0]->ustadz_class)
+                    ->get();
+        } 
         
         $no = 0;
         $data = array();

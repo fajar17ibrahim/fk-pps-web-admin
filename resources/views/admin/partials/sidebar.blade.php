@@ -74,8 +74,10 @@
                 @endif
                 <li> <a href="{{ URL::to('/') }}/master-santri"><i class="bx bx-right-arrow-alt"></i>Santri</a>
                 </li>
+                @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                 <li> <a href="{{ URL::to('/') }}/master-ustadz"><i class="bx bx-right-arrow-alt"></i>Ustadz / Ustadzah</a>
                 </li>
+                @endif
             </ul>
         </li>
         @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)

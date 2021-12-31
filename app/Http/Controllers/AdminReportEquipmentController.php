@@ -182,10 +182,16 @@ class AdminReportEquipmentController extends Controller
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
                 ->get();
             }
+        } else if ($user[0]->role_id == 2) {
+            $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
+                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->get();
         } else {
             $equipments = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('santri.santri_class', '=', $user[0]->ustadz_class)
                 ->get();
         }
 

@@ -62,6 +62,7 @@ class AdminReportAttitudeController extends Controller
             ->where('santri_school', '=', $user[0]->ustadz_school)
             ->get();
         }
+
         return view('admin.page.report.reportvalue.attitude', compact('schools'))
         ->with(array('kelass' => $kelass))
         ->with(array('santris' => $santris));
@@ -282,7 +283,7 @@ class AdminReportAttitudeController extends Controller
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->get();
             }
-        } else {
+        } else if ($user[0]->role_id == 2) {
             if ($kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
@@ -295,6 +296,12 @@ class AdminReportAttitudeController extends Controller
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
             }
+        } else {
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                    ->leftJoin('school','santri.santri_school','=','school.school_id')
+                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('kelas.class_id', '=', $user[0]->ustadz_class)
+                    ->get();
         }
 
         return $santris;

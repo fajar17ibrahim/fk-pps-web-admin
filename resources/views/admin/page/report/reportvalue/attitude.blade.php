@@ -496,12 +496,29 @@
                     var kelas = 0;
                     var mapel = 0;
                     var table;
+                    // $(function() {
+                    //     // Menampilkan data Report Value
+                    //     table = $('#dataTable').DataTable({
+                    //         ajax: {
+                    //             "url": "{{ URL::to('/') }}/report-attitude/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
+                    //             "type": "GET"
+                    //         }
+                    //     });
+                    // });
+
                     $(function() {
                         // Menampilkan data Report Value
-                        table = $('#dataTable').DataTable({
-                            ajax: {
-                                "url": "{{ URL::to('/') }}/report-attitude/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
-                                "type": "GET"
+                        $.ajax({
+                            url: "{{ URL::to('/') }}/report-attitude/data/" + 0 + "/" + 0 + "/" + 0,
+                            success: function(response){
+                                $('#soSantriNISN').empty();
+                                $.each(response, function(key, value) {
+                                    $('#soSantriNISN').append(new Option(value.santri_nisn + " - " + value.santri_name, value.santri_nisn));
+                                    // alert(key);
+                                });
+                            },
+                            error: function() {
+                                alert('Tidak dapat menampilkan Data');
                             }
                         });
                     });
@@ -517,7 +534,6 @@
                             success: function(response){
                                 $('#soSantriNISN').empty();
                                 $.each(response, function(key, value) {
-                                    // location.reload();
                                     $('#soSantriNISN').append(new Option(value.santri_nisn + " - " + value.santri_name, value.santri_nisn));
                                     // alert(key);
                                 });

@@ -31,7 +31,7 @@ class AdminDashboardController extends Controller
 
             $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
             ->count();
-        } else {
+        } else if ($user[0]->role_id == 2) {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('santri.santri_school', '=', $user[0]->ustadz_school)
@@ -45,6 +45,23 @@ class AdminDashboardController extends Controller
 
             $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
             ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
+            ->count();
+        } else {
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
+            ->where('santri.santri_school', '=', $user[0]->ustadz_school)
+            ->where('santri_class', '=', $user[0]->ustadz_class)
+            ->count();
+
+            $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
+            ->where('graduation.graduation_school', '=', $user[0]->ustadz_school)
+            ->count();
+
+            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
+            ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
+            ->where('ustadz.ustadz_class', '=', $user[0]->ustadz_class)
             ->count();
         }
 
