@@ -20,7 +20,7 @@
                                             <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
                                             </div>
                                             <div class="ms-3">
-                                                <h6 class="mb-0 text-white">Berhasil Update Data</h6>
+                                                <h6 class="mb-0 text-white">Berhasil</h6>
                                                 <div class="text-white">{{ Session::get('message_success') }}</div>
                                             </div>
                                         </div>
@@ -33,7 +33,7 @@
                                             <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
                                             </div>
                                             <div class="ms-3">
-                                                <h6 class="mb-0 text-white">Gagal Update Data!</h6>
+                                                <h6 class="mb-0 text-white">Gagal!</h6>
                                                 <div class="text-white">{{ Session::get('message_error') }}</div>
                                             </div>
                                         </div>
@@ -90,9 +90,14 @@
                             success: function(response){
                                 $('#addUserModal').modal('show');
                                 $('.modal-title').text('Form Tambah User');
-                                $('#inName').val(response[0].ustadz_name).attr('readonly','true');
+                                if (response.length > 0) {
+                                    $('#inName').val(response[0].ustadz_name).attr('readonly','true');
+                                } else {
+                                    alert('Email tidak ditemukan!');
+                                }
                             } ,
                             error: function() {
+                                $('#inName').val('').attr('readonly','true');
                                 alert('Tidak dapat menampilkan Data');
                             }
                         });

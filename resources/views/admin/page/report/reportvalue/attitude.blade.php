@@ -509,7 +509,7 @@
                     $(function() {
                         // Menampilkan data Report Value
                         $.ajax({
-                            url: "{{ URL::to('/') }}/report-attitude/data/" + 0 + "/" + 0 + "/" + 0,
+                            url: "{{ URL::to('/') }}/report-attitude/data/" + level + "/" + school + "/" + kelas,
                             success: function(response){
                                 $('#soSantriNISN').empty();
                                 $.each(response, function(key, value) {

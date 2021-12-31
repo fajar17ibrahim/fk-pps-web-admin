@@ -63,29 +63,39 @@ class AdminUserController extends Controller
         //
         try {
             //
-            $user = new User;
-            $user->name = $request['inName'];
-            $user->email = $request['inEmail'];
-            $user->role_id = $request['soRole'];
-            $user->status = $request['soStatus'];
-            $random_password = Str::random(8);
-            $user->password = Hash::make($random_password);
-            $save = $user->save();
-            // return response()->json(compact('user','token'), 201);
-            
-            if ($save) {
-                $details = [
-                    'title' => 'Password Login',
-                    'body' => 'Password Anda : ' . $random_password
-                ];
+            $user = Session::get('user');   
+            $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
+                    ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                    ->first();
 
-                Mail::to($request['inEmail'])->send(new EMail($details));
+            if ($emailCheck != null) {
+                $user = new User;
+                $user->name = $request['inName'];
+                $user->email = $request['inEmail'];
+                $user->role_id = $request['soRole'];
+                $user->status = $request['soStatus'];
+                $random_password = Str::random(8);
+                $user->password = Hash::make($random_password);
+                $save = $user->save();
+                // return response()->json(compact('user','token'), 201);
+                
+                if ($save) {
+                    $details = [
+                        'title' => 'Password Login',
+                        'body' => 'Password Anda : ' . $random_password
+                    ];
 
-                return redirect()->route('user.index')
-                ->with('message_success', 'User berhasil disimpan.');
+                    Mail::to($request['inEmail'])->send(new EMail($details));
+
+                    return redirect()->route('user.index')
+                    ->with('message_success', 'User berhasil disimpan.');
+                } else {
+                    return redirect()->route('user.index')
+                    ->with('message_error', 'User gagal disimpan.');
+                }
             } else {
                 return redirect()->route('user.index')
-                ->with('message_error', 'User gagal disimpan.');
+                    ->with('message_error', 'Email tidak ditemukan.');
             }
         } catch(\Illuminate\Database\QueryException $e){ 
             return redirect()->route('user.index')
@@ -164,8 +174,15 @@ class AdminUserController extends Controller
         //
     }
 
-    public function search($email) { 
-        $ustadz = Ustadz::where('ustadz.ustadz_email', '=', $email)->get();
+    public function search($email) {
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            $ustadz = Ustadz::where('ustadz.ustadz_email', '=', $email)->get();
+        } else {
+            $ustadz = Ustadz::where('ustadz.ustadz_email', '=', $email)
+                ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
+                ->get();
+        }
         return response()->json($ustadz);
     }
 

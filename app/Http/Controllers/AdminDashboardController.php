@@ -61,7 +61,6 @@ class AdminDashboardController extends Controller
 
             $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
             ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
-            ->where('ustadz.ustadz_class', '=', $user[0]->ustadz_class)
             ->count();
         }
 
