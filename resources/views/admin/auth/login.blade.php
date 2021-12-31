@@ -37,7 +37,7 @@
 								<div class="border p-4 rounded">
 									<div class="text-center">
 										<h3 class="">Sign in</h3>
-										<p>Belum punya akun ? <a href="authentication-signup.html">Daftar disini</a>
+										<p>Belum punya akun ? <a href="https://forms.gle/nvvL32SdUY9KPQNs9">Daftar disini</a>
 										</p>
 									</div>
 									<div class="form-body">

@@ -71,13 +71,17 @@ class AdminReportValueController extends Controller
                 $kelass[] = $data;
             }
 
-            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
+                    ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
+                    ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
                     ->orderBy('mapel_name', 'asc')->get();
         } else {
 
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
-                ->where('mapel_teacher.class_id', '=', $user[0]->ustadz_class)       
-                ->orderBy('mapel_name', 'asc')->get();
+                    ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')          
+                    ->where('kelas.class_school', '=', $user[0]->ustadz_school)    
+                    ->where('mapel_teacher.class_id', '=', $user[0]->ustadz_class)       
+                    ->orderBy('mapel_name', 'asc')->get();
         }
 
         foreach ($mapelsData as $mapel) {

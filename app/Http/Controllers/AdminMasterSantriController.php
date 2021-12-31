@@ -584,7 +584,7 @@ class AdminMasterSantriController extends Controller
                     ->get();
         } 
 
-        return $user[0]->ustadz_class;
+        // return $user[0]->ustadz_class;
         
         $no = 0;
         $data = array();

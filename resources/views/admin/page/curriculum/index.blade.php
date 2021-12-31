@@ -32,7 +32,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['class_level'] == 'Ula')
+            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['school_level'] == 'Ula')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -138,7 +138,7 @@
                 </div>
             </div>
             @endif
-            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['class_level'] == 'Wustha')
+            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['school_level'] == 'Wustha')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -244,7 +244,7 @@
                 </div>
             </div>
             @endif
-            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['class_level'] == 'Ulya')
+            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['school_level'] == 'Ulya')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
