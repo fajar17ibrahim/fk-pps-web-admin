@@ -6,7 +6,7 @@
 					
 					<div class="container">
 						<div class="main-body">
-							<form method="post" action="{{ URL::to('/') }}/school-profile/{{ $school[0]->school_id }}" class="row g-3 needs-validation" novalidate>
+							<form method="post" action="{{ URL::to('/') }}/school-profile/{{ $school[0]->school_id }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 								@method('PUT')
 								@csrf
 								<div class="row">
@@ -42,7 +42,7 @@
 										<div class="card">
 											<div class="card-body">
 												<div class="d-flex flex-column align-items-center text-center">
-													<img src="{{ asset('assets/images/logo_fk_pkpps.jpg') }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
+													<img src="images/{{ $school[0]->school_photo }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
 													<div class="mt-3">
 														<p class="text-secondary mb-1">Gambar</p>
 														<h5>Logo Sekolah</h5>
@@ -50,7 +50,7 @@
 												</div>
 												<br>
 												<div class="input-group">
-													<input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+													<input name="inSchoolPhoto" type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
 												</div>
 											</div>
 										</div>

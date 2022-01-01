@@ -88,6 +88,15 @@ class AdminSchoolProfileController extends Controller
         try {
             //
             $school = School::find($id);
+
+            $schoolPhoto = $request['inSchoolPhoto'];
+            if ($schoolPhoto) {
+                $photoName = $request['inSchoolNPSN'] . "_" . time().'.' . $request->inSchoolPhoto->extension();
+                $request->inSchoolPhoto->move(public_path('images'), $photoName);
+            } else {
+                $photoName = "logo_fk_pkpps.jpg";
+            }
+
             $school->school_statistic_number = $request['inSchoolNSP'];
             $school->school_npsn = $request['inSchoolNPSN'];
             $school->school_name = $request['inSchoolName'];
@@ -102,7 +111,8 @@ class AdminSchoolProfileController extends Controller
             $school->school_pos_code = $request['inPosCode'];
             $school->school_country = $request['inCountry'];
             $school->school_status = 'Aktif';
-            $school->school_headship = $request['soKepsek'];;
+            $school->school_headship = $request['soKepsek'];
+            $school->school_photo = $photoName;
             $saveSchool = $school->update();
     
             if ($saveSchool) {

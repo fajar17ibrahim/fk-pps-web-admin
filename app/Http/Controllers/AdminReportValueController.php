@@ -341,13 +341,14 @@ class AdminReportValueController extends Controller
                 ->where('class_id', $kelas)
                 ->first();
 
+        $santris = array();
         if ($mapelData != null) {
             Session::put('mapel', $mapelData->mapel_teacher_id);
         } else {
-            Session::put('mapel', 0);
+            if ($level != 0 || $school != 0 || $kelas != 0) {
+                return "error_mapel";
+            }
         }
-
-        // return Session::get('mapel');
         
         if ($user[0]->role_id == 1) {
             if ($level != 0 && $school != 0 && $kelas != 0) {
@@ -412,10 +413,10 @@ class AdminReportValueController extends Controller
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
                     ->where('school.school_id', '=', $user[0]->ustadz_school)
-                    ->where('kelas.class_id', '=', $user[0]->ustadz_class)
+                    ->where('santri.santri_class', '=', $user[0]->ustadz_class)
                     ->get();
-        } 
-        
+        }
+                
         $no = 0;
         $data = array();
         foreach ($santris as $santri) {

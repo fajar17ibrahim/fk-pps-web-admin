@@ -189,23 +189,26 @@ class AdminCurriculumController extends Controller
     {
         try {
         //
+
         $user = Session::get('user');
-        $curriculumCheck = Curriculum::where('school_id', '=', $user[0]->ustadz_school)
-            ->where('class_level', '=', $level)
+        $curriculumCheck = Curriculum::where('class_level', '=', $level)
             ->where('desc', '=', $desc)
             ->first();
 
+            // return $curriculumCheck;
+
             if ($curriculumCheck) {
                 $filePath = public_path("files/{$curriculumCheck->file}");
+                // return $filePath;
                 if (File::exists($filePath)) {
                     return response()->download($filePath);
                 } else {
                     return redirect()->route('curriculum.index')
-                    ->with('message_error', 'File gagal didownload.');
+                    ->with('message_error', 'File tidak tersedia.');
                 }
             } else {
                 return redirect()->route('curriculum.index')
-                ->with('message_error', 'File gagal didownload.');
+                ->with('message_error', 'File tidak tersedia.');
             }
         } catch(\Illuminate\Database\QueryException $e) { 
             return redirect()->route('curriculum.index')

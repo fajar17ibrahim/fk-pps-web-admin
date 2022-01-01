@@ -556,7 +556,7 @@ class AdminMasterSantriController extends Controller
             } else if ($level == 0 && $school == 0 && $kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('kelas.class_id', '=', $kelas)
+                ->where('santri.santri_class', '=', $kelas)
                 ->get();
             }else {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
@@ -567,20 +567,20 @@ class AdminMasterSantriController extends Controller
             if ($kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
-                    ->where('school.school_id', '=', $user[0]->ustadz_school)
-                    ->where('kelas.class_id', '=', $kelas)
+                    ->where('santri.santri_school', '=', $user[0]->ustadz_school)
+                    ->where('santri.santri_class', '=', $kelas)
                     ->get();
             } else {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('santri.santri_school', '=', $user[0]->ustadz_school)
                 ->get();
             }
         } else {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
-                    ->where('school.school_id', '=', $user[0]->ustadz_school)
-                    ->where('kelas.class_id', '=', $user[0]->ustadz_class)
+                    ->where('santri.santri_school', '=', $user[0]->ustadz_school)
+                    ->where('santri.santri_class', '=', $user[0]->ustadz_class)
                     ->get();
         } 
 

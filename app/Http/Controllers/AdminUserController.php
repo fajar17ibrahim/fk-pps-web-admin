@@ -64,14 +64,20 @@ class AdminUserController extends Controller
         try {
             //
             $user = Session::get('user');   
-            $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
-                    ->where('ustadz_school', '=', $user[0]->ustadz_school)
-                    ->first();
+            if ($user[0]->role_id != 1) {
+                $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
+                        ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                        ->first();
+            } else {
+                $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
+                        ->first();
+            }
 
             if ($emailCheck != null) {
                 $user = new User;
-                $user->name = $request['inName'];
+                $user->name = $emailCheck->ustadz_name;
                 $user->email = $request['inEmail'];
+                // $user->name = $request['inName'];
                 $user->role_id = $request['soRole'];
                 $user->status = $request['soStatus'];
                 $random_password = Str::random(8);

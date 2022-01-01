@@ -103,11 +103,17 @@ class AdminMasterRelationMapelController extends Controller
             $kelas = $request['soKelas'];
             $ustadz = $request['soUstadz'];
             $mapelTeacherCheck = MapelTeacher::where('mapel_id', '=', $mapel)
-                    ->where('class_id', '=', $kelas)
-                    ->where('ustadz_nik', '=', $ustadz)
-                    ->first();
+                ->where('class_id', '=', $kelas)
+                ->where('ustadz_nik', '=', $ustadz)
+                ->first();
 
-            if ($mapelTeacherCheck) {
+            $ustadzCheck = Ustadz::where('ustadz_nik', '=', $ustadz)
+                ->first();
+
+            $ustadzCheck->ustadz_class = $kelas;
+            $update = $ustadzCheck->update();
+
+            if ($mapelTeacherCheck && $update) {
                 $mapelTeacher = $mapelTeacherCheck;
             } else {
                 $mapelTeacher = new MapelTeacher;
@@ -184,8 +190,14 @@ class AdminMasterRelationMapelController extends Controller
             $mapelTeacher->class_id = $request['soKelasEdit'];
             $mapelTeacher->ustadz_nik = $request['soUstadzEdit'];
             $updated = $mapelTeacher->update();
+
+            $ustadzCheck = Ustadz::where('ustadz_nik', '=', $request['soUstadzEdit'])
+                ->first();
+
+            $ustadzCheck->ustadz_class = $request['soKelasEdit'];
+            $updateUstadz = $ustadzCheck->update();
     
-            if ($updated) {
+            if ($updated && $updateUstadz) {
                 return redirect()->route('master-relation-mapel.index')
                 ->with('message_success', 'Guru Mapel berhasil diperbarui.');
             } else {

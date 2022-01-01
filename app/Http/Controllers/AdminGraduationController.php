@@ -13,6 +13,7 @@ use App\Models\Graduation;
 use App\Models\Ustadz;
 use App\Models\SchoolYear;
 use App\Models\ReportValueLast;
+use App\Models\MapelTeacher;
 
 class AdminGraduationController extends Controller
 {
@@ -28,20 +29,22 @@ class AdminGraduationController extends Controller
         if ($user[0]->role_id == 1) {
             $schools = School::orderBy('school_name', 'asc')->get();
             $kelass = Kelas::orderBy('class_id', 'asc')->get();
-            $santris = Santri::orderBy('santri_name', 'asc')->get();
-        } else {
-            $schools = School::orderBy('school_name', 'asc')
-            ->where('school.school_id', '=', $user[0]->ustadz_school)
-            ->get();
-
-            $kelass = Kelas::orderBy('class_id', 'asc')
-            ->where('kelas.class_level', '=', $user[0]->class_level)
-            ->get();
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-                ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
+            ->leftJoin('school','kelas.class_school','=','school.school_id')
+            ->get();
+        } else {
+            $schools = School::orderBy('school_name', 'asc')
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->get();
+
+            $kelass = Kelas::orderBy('class_id', 'asc')
+                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->get();
+
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
+                ->where('santri_school', '=', $user[0]->ustadz_school)
                 ->get();
         }
         return view('admin.page.graduation.graduated.index', compact('schools'), compact('kelass'))
@@ -74,7 +77,7 @@ class AdminGraduationController extends Controller
             $satriNISN = $request['soSantri'];
 
             $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->where('santri.santri_nisn', '=', $satriNISN)
                 ->first();
 
@@ -191,7 +194,7 @@ class AdminGraduationController extends Controller
             $satriNISN = $request['soSantri'];
 
             $santri = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-                ->leftJoin('school','kelas.class_school','=','school.school_id')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->where('santri.santri_nisn', '=', $satriNISN)
                 ->first();
 
@@ -268,18 +271,44 @@ class AdminGraduationController extends Controller
     {
         //
         $user = Session::get('user');
+        $mapels = array();
+        $mapelOld = "";
         if ($user[0]->role_id == 1) {
             $santris = Santri::orderBy('santri_name', 'asc')->get();
-        } else {
+            
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
+                    ->orderBy('mapel_name', 'asc')->get();
+        } else if ($user[0]->role_id == 2) { 
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-                ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
+
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
+                ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
+                ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
+                ->orderBy('mapel_name', 'asc')->get();
+        } else {
+            $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
+                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('santri.santri_class', '=', $user[0]->ustadz_class)
+                ->get();
+
+            $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
+                ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
+                ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
+                ->orderBy('mapel_name', 'asc')->get();
         }
 
-        $mapels = Mapel::orderBy('mapel_name', 'asc')->get();
+        foreach ($mapelsData as $mapel) {
+            if ($mapelOld != $mapel->mapel_id) {
+                $mapels[] = $mapel;
+            }
+            $mapelOld = $mapel->mapel_id;
+        }
+
         return view('admin.page.graduation.graduated.graduation-add', compact('santris'), compact('mapels'));
     }
 
@@ -322,7 +351,6 @@ class AdminGraduationController extends Controller
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
                 ->where('school.school_id', '=', $user[0]->ustadz_school)
                 ->get();
         }
@@ -486,31 +514,40 @@ class AdminGraduationController extends Controller
     }
 
     public function listData($level, $school) {
-        if ($level != 0 && $school != 0) {
-            $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
-            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
-            ->where('kelas.class_level', '=', $level)
-            ->where('graduation.graduation_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0) {
-            $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
-            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0) {
-            $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
-            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
-            ->where('graduation.graduation_school', '=', $school)
-            ->get();
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0) {
+                $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+                ->leftJoin('school','school.school_id','=','graduation.graduation_school')
+                ->where('kelas.class_level', '=', $level)
+                ->where('graduation.graduation_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0) {
+                $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+                ->leftJoin('school','school.school_id','=','graduation.graduation_school')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0) {
+                $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+                ->leftJoin('school','school.school_id','=','graduation.graduation_school')
+                ->where('graduation.graduation_school', '=', $school)
+                ->get();
+            } else {
+                $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+                ->leftJoin('school','school.school_id','=','graduation.graduation_school')
+                ->get();
+            }
         } else {
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
-            ->leftJoin('school','school.school_id','=','graduation.graduation_school')
-            ->get();
-        } 
+                ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
+                ->leftJoin('school','school.school_id','=','graduation.graduation_school')
+                ->where('graduation.graduation_school', '=', $user[0]->ustadz_school)
+                ->get();
+        }
         
         $no = 0;
         $data = array();

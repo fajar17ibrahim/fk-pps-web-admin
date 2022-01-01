@@ -278,31 +278,40 @@ class AdminMutationController extends Controller
     }
 
     public function listData($level, $school) {
-        if ($level != 0 && $school != 0) {
-            $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
-            ->leftJoin('school','school.school_id','=','mutation.mutation_school')
-            ->where('kelas.class_level', '=', $level)
-            ->where('mutation.mutation_school', '=', $school)
-            ->get();
-        } else if ($level != 0 && $school == 0) {
-            $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
-            ->leftJoin('school','school.school_id','=','mutation.mutation_school')
-            ->where('kelas.class_level', '=', $level)
-            ->get();
-        } else if ($level == 0 && $school != 0) {
-            $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
-            ->leftJoin('school','school.school_id','=','mutation.mutation_school')
-            ->where('santri.santri_school', '=', $school)
-            ->get();
+        $user = Session::get('user');
+        if ($user[0]->role_id == 1) {
+            if ($level != 0 && $school != 0) {
+                $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
+                ->leftJoin('school','school.school_id','=','mutation.mutation_school')
+                ->where('kelas.class_level', '=', $level)
+                ->where('mutation.mutation_school', '=', $school)
+                ->get();
+            } else if ($level != 0 && $school == 0) {
+                $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
+                ->leftJoin('school','school.school_id','=','mutation.mutation_school')
+                ->where('kelas.class_level', '=', $level)
+                ->get();
+            } else if ($level == 0 && $school != 0) {
+                $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
+                ->leftJoin('school','school.school_id','=','mutation.mutation_school')
+                ->where('santri.santri_school', '=', $school)
+                ->get();
+            } else {
+                $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
+                ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
+                ->leftJoin('school','school.school_id','=','mutation.mutation_school')
+                ->get();
+            }
         } else {
             $mutations = Mutation::leftJoin('santri','santri.santri_nisn','=','mutation.mutation_santri')
-            ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
-            ->leftJoin('school','school.school_id','=','mutation.mutation_school')
-            ->get();
-        } 
+                ->leftJoin('kelas','kelas.class_id','=','mutation.mutation_class')
+                ->leftJoin('school','school.school_id','=','mutation.mutation_school')
+                ->where('santri.santri_school', '=', $user[0]->ustadz_school)
+                ->get();
+        }
         
         $no = 0;
         $data = array();

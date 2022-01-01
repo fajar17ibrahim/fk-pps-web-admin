@@ -255,18 +255,25 @@
                         $.ajax({
                             url: "{{ URL::to('/') }}/report-value/data/" + level + "/" + school + "/" + kelas + "/" + mapel,
                             success: function(response){
-                                table.ajax.url("{{ URL::to('/') }}/report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
-                                showKD()
-                                $('#inMapel').val(mapel);
-                                let mapelName = $("#soMapelFilter option:selected").text();
-                                if (mapelName != "Semua") {
-                                    $('#title').text("Input Nilai Raport Mapel " + mapelName); 
+                                // alert(response.length);
+                                if (response != "error_mapel") {
+                                    table.ajax.url("{{ URL::to('/') }}/report-value/data/" + level + "/" + school+ "/" + kelas + "/" + mapel).load();
+                                    showKD()
+                                    $('#inMapel').val(mapel);
+                                    let mapelName = $("#soMapelFilter option:selected").text();
+                                    if (mapelName != "Semua") {
+                                        $('#title').text("Input Nilai Raport Mapel " + mapelName); 
+                                    } else {
+                                        $('#title').text("Input Nilai Raport"); 
+                                    }
                                 } else {
-                                    $('#title').text("Input Nilai Raport"); 
+                                    alert('Mapel tidak ditemukan dikelas ini!');
+                                    location.reload();
                                 }
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');
+                                
                             }
                         });
                     };
