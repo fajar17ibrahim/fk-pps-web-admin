@@ -21,7 +21,6 @@ class AdminMasterSantriController extends Controller
     public function index()
     {
         //
-        $schools = School::orderBy('school_name', 'asc')->get();
         $santris = Santri::orderBy('santri_name', 'asc')->get();
         $user = Session::get('user');
         $kelass = array();
@@ -38,6 +37,17 @@ class AdminMasterSantriController extends Controller
     
                 $kelass[] = $data;
             }
+
+            $schoolsData = School::orderBy('school_name', 'asc')->get();
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
+            }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
                 ->where('class_level', '=', $user[0]->school_level)
@@ -51,6 +61,21 @@ class AdminMasterSantriController extends Controller
                 );
 
                 $kelass[] = $data;
+            }
+
+            $schoolsData = School::orderBy('school_name', 'asc')
+                ->where('school_level', '=', $user[0]->school_level)
+                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->get();
+
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name
+                );
+
+                $schools[] = $data;
             }
         }
         return view('admin.page.master.santri.index')
@@ -595,8 +620,7 @@ class AdminMasterSantriController extends Controller
             $row[] = '<div class="d-flex align-items-center">
                             <img src="images/'. $santri->santri_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
                         </div>';
-            $row[] = "NIS : " . $santri->santri_nism . "<br>NISN : " .$santri->santri_nisn;
-            $row[] = $santri->santri_name;  
+            $row[] = "<b>" . $santri->santri_name . "</b><br>NISN : " . $santri->santri_nisn . "<br>NISM : " . $santri->santri_nism;
             $row[] = $santri->santri_gender;
             $row[] = $santri->santri_born_place . ",<br>" . tanggal($santri->santri_born_date);
             $row[] = '<div class="d-flex align-items-center text-success">	

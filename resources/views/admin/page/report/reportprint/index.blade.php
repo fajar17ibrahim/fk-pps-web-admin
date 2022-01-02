@@ -33,8 +33,8 @@
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
 									<option value="0">Semua</option>	
-                                    @foreach ($schools as $school)
-										<option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
+                                        @foreach ($schools as $school)
+                                        <option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
 										@endforeach
 									</select>
                                 </div>
@@ -103,7 +103,7 @@
                                                 <th>TA / Semester</th>
                                                 <th>Cetak Nilai UTS</th>
                                                 <th>Cetak Nilai UAS</th>
-                                                <th width="10%">Aksi</th>
+                                                <!-- <th width="10%">Aksi</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -54,6 +54,17 @@ class AdminReportValueController extends Controller
                 $kelass[] = $data;
             }
 
+            $schoolsData = School::orderBy('school_name', 'asc')->get();
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
+            }
+
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
                     ->orderBy('mapel_name', 'asc')->get();
             
@@ -71,6 +82,21 @@ class AdminReportValueController extends Controller
                 $kelass[] = $data;
             }
 
+            $schoolsData = School::orderBy('school_name', 'asc')
+                ->where('school_level', '=', $user[0]->school_level)
+                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->get();
+
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name
+                );
+
+                $schools[] = $data;
+            }
+
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
                     ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
                     ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
@@ -82,6 +108,7 @@ class AdminReportValueController extends Controller
                     ->where('kelas.class_school', '=', $user[0]->ustadz_school)    
                     ->where('mapel_teacher.class_id', '=', $user[0]->ustadz_class)       
                     ->orderBy('mapel_name', 'asc')->get();
+
         }
 
         foreach ($mapelsData as $mapel) {

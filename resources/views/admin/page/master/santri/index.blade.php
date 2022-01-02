@@ -34,7 +34,7 @@
                                     <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
 									<option value="0">Semua</option>	
                                         @foreach ($schools as $school)
-                                            <option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
+                                        <option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
 										@endforeach
 									</select>
                                 </div>
@@ -105,8 +105,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Foto</th>
-                                                <th>NIS / NISN</th>
-                                                <th>Nama Santri</th>
+                                                <th>Informasi Santri</th>
                                                 <th>Jenis Kelamin</th>
                                                 <th>TTL</th>
                                                 <th>Status</th>

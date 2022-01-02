@@ -45,6 +45,17 @@ class AdminReportPrintController extends Controller
     
                 $kelass[] = $data;
             }
+
+            $schoolsData = School::orderBy('school_name', 'asc')->get();
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
+            }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
                 ->where('class_level', '=', $user[0]->class_level)
@@ -59,9 +70,23 @@ class AdminReportPrintController extends Controller
 
                 $kelass[] = $data;
             }
+
+            $schoolsData = School::orderBy('school_name', 'asc')
+                ->where('school_level', '=', $user[0]->school_level)
+                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->get();
+
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name
+                );
+
+                $schools[] = $data;
+            }
         }
-        $schools = School::orderBy('school_name', 'asc')->get();
-        // $kelass = Kelas::orderBy('class_name', 'asc')->get();
+
         return view('admin.page.report.reportprint.index', compact('schools'), compact('kelass'));
     }
 
@@ -235,7 +260,7 @@ class AdminReportPrintController extends Controller
             $row[] = $report_print->tahun_pelajaran_name . " - " . $report_print->tahun_pelajaran_semester;
             $row[] = '<a href="' . URL::to('/') .'/report-uts-print-pdf/' . $report_print->report_id . '">rapor-uts.pdf</a>';
             $row[] = '<a href="' . URL::to('/') .'/report-uas-print-pdf/' . $report_print->report_id . '">rapor-uas.pdf</a>';
-            $row[] = '<input type="button" class="btn btn-danger" value="Blok Rapor" />';
+            // $row[] = '<input type="button" class="btn btn-danger" value="Blok Rapor" />';
             $data[] = $row;
         }
 
