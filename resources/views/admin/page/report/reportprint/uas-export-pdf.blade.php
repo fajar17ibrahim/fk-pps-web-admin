@@ -10,10 +10,10 @@
                                 <table id="table-attendance" class="borderless" style="width:100%;">
                                     <tbody>
                                         <tr >
-                                            <td style="width:15%">Nama PKPPS</td>
-                                            <td style="width:40%" class="text-bold">: {{ $data['biodata']['pps_nama'] }}</td>
-                                            <td style="width:15%">Kelas</td>
-                                            <td style="width:20%" class="text-bold">: {{ $data['biodata']['kelas_nama'] }}</td>
+                                            <td style="width:12%">Nama PKPPS</td>
+                                            <td style="width:50%" class="text-bold">: {{ $data['biodata']['pps_nama'] }}</td>
+                                            <td style="width:14%">Kelas</td>
+                                            <td style="width:14%" class="text-bold">: {{ $data['biodata']['kelas_nama'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Alamat</td>
@@ -49,7 +49,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="table-text-top text-center">{{ $data['sikap']['spiritual_pred'] }}</td>
-                                        <td class="table-text-top" style="height:80px;">{{ $data['sikap']['spiritual_baik_desc'] }} <br><br><i><b>Kurang </b><br></i>{{ $data['sikap']['spiritual_kurang_desc'] }}</td>
+                                        <td class="table-text-top" style="height:80px;">{{ $data['sikap']['spiritual_baik_desc'] }} <br><br><i>@if ($data['sikap']['spiritual_kurang_desc'] != '')<b>Kurang </b><br></i>{{ $data['sikap']['spiritual_kurang_desc'] }}@endif</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -64,7 +64,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="table-text-top text-center">{{ $data['sikap']['sosial_pred'] }}</td>
-                                        <td class="table-text-top" style="height:80px;">{{ $data['sikap']['sosial_baik_desc'] }} <br><br><i><b>Kurang </b></i><br>{{ $data['sikap']['sosial_kurang_desc'] }}</td>
+                                        <td class="table-text-top" style="height:80px;">{{ $data['sikap']['sosial_baik_desc'] }} <br><br><i>@if ($data['sikap']['sosial_kurang_desc'] != '')<b>Kurang </b></i><br>{{ $data['sikap']['sosial_kurang_desc'] }}@endif</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -272,5 +272,5 @@
                         </div>
                     </div>
                 </div>
-            
+
                 @endsection
