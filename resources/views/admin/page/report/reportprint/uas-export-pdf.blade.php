@@ -7,29 +7,34 @@
                         <div class="card">
                             <div class="card-body">
                                 <h2 class="mb-0 text-uppercase text-center">Capaian Hasil Belajar</h2>
-                                <table id="table-attendance" class="borderless" style="width:100%;">
+                                <table id="table-attendance" class="borderless" style="width:100%; line-height: 130%;">
                                     <tbody>
                                         <tr >
-                                            <td style="width:12%">Nama PKPPS</td>
-                                            <td style="width:50%" class="text-bold">: {{ $data['biodata']['pps_nama'] }}</td>
-                                            <td style="width:14%">Kelas</td>
-                                            <td style="width:14%" class="text-bold">: {{ $data['biodata']['kelas_nama'] }}</td>
+                                            <td style="width:14%">Nama PKPPS</td>
+                                            <td style="width:1%">:</td>
+                                            <td style="width:46%" class="text-bold">{{ $data['biodata']['pps_nama'] }}</td>
+                                            <td style="width:14%" rowspan="2">Kelas<br>Semester<br>Tahun Pelajaran</td>
+                                            <td style="width:1%" rowspan="2">:<br>:<br>:</td>
+                                            <td style="width:14%" rowspan="2" class="text-bold">{{ $data['biodata']['kelas_nama'] }}<br>{{ $data['biodata']['semester'] }}<br>{{ $data['biodata']['tahun_pelajaran'] }}</td>
                                         </tr>
-                                        <tr>
+                                        <tr valign="top">
                                             <td>Alamat</td>
-                                            <td class="text-bold">: {{ $data['biodata']['pps_alamat'] }}</td>
-                                            <td>Semester</td>
-                                            <td class="text-bold">: {{ $data['biodata']['semester'] }}</td>
+                                            <td>:</td>
+                                            <td class="text-bold">{{ $data['biodata']['pps_alamat'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Nama</td>
-                                            <td class="text-bold">: {{ $data['biodata']['santri_nama'] }}</td>
-                                            <td>Tahun Pelajaran</td>
-                                            <td class="text-bold">: {{ $data['biodata']['tahun_pelajaran'] }}</td>
+                                            <td>:</td>
+                                            <td class="text-bold">{{ $data['biodata']['santri_nama'] }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>Nomor Induk</td>
-                                            <td class="text-bold">: {{ $data['biodata']['santri_no_induk'] }}</td>
+                                            <td>:</td>
+                                            <td class="text-bold">{{ $data['biodata']['santri_no_induk'] }}</td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                         </tr>

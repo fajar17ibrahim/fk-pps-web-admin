@@ -7,7 +7,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div>
-                                    <table id="table-attendance"  class="borderless" style="width:100%">
+                                    <table id="table-attendance"  class="borderless" style="width:100%:">
                                         <tbody>
                                             <tr>
                                                 <td colspan="4" class="text-center"><img src="assets/images/lambang-pancasila.jpg" width="80" heigh="80"></td>
@@ -18,29 +18,31 @@
                                         </tbody>
                                     </table>
                                     <br>
-                                    <table id="table-attendance"  class="borderless" style="width:100%">
+                                    <table id="table-attendance"  class="borderless"style="width:100%; line-height: 130%;" >
                                         <tbody>
                                             <tr>
-                                                <td style="width:15%">Nama PKPPS</td>
-                                                <td style="width:40%">: {{ $reportPrint->school_name }}</td>
-                                                <td style="width:15%">Kelas</td>
-                                                <td style="width:20%">: {{ $reportPrint->class_name }}</td>
+                                                <td style="width:14%">Nama PKPPS</td>
+                                                <td style="width:1%">:</td>
+                                                <td style="width:40%">{{ $reportPrint->school_name }}</td>
+                                                <td style="width:14%;" rowspan="2">Kelas<br>Semester<br>Tahun Pelajaran</td>
+                                                <td style="width:1%" rowspan="2">:<br>:<br>:</td>
+                                                <td style="width:20%" rowspan="2">{{ $reportPrint->class_name }}<br>{{ $reportPrint->semester_name }}<br>{{ $reportPrint->tahun_pelajaran_name }}</td>
                                             </tr>
-                                            <tr>
+                                            <tr valign="top">
                                                 <td>Alamat</td>
-                                                <td>: {{ $reportPrint->school_address }}</td>
-                                                <td>Semester</td>
-                                                <td>: {{ $reportPrint->semester_name }}</td>
+                                                <td>:</td>
+                                                <td>{{ $reportPrint->school_address }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Nama</td>
-                                                <td>: {{ $reportPrint->santri_name }}</td>
-                                                <td>Tahun Pelajaran</td>
-                                                <td>: {{ $reportPrint->tahun_pelajaran_name }}</td>
+                                                <td>:</td>
+                                                <td>{{ $reportPrint->santri_name }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Nomor Induk</td>
-                                                <td>: {{ $reportPrint->santri_nism }}</td>
+                                                <td>:</td>
+                                                <td>{{ $reportPrint->santri_nism }}</td>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>

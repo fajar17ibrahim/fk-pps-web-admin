@@ -20,44 +20,55 @@
                 <table class="borderless align-center" style="width:70%">
                     <tbody>
                         <tr>
-                            <td style="width:30%;">Nama PPS</td>
-                            <td style="width:70%;">: {{ $santri[0]->school_name }}</td>
+                            <td style="width:29%;">Nama PPS</td>
+                            <td style="width:1%;">:</td>
+                            <td style="width:70%;">{{ $santri[0]->school_name }}</td>
                         </tr>
                         <tr>
                             <td>NPSN</td>
-                            <td>: {{ $santri[0]->school_npsn }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_npsn }}</td>
                         </tr>
                         <tr>
                             <td>NSP</td>
-                            <td>: {{ $santri[0]->school_statistic_number }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_statistic_number }}</td>
                         </tr>
-                        <tr>
-                            <td>Alamat</td>
-                            <td>: {{ $santri[0]->school_address }}</td>
+                        <tr valign="top">
+                            <td>Alamat
+                            <td>:</td>
+                            </td>
+                            <td>{{ $santri[0]->school_address }}</td>
                         </tr>
                         <tr>
                             <td>Kelurahan / Desa</td>
-                            <td>: {{ $santri[0]->school_village }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_village }}</td>
                         </tr>
                         <tr>
                             <td>Kecamatan</td>
-                            <td>: {{ $santri[0]->school_districts }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_districts }}</td>
                         </tr>
                         <tr>
                             <td>Kabupaten / Kota</td>
-                            <td>: {{ $santri[0]->school_city }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_city }}</td>
                         </tr>
                         <tr>
                             <td>Provinsi</td>
-                            <td>: {{ $santri[0]->school_province }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_province }}</td>
                         </tr>
                         <tr>
                             <td>website</td>
-                            <td>: -</td>
+                            <td>:</td>
+                            <td>-</td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>: {{ $santri[0]->school_email }}</td>
+                            <td>:</td>
+                            <td>{{ $santri[0]->school_email }}</td>
                         </tr>
                     </tbody>
                 </table>
