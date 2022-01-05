@@ -299,6 +299,15 @@ class AdminMasterUstadzController extends Controller
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {
+                $userData = User::where('email', '=', $request['inUstadzEmail'])
+                    ->first();
+
+                if ($userData) {
+                    $userData->name = $request['inUstadzName'];
+                    $userData->email = $request['inUstadzEmail'];
+                    $userData->update();
+                }
+                
                 return redirect()->route('master-ustadz.index')
                 ->with('message_success', 'Ustadz berhasil diperbarui.');
             } else {
@@ -500,7 +509,7 @@ class AdminMasterUstadzController extends Controller
             $row[] = '<div class="d-flex align-items-center">
                             <img src="images/'. $ustadz->ustadz_photo .'" alt="" class="p-1 border bg-white"  width="90" height="100">
                         </div>';
-            $row[] = $ustadz->ustadz_name .'<br>NIK : '. $ustadz->ustadz_nik;
+            $row[] = '<b>' . $ustadz->ustadz_name .'</b><br>NIK : '. $ustadz->ustadz_nik .'<br>Email : '. $ustadz->ustadz_email;
             $row[] = $ustadz->ustadz_gender;
             $row[] = $ustadz->ustadz_born_place . ",<br>" . tanggal($ustadz->ustadz_born_date);
             $row[] = '<div class="d-flex align-items-center text-success">	

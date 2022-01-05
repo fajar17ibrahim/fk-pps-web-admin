@@ -77,13 +77,11 @@ class AdminUserController extends Controller
                 $user = new User;
                 $user->name = $emailCheck->ustadz_name;
                 $user->email = $request['inEmail'];
-                // $user->name = $request['inName'];
                 $user->role_id = $request['soRole'];
                 $user->status = $request['soStatus'];
                 $random_password = Str::random(8);
                 $user->password = Hash::make($random_password);
                 $save = $user->save();
-                // return response()->json(compact('user','token'), 201);
                 
                 if ($save) {
                     $details = [

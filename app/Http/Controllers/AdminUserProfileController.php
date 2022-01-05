@@ -121,6 +121,15 @@ class AdminUserProfileController extends Controller
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {
+                $userData = User::where('email', '=', $request['inUstadzEmail'])
+                    ->first();
+
+                if ($userData) {
+                    $userData->name = $request['inUstadzName'];
+                    $userData->email = $request['inUstadzEmail'];
+                    $userData->update();
+                }
+
                 return redirect()->route('user-profile.index')
                 ->with('message_success', 'Profil berhasil diperbarui.');
             } else {
