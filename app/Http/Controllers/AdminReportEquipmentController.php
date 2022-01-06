@@ -109,11 +109,39 @@ class AdminReportEquipmentController extends Controller
     public function show($id)
     {
         //
-        $equipment = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
-        ->leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
-        ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
-        ->where('equipment.equipment_id', $id)
-        ->get();
+        $equipmentData = ReportEquipment::leftJoin('santri', 'equipment.santri_id', '=', 'santri.santri_nisn')
+            ->leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
+            ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
+            ->where('equipment.equipment_id', $id)
+            ->first();
+
+            $kelasStart = Kelas::where('class_id', '=', $equipmentData->santri_class_start)->first();
+
+            $equipment = array(
+                'nama' => $equipmentData->santri_name,
+                'nism' => $equipmentData->santri_nism,
+                'nisn' => $equipmentData->santri_nisn,
+                'ttl' => $equipmentData->santri_born_place . ", ". tanggal($equipmentData->santri_born_date),
+                'gender' => $equipmentData->santri_gender,
+                'agama' => $equipmentData->santri_religion,
+                'anak_ke' => $equipmentData->santri_child_of,
+                'alamat_santri' => $equipmentData->santri_address . " RT/RW " . $equipmentData->santri_rt_rw . ", " . $equipmentData->santri_village . "" . $equipmentData->santri_district . ", " . $equipmentData->santri_city . ", " . $equipmentData->santri_province . " " . $equipmentData->santri_pos_code . ", " . $equipmentData->santri_country,
+                'pendidikan_terakhir' => $equipmentData->santri_last_school,
+                'kelas_mulai' => $kelasStart->class_name,
+                'kelas_mulai_tanggal' => tanggal($equipmentData->santri_class_start_date),
+                'ayah' => $equipmentData->father_name,
+                'ibu' => $equipmentData->mother_name,
+                'alamat_ortu' => $equipmentData->santri_address . " RT/RW " . $equipmentData->santri_rt_rw . ", " . $equipmentData->santri_village . "" . $equipmentData->santri_district . ", " . $equipmentData->santri_city . ", " . $equipmentData->santri_province . " " . $equipmentData->santri_pos_code . ", " . $equipmentData->santri_country,
+                'ayah_phone' => $equipmentData->father_phone,
+                'ayah_profesi' => $equipmentData->father_profession,
+                'ibu_profesi' => $equipmentData->mother_profession,
+                'wali_nama' => $equipmentData->wali_name,
+                'wali_phone' => $equipmentData->wali_phone,
+                'wali_profesi' => $equipmentData->wali_profession,
+                'sekolah_kota' => $equipmentData->school_city,
+                'sekolah_level' => $equipmentData->school_level,
+                'kepsek' => $equipmentData->ustadz_name
+            );
         return json_encode($equipment);
     }
 
@@ -266,10 +294,40 @@ class AdminReportEquipmentController extends Controller
     public function reportSantri($id)
     {
         //
-        $santri = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
+        $santriData = Santri::leftJoin('kelas', 'santri.santri_class', '=', 'kelas.class_id')
         ->leftJoin('school', 'santri.santri_school', '=', 'school.school_id')
         ->leftJoin('ustadz', 'ustadz.ustadz_nik', '=', 'school.school_headship')
-        ->where('santri_nisn', '=', $id)->get();
+        ->where('santri_nisn', '=', $id)
+        ->first();
+
+        $kelasStart = Kelas::where('class_id', '=', $santriData->santri_class_start)->first();
+
+        $santri = array(
+            'photo' => $santriData->santri_photo,
+            'nama' => $santriData->santri_name,
+            'nism' => $santriData->santri_nism,
+            'nisn' => $santriData->santri_nisn,
+            'ttl' => $santriData->santri_born_place . ", ". tanggal($santriData->santri_born_date),
+            'gender' => $santriData->santri_gender,
+            'agama' => $santriData->santri_religion,
+            'anak_ke' => $santriData->santri_child_of,
+            'alamat_santri' => $santriData->santri_address . " RT/RW " . $santriData->santri_rt_rw . ", " . $santriData->santri_village . "" . $santriData->santri_district . ", " . $santriData->santri_city . ", " . $santriData->santri_province . " " . $santriData->santri_pos_code . ", " . $santriData->santri_country,
+            'pendidikan_terakhir' => $santriData->santri_last_school,
+            'kelas_mulai' => $kelasStart->class_name,
+            'kelas_mulai_tanggal' => tanggal($santriData->santri_class_start_date),
+            'ayah' => $santriData->father_name,
+            'ibu' => $santriData->mother_name,
+            'alamat_ortu' => $santriData->santri_address . " RT/RW " . $santriData->santri_rt_rw . ", " . $santriData->santri_village . "" . $santriData->santri_district . ", " . $santriData->santri_city . ", " . $santriData->santri_province . " " . $santriData->santri_pos_code . ", " . $santriData->santri_country,
+            'ayah_phone' => $santriData->father_phone,
+            'ayah_profesi' => $santriData->father_profession,
+            'ibu_profesi' => $santriData->mother_profession,
+            'wali_nama' => $santriData->wali_name,
+            'wali_phone' => $santriData->wali_phone,
+            'wali_profesi' => $santriData->wali_profession,
+            'sekolah_kota' => $santriData->school_city,
+            'sekolah_level' => $santriData->school_level,
+            'kepsek' => $santriData->ustadz_name
+        );
 
         // return $santri;
         $pdf = PDF::loadView('admin.page.report.reportequipment.report-santri-information', compact('santri'));

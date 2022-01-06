@@ -131,10 +131,10 @@
                             dataType: "JSON",
                             success: function(data) {
                                 $('#reportEquipmentListModal').modal('show');
-								$('#lsCover').attr('href', 'report-equipment-cover/' + data[0].santri_nisn);
-								$('#lsLembaga').attr('href', 'report-equipment-lembaga/' + data[0].santri_nisn);
-								$('#lsSantri').attr('href', 'report-equipment-santri/' + data[0].santri_nisn);
-								$('#lsMutation').attr('href', 'report-equipment-mutation/' + data[0].santri_nisn);
+								$('#lsCover').attr('href', 'report-equipment-cover/' + data.nisn);
+								$('#lsLembaga').attr('href', 'report-equipment-lembaga/' + data.nisn);
+								$('#lsSantri').attr('href', 'report-equipment-santri/' + data.nisn);
+								$('#lsMutation').attr('href', 'report-equipment-mutation/' + data.nisn);
                             },
                             error: function() {
                                 alert('Tidak dapat menampilkan Data');

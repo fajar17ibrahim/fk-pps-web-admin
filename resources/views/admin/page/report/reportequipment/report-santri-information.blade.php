@@ -19,40 +19,40 @@
                             <td style="width:1%;">1.</td>
                             <td style="width:39%;">Nama Peserta Didik (Lengkap)</td>
                             <td style="width:1px;">:</td>
-                            <td style="width:60%;">{{ $santri[0]->santri_name }}</td>
+                            <td style="width:60%;">{{ $santri['nama']}}</td>
                         </tr>
                         <tr>
                             <td>2.</td>
                             <td>NIS</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_nism }}</td>
+                            <td>{{ $santri['nism']}}</td>
                         </tr>
                         <tr>
                             <td>3.</td>
                             <td>NISN</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_nisn }}</td>
+                            <td>{{ $santri['nisn']}}</td>
                         </tr>
                         
                         <tr>
                             <td>4.</td>
                             <td>Tempat Tanggal Lahir</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_born_place .", ". tanggal($santri[0]->santri_born_date) }}</td>
+                            <td>{{ $santri['ttl']}}</td>
                         </tr>
                         
                         <tr>
                             <td>5.</td>
                             <td>Jenis Kelamin</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_gender }}</td>
+                            <td>{{ $santri['gender']}}</td>
                         </tr>
                         
                         <tr>
                             <td>6.</td>
                             <td>Agama</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_religion }}</td>
+                            <td>{{ $santri['agama']}}</td>
                         </tr>
                         <tr>
                             <td>7.</td>
@@ -64,13 +64,13 @@
                             <td>8.</td>
                             <td>Anak ke</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_child_of }}</td>
+                            <td>{{ $santri['anak_ke']}}</td>
                         </tr>
                         <tr valign="top">
                             <td>9.</td>
                             <td>Alamat Peserta Didik</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_address . " RT/RW " . $santri[0]->santri_rt_rw . ", " . $santri[0]->santri_village . "" . $santri[0]->santri_district . ", " . $santri[0]->santri_city . ", " . $santri[0]->santri_province . " " . $santri[0]->santri_pos_code . ", " . $santri[0]->santri_country }}</td>
+                            <td>{{ $santri['alamat_santri']}}</td>
                         </tr>
                         <tr>
                             <td>10.</td>
@@ -82,7 +82,7 @@
                             <td>11.</td>
                             <td>PPS Asal</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_last_school }}</td>
+                            <td>{{ $santri['pendidikan_terakhir']}}</td>
                         </tr>
                         <tr>
                             <td>12.</td>
@@ -94,13 +94,13 @@
                             <td></td>
                             <td>Dikelas</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_class_start }}</td>
+                            <td>{{ $santri['kelas_mulai']}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>Pada Tanggal</td>
                             <td>:</td>
-                            <td>{{ tanggal($santri[0]->santri_class_start_date) }}</td>
+                            <td>{{ $santri['kelas_mulai_tanggal']}}</td>
                         </tr>
                         <tr>
                             <td>13.</td>
@@ -112,25 +112,25 @@
                             <td></td>
                             <td>a. Ayah</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->father_name }}</td>
+                            <td>{{ $santri['ayah']}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>b. Ibu</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->mother_name }}</td>
+                            <td>{{ $santri['ibu']}}</td>
                         </tr>
                         <tr valign="top">
                             <td>14.</td>
                             <td>Alamat Orang Tua</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->santri_address . " RT/RW " . $santri[0]->santri_rt_rw . ", " . $santri[0]->santri_village . "" . $santri[0]->santri_district . ", " . $santri[0]->santri_city . ", " . $santri[0]->santri_province . " " . $santri[0]->santri_pos_code . ", " . $santri[0]->santri_country }}</td>
+                            <td>{{ $santri['alamat_ortu']}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>Nomor Telepon Rumah</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->father_phone }}</td>
+                            <td>{{ $santri['ayah_phone']}}</td>
                         </tr>
                         <tr>
                             <td>15.</td>
@@ -141,19 +141,19 @@
                             <td></td>
                             <td>a. Ayah</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->father_profession }}</td>
+                            <td>{{ $santri['ayah_profesi']}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>b. Ibu</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->mother_profession }}</td>
+                            <td>{{ $santri['ibu_profesi']}}</td>
                         </tr>
                         <tr>
                             <td>16.</td>
                             <td>Nama Wali Peserta Didik</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->wali_name }}</td>
+                            <td>{{ $santri['wali_nama']}}</td>
                         </tr>
                         <tr>
                             <td>17.</td>
@@ -165,13 +165,13 @@
                             <td></td>
                             <td>Nomor Telepon Rumah</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->wali_phone }}</td>
+                            <td>{{ $santri['wali_phone']}}</td>
                         </tr>
                         <tr>
                             <td>18.</td>
                             <td>Pekerjaan Wali Peserta Didik</td>
                             <td>:</td>
-                            <td>{{ $santri[0]->wali_profession }}</td>
+                            <td>{{ $santri['wali_profesi']}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -179,11 +179,11 @@
                 <table class="borderless align-center" style="width:80%;">
                     <tbody>
                         <tr >
-                            <td class="text-right" rowspan="3" style="width:40%;"><img src="images/{{ $santri[0]->santri_photo }}" alt="" class="bg-white"  width="100" height="130"></td>
+                            <td class="text-right" rowspan="3" style="width:40%;"><img src="images/{{ $santri['photo']}}" alt="" class="bg-white"  width="100" height="130"></td>
                             <!-- <td rowspan="4">Kepaa Ulya</td> -->
                             <td>
-                                {{ trim(strstr($santri[0]->school_city, " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }} <br>
-                                Kepala {{ $santri[0]->class_level }}
+                                {{ trim(strstr($santri['sekolah_kota'], " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }} <br>
+                                Kepala {{ $santri['sekolah_level']}}
                             </td>
                         </tr>
                         <tr>
@@ -192,7 +192,7 @@
                         </tr>
                         <tr>
                         <!-- <td>Kepala Ulya</td> -->
-                            <td>{{ $santri[0]->ustadz_name }}</td>
+                            <td>{{ $santri['kepsek'] }}</td>
                         </tr>
                     </tbody>
                 </table>
