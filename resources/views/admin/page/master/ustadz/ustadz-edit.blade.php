@@ -65,7 +65,7 @@
 										<input name="inUstadzPlaceBorn" type="text" id="inUstadzPlaceBorn" class="form-control" value="{{ $ustadz->ustadz_born_place }}" required />
 										<div class="invalid-tooltip">Tempat Lahir tidak boleh kosong</div>
 									</div>
-									<label for="inUstadzDateBorn" class="col-sm-2 col-form-label">Tanggal Lahir</label>
+									<label for="inUstadzDateBorn" class="col-sm-2 col-form-label">Tgl Lahir</label>
 									<div class="col-sm-4 text-secondary">
 										<input name="inUstadzDateBorn" type="date" id="inUstadzDateBorn" class="form-control" value="{{ $ustadz->ustadz_born_date }}" required>
 										<div class="invalid-tooltip">Tanggal tidak boleh kosong</div>

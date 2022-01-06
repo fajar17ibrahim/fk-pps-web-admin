@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\School;
 use App\Models\Ustadz;
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AdminUserProfileController extends Controller
@@ -93,6 +94,13 @@ class AdminUserProfileController extends Controller
                 $photoName = "avatar.png";
             }
             $ustadz = Ustadz::find($id);
+            $email = $request['inUstadzEmail'];
+
+            $checkData = Ustadz::where('ustadz_email', '=', $email)->first();
+            if ($checkData && $ustadz->ustadz_email != $email) {
+                return redirect()->route('user-profile.index')
+                ->with('message_error', 'Email sudah terdaftar.');
+            }
             $ustadz->ustadz_nik = $request['inUstadzNIK'];
             $ustadz->ustadz_name = $request['inUstadzName'];
             $ustadz->ustadz_born_place = $request['inUstadzPlaceBorn'];
@@ -114,19 +122,19 @@ class AdminUserProfileController extends Controller
             $ustadz->ustadz_city = $request['inKabOrCity'];
             $ustadz->ustadz_province = $request['inProvince'];
             $ustadz->ustadz_country = $request['inCountry'];
-            $ustadz->ustadz_email = $request['inUstadzEmail'];
+            $ustadz->ustadz_email = $email;
             $ustadz->ustadz_phone = $request['inUstadzPhone'];
             $ustadz->status = 'Aktif';
             $ustadz->ustadz_photo = $photoName;
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {
-                $userData = User::where('email', '=', $request['inUstadzEmail'])
+                $userData = User::where('email', '=', $email)
                     ->first();
 
                 if ($userData) {
                     $userData->name = $request['inUstadzName'];
-                    $userData->email = $request['inUstadzEmail'];
+                    $userData->email = $email;
                     $userData->update();
                 }
 

@@ -70,8 +70,8 @@
 														<input name="inSantriPlaceBorn" type="text" id="inSantriPlaceBorn" class="form-control" value="{{ $santri['tempat_lahir'] }}" required/>
 														<div class="invalid-tooltip">Tempat Lahir tidak boleh kosong</div>
 													</div>
-													<label for="inSantriDateBorn" class="col-sm-3 col-form-label">Tanggal Lahir</label>
-													<div class="col-sm-3 text-secondary">
+													<label for="inSantriDateBorn" class="col-sm-2 col-form-label">Tgl Lahir</label>
+													<div class="col-sm-4 text-secondary">
 														<input name="inSantriDateBorn" type="date" id="inSantriDateBorn" class="form-control" value="{{ $santri['tanggal_lahir'] }}" required>
 														<div class="invalid-tooltip">Pilih Tanggal Lahir</div>
 													</div>
@@ -143,8 +143,8 @@
 														@endforeach
 														</select>
 													</div>
-													<label for="inSantriJoinDate" class="col-sm-3 col-form-label">Tanggal Masuk</label>
-													<div class="col-sm-3 text-secondary">
+													<label for="inSantriJoinDate" class="col-sm-2 col-form-label">Tgl Masuk</label>
+													<div class="col-sm-4 text-secondary">
 														<input name="inSantriJoinDate" type="date" id="inSantriJoinDate" class="form-control" value="{{ $santri['diterima_tangal'] }}" required>
 													</div>
 												</div>

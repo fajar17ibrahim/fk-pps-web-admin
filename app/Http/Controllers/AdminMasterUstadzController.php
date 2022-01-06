@@ -234,13 +234,6 @@ class AdminMasterUstadzController extends Controller
             //
             $this->authorize('master-teacher');
 
-            $email = $request['inUstadzEmail'];
-            $checkData = Ustadz::where('ustadz_email', '=', $email)->first();
-            if ($checkData) {
-                return redirect()->route('master-ustadz.index')
-                ->with('message_error', 'Email sudah terdaftar.');
-            }
-
             $ustadzPhoto = $request['inUstadzPhoto'];
             if ($ustadzPhoto) {
                 $photoName = $request['inUstadzNIK'] . "_" . time().'.' . $request->inUstadzPhoto->extension();
@@ -270,6 +263,13 @@ class AdminMasterUstadzController extends Controller
             }
 
             $ustadz = Ustadz::find($id);
+            $email = $request['inUstadzEmail'];
+
+            $checkData = Ustadz::where('ustadz_email', '=', $email)->first();
+            if ($checkData && $ustadz->ustadz_email != $email) {
+                return redirect()->route('master-ustadz.index')
+                ->with('message_error', 'Email sudah terdaftar.');
+            }
             $ustadz->ustadz_nik = $request['inUstadzNIK'];
             $ustadz->ustadz_name = $request['inUstadzName'];
             $ustadz->ustadz_born_place = $request['inUstadzPlaceBorn'];
