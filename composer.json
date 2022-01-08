@@ -30,7 +30,8 @@
         },
         "files" : [
             "app/Helpers/tanggal.php",
-            "app/Helpers/roleName.php"
+            "app/Helpers/roleName.php",
+            "app/Helpers/predikat.php"
         ]
     },
     "autoload-dev": {

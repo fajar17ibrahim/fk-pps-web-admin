@@ -7,6 +7,7 @@ use URL;
 use Illuminate\Http\Request;
 use App\Models\School;
 use App\Models\Ustadz;
+use App\Models\User;
 use App\Models\Address;
 use App\Models\Kelas;
 
@@ -233,13 +234,18 @@ class AdminMasterUstadzController extends Controller
         try {
             //
             $this->authorize('master-teacher');
+            $ustadz = Ustadz::find($id);
 
             $ustadzPhoto = $request['inUstadzPhoto'];
             if ($ustadzPhoto) {
                 $photoName = $request['inUstadzNIK'] . "_" . time().'.' . $request->inUstadzPhoto->extension();
                 $request->inUstadzPhoto->move(public_path('images'), $photoName);
             } else {
-                $photoName = "avatar.png";
+                if ($ustadz->ustadz_photo) {
+                    $photoName = $ustadz->ustadz_photo;
+                } else {
+                    $photoName = "avatar.png";
+                }
             }
 
             $rtLength =  strlen($request['inRT']);
@@ -262,7 +268,7 @@ class AdminMasterUstadzController extends Controller
                 $rw = $angkaNol . $request['inRW'];
             }
 
-            $ustadz = Ustadz::find($id);
+            
             $email = $request['inUstadzEmail'];
 
             $checkData = Ustadz::where('ustadz_email', '=', $email)->first();

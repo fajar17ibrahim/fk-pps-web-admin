@@ -138,6 +138,20 @@ class AdminMasterSchoolController extends Controller
         //
         try {
             //
+            $school = School::find($id);
+
+            $schoolPhoto = $request['inSchoolPhoto'];
+            if ($schoolPhoto) {
+                $photoName = $request['inSchoolNPSN'] . "_" . time().'.' . $request->inSchoolPhoto->extension();
+                $request->inSchoolPhoto->move(public_path('images'), $photoName);
+            } else {
+                if ($school->school_photo) {
+                    $photoName = $school->school_photo;
+                } else {
+                    $photoName = "logo_fk_pkpps.jpg";
+                }
+            }
+
             $rtLength =  strlen($request['inRT']);
             $angkaNol = "0";
             $rt = $request['inRT'];
@@ -158,15 +172,6 @@ class AdminMasterSchoolController extends Controller
                 $rw = $angkaNol . $request['inRW'];
             }
 
-            $schoolPhoto = $request['inSchoolPhoto'];
-            if ($schoolPhoto) {
-                $photoName = $request['inSchoolNPSN'] . "_" . time().'.' . $request->inSchoolPhoto->extension();
-                $request->inSchoolPhoto->move(public_path('images'), $photoName);
-            } else {
-                $photoName = "logo_fk_pkpps.jpg";
-            }
-
-            $school = School::find($id);
             $school->school_statistic_number = $request['inSchoolNSP'];
             $school->school_npsn = $request['inSchoolNPSN'];
             $school->school_name = $request['inSchoolName'];

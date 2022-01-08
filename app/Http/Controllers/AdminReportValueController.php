@@ -393,7 +393,7 @@ class AdminReportValueController extends Controller
                 ->get();
             } else if ($level == 0 && $school != 0 && $kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
-                ->leftJoin('school','ksantri.santri_school','=','school.school_id')
+                ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->where('santri.santri_school', '=', $school)
                 ->where('kelas.class_id', '=', $kelas)
                 ->get();

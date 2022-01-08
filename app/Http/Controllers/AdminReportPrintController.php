@@ -307,7 +307,7 @@ class AdminReportPrintController extends Controller
 
         $user = Session::get('user');
 
-        $schoolHeadship = Ustadz::where('ustadz.ustadz_nik', '=', $user[0]->school_headship)
+        $schoolHeadship = Ustadz::where('ustadz.ustadz_nik', '=', $reportPrint->school_headship)
         ->first();
 
         // return $schoolHeadship;
@@ -329,7 +329,7 @@ class AdminReportPrintController extends Controller
                 'wali_kelas' => $reportPrint->ustadz_name,
                 'semester' => $reportPrint->semester_name,
                 'tahun_pelajaran' => $reportPrint->tahun_pelajaran_name,
-                'ayah_nama' => $reportPrint->father_name,
+                'ayah_nama' => '....................',
                 'sekolah_kota' => $reportPrint->school_city,
                 'kepala_sekolah' => $schoolHeadship->ustadz_name
             );
@@ -347,12 +347,25 @@ class AdminReportPrintController extends Controller
         // return $reportReportAttitude;
 
         if ($reportReportAttitude) {
+            $descSpiritual = $reportReportAttitude->good_spiritual_attitude;
+            if ($descSpiritual != "") {
+                $descSpiritual = "Memiliki sikap Spiritual " . predikat($reportReportAttitude->spiritual_attitude_pred) . " antara lain : " . $reportReportAttitude->good_spiritual_attitude;
+            } else {
+                $descSpiritual = "";
+            }
+
+            $descSosial = $reportReportAttitude->good_sosial_attitude;
+            if ($descSosial != "") {
+                $descSosial = "Memiliki sikap Sosial " . predikat($reportReportAttitude->sosial_attitude_pred) . " antara lain : " . $reportReportAttitude->good_sosial_attitude;
+            } else {
+                $descSosial = "";
+            }
             $attitude = array(
                 'spiritual_pred' => $reportReportAttitude->spiritual_attitude_pred,
-                'spiritual_baik_desc' => $reportReportAttitude->good_spiritual_attitude,
+                'spiritual_baik_desc' => $descSpiritual,
                 'spiritual_kurang_desc' => $reportReportAttitude->lack_of_spiritual_attitude,
                 'sosial_pred' => $reportReportAttitude->sosial_attitude_pred,
-                'sosial_baik_desc' => $reportReportAttitude->good_sosial_attitude,
+                'sosial_baik_desc' => $descSosial,
                 'sosial_kurang_desc' => $reportReportAttitude->lack_of_sosial_attitude,
             );
         } else {
@@ -392,6 +405,20 @@ class AdminReportPrintController extends Controller
                 foreach ($reportValues as $reportValue) {
                     if ($reportValue->kelompok_name == $kelompokMapel) {
                         $no++;
+
+                        $descKnowladge = $reportValue->knowledge_pre;
+                        if ($descKnowladge != "") {
+                            $descKnowladge = 'Memiliki kemampuan ' . predikat($reportValue->knowledge_pre) . ' dalam pengetahuan ' . $reportValue->knowledge_desc;
+                        } else {
+                            $descKnowladge = "";
+                        }
+
+                        $descSkills = $reportValue->skills_desc;
+                        if ($descSkills != "") {
+                            $descSkills = 'Memiliki kemampuan ' . predikat($reportValue->knowladge_pre) . ' dalam keterampilan ' . $reportValue->skills_desc;
+                        } else {
+                            $descSkills = "";
+                        }
                         $row = array(
                             'no' => $no,
                             'mapel_nama' => $reportValue->mapel_name,
@@ -411,7 +438,7 @@ class AdminReportPrintController extends Controller
                             'pts' => $reportValue->pts,  
                             'pas' => round($reportValue->pas),
                             'pre_pengetahuan' => $reportValue->knowledge_pre,
-                            'deskripsi_pengetahuan' => $reportValue->knowledge_desc,
+                            'deskripsi_pengetahuan' => $descKnowladge,
                             'k1' => $reportValue->k1,
                             'k2' => $reportValue->k2,
                             'k3' => $reportValue->k3,
@@ -424,7 +451,7 @@ class AdminReportPrintController extends Controller
                             'k10' => $reportValue->k10,
                             'hpa' => $reportValue->hpa,
                             'pre_keterampilan' => $reportValue->skills_pre,  
-                            'deskripsi_keterampilan' => $reportValue->skills_desc,
+                            'deskripsi_keterampilan' => $descSkills,
                             'average' => round(((float) $reportValue->pas + (float) $reportValue->hpa) / 2)
                         );
                         $values[] = $row;

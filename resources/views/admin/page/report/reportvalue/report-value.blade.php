@@ -488,8 +488,6 @@
                             pred[$index].value = "B";
                         } else if (rphValue >= predB && rphValue <= predA) {
                             pred[$index].value = "A";
-                        } else {
-                            pred[$index].value = "E";
                         }
                         
                         pDesc[$index].value = sKDKnowledge;

@@ -7,36 +7,27 @@
                         <div class="card">
                             <div class="card-body">
                                 <h2 class="mb-0 text-uppercase text-center">Capaian Hasil Belajar</h2>
-                                <table id="table-attendance" class="borderless" style="width:100%; line-height: 130%;">
+                                <br>
+                                <table id="table-attendance" class="borderless" style="width:100%; line-height:50%">
                                     <tbody>
-                                        <tr >
-                                            <td style="width:14%">Nama PKPPS</td>
-                                            <td style="width:1%">:</td>
-                                            <td style="width:46%" class="text-bold">{{ $data['biodata']['pps_nama'] }}</td>
-                                            <td style="width:14%" rowspan="2">Kelas<br>Semester<br>Tahun Pelajaran</td>
-                                            <td style="width:1%" rowspan="2">:<br>:<br>:</td>
-                                            <td style="width:14%" rowspan="2" class="text-bold">{{ $data['biodata']['kelas_nama'] }}<br>{{ $data['biodata']['semester'] }}<br>{{ $data['biodata']['tahun_pelajaran'] }}</td>
-                                        </tr>
                                         <tr valign="top">
-                                            <td>Alamat</td>
-                                            <td>:</td>
-                                            <td class="text-bold">{{ $data['biodata']['pps_alamat'] }}</td>
+                                            <td style="width:14%" >Nama PKPPS<p style=" line-height:50%">Alamat</td>
+                                            <td style="width:1%" >:<p style=" line-height:50%">:</td>
+                                            <td style="width:46%;" class="text-bold" >{{ $data['biodata']['pps_nama'] }}<p style=" line-height:120%; margin:5px 0px 5px 0px">{{ $data['biodata']['pps_alamat'] }}</td>
+                                            <td style="width:14%;" rowspan="3">Kelas<p>Semester<p>Tahun Pelajaran</td>
+                                            <td style="width:1%;" rowspan="3" >:<p>:<p>:</td>
+                                            <td style="width:14%;" rowspan="3" class="text-bold">{{ $data['biodata']['kelas_nama'] }}<p>{{ $data['biodata']['semester'] }}<p>{{ $data['biodata']['tahun_pelajaran'] }}</td>
                                         </tr>
                                         <tr>
                                             <td>Nama</td>
                                             <td>:</td>
                                             <td class="text-bold">{{ $data['biodata']['santri_nama'] }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>Nomor Induk</td>
                                             <td>:</td>
                                             <td class="text-bold">{{ $data['biodata']['santri_no_induk'] }}</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            
                                         </tr>
                                     </tbody>
                                 </table>
@@ -238,7 +229,7 @@
                             <table id="table-attendance" class="border" style="width:100%;">
                                 <tbody>
                                     <tr>
-                                        <td style="height:100px; vertical-align: top">Peringkat Nilai Ranking {{ $data['catatan_wali_kelas']['ranking'] . ". " . $data['catatan_wali_kelas']['catatan_ranking']  . ". " . $data['catatan_wali_kelas']['catatan_pilihan']}}</td>
+                                        <td style="height:100px; vertical-align: top">{{ $data['catatan_wali_kelas']['catatan_ranking']  . ". " . $data['catatan_wali_kelas']['catatan_pilihan']}}</td>
                                     </tr>
                                 </tbody>
                             </table>

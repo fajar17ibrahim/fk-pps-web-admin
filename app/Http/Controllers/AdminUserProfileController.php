@@ -85,15 +85,20 @@ class AdminUserProfileController extends Controller
         try {
             //
             $this->authorize('user-profile');
+            $ustadz = Ustadz::find($id);
 
             $ustadzPhoto = $request['inUstadzPhoto'];
             if ($ustadzPhoto) {
                 $photoName = $request['inUstadzNIK'] . "_" . time().'.' . $request->inUstadzPhoto->extension();
                 $request->inUstadzPhoto->move(public_path('images'), $photoName);
             } else {
-                $photoName = "avatar.png";
+                if ($ustadz->ustadz_photo) {
+                    $photoName = $ustadz->ustadz_photo;
+                } else {
+                    $photoName = "avatar.png";
+                }
             }
-            $ustadz = Ustadz::find($id);
+            
             $email = $request['inUstadzEmail'];
 
             $checkData = Ustadz::where('ustadz_email', '=', $email)->first();
