@@ -89,23 +89,38 @@ class AdminReportAttendanceController extends Controller
                     ->where('santri.santri_nisn', '=', $nisn)
                     ->first();
 
-                $attendance = new ReportAttendance;
+                $reportAttendanceCheck = ReportAttendance::where('santri_nisn', '=', $santri->santri_nisn)
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->where('class_id', '=', $santri->santri_class)
+                    ->first();
+
+                if ($reportAttendanceCheck) {
+                    $attendance = $reportAttendanceCheck;
+                } else {
+                    $attendance = new ReportAttendance;
+                }
+
                 $attendance->santri_nisn = $santri->santri_nisn;
                 $attendance->class_id = $santri->santri_class;
                 $attendance->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
                 $attendance->s = $s[$index];
                 $attendance->i = $i[$index];
                 $attendance->a = $a[$index];
-                $save = $attendance->save();
-            }
-        
-                if ($save) {
-                    return redirect()->route('report-attendance.index')
-                    ->with('message_success', 'Absensi berhasil disimpan.');
+
+                if ($reportAttendanceCheck) {
+                    $save = $attendance->update();
                 } else {
-                    return redirect()->route('report-attendance.index')
-                    ->with('message_error', 'Absensi gagal disimpan.');
-                }
+                    $save = $attendance->save();
+                } 
+            }
+
+            if ($save) {
+                return redirect()->route('report-attendance.index')
+                ->with('message_success', 'Absensi berhasil disimpan.');
+            } else {
+                return redirect()->route('report-attendance.index')
+                ->with('message_error', 'Absensi gagal disimpan.');
+            }
         } catch(\Illuminate\Database\QueryException $e){ 
             return redirect()->route('report-attendance.index')
             ->with('message_error', $e->getMessage());
@@ -229,15 +244,30 @@ class AdminReportAttendanceController extends Controller
         $no = 0;
         $data = array();
         foreach ($santris as $santri) {
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            $reportAttendanceCheck = ReportAttendance::where('santri_nisn', '=', $santri->santri_nisn)
+                ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                ->first();
+
+            if ($reportAttendanceCheck) {
+                $s = $reportAttendanceCheck->s;
+                $i = $reportAttendanceCheck->i;
+                $a = $reportAttendanceCheck->a;
+            } else {
+                $s = "0";
+                $i = "0";
+                $a = "0";
+            }
+
             $no++;
             $row = array();
             $row[] = $no;
             $row[] = $santri->santri_nism . " / " . $santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
-            $row[] = '<input name="inS[]" type="number" class="form-control" value="0" />';
-            $row[] = '<input name="inI[]" type="number" class="form-control" value="0" />';
-            $row[] = '<input name="inA[]" type="number" class="form-control" value="0" />';
+            $row[] = '<input name="inS[]" type="number" class="form-control" value="' . $s . '" />';
+            $row[] = '<input name="inI[]" type="number" class="form-control" value="' . $i . '" />';
+            $row[] = '<input name="inA[]" type="number" class="form-control" value="' . $a . '" />';
             $data[] = $row;
         }
 

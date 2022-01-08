@@ -99,48 +99,97 @@ class AdminReportExtrakurikulerController extends Controller
                     ->where('santri.santri_nisn', '=', $nisn)
                     ->first();
 
-                if ($extra1Name[$index] != "") {
-                    $extrakurikuler = new ReportExtrakurikuler;
+                $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+                $reportExtraCheck = ReportExtrakurikuler::where('santri_nisn', '=', $santri->santri_nisn)
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->where('class_id', '=', $santri->santri_class)
+                    ->orderBy('report_extrakurikuler_id', 'asc')
+                    ->get();
+
+                if ($extra1Name[$index] != "Tidak Ada") {
+                    if (count($reportExtraCheck) == 1) {
+                        $extrakurikuler = $reportExtraCheck[0];
+                    } else {
+                        $extrakurikuler = new ReportExtrakurikuler;
+                    }
+                    
                     $extrakurikuler->santri_nisn = $santri->santri_nisn;
                     $extrakurikuler->class_id = $santri->santri_class;
                     $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
                     $extrakurikuler->extra_name = $extra1Name[$index];
                     $extrakurikuler->extra_value = $extra1Value[$index];
                     $extrakurikuler->extra_description = $extra1Desc[$index];
-                    $save = $extrakurikuler->save();
+
+                    if (count($reportExtraCheck) == 1) {
+                        $save = $extrakurikuler->update();
+                    } else {
+                        $save = $extrakurikuler->save();
+                    }
+                    
                 }
 
-                if ($extra2Name[$index] != "") {
-                    $extrakurikuler = new ReportExtrakurikuler;
+                if ($extra2Name[$index] != "Tidak Ada") {
+                    if (count($reportExtraCheck) == 2) {
+                        $extrakurikuler = $reportExtraCheck[1];
+                    } else {
+                        $extrakurikuler = new ReportExtrakurikuler;
+                    }
+
                     $extrakurikuler->santri_nisn = $santri->santri_nisn;
                     $extrakurikuler->class_id = $santri->santri_class;
                     $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
                     $extrakurikuler->extra_name = $extra2Name[$index];
                     $extrakurikuler->extra_value = $extra2Value[$index];
                     $extrakurikuler->extra_description = $extra2Desc[$index];
-                    $save = $extrakurikuler->save();
+                    
+                    if (count($reportExtraCheck) == 2) {
+                        $save = $extrakurikuler->update();
+                    } else {
+                        $save = $extrakurikuler->save();
+                    }
                 }
 
-                if ($extra3Name[$index] != "") {
-                    $extrakurikuler = new ReportExtrakurikuler;
+                if ($extra3Name[$index] != "Tidak Ada") {
+                    
+                    if (count($reportExtraCheck) == 3) {
+                        $extrakurikuler = $reportExtraCheck[2];
+                    } else {
+                        $extrakurikuler = new ReportExtrakurikuler;
+                    }
+                    
                     $extrakurikuler->santri_nisn = $santri->santri_nisn;
                     $extrakurikuler->class_id = $santri->santri_class;
                     $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
                     $extrakurikuler->extra_name = $extra3Name[$index];
                     $extrakurikuler->extra_value = $extra3Value[$index];
                     $extrakurikuler->extra_description = $extra3Desc[$index];
-                    $save = $extrakurikuler->save();
+
+                    if (count($reportExtraCheck) == 3) {
+                        $save = $extrakurikuler->update();
+                    } else {
+                        $save = $extrakurikuler->save();
+                    }
                 }
 
-                if ($extra4Name[$index] != "") {
-                    $extrakurikuler = new ReportExtrakurikuler;
+                if ($extra4Name[$index] != "Tidak Ada") {
+                    if (count($reportExtraCheck) == 4) {
+                        $extrakurikuler = $reportExtraCheck[3];
+                    } else {
+                        $extrakurikuler = new ReportExtrakurikuler;
+                    }
+                    
                     $extrakurikuler->santri_nisn = $santri->santri_nisn;
                     $extrakurikuler->class_id = $santri->santri_class;
                     $extrakurikuler->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
                     $extrakurikuler->extra_name = $extra4Name[$index];
                     $extrakurikuler->extra_value = $extra4Value[$index];
                     $extrakurikuler->extra_description = $extra4Desc[$index];
-                    $save = $extrakurikuler->save();
+
+                    if (count($reportExtraCheck) == 4) {
+                        $save = $extrakurikuler->update();
+                    } else {
+                        $save = $extrakurikuler->save();
+                    }
                 }
             }
         
@@ -274,6 +323,58 @@ class AdminReportExtrakurikulerController extends Controller
         $no = 0;
         $data = array();
         foreach ($santris as $santri) {
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            $reportExtraCheck = ReportExtrakurikuler::where('santri_nisn', '=', $santri->santri_nisn)
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->where('class_id', '=', $santri->santri_class)
+                    ->orderBy('report_extrakurikuler_id', 'asc')
+                    ->get();
+
+            $name1 = "Tidak Ada";
+            $value1 = "A";
+            $desc1 = "";
+            $name2 = "Tidak Ada";
+            $value2 = "A";
+            $desc2 = "";
+            $name3 = "Tidak Ada";
+            $value3 = "A";
+            $desc3 = "";
+            $name4 = "Tidak Ada";
+            $value4 = "A";
+            $desc4 = "";
+
+            if (count($reportExtraCheck) > 0) {
+                $count = 0;
+                foreach ($reportExtraCheck as $reportExtra) {
+                    if ($count == 0) {
+                        $name1 = $reportExtraCheck[0]->extra_name;
+                        $value1 = $reportExtraCheck[0]->extra_value;
+                        $desc1 = $reportExtraCheck[0]->extra_description;
+                    }
+
+                    if ($count == 1) {
+                        $name2 = $reportExtraCheck[1]->extra_name;
+                        $value2 = $reportExtraCheck[1]->extra_value;
+                        $desc2 = $reportExtraCheck[1]->extra_description;
+                    } 
+
+                    if ($count == 2) {
+                        $name3 = $reportExtraCheck[2]->extra_name;
+                        $value3 = $reportExtraCheck[2]->extra_value;
+                        $desc3 = $reportExtraCheck[2]->extra_description;
+                    } 
+
+                    if ($count == 3) {
+                        $name4 = $reportExtraCheck[3]->extra_name;
+                        $value4 = $reportExtraCheck[3]->extra_value;
+                        $desc4 = $reportExtraCheck[3]->extra_description;
+                    }
+
+                    $count++;
+                }
+            }
+            
+
             $no++;
             $row = array();
             $row[] = $no;
@@ -281,7 +382,8 @@ class AdminReportExtrakurikulerController extends Controller
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
             $row[] = '<select name="soExtra1Name[]" class="single-select form-select" style="width:250px">
-                        <option value="">Tidak Ada</option>
+                        <option value="' . $name1 . '">' . $name1 . '</option>
+                        <option value="Tidak Ada">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -289,13 +391,15 @@ class AdminReportExtrakurikulerController extends Controller
                         <option value="Catur">Catur</option>
                     </select>';
             $row[] = '<select name="soExtra1Value[]" class="single-select form-select" style="width:80px">
+                        <option value="' . $value1 . '">' . $value1 . '</option>            
                         <option value="B">B</option>
                         <option value="SB">SB</option>
                         <option value="C">C</option>
                     </select>';
-            $row[] = '<textarea name="taExtra1Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taExtra1Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc1. '</textarea>';
             $row[] = '<select name="soExtra2Name[]" class="single-select form-select" style="width:250px">
-                        <option value="">Tidak Ada</option>
+                        <option value="' . $name2 . '">' . $name2 . '</option>            
+                        <option value="Tidak Ada">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -303,13 +407,14 @@ class AdminReportExtrakurikulerController extends Controller
                         <option value="Catur">Catur</option>
                     </select>';
             $row[] = '<select name="soExtra2Value[]" class="single-select form-select" style="width:80px">
-                        <option value="B">B</option>
+                        <option value="' . $value2 . '">' . $value2. '</option>
                         <option value="SB">SB</option>
                         <option value="C">C</option>
                     </select>';
-            $row[] = '<textarea name="taExtra2Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taExtra2Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc2. '</textarea>';
             $row[] = '<select name="soExtra3Name[]" class="single-select form-select" style="width:250px">
-                        <option value="">Tidak Ada</option>
+                        <option value="' . $name3. '">' . $name3. '</option>            
+                        <option value="Tidak Ada">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -317,13 +422,15 @@ class AdminReportExtrakurikulerController extends Controller
                         <option value="Catur">Catur</option>
                     </select>';
             $row[] = '<select name="soExtra3Value[]" class="single-select form-select" style="width:80px">
+                        <option value="' . $value3 . '">' . $value3. '</option> 
                         <option value="B">B</option>
                         <option value="SB">SB</option>
                         <option value="C">C</option>
                     </select>';
-            $row[] = '<textarea name="taExtra3Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taExtra3Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc3. '</textarea>';
             $row[] = '<select name="soExtra4Name[]" class="single-select form-select" style="width:250px">
-                        <option value="">Tidak Ada</option>
+                        <option value="' . $name4. '">' . $name4. '</option>            
+                        <option value="Tidak Ada">Tidak Ada</option>
                         <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
                         <option value="Drumband">Drumband</option>
                         <option value="Sepak Bola">Sepak Bola</option>
@@ -331,11 +438,12 @@ class AdminReportExtrakurikulerController extends Controller
                         <option value="Catur">Catur</option>
                     </select>';
             $row[] = '<select name="soExtra4Value[]" class="single-select form-select" style="width:80px">
+                        <option value="' . $value4 . '">' . $value4. '</option>            
                         <option value="B">B</option>
                         <option value="SB">SB</option>
                         <option value="C">C</option>
                     </select>';
-            $row[] = '<textarea name="taExtra4Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taExtra4Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc4. '</textarea>';
             $data[] = $row;
         }
 
