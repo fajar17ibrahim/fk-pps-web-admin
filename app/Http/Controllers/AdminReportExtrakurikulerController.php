@@ -107,7 +107,7 @@ class AdminReportExtrakurikulerController extends Controller
                     ->get();
 
                 if ($extra1Name[$index] != "Tidak Ada") {
-                    if (count($reportExtraCheck) == 1) {
+                    if (count($reportExtraCheck) >= 1) {
                         $extrakurikuler = $reportExtraCheck[0];
                     } else {
                         $extrakurikuler = new ReportExtrakurikuler;
@@ -120,7 +120,7 @@ class AdminReportExtrakurikulerController extends Controller
                     $extrakurikuler->extra_value = $extra1Value[$index];
                     $extrakurikuler->extra_description = $extra1Desc[$index];
 
-                    if (count($reportExtraCheck) == 1) {
+                    if (count($reportExtraCheck) >= 1) {
                         $save = $extrakurikuler->update();
                     } else {
                         $save = $extrakurikuler->save();
@@ -129,7 +129,7 @@ class AdminReportExtrakurikulerController extends Controller
                 }
 
                 if ($extra2Name[$index] != "Tidak Ada") {
-                    if (count($reportExtraCheck) == 2) {
+                    if (count($reportExtraCheck) >= 2) {
                         $extrakurikuler = $reportExtraCheck[1];
                     } else {
                         $extrakurikuler = new ReportExtrakurikuler;
@@ -142,7 +142,7 @@ class AdminReportExtrakurikulerController extends Controller
                     $extrakurikuler->extra_value = $extra2Value[$index];
                     $extrakurikuler->extra_description = $extra2Desc[$index];
                     
-                    if (count($reportExtraCheck) == 2) {
+                    if (count($reportExtraCheck) >= 2) {
                         $save = $extrakurikuler->update();
                     } else {
                         $save = $extrakurikuler->save();
@@ -151,7 +151,7 @@ class AdminReportExtrakurikulerController extends Controller
 
                 if ($extra3Name[$index] != "Tidak Ada") {
                     
-                    if (count($reportExtraCheck) == 3) {
+                    if (count($reportExtraCheck) >= 3) {
                         $extrakurikuler = $reportExtraCheck[2];
                     } else {
                         $extrakurikuler = new ReportExtrakurikuler;
@@ -164,7 +164,7 @@ class AdminReportExtrakurikulerController extends Controller
                     $extrakurikuler->extra_value = $extra3Value[$index];
                     $extrakurikuler->extra_description = $extra3Desc[$index];
 
-                    if (count($reportExtraCheck) == 3) {
+                    if (count($reportExtraCheck) >= 3) {
                         $save = $extrakurikuler->update();
                     } else {
                         $save = $extrakurikuler->save();
@@ -172,7 +172,7 @@ class AdminReportExtrakurikulerController extends Controller
                 }
 
                 if ($extra4Name[$index] != "Tidak Ada") {
-                    if (count($reportExtraCheck) == 4) {
+                    if (count($reportExtraCheck) >= 4) {
                         $extrakurikuler = $reportExtraCheck[3];
                     } else {
                         $extrakurikuler = new ReportExtrakurikuler;
@@ -185,7 +185,7 @@ class AdminReportExtrakurikulerController extends Controller
                     $extrakurikuler->extra_value = $extra4Value[$index];
                     $extrakurikuler->extra_description = $extra4Desc[$index];
 
-                    if (count($reportExtraCheck) == 4) {
+                    if (count($reportExtraCheck) >= 4) {
                         $save = $extrakurikuler->update();
                     } else {
                         $save = $extrakurikuler->save();

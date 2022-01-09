@@ -89,14 +89,29 @@ class AdminReportHomeRoomTeacherNotesController extends Controller
                     ->where('santri.santri_nisn', '=', $nisn)
                     ->first();
 
-                $homeroomTeacherNotes = new ReportHomeRoomTeacher;
+                $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+                $reportHomeRoomTeacherCheck = ReportHomeRoomTeacher::where('santri_nisn', '=', $santri->santri_nisn)
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->first();
+
+                if ($reportHomeRoomTeacherCheck) {
+                    $homeroomTeacherNotes = $reportHomeRoomTeacherCheck;
+                } else {
+                    $homeroomTeacherNotes = new ReportHomeRoomTeacher;
+                }
+
                 $homeroomTeacherNotes->santri_nisn = $santri->santri_nisn;
                 $homeroomTeacherNotes->class_id = $santri->santri_class;
                 $homeroomTeacherNotes->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
                 $homeroomTeacherNotes->ranking = $ranking[$index];
                 $homeroomTeacherNotes->notes_by_ranking = $taNotes[$index];
                 $homeroomTeacherNotes->notes_by_option = $soNotes[$index];
-                $save = $homeroomTeacherNotes->save();
+
+                if ($reportHomeRoomTeacherCheck) {
+                    $save = $homeroomTeacherNotes->update();
+                } else {
+                    $save = $homeroomTeacherNotes->save();
+                }
             }
         
             if ($save) {
@@ -229,6 +244,22 @@ class AdminReportHomeRoomTeacherNotesController extends Controller
         $no = 0;
         $data = array();
         foreach ($santris as $santri) {
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            $reportHomeRoomTeacherCheck = ReportHomeRoomTeacher::where('santri_nisn', '=', $santri->santri_nisn)
+                ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                ->first();
+
+            if ($reportHomeRoomTeacherCheck) {
+                $ranking = $reportHomeRoomTeacherCheck->ranking;
+                $notes = $reportHomeRoomTeacherCheck->notes_by_ranking;
+                $notesOption = $reportHomeRoomTeacherCheck->notes_by_option;
+
+            } else {
+                $ranking = "0";
+                $notes = "";
+                $notesOption = "Tidak Ada";
+            }
+
             $no++;
             $row = array();
             $row[] = $no;
@@ -236,6 +267,7 @@ class AdminReportHomeRoomTeacherNotesController extends Controller
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
             $row[] = '<select name="soRanking[]" class="single-select form-select" style="width:80px">
+                        <option value="' . $ranking . '">' . $ranking . '</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -243,8 +275,9 @@ class AdminReportHomeRoomTeacherNotesController extends Controller
                         <option value="5">5</option>
                         <option value="6">6</option>
                     </select>';
-            $row[] = '<textarea name="taNotes[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">Prestasinya sangat baik, perlu dipertahankan</textarea>';
+            $row[] = '<textarea name="taNotes[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $notes . '</textarea>';
             $row[] = '<select name="soNotes[]" class="single-select form-select" style="width:550px">
+                        <option>' . $notesOption . '</option>
                         <option>Selalu berusaha untuk mematuhi tata tertib sekolah dan patuh terhadap Guru.</option>
                         <option>Selalu berusaha untuk mandiri dan tepat waktu dalam mengerjakan tugas.</option>
                         <option>Mempunyai kemampuan dan motivasi yang tinggi untuk menggunakan waktu secara efisien.</option>

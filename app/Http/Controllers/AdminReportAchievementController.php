@@ -92,29 +92,71 @@ class AdminReportAchievementController extends Controller
                     ->where('santri.santri_nisn', '=', $nisn)
                     ->first();
 
-                $achievement = new ReportAchievement;
-                $achievement->santri_nisn = $santri->santri_nisn;
-                $achievement->class_id = $santri->santri_class;
-                $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $achievement->achievement_name = $achievement1Name[$index];
-                $achievement->achievement_description = $achievement1Desc[$index];
-                $save = $achievement->save();
+                $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+                $reportAchievementCheck = ReportAchievement::where('santri_nisn', '=', $santri->santri_nisn)
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->orderBy('report_achievement_id', 'asc')
+                    ->get();
 
-                $achievement = new ReportAchievement;
-                $achievement->santri_nisn = $santri->santri_nisn;
-                $achievement->class_id = $santri->santri_class;
-                $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $achievement->achievement_name = $achievement2Name[$index];
-                $achievement->achievement_description = $achievement2Desc[$index];
-                $save = $achievement->save();
+                if ($achievement1Name[$index] != "Tidak Ada") {
+                    if (count($reportAchievementCheck) >= 1) {
+                        $achievement = $reportAchievementCheck[0];
+                    } else {
+                        $achievement = new ReportAchievement;
+                    }
 
-                $achievement = new ReportAchievement;
-                $achievement->santri_nisn = $santri->santri_nisn;
-                $achievement->class_id = $santri->santri_class;
-                $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
-                $achievement->achievement_name = $achievement3Name[$index];
-                $achievement->achievement_description = $achievement3Desc[$index];
-                $save = $achievement->save();
+                    $achievement->santri_nisn = $santri->santri_nisn;
+                    $achievement->class_id = $santri->santri_class;
+                    $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $achievement->achievement_name = $achievement1Name[$index];
+                    $achievement->achievement_description = $achievement1Desc[$index];
+                    
+                    if (count($reportAchievementCheck) >= 1) {
+                        $save = $achievement->update();
+                    } else {
+                        $save = $achievement->save();
+                    }
+                }
+
+                if ($achievement2Name[$index] != "Tidak Ada") {
+                    if (count($reportAchievementCheck) >= 2) {
+                        $achievement = $reportAchievementCheck[1];
+                    } else {
+                        $achievement = new ReportAchievement;
+                    }
+
+                    $achievement->santri_nisn = $santri->santri_nisn;
+                    $achievement->class_id = $santri->santri_class;
+                    $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $achievement->achievement_name = $achievement2Name[$index];
+                    $achievement->achievement_description = $achievement2Desc[$index];
+
+                    if (count($reportAchievementCheck) >= 2) {
+                        $save = $achievement->update();
+                    } else {
+                        $save = $achievement->save();
+                    }
+                }
+
+                if ($achievement3Name[$index] != "Tidak Ada") {
+                    if (count($reportAchievementCheck) >= 3) {
+                        $achievement = $reportAchievementCheck[2];
+                    } else {
+                        $achievement = new ReportAchievement;
+                    }
+
+                    $achievement->santri_nisn = $santri->santri_nisn;
+                    $achievement->class_id = $santri->santri_class;
+                    $achievement->tahun_pelajaran_id = $schoolYear->tahun_pelajaran_id;
+                    $achievement->achievement_name = $achievement3Name[$index];
+                    $achievement->achievement_description = $achievement3Desc[$index];
+
+                    if (count($reportAchievementCheck) >= 3) {
+                        $save = $achievement->update();
+                    } else {
+                        $save = $achievement->save();
+                    }
+                }
 
             }
         
@@ -248,6 +290,42 @@ class AdminReportAchievementController extends Controller
         $no = 0;
         $data = array();
         foreach ($santris as $santri) {
+
+            $schoolYear = SchoolYear::orderBy('tahun_pelajaran_id', 'desc')->first();
+            $reportAchievementCheck = ReportAchievement::where('santri_nisn', '=', $santri->santri_nisn)
+                ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                ->orderBy('report_achievement_id', 'asc')
+                ->get();
+
+                $name1 = "Tidak Ada";
+                $desc1 = "";
+                $name2 = "Tidak Ada";
+                $desc2 = "";
+                $name3 = "Tidak Ada";
+                $desc3 = "";
+    
+                if (count($reportAchievementCheck) > 0) {
+                    $count = 0;
+                    foreach ($reportAchievementCheck as $reportAchievement) {
+                        if ($count == 0) {
+                            $name1 = $reportAchievementCheck[0]->achievement_name;
+                            $desc1 = $reportAchievementCheck[0]->achievement_description;
+                        }
+    
+                        if ($count == 1) {
+                            $name2 = $reportAchievementCheck[1]->achievement_name;
+                            $desc2 = $reportAchievementCheck[1]->achievement_description;
+                        } 
+    
+                        if ($count == 2) {
+                            $name3 = $reportAchievementCheck[2]->achievement_name;
+                            $desc3 = $reportAchievementCheck[2]->achievement_description;
+                        } 
+    
+                        $count++;
+                    }
+                }
+
             $no++;
             $row = array();
             $row[] = $no;
@@ -255,20 +333,23 @@ class AdminReportAchievementController extends Controller
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
             $row[] = '<select name="soAchievement1Name[]" class="single-select form-select">
+                        <option value="' . $name1 . '">' . $name1 . '</option>            
                         <option value="Kesenian">Kesenian</option>
                         <option value="Keagamaan">Keagamaan</option>
                     </select>';
-            $row[] = '<textarea name="taAchievement1Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taAchievement1Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3">' . $desc1 . '</textarea>';
             $row[] = '<select name="soAchievement2Name[]" class="single-select form-select">
+                        <option value="' . $name2 . '">' . $name2 . '</option>             
                         <option value="Kesenian">Kesenian</option>
                         <option value="Keagamaan">Keagamaan</option>
                     </select>';
-            $row[] = '<textarea name="taAchievement2Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taAchievement2Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3">' . $desc2 . '</textarea>';
             $row[] = '<select name="soAchievement3Name[]" class="single-select form-select">
+                        <option value="' . $name3 . '">' . $name3 . '</option> 
                         <option value="Kesenian">Kesenian</option>
                         <option value="Keagamaan">Keagamaan</option>
                     </select>';
-            $row[] = '<textarea name="taAchievement3Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3"></textarea>';
+            $row[] = '<textarea name="taAchievement3Desc[]" class="form-control" style="width:300px" id="inputDescription" placeholder="" rows="3">' . $desc3 . '</textarea>';
             $data[] = $row;
         }
 
