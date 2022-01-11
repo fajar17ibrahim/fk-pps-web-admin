@@ -23,7 +23,6 @@ class AdminReportExtrakurikulerController extends Controller
         $this->authorize('report-extrakurikuler');
         $user = Session::get('user');
 
-        $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = array();
         if ($user[0]->role_id == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
@@ -38,6 +37,17 @@ class AdminReportExtrakurikulerController extends Controller
     
                 $kelass[] = $data;
             }
+
+            $schoolsData = School::orderBy('school_name', 'asc')->get();
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
+            }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
                 ->where('class_school', '=', $user[0]->ustadz_school)
@@ -50,6 +60,21 @@ class AdminReportExtrakurikulerController extends Controller
                 );
 
                 $kelass[] = $data;
+            }
+
+            $schoolsData = School::orderBy('school_name', 'asc')
+                ->where('school_level', '=', $user[0]->school_level)
+                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->get();
+
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name
+                );
+
+                $schools[] = $data;
             }
         }
         

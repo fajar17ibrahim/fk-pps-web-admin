@@ -23,7 +23,6 @@ class AdminReportAttitudeController extends Controller
         //
         $this->authorize('report-attitude');
 
-        $schools = School::orderBy('school_name', 'asc')->get();
         $kelass = array();
         $user = Session::get('user');
         if ($user[0]->role_id == 1) {
@@ -38,6 +37,17 @@ class AdminReportAttitudeController extends Controller
                 );
     
                 $kelass[] = $data;
+            }
+            
+            $schoolsData = School::orderBy('school_name', 'asc')->get();
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name . ' (' . $school->school_level . ')'
+                );
+
+                $schools[] = $data;
             }
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
@@ -55,6 +65,21 @@ class AdminReportAttitudeController extends Controller
                 );
 
                 $kelass[] = $data;
+            }
+
+            $schoolsData = School::orderBy('school_name', 'asc')
+                ->where('school_level', '=', $user[0]->school_level)
+                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->get();
+
+            $schools = array();
+            foreach($schoolsData as $school) {
+                $data = array(
+                    'id' => $school->school_id,
+                    'pps_nama' => $school->school_name
+                );
+
+                $schools[] = $data;
             }
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')

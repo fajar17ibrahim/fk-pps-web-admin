@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 use App\Models\School;
 use App\Models\Ustadz;
 use App\Models\Address;
@@ -146,7 +147,7 @@ class AdminUserProfileController extends Controller
                 $ustadz = Ustadz::leftJoin('users', 'users.email', '=', 'ustadz.ustadz_email')
                     ->leftJoin('role', 'role.id', '=', 'users.role_id')
                     ->leftJoin('school', 'school.school_id', '=', 'ustadz.ustadz_school')
-                    ->where('ustadz_email' , '=', $user->email)
+                    ->where('ustadz_id' , '=', $id)
                     ->get();
                     Session::put('user', $ustadz);
                     
