@@ -305,12 +305,12 @@ class AdminMasterUstadzController extends Controller
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {
-                $userData = User::where('email', '=', $request['inUstadzEmail'])
+                $userData = User::where('email', '=', $email)
                     ->first();
 
                 if ($userData) {
                     $userData->name = $request['inUstadzName'];
-                    $userData->email = $request['inUstadzEmail'];
+                    $userData->email = $email;
                     $userData->update();
                 }
                 

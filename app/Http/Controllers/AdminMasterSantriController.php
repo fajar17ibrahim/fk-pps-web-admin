@@ -129,6 +129,26 @@ class AdminMasterSantriController extends Controller
             } else {
                 $santri = new Santri;
             } 
+
+            $rtLength =  strlen($request['inRT']);
+            $angkaNol = "0";
+            $rt = $request['inRT'];
+            if ($rtLength < 3) {
+                for ($i = 1; $i < 3 - $rtLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rt = $angkaNol . $request['inRT'];
+            }
+            
+            $rwLength =  strlen($request['inRW']);
+            $angkaNol = "0";
+            $rw = $request['inRW'];
+            if ($rwLength < 3) {
+                for ($i = 1; $i < 3 - $rwLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rw = $angkaNol . $request['inRW'];
+            }
             
             $santri->santri_name = $request['inSantriName'];
             $santri->santri_nism = $nism;
@@ -166,7 +186,7 @@ class AdminMasterSantriController extends Controller
             $santri->wali_salary = $request['soWaliSalery'];
             $santri->santri_address = $request['inAddress'];
             $santri->santri_village = $request['soVillage'];
-            $santri->santri_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $santri->santri_rt_rw = $rt . "/" . $rw;
             $santri->santri_districts = $request['inDistrict'];
             $santri->santri_city = $request['inKabOrCity'];
             $santri->santri_province = $request['inProvince'];
@@ -308,6 +328,26 @@ class AdminMasterSantriController extends Controller
                 }
             }
 
+            $rtLength =  strlen($request['inRT']);
+            $angkaNol = "0";
+            $rt = $request['inRT'];
+            if ($rtLength < 3) {
+                for ($i = 1; $i < 3 - $rtLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rt = $angkaNol . $request['inRT'];
+            }
+            
+            $rwLength =  strlen($request['inRW']);
+            $angkaNol = "0";
+            $rw = $request['inRW'];
+            if ($rwLength < 3) {
+                for ($i = 1; $i < 3 - $rwLength; $i++) {
+                    $angkaNol .= $angkaNol;
+                }
+                $rw = $angkaNol . $request['inRW'];
+            }
+
             $santri->santri_name = $request['inSantriName'];
             $santri->santri_nism = $request['inSantriNISM'];
             $santri->santri_nisn = $santriNISN;
@@ -344,7 +384,7 @@ class AdminMasterSantriController extends Controller
             $santri->wali_salary = $request['soWaliSalery'];
             $santri->santri_address = $request['inAddress'];
             $santri->santri_village = $request['soVillage'];
-            $santri->santri_rt_rw = $request['inRT'] . "/" . $request['inRW'];
+            $santri->santri_rt_rw = $rt . "/" . $rw;
             $santri->santri_districts = $request['inDistrict'];
             $santri->santri_city = $request['inKabOrCity'];
             $santri->santri_province = $request['inProvince'];
