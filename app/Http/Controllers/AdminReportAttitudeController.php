@@ -141,6 +141,7 @@ class AdminReportAttitudeController extends Controller
             $attitudeNotStandOuts = $request['cbAttitudeNotStandOut'];
             $predSocialAttitude = $request['soPredSocialAttitude'];
             $attitudeVeryGoods = $request['cbAttitudeVeryGood'];
+            $attitudeGoods = $request['cbAttitudeGood'];
             $attitudeNotGoods = $request['cbAttitudeNotGood'];
             $attitudeEvolveSocials = $request['cbAttitudeEvolveSocial'];
             $notes = $request['taNotes'];
@@ -152,7 +153,6 @@ class AdminReportAttitudeController extends Controller
                 }
             }
 
-            $goodSpiritualAttitude = "";
             if ($attitudeEvolves) {
                 foreach ($attitudeEvolves as $attitudeEvolve) {
                     $goodSpiritualAttitude .= $attitudeEvolve . ". ";
@@ -173,7 +173,12 @@ class AdminReportAttitudeController extends Controller
                 }
             }
 
-            $goodSocialAttitude = "";
+            if ($attitudeGoods) {
+                foreach ($attitudeGoods as $attitudeGood) {
+                    $goodSocialAttitude .= $attitudeVeryGood . ". ";
+                }
+            }
+
             if ($attitudeEvolveSocials) {
                 foreach ($attitudeEvolveSocials as $attitudeEvolveSocial) {
                     $goodSocialAttitude .= $attitudeEvolveSocial . ". ";

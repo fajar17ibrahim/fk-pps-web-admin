@@ -355,35 +355,35 @@
                                                 <label class="col-sm-3 col-form-label">Baik</label>
                                                 <div class="col-sm-9 text-secondary">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Jujur" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Jujur" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Jujur</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" name="cbAttitudeVeryGood[]" type="checkbox" value="Disiplin" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" name="cbAttitudeVeryGood[]" type="checkbox" value="Disiplin" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Disiplin</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Tanggung jawab" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Tanggung jawab" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Tanggung jawab</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Santun" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Santun" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Santun</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Percaya diri" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Percaya diri" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Percaya diri</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Peduli" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Peduli" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Peduli</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Toleransi" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Toleransi" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Toleransi</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" name="cbAttitudeNotGood[]" type="checkbox" value="Gotong Royong" id="flexCheckDefault">
+                                                        <input class="form-check-input" name="cbAttitudeGood[]" type="checkbox" value="Gotong Royong" id="flexCheckDefault">
                                                         <label class="form-check-label" for="flexCheckDefault">Gotong Royong</label>
                                                     </div>
                                                 </div>

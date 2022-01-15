@@ -3,6 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
+                    @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -40,7 +41,7 @@
                                 </div>
                             </div>
                             @endif
-                            @if(Session::get('user')[0]['role_id'] != 1)
+                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Kelas</h6>
@@ -63,6 +64,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">

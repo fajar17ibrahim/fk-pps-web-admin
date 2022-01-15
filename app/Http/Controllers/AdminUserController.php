@@ -195,13 +195,11 @@ class AdminUserController extends Controller
         if ($user[0]->role_id == 1) {
             $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
             ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
-            ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
             ->select('role_name', 'name', 'email', 'users.id', 'users.status')
             ->get();
         } else {
             $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
             ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
-            ->leftJoin('kelas', 'kelas.class_id', '=', 'ustadz.ustadz_class')
             ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
             ->select('role_name', 'name', 'email', 'users.id', 'users.status')
             ->get();

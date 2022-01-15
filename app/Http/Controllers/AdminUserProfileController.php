@@ -87,6 +87,7 @@ class AdminUserProfileController extends Controller
             //
             $this->authorize('user-profile');
             $ustadz = Ustadz::find($id);
+            $lastEmail = $ustadz->ustadz_email;
 
             $ustadzPhoto = $request['inUstadzPhoto'];
             if ($ustadzPhoto) {
@@ -103,7 +104,7 @@ class AdminUserProfileController extends Controller
             $email = $request['inUstadzEmail'];
 
             $checkData = Ustadz::where('ustadz_email', '=', $email)->first();
-            if ($checkData && $ustadz->ustadz_email != $email) {
+            if ($checkData && $lastEmail != $email) {
                 return redirect()->route('user-profile.index')
                 ->with('message_error', 'Email sudah terdaftar.');
             }
@@ -135,7 +136,7 @@ class AdminUserProfileController extends Controller
             $saveUstadz = $ustadz->update();
     
             if ($saveUstadz) {
-                $userData = User::where('email', '=', $email)
+                $userData = User::where('email', '=', $lastEmail)
                     ->first();
 
                 if ($userData) {

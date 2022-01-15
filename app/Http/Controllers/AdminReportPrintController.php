@@ -58,7 +58,7 @@ class AdminReportPrintController extends Controller
             }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
+                ->where('class_level', '=', $user[0]->school_level)
                 ->where('class_school', '=', $user[0]->ustadz_school)
                 ->get();
 
@@ -297,7 +297,7 @@ class AdminReportPrintController extends Controller
         $reportPrint = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
+            ->leftJoin('school','santri.santri_school','=','school.school_id')
             ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->leftJoin('semester','semester.semester_id','=','tahun_pelajaran.tahun_pelajaran_semester')
             ->where('report_print.report_id','=', $id)
@@ -520,7 +520,7 @@ class AdminReportPrintController extends Controller
 
         $reportAchievements = ReportAchievement::where('report_achievement.class_id', '=', $reportPrint->santri_class)
         ->where('report_achievement.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
-        ->where('report_achievement.santri_nisn', '=', $id)
+        ->where('report_achievement.santri_nisn', '=', $reportPrint->santri_nisn)
         ->get();
 
         if (count($reportAchievements) > 0) {
