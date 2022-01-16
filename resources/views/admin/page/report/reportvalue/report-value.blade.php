@@ -480,13 +480,13 @@
                         let predC = kkmValue + predInterval;
                         let predB = kkmValue + predInterval * 2;
                         let predA =  kkmValue + predInterval * 3;
-                        if (rphValue < kkmValue) {
+                        if (hpaValue < kkmValue) {
                             pred[$index].value = "D";
-                        } else if (rphValue >= kkmValue && rphValue < predC) {               
+                        } else if (hpaValue >= kkmValue && hpaValue < predC) {               
                             pred[$index].value = "C";
-                        } else if (rphValue >= predC && rphValue < predB) {
+                        } else if (hpaValue >= predC && hpaValue < predB) {
                             pred[$index].value = "B";
-                        } else if (rphValue >= predB && rphValue <= predA) {
+                        } else if (hpaValue >= predB && hpaValue <= predA) {
                             pred[$index].value = "A";
                         }
                         

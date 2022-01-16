@@ -18,33 +18,26 @@
                                         </tbody>
                                     </table>
                                     <br>
-                                    <table id="table-attendance"  class="borderless"style="width:100%; line-height: 130%;" >
+                                    <table id="table-attendance" class="borderless" style="width:100%; line-height:50%">
                                         <tbody>
-                                            <tr>
-                                                <td style="width:14%">Nama PKPPS</td>
-                                                <td style="width:1%">:</td>
-                                                <td style="width:40%">{{ $reportPrint->school_name }}</td>
-                                                <td style="width:14%;" rowspan="2">Kelas<br>Semester<br>Tahun Pelajaran</td>
-                                                <td style="width:1%" rowspan="2">:<br>:<br>:</td>
-                                                <td style="width:20%" rowspan="2">{{ $reportPrint->class_name }}<br>{{ $reportPrint->semester_name }}<br>{{ $reportPrint->tahun_pelajaran_name }}</td>
-                                            </tr>
                                             <tr valign="top">
-                                                <td>Alamat</td>
-                                                <td>:</td>
-                                                <td>{{ $reportPrint->school_address }}</td>
+                                                <td style="width:14%" >Nama PKPPS<p style=" line-height:50%">Alamat</td>
+                                                <td style="width:1%" >:<p style=" line-height:50%">:</td>
+                                                <td style="width:46%;" class="text-bold" >{{ $data['biodata']['pps_nama'] }}<p style=" line-height:120%; margin:5px 0px 5px 0px">{{ $data['biodata']['pps_alamat'] }}</td>
+                                                <td style="width:14%;" rowspan="3">Kelas<p>Semester<p>Tahun Pelajaran</td>
+                                                <td style="width:1%;" rowspan="3" >:<p>:<p>:</td>
+                                                <td style="width:14%;" rowspan="3" class="text-bold">{{ $data['biodata']['kelas_nama'] }}<p>{{ $data['biodata']['semester'] }}<p>{{ $data['biodata']['tahun_pelajaran'] }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Nama</td>
                                                 <td>:</td>
-                                                <td>{{ $reportPrint->santri_name }}</td>
+                                                <td class="text-bold">{{ $data['biodata']['santri_nama'] }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Nomor Induk</td>
                                                 <td>:</td>
-                                                <td>{{ $reportPrint->santri_nism }}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td class="text-bold">{{ $data['biodata']['santri_no_induk'] }}</td>
+                                                
                                             </tr>
                                         </tbody>
                                     </table>
@@ -79,26 +72,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php $no = 1; @endphp
-                                            @foreach ($reportValues as $reportValue)
+                                            @foreach ($data['nilai'] as $nilai)
                                             <tr>
-                                                <td>{{ $no }}</td>
-                                                <td class="text-left">{{ $reportValue->mapel_name }}</td>
-                                                <td>{{ $reportValue->report_kkm }}</td>
-                                                <td>{{ $reportValue->p1 }}</td>
-                                                <td>{{ $reportValue->p2 }}</td>
-                                                <td>{{ $reportValue->p3 }}</td>
-                                                <td>{{ $reportValue->p4 }}</td>
-                                                <td>{{ $reportValue->p5 }}</td>
-                                                <td>{{ $reportValue->k1 }}</td>
-                                                <td>{{ $reportValue->k2 }}</td>
-                                                <td>{{ $reportValue->k3 }}</td>
-                                                <td>{{ $reportValue->k4 }}</td>
-                                                <td>{{ $reportValue->k5 }}</td>
-                                                <td>{{ $reportValue->pts }}</td>
-                                                <td>{{ $reportValue->pts }}</td>
+                                                <td>{{ $nilai['no'] }}</td>
+                                                <td class="text-left">{{ $nilai['mapel_nama'] }}</td>
+                                                <td>{{ $nilai['kkm'] }}</td>
+                                                <td>{{ $nilai['p1'] }}</td>
+                                                <td>{{ $nilai['p2'] }}</td>
+                                                <td>{{ $nilai['p3'] }}</td>
+                                                <td>{{ $nilai['p4'] }}</td>
+                                                <td>{{ $nilai['p5'] }}</td>
+                                                <td>{{ $nilai['k1'] }}</td>
+                                                <td>{{ $nilai['k2'] }}</td>
+                                                <td>{{ $nilai['k3'] }}</td>
+                                                <td>{{ $nilai['k4'] }}</td>
+                                                <td>{{ $nilai['k5'] }}</td>
+                                                <td>{{ $nilai['pts'] }}</td>
+                                                <td>{{ $nilai['hpts'] }}</td>
                                             </tr>
-                                            @php $no++ @endphp
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -114,12 +105,12 @@
                                                 <td style="width: 70%">
                                                     Mengetahui:<br>
                                                     Orang Tua / Wali<br><br><br><br><br>
-                                                    {{ $reportPrint->father_name }}
+                                                    {{ $data['biodata']['ayah_nama'] }}
                                                 </td>
                                                 <td style="width: 30%">
-                                                    {{ trim(strstr($reportPrint->school_city, " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
+                                                    {{ trim(strstr($data['biodata']['sekolah_kota'], " ")) . ", ". tanggal(substr(tanggal('now'), 0, 10)) }}<br>
                                                     Wali Kelas<br><br><br><br><br>
-                                                    <b>{{ $reportPrint->ustadz_name }}</b>
+                                                    <b>{{ $data['biodata']['wali_kelas'] }}</b>
                                                 </td>
                                             </tr>
                                         </tbody>

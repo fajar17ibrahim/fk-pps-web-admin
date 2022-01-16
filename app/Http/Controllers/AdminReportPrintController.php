@@ -226,7 +226,6 @@ class AdminReportPrintController extends Controller
                     ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
                     ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
-                    ->where('school.santri_school', '=', $user[0]->ustadz_school)
                     ->where('santri.santri_class', '=', $kelas)
                     ->get();
             } else {
@@ -273,21 +272,77 @@ class AdminReportPrintController extends Controller
         $reportPrint = ReportPrint::leftJoin('santri', 'report_print.santri_nisn', '=', 'santri.santri_nisn')
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
-            ->leftJoin('school','kelas.class_school','=','school.school_id')
+            ->leftJoin('school','santri.santri_school','=','school.school_id')
             ->leftJoin('tahun_pelajaran','tahun_pelajaran.tahun_pelajaran_id','=','report_print.tahun_pelajaran_id')
             ->leftJoin('semester','semester.semester_id','=','tahun_pelajaran.tahun_pelajaran_semester')
             ->where('report_print.report_id','=', $id)
             ->first();
 
+            if ($reportPrint) {
+                $schoolHeadship = Ustadz::where('ustadz.ustadz_nik', '=', $reportPrint->school_headship)
+                    ->first();
+
+                $biodata = array(
+                    'pps_nama' => $reportPrint->school_name,
+                    'pps_alamat' => $reportPrint->school_address,
+                    'pps_tingkat' => $reportPrint->class_level,
+                    'santri_nama' => $reportPrint->santri_name,
+                    'santri_no_induk' => $reportPrint->santri_nism,
+                    'kelas_nama' => $reportPrint->class_name,
+                    'wali_kelas' => $reportPrint->ustadz_name,
+                    'semester' => $reportPrint->semester_name,
+                    'tahun_pelajaran' => $reportPrint->tahun_pelajaran_name,
+                    'ayah_nama' => '..........................',
+                    'sekolah_kota' => $reportPrint->school_city,
+                    'kepala_sekolah' => $schoolHeadship->ustadz_name
+                );
+            } else {
+                $errorMessage = "Biodata tidak lengkap";
+                return redirect()->route('report-print.index')
+                        ->with('message_error', $errorMessage);
+            }
+
         $reportValues = ReportValue::leftJoin('mapel','mapel.mapel_id','=','report_value.mapel_id')
-        ->where('report_value.class_id', '=', $reportPrint->santri_class)
-        ->where('report_value.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
+            ->where('report_value.class_id', '=', $reportPrint->santri_class)
+            ->where('report_value.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
             ->where('report_value.santri_nisn', '=', $reportPrint->santri_nisn)
             ->get();
 
+        if ($reportValues) {
+            $values = array();
+            $no = 0;
+            foreach ($reportValues as $reportValue) {
+                $row = array(
+                    'no' => $no++,
+                    'mapel_nama' => $reportValue->mapel_name,
+                    'kkm' => $reportValue->report_kkm,
+                    'jp' => $reportValue->jp,
+                    'p1' => $reportValue->p1,
+                    'p2' => $reportValue->p2,
+                    'p3' => $reportValue->p3,
+                    'p4' => $reportValue->p4,
+                    'p5' => $reportValue->p5,
+                    'k1' => $reportValue->k1,
+                    'k2' => $reportValue->k2,
+                    'k3' => $reportValue->k3,
+                    'k4' => $reportValue->k4,
+                    'k5' => $reportValue->k5,
+                    'pts' => $reportValue->pts,
+                    'hpts' => round(((float) $reportValue->rph + (float) $reportValue->pts + (float) $reportValue->rpk) / 3)
+                );
+                $values[] = $row;
+                
+            }
+        }
+
+        $data = array(
+            'biodata' => $biodata,
+            'nilai' => $values
+        );
+
             // return $reportValues;
 
-        $pdf = PDF::loadView('admin.page.report.reportprint.uts-export-pdf', compact('reportPrint'), compact('reportValues'));
+        $pdf = PDF::loadView('admin.page.report.reportprint.uts-export-pdf', compact('data'));
         $pdf->setPaper('a4', 'potrait');
         return $pdf->stream();
     }
@@ -329,7 +384,7 @@ class AdminReportPrintController extends Controller
                 'wali_kelas' => $reportPrint->ustadz_name,
                 'semester' => $reportPrint->semester_name,
                 'tahun_pelajaran' => $reportPrint->tahun_pelajaran_name,
-                'ayah_nama' => '....................',
+                'ayah_nama' => '..........................',
                 'sekolah_kota' => $reportPrint->school_city,
                 'kepala_sekolah' => $schoolHeadship->ustadz_name
             );
@@ -382,14 +437,13 @@ class AdminReportPrintController extends Controller
         ->get();
 
         if ($reportValues) {
-            $kelompokMapels = array();
-            $kelompokMapel = '';
-            foreach ($reportValues as $reportValue) {
-                if ($kelompokMapel != $reportValue->kelompok_name) {
-                    $kelompokMapels[] = $reportValue->kelompok_name;
-                }
-                $kelompokMapel = $reportValue->kelompok_name;
-            }
+            $kelompokMapels = ReportValue::leftJoin('mapel','mapel.mapel_id','=','report_value.mapel_id')
+                ->leftJoin('kelompok_mapel','kelompok_mapel.kelompok_id','=','mapel.mapel_kelompok')
+                ->where('report_value.class_id', '=', $reportPrint->santri_class)
+                ->where('report_value.tahun_pelajaran_id', '=', $reportPrint->tahun_pelajaran_id)
+                ->where('report_value.santri_nisn', '=', $reportPrint->santri_nisn)
+                ->groupBy('kelompok_id')
+                ->get();
 
             $valuesByKelompok = array();
             $kkms = array();
@@ -403,7 +457,7 @@ class AdminReportPrintController extends Controller
             foreach ($kelompokMapels as $kelompokMapel) {
                 $values = array();
                 foreach ($reportValues as $reportValue) {
-                    if ($reportValue->kelompok_name == $kelompokMapel) {
+                    if ($reportValue->kelompok_id == $kelompokMapel->kelompok_id) {
                         $no++;
 
                         $descKnowladge = $reportValue->knowledge_pre;
@@ -449,6 +503,7 @@ class AdminReportPrintController extends Controller
                             'k8' => $reportValue->k8,
                             'k9' => $reportValue->k9,
                             'k10' => $reportValue->k10,
+                            'rpk' => $reportValue->rpk,
                             'hpa' => $reportValue->hpa,
                             'pre_keterampilan' => $reportValue->skills_pre,  
                             'deskripsi_keterampilan' => $descSkills,
@@ -468,9 +523,9 @@ class AdminReportPrintController extends Controller
                             $kkms[] = array(
                                 'kkm' => $reportValue->report_kkm,
                                 'D' => "< " . round($predD),
-                                'C' => round($predD + 1) . " - " . round($predC),
-                                'B' => round($predC + 1) . " - " . round($predB),
-                                'A' => round($predB + 1) . " - " . round($predA));
+                                'C' => round($predD) . " - " . round($predC - 1),
+                                'B' => round($predC) . " - " . round($predB - 1),
+                                'A' => round($predB) . " - " . round($predA));
                         }
 
                         $kkmPreve = $reportValue->report_kkm;
@@ -478,7 +533,7 @@ class AdminReportPrintController extends Controller
                 }
                 
                 $valuesByKelompok[] = array(
-                    'kelompok' => $kelompokMapel,  
+                    'kelompok' => $kelompokMapel->kelompok_name,  
                     'mapel' => $values);
             }
         } else {

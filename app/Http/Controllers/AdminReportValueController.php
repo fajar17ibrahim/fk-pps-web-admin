@@ -189,10 +189,10 @@ class AdminReportValueController extends Controller
                     ->first();
 
                 $reportValueCheck = ReportValue::where('santri_nisn', '=', $santri->santri_nisn)
-                ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
-                ->where('mapel_id', '=', $mapel)
-                ->where('class_id', '=', $santri->santri_class)
-                ->first();
+                    ->where('tahun_pelajaran_id', '=', $schoolYear->tahun_pelajaran_id)
+                    ->where('mapel_id', '=', $mapel)
+                    ->where('class_id', '=', $santri->santri_class)
+                    ->first();
 
                 if (!$reportValueCheck) {
                     $reportValue = new ReportValue;

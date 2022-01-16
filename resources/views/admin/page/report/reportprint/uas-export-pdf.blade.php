@@ -92,9 +92,9 @@
                                         <td>{{ $mapel['no'] }}</td>
                                         <td class="text-left">{{ $mapel['mapel_nama'] }}</td>
                                         <td>{{ $mapel['kkm'] }}</td>
-                                        <td>{{ $mapel['pas'] }}</td>
-                                        <td>{{ $mapel['pre_pengetahuan'] }}</td>
                                         <td>{{ $mapel['hpa'] }}</td>
+                                        <td>{{ $mapel['pre_pengetahuan'] }}</td>
+                                        <td>{{ $mapel['rpk'] }}</td>
                                         <td>{{ $mapel['pre_keterampilan'] }}</td>
                                         <td>{{ $mapel['average'] }}</td>
                                     </tr>
