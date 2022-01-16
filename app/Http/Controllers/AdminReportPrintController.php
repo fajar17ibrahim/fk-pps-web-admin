@@ -310,7 +310,7 @@ class AdminReportPrintController extends Controller
 
         if ($reportValues) {
             $values = array();
-            $no = 0;
+            $no = 1;
             foreach ($reportValues as $reportValue) {
                 $row = array(
                     'no' => $no++,
