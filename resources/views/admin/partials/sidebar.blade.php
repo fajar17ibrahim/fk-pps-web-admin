@@ -129,6 +129,13 @@
             </a>
         </li>
         @endif
+        <li class="btn btn-success">
+            <a href="{{ URL::to('/') }}/download/manual-book">
+                <div class="parent-icon text-white"><i class="bx bx-download"></i>
+                </div>
+                <div class="menu-title text-white">Manual Book</div>
+            </a>
+        </li>
     </ul>
     <!--end navigation-->
 </div>

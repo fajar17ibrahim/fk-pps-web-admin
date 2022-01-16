@@ -56,6 +56,8 @@ Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::get('/', [AdminDashboardController::class, 'index'])->name('home');
 
+    Route::get('/download/{desc}', [AdminDashboardController::class, 'download'])->name('home.download');
+
     // Graduation
     Route::resource('graduation', AdminGraduationController::class);
 
