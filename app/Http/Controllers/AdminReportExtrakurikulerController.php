@@ -8,6 +8,7 @@ use App\Models\Kelas;
 use App\Models\School;
 use App\Models\Santri;
 use App\Models\SchoolYear;
+use App\Models\Extrakurikuler;
 use App\Models\ReportExtrakurikuler;
 
 class AdminReportExtrakurikulerController extends Controller
@@ -77,9 +78,9 @@ class AdminReportExtrakurikulerController extends Controller
                 $schools[] = $data;
             }
         }
-        
+
         return view('admin.page.report.reportvalue.extrakurikuler', compact('schools'))
-        ->with(array('kelass' => $kelass));
+                ->with(array('kelass' => $kelass));
     }
 
     /**
@@ -355,6 +356,15 @@ class AdminReportExtrakurikulerController extends Controller
                     ->orderBy('report_extrakurikuler_id', 'asc')
                     ->get();
 
+            $extrakurikulers = Extrakurikuler::select('extra_name as name')
+                    ->orderBy('extra_name', 'asc')
+                    ->get();
+
+            $extra = "";
+            foreach ($extrakurikulers as $extrakurikuler) { 
+                $extra .= '<option value="' . $extrakurikuler->name . '">' . $extrakurikuler->name . '</option>';
+            };
+
             $name1 = "Tidak Ada";
             $value1 = "A";
             $desc1 = "";
@@ -408,12 +418,7 @@ class AdminReportExtrakurikulerController extends Controller
             $row[] = $santri->santri_gender;
             $row[] = '<select name="soExtra1Name[]" class="single-select form-select" style="width:250px">
                         <option value="' . $name1 . '">' . $name1 . '</option>
-                        <option value="Tidak Ada">Tidak Ada</option>
-                        <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
-                        <option value="Drumband">Drumband</option>
-                        <option value="Sepak Bola">Sepak Bola</option>
-                        <option value="Palang Merah Remaja">Palang Merah Remaja</option>
-                        <option value="Catur">Catur</option>
+                        ' . $extra . '
                     </select>';
             $row[] = '<select name="soExtra1Value[]" class="single-select form-select" style="width:80px">
                         <option value="' . $value1 . '">' . $value1 . '</option>            
@@ -424,12 +429,7 @@ class AdminReportExtrakurikulerController extends Controller
             $row[] = '<textarea name="taExtra1Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc1. '</textarea>';
             $row[] = '<select name="soExtra2Name[]" class="single-select form-select" style="width:250px">
                         <option value="' . $name2 . '">' . $name2 . '</option>            
-                        <option value="Tidak Ada">Tidak Ada</option>
-                        <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
-                        <option value="Drumband">Drumband</option>
-                        <option value="Sepak Bola">Sepak Bola</option>
-                        <option value="Palang Merah Remaja">Palang Merah Remaja</option>
-                        <option value="Catur">Catur</option>
+                        ' . $extra . '
                     </select>';
             $row[] = '<select name="soExtra2Value[]" class="single-select form-select" style="width:80px">
                         <option value="' . $value2 . '">' . $value2. '</option>
@@ -439,12 +439,7 @@ class AdminReportExtrakurikulerController extends Controller
             $row[] = '<textarea name="taExtra2Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc2. '</textarea>';
             $row[] = '<select name="soExtra3Name[]" class="single-select form-select" style="width:250px">
                         <option value="' . $name3. '">' . $name3. '</option>            
-                        <option value="Tidak Ada">Tidak Ada</option>
-                        <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
-                        <option value="Drumband">Drumband</option>
-                        <option value="Sepak Bola">Sepak Bola</option>
-                        <option value="Palang Merah Remaja">Palang Merah Remaja</option>
-                        <option value="Catur">Catur</option>
+                        ' . $extra . '
                     </select>';
             $row[] = '<select name="soExtra3Value[]" class="single-select form-select" style="width:80px">
                         <option value="' . $value3 . '">' . $value3. '</option> 
@@ -455,12 +450,7 @@ class AdminReportExtrakurikulerController extends Controller
             $row[] = '<textarea name="taExtra3Desc[]" class="form-control" id="inputDescription" style="width:300px" placeholder="" rows="3">' . $desc3. '</textarea>';
             $row[] = '<select name="soExtra4Name[]" class="single-select form-select" style="width:250px">
                         <option value="' . $name4. '">' . $name4. '</option>            
-                        <option value="Tidak Ada">Tidak Ada</option>
-                        <option value="Pendidikan Kepramukaan">Pendidikan Kepramukaan</option>
-                        <option value="Drumband">Drumband</option>
-                        <option value="Sepak Bola">Sepak Bola</option>
-                        <option value="Palang Merah Remaja">Palang Merah Remaja</option>
-                        <option value="Catur">Catur</option>
+                        ' . $extra . '
                     </select>';
             $row[] = '<select name="soExtra4Value[]" class="single-select form-select" style="width:80px">
                         <option value="' . $value4 . '">' . $value4. '</option>            

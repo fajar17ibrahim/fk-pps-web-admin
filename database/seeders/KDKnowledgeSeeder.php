@@ -21,7 +21,7 @@ class KDKnowledgeSeeder extends Seeder
         foreach($ustadzs as $ustadz) {
             for ($i = 1; $i <= 10; $i++) {
                 $kdKnowledge = new KDKnowledge;
-                $kdKnowledge->ustadz_nik = $ustadz->ustadz_nik;
+                $kdKnowledge->mapel_teacher = "1";
                 $kdKnowledge->p_id = $i;
                 $kdKnowledge->desc = "Mampu memahami Al-Qur'an dengan baik " . $i;
                 $kdKnowledge->save();

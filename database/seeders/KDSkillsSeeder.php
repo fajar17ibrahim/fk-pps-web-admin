@@ -22,7 +22,7 @@ class KDSkillsSeeder extends Seeder
         foreach($ustadzs as $ustadz) {
             for ($i = 1; $i <= 10; $i++) {
                 $kdSkills = new KDSkills;
-                $kdSkills->ustadz_nik = $ustadz->ustadz_nik;
+                $kdSkills->mapel_teacher = "1";
                 $kdSkills->k_id = $i;
                 $kdSkills->desc = "Mampu Berkomunikasi " . $i;
                 $kdSkills->save();

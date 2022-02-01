@@ -112,7 +112,7 @@ class PermissionSeeder extends Seeder
             ],
             [
                  'permission_name' => 'changepassword' // 32
-            ]           
+            ]          
         ]);
 
         $ceo = Role::where('role_name', 'ceo')->first();
