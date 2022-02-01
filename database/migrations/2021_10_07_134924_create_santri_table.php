@@ -19,11 +19,11 @@ class CreateSantriTable extends Migration
             $table->string('santri_nisn', 20)->nullable();
             $table->string('santri_name')->nullable();
             $table->string('santri_gender', 20)->nullable();
-            $table->string('santri_born_place', 20)->nullable();
+            $table->string('santri_born_place', 50)->nullable();
             $table->string('santri_born_date', 20)->nullable();
             $table->string('santri_religion', 20)->nullable();
-            $table->string('santri_hobby', 20)->nullable();
-            $table->string('santri_goal', 20)->nullable();
+            $table->string('santri_hobby', 50)->nullable();
+            $table->string('santri_goal', 50)->nullable();
             $table->string('santri_home_status', 50)->nullable();
             $table->string('santri_child_of', 20)->nullable();
             $table->string('santri_last_school', 50)->nullable();
