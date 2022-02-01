@@ -208,6 +208,10 @@ class AdminUserController extends Controller
         $no = 0;
         $data = array();
         foreach ($users as $userData) {
+            $label = "text-danger";
+            if ($userData->status == "Aktif") {
+                $label = "text-success";
+            }
             $no++;
             $row = array();
             $row[] = $no;
@@ -215,7 +219,7 @@ class AdminUserController extends Controller
             $row[] = $userData->name;
             $row[] = $userData->email;
             $row[] = roleName($userData->role_name);
-            $row[] = '<div class="d-flex align-items-center text-success">	
+            $row[] = '<div class="d-flex align-items-center ' . $label . '">	
                         <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
                         <span>' . $userData->status . '</span>
                     </div>';

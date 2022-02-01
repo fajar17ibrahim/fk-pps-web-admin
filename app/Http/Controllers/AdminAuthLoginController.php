@@ -29,16 +29,20 @@ class AdminAuthLoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $ustadz = Ustadz::leftJoin('users', 'users.email', '=', 'ustadz.ustadz_email')
-            ->leftJoin('role', 'role.id', '=', 'users.role_id')
-            ->leftJoin('school', 'school.school_id', '=', 'ustadz.ustadz_school')
-            ->where('ustadz_email' , '=', $user->email)
+                ->leftJoin('role', 'role.id', '=', 'users.role_id')
+                ->leftJoin('school', 'school.school_id', '=', 'ustadz.ustadz_school')
+                ->where('ustadz_email' , '=', $user->email)
                 ->get();
+
+            if ($ustadz[0]->status == "Nonactive") {
+                Session::flash('error', 'Akun anda tidak Aktif');
+                return redirect('login');
+            }
             Session::put('user', $ustadz);
             Session::put('pkpps', $ustadz[0]->school_name);
             $user->login_date = tanggal('now');
             $user->update();
             if ($user->role == '1') {
-                
                 return redirect('/');
                 // return redirect()->intended('admin');
             } else if ($user->level == '2') {
