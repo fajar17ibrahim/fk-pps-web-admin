@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    @if(Session::get('user')[0]['role_id'] == 1)
+                    @if(Session::get('user')['akses'] == 1)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">

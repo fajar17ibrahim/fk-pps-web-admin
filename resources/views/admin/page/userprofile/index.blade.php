@@ -268,7 +268,7 @@
 														<input name="inCountry" type="text" id="inCountry" class="form-control" value="{{$ustadz[0]->ustadz_country }}" />
 													</div>
 												</div>
-												@if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+												@if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
 												<div class="row">
 													<div class="col-sm-3"></div>
 													<div class="col-sm-9 text-secondary">

@@ -1,11 +1,11 @@
 <?php
 
 function roleName($string) {
-    if ($string == 'ceo') {
+    if ($string == '1') {
         $string = 'CEO';
-    } else if ($string == 'teacher') {
+    } else if ($string == '4') {
         $string = 'Guru';
-    } else if ($string == 'admin') {
+    } else if ($string == '2') {
         $string = 'Admin';
     } else {
         $string = 'Wali Kelas';

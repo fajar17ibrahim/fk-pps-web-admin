@@ -24,8 +24,12 @@ class AdminMasterUstadzController extends Controller
         //
         $this->authorize('master-teacher');
         $user = Session::get('user');
+
+        if ($user == null) {
+            return redirect('login');
+        }
         
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -50,10 +54,20 @@ class AdminMasterUstadzController extends Controller
                 $schools[] = $data;
             }
 
+            $ustadzDatas = Ustadz::get();
+            $ustadzs = array();
+
+            foreach ($ustadzDatas as $ustadzData) {
+                $ustadzs[] = array(
+                            'nik' => $ustadzData->ustadz_nik,
+                            'name' => $ustadzData->ustadz_name
+                        );
+            }
+
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->school_level)
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_level', '=', $user['level'])
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
             foreach($kelassCheck as $kelas) {
@@ -65,24 +79,37 @@ class AdminMasterUstadzController extends Controller
                 $kelass[] = $data;
             }
             
-            $schoolsData = School::orderBy('school_name', 'asc')
-                ->where('school_level', '=', $user[0]->school_level)
-                ->where('school_id', '=', $user[0]->ustadz_school)
-                ->get();
+            $schoolsData = School::where('school_level', '=', $user['level'])
+                ->where('school_id', '=', $user['sekolah'])
+                ->first();
 
             $schools = array();
-            foreach($schoolsData as $school) {
-                $data = array(
-                    'id' => $school->school_id,
-                    'pps_nama' => $school->school_name
-                );
+            $data = array(
+                'id' => $schoolsData->school_id,
+                'pps_nama' => $schoolsData->school_name
+            );
 
-                $schools[] = $data;
+            $schools[] = $data;
+
+            $schoolByNpsn = School::where('school_npsn', '=', $schoolsData->school_npsn)->get();
+            $ustadzs = array();
+            foreach ($schoolByNpsn as $school) {
+                $ustadzDatas = Ustadz::where('ustadz_school', 'like', '% ' . $school->school_id . ' %')
+                        ->where('ustadz_school', 'not like', '% ' . $user['sekolah'] . ' %')
+                        ->get();
+
+                foreach ($ustadzDatas as $ustadzData) {
+                    $ustadzs[] = array(
+                                'nik' => $ustadzData->ustadz_nik,
+                                'name' => $ustadzData->ustadz_name
+                            );
+                }
             }
 
         }
 
-        return view('admin.page.master.ustadz.index', compact('schools'), compact('kelass'));
+        return view('admin.page.master.ustadz.index', compact('schools'), compact('kelass'))
+                ->with('ustadzs', $ustadzs);
     }
 
     /**
@@ -172,10 +199,11 @@ class AdminMasterUstadzController extends Controller
             $ustadz->ustadz_districts = $request['inDistricts'];
             $ustadz->ustadz_city = $request['inKabOrCity'];
             $ustadz->ustadz_province = $request['inProvince'];
+            $ustadz->ustadz_pos_code = $request['inPosCode'];
             $ustadz->ustadz_country = $request['inCountry'];
             $ustadz->ustadz_email = $email;
             $ustadz->ustadz_phone = $request['inUstadzPhone'];
-            $ustadz->ustadz_school = $request['soPKPPS'];
+            $ustadz->ustadz_school = ' ' . $request['soPKPPS'] . ' ';
             $ustadz->status = 'Aktif';
             $ustadz->ustadz_photo = $photoName;
 
@@ -298,9 +326,9 @@ class AdminMasterUstadzController extends Controller
             $ustadz->ustadz_city = $request['inKabOrCity'];
             $ustadz->ustadz_province = $request['inProvince'];
             $ustadz->ustadz_country = $request['inCountry'];
+            $ustadz->ustadz_pos_code = $request['inPosCode'];
             $ustadz->ustadz_email = $request['inUstadzEmail'];
             $ustadz->ustadz_phone = $request['inUstadzPhone'];
-            $ustadz->ustadz_school = $request['soPKPPS'];
             $ustadz->status = 'Aktif';
             $ustadz->ustadz_photo = $photoName;
             $saveUstadz = $ustadz->update();
@@ -346,7 +374,7 @@ class AdminMasterUstadzController extends Controller
         $user = Session::get('user');
         
         $kelass = array();
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -372,8 +400,8 @@ class AdminMasterUstadzController extends Controller
                 }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->school_level)
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_level', '=', $user['level'])
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
                 foreach($kelassCheck as $kelas) {
@@ -386,8 +414,8 @@ class AdminMasterUstadzController extends Controller
                 }
 
                 $schoolsData = School::orderBy('school_name', 'asc')
-                ->where('school_level', '=', $user[0]->school_level)
-                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->where('school_level', '=', $user['level'])
+                ->where('school_id', '=', $user['sekolah'])
                 ->get();
 
                 $schools = array();
@@ -404,14 +432,72 @@ class AdminMasterUstadzController extends Controller
         $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
                 ->leftJoin('kelas','kelas.class_id','=','ustadz.ustadz_class')
                 ->find($id);
+
+                $data = array(
+                    'id' => $ustadz->ustadz_id,
+                    'photo' => $ustadz->ustadz_photo,
+                    'nik' => $ustadz->ustadz_nik,  
+                    'name' => $ustadz->ustadz_name, 
+                    'gender' => $ustadz->ustadz_gender, 
+                    'tempat_lahir' => $ustadz->ustadz_born_place, 
+                    'tanggal_lahir' => $ustadz->ustadz_born_date, 
+                    'agama' => $ustadz->ustadz_religion, 
+                    'ibu_name' => $ustadz->ustadz_mother_name, 
+                    'profesi' => $ustadz->ustadz_profesion, 
+                    'status_karyawan' => $ustadz->ustadz_employee_status, 
+                    'status_tugas' => $ustadz->ustadz_assigment_status, 
+                    'pendidikan' => $ustadz->ustadz_education, 
+                    'pendidikan_pesantren' => $ustadz->ustadz_education_pesantren, 
+                    'pendidikan_luar' => $ustadz->ustadz_education_abroad, 
+                    'kompetensi' => $ustadz->ustadz_competence,
+                    'email' => $ustadz->ustadz_email,  
+                    'phone' => $ustadz->ustadz_phone, 
+                    'alamat' => $ustadz->ustadz_address, 
+                    'desa' => $ustadz->ustadz_village, 
+                    'rt' => substr($ustadz->ustadz_rt_rw, 0, 3),
+                    'rw' => substr($ustadz->ustadz_rt_rw, 4, 3), 
+                    'kecamatan' => $ustadz->ustadz_districts, 
+                    'kab_kota' => $ustadz->ustadz_city, 
+                    'provinsi' => $ustadz->ustadz_province, 
+                    'kode_pos' => $ustadz->ustadz_pos_code, 
+                    'negara' => $ustadz->ustadz_country);
         
         $address = Address::get();
 
         // return $ustadz;
 
         return view('admin.page.master.ustadz.ustadz-edit', compact('address'), compact('schools'))
-        ->with('ustadz', $ustadz)
+        ->with('ustadz', $data)
         ->with('kelass', $kelass);
+    }
+
+    public function editAddUstadz(Request $request)
+    {
+        //
+        try {
+            $this->authorize('master-teacher');
+            $user = Session::get('user');
+
+            $nik = $request['inUstadz'];
+
+            $ustadz = Ustadz::where('ustadz_nik', '=', $nik)->first();
+
+            $ustadz->ustadz_school .= $user['sekolah'] . ' ';
+            $saveUstadz = $ustadz->update();
+
+            if ($saveUstadz) {
+                return redirect()->route('master-ustadz.index')
+                ->with('message_success', 'Ustadz berhasil disimpan.');
+            } else {
+                return redirect()->route('master-ustadz.index')
+                ->with('message_error', 'Ustadz gagal disimpan.');
+            }
+        } catch(\Illuminate\Database\QueryException $e){ 
+            return redirect()->route('master-ustadz.index')
+            // ->with('message_error', 'Ustadz gagal disimpan.');
+            ->with('message_error', $e->getMessage());
+        }
+        
     }
 
     public function addUstadz()
@@ -421,7 +507,7 @@ class AdminMasterUstadzController extends Controller
         $user = Session::get('user');
 
         $kelass = array();
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -445,33 +531,33 @@ class AdminMasterUstadzController extends Controller
 
                     $schools[] = $data;
                 }
+
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
-                foreach($kelassCheck as $kelas) {
-                    $data = array(
-                        'id' => $kelas->class_id,
-                        'name' => $kelas->class_name,
-                    );
+            foreach($kelassCheck as $kelas) {
+                $data = array(
+                    'id' => $kelas->class_id,
+                    'name' => $kelas->class_name,
+                );
 
-                    $kelass[] = $data;
-                }
+                $kelass[] = $data;
+            }
 
-                $schoolsData = School::orderBy('school_name', 'asc')
-                ->where('school_id', '=', $user[0]->ustadz_school)
-                ->get();
+            $schoolsData = School::orderBy('school_name', 'asc')
+                ->where('school_id', '=', $user['sekolah'])
+                ->first();
 
-                $schools = array();
-                foreach($schoolsData as $school) {
-                    $data = array(
-                        'id' => $school->school_id,
-                        'pps_nama' => $school->school_name
-                    );
+            $schools = array();
+            $data = array(
+                'id' => $schoolsData->school_id,
+                'pps_nama' => $schoolsData->school_name
+            );
 
-                    $schools[] = $data;
-                }
+            $schools[] = $data;
+
         }
         
         $address = Address::get();
@@ -492,18 +578,14 @@ class AdminMasterUstadzController extends Controller
 
     public function listData($school) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($school != 0) {
-                $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->where('ustadz.ustadz_school', '=', $school)
-                ->get();
+                $ustadzs = Ustadz::where('ustadz_school', 'like', '% ' . $school . ' %')->get();
             } else {
-                $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->get();
+                $ustadzs = Ustadz::get();
             }
         } else {
-            $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+            $ustadzs = Ustadz::where('ustadz_school', 'like', '% ' . $user['sekolah'] . ' %')
                 ->get();
         }
 

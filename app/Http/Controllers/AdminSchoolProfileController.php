@@ -19,16 +19,21 @@ class AdminSchoolProfileController extends Controller
     {
         //
         $user = Auth::user();
+
+        if ($user == null) {
+            return redirect('login');
+        }
+        
         $ustadz = Ustadz::where('ustadz_email' , '=', $user->email)
-        ->get();
+                ->first();
         $school = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')
-        ->where('school.school_id' , '=' , $ustadz[0]->ustadz_school)
-        ->get();
+                ->where('school.school_id' , '=' , $ustadz->ustadz_school)
+                ->first();
         // return $ustadz;
         $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_npsn')->get();
         $address = Address::get();
         return view('admin.page.schoolprofile.index', compact('ustadzs'), compact('address'))
-        ->with('school', $school);
+                ->with('school', $school);
 
     }
 
@@ -117,14 +122,14 @@ class AdminSchoolProfileController extends Controller
     
             if ($saveSchool) {
                 return redirect()->route('school-profile.index')
-                ->with('message_success', 'Profil PKPPS berhasil diperbarui.');
+                        ->with('message_success', 'Profil PKPPS berhasil diperbarui.');
             } else {
                 return redirect()->route('school-profile.index')
-                ->with('message_error', 'Profil PKPPS gagal diperbarui.');
+                        ->with('message_error', 'Profil PKPPS gagal diperbarui.');
             }
         } catch(\Illuminate\Database\QueryException $e){ 
             return redirect()->route('school-profile.index')
-            ->with('message_error', 'Profil PKPPS gagal diperbarui.');
+                    ->with('message_error', 'Profil PKPPS gagal diperbarui.');
             // ->with('message_error', $e->getMessage());
         }
     }

@@ -18,7 +18,7 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        @if(Session::get('user')[0]['role_id'] != 4)
+        @if(Session::get('user')['akses'] != 4)
         <li>
             <a href="{{ URL::to('/') }}/school-profile">
                 <div class="parent-icon"><i class="bx bx-building"></i>
@@ -50,7 +50,7 @@
                 <div class="menu-title">Buku Induk</div>
             </a>
         </li>
-        @if(Session::get('user')[0]['role_id'] != 4)
+        @if(Session::get('user')['akses'] != 4)
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-data'></i>
@@ -58,11 +58,11 @@
                 <div class="menu-title">Master</div>
             </a>
             <ul>
-                @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                 <li> <a href="{{ URL::to('/') }}/master-class"><i class="bx bx-right-arrow-alt"></i>Kelas</a>
                 </li>
                 @endif
-                @if(Session::get('user')[0]['role_id'] == 1)
+                @if(Session::get('user')['akses'] == 1)
                 <li> <a href="{{ URL::to('/') }}/master-mapel"><i class="bx bx-right-arrow-alt"></i>Mapel</a>
                 </li>
                 <li> <a href="{{ URL::to('/') }}/master-school"><i class="bx bx-right-arrow-alt"></i>PKPPS</a>
@@ -74,13 +74,13 @@
                 @endif
                 <li> <a href="{{ URL::to('/') }}/master-santri"><i class="bx bx-right-arrow-alt"></i>Santri</a>
                 </li>
-                @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                 <li> <a href="{{ URL::to('/') }}/master-ustadz"><i class="bx bx-right-arrow-alt"></i>Ustadz / Ustadzah</a>
                 </li>
                 @endif
             </ul>
         </li>
-        @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+        @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-network-chart'></i>
@@ -120,7 +120,7 @@
                 <div class="menu-title">Kurikulum</div>
             </a>
         </li>
-        @if(Session::get('user')[0]['role_id'] != 4)
+        @if(Session::get('user')['akses'] != 4)
         <li>
             <a href="{{ URL::to('/') }}/user">
                 <div class="parent-icon"><i class="lni lni-users"></i>

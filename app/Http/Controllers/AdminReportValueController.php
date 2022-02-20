@@ -27,6 +27,11 @@ class AdminReportValueController extends Controller
         //
         $this->authorize('report-value');
         $user = Session::get('user');
+
+        if ($user == null) {
+            return redirect('login');
+        }
+        
         $mapel = Session::get('mapel');
 
         $kdKnowledges = KDKnowledge::where('mapel_teacher', '=', $mapel)
@@ -40,7 +45,7 @@ class AdminReportValueController extends Controller
         $kelass = array();
         $mapels = array();
         $mapelOld = "";
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -68,9 +73,9 @@ class AdminReportValueController extends Controller
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
                     ->orderBy('mapel_name', 'asc')->get();
             
-        } else if ($user[0]->role_id == 2) {
+        } else if ($user['akses'] == 2) {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
             foreach($kelassCheck as $kelas) {
@@ -84,7 +89,7 @@ class AdminReportValueController extends Controller
 
             $schoolsData = School::orderBy('school_name', 'asc')
                 ->where('school_level', '=', $user[0]->school_level)
-                ->where('school_id', '=', $user[0]->ustadz_school)
+                ->where('school_id', '=', $user['sekolah'])
                 ->get();
 
             $schools = array();
@@ -99,14 +104,14 @@ class AdminReportValueController extends Controller
 
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
                     ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
-                    ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
+                    ->where('kelas.class_school', '=', $user['sekolah'])       
                     ->orderBy('mapel_name', 'asc')->get();
         } else {
 
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
                     ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')          
-                    ->where('kelas.class_school', '=', $user[0]->ustadz_school)    
-                    ->where('mapel_teacher.class_id', '=', $user[0]->ustadz_class)       
+                    ->where('kelas.class_school', '=', $user['sekolah'])    
+                    ->where('mapel_teacher.class_id', '=', $user['kelas'])       
                     ->orderBy('mapel_name', 'asc')->get();
 
         }
@@ -377,7 +382,7 @@ class AdminReportValueController extends Controller
             }
         }
         
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($level != 0 && $school != 0 && $kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
@@ -423,24 +428,24 @@ class AdminReportValueController extends Controller
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
                 ->get();
             }
-        } else if ($user[0]->role_id == 2) {
+        } else if ($user['akses'] == 2) {
             if ($kelas != 0) {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
-                    ->where('school.school_id', '=', $user[0]->ustadz_school)
+                    ->where('school.school_id', '=', $user['sekolah'])
                     ->where('kelas.class_id', '=', $kelas)
                     ->get();
             } else {
                 $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
             }
         } else {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                     ->leftJoin('school','santri.santri_school','=','school.school_id')
-                    ->where('school.school_id', '=', $user[0]->ustadz_school)
-                    ->where('santri.santri_class', '=', $user[0]->ustadz_class)
+                    ->where('school.school_id', '=', $user['sekolah'])
+                    ->where('santri.santri_class', '=', $user['kelas'])
                     ->get();
         }
                 

@@ -20,8 +20,12 @@ class AdminMasterRelationClassController extends Controller
         //
         $user = Session::get('user');
 
+        if ($user == null) {
+            return redirect('login');
+        }
+
         $kelass = array();
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -39,7 +43,7 @@ class AdminMasterRelationClassController extends Controller
             
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
             foreach($kelassCheck as $kelas) {
@@ -52,7 +56,7 @@ class AdminMasterRelationClassController extends Controller
             }
 
             $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')
-                ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                ->where('ustadz_school', 'like', '% ' . $user['sekolah'] . ' %')
                 ->get();
         }
 
@@ -106,7 +110,7 @@ class AdminMasterRelationClassController extends Controller
         ->find($id);
 
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $name = $kelas->school_name . ' - ' . $kelas->class_name;
         } else {
             $name = $kelas->class_name;
@@ -178,7 +182,7 @@ class AdminMasterRelationClassController extends Controller
 
     public function listData($level, $school) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($level != 0 && $school != 0) {
                 $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
@@ -203,8 +207,8 @@ class AdminMasterRelationClassController extends Controller
         } else {
             $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
             ->leftJoin('ustadz','ustadz.ustadz_nik','=','kelas.homeroom_teacher')
-            ->where('kelas.class_level', '=', $user[0]->school_level)
-            ->where('school.school_id', '=', $user[0]->ustadz_school)
+            ->where('kelas.class_level', '=', $user['level'])
+            ->where('school.school_id', '=', $user['sekolah'])
             ->get();
             
         }

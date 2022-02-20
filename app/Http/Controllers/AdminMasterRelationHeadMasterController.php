@@ -23,11 +23,16 @@ class AdminMasterRelationHeadMasterController extends Controller
         $this->authorize('master-relation-headmaster');
 
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+
+        if ($user == null) {
+            return redirect('login');
+        }
+        
+        if ($user['akses'] == 1) {
             $ustadzs = Ustadz::get();
         } else {
             $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
         }
         $schools = School::orderBy('school_name', 'asc')->get();
@@ -145,13 +150,13 @@ class AdminMasterRelationHeadMasterController extends Controller
         $this->authorize('master-relation-headmaster');
 
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $schools = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')
                 ->get();
         } else {
             $schools = School::leftJoin('ustadz','ustadz.ustadz_nik','=','school.school_headship')
-                ->where('school.school_level', '=', $user[0]->school_level)
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_level', '=', $user['level'])
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
         }
         
@@ -182,11 +187,11 @@ class AdminMasterRelationHeadMasterController extends Controller
         $this->authorize('master-relation-headmaster');
 
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $ustadz = Ustadz::where('ustadz_nik', '=', $nik)->first();
         } else {
             $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->where('ustadz_nik', '=', $nik)
                 ->first();
         }

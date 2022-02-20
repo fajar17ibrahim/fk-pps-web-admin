@@ -23,6 +23,11 @@ class AdminUserProfileController extends Controller
         $this->authorize('user-profile');
 
         $user = Auth::user();
+
+        if ($user == null) {
+            return redirect('login');
+        }
+        
         $ustadz = Ustadz::where('ustadz_email' , '=', $user->email)->get();
         $schools = School::orderBy('school_name', 'asc')->get();
         $address = Address::get();

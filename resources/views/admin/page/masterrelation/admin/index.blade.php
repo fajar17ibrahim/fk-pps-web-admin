@@ -84,6 +84,7 @@
                                 $('#editAdminModal').modal('show');
                                 $('.modal-title').text('Form Edit Admin');
                                 $('#formEdit').attr('action', url);
+                                $('#inEmailOldEdit').val(data.email).attr('readonly','true');
                                 $('#inEmailEdit').val(data.email);
                                 $('#inNameEdit').val(data.name).attr('readonly','true');
                             },
@@ -106,6 +107,8 @@
                                 $('#inNameEdit').val(response.name).attr('readonly','true');
                             } ,
                             error: function() {
+                                $('#inEmailEdit').val('');
+                                $('#inNameEdit').val('').attr('readonly','true');
                                 alert('Tidak dapat menampilkan Data');
                             }
                         });

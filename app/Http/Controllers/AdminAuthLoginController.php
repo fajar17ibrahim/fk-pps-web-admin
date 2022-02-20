@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Ustadz;
+use App\Models\MapelTeacher;
+use App\Models\Kelas;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,30 +30,117 @@ class AdminAuthLoginController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+            $aksess = array();
+
             $ustadz = Ustadz::leftJoin('users', 'users.email', '=', 'ustadz.ustadz_email')
                 ->leftJoin('role', 'role.id', '=', 'users.role_id')
-                ->leftJoin('school', 'school.school_id', '=', 'ustadz.ustadz_school')
                 ->where('ustadz_email' , '=', $user->email)
+                ->first();
+
+            $schoolUstadzs = explode(" ", $ustadz->user_school);
+            foreach ($schoolUstadzs as $schoolUstadzId) {
+                $schoolUstadz = School::where('school_id' , '=', $schoolUstadzId)
+                    ->first();
+
+                if ($schoolUstadz != null) {
+                    $akses = "2";
+                    $aksesNama = "Admin";
+                    if ($ustadz->role_id == 1 && count($aksess) == 0) {
+                        $akses = "1";
+                        $aksesNama = "CEO";
+                    }
+
+                    $data = array(
+                        'id' => $ustadz->ustadz_id,
+                        'sekolah' => $schoolUstadz->school_id,
+                        'kelas' => '0',
+                        'nama' => $schoolUstadz->school_level,
+                        'akses' => $akses,
+                        'akses_nama' => $aksesNama
+                    );
+
+                    $aksess[] = $data;
+                }
+            }
+
+            // return $aksess;
+            
+            $mapelTeachers = MapelTeacher::leftJoin('kelas', 'mapel_teacher.class_id', '=', 'kelas.class_id')
+                ->groupBy('kelas.class_id')
+                ->where('ustadz_nik', '=', $ustadz->ustadz_nik)
                 ->get();
 
-            if ($ustadz[0]->status == "Nonactive") {
+            foreach ($mapelTeachers as $mapelTeacher) {
+                $data = array(
+                    'id' => $ustadz->ustadz_id,
+                    'sekolah' => $mapelTeacher->class_school,
+                    'kelas' => $mapelTeacher->class_id,
+                    'nama' => $mapelTeacher->class_name,
+                    'akses' => '4',
+                    'akses_nama' => 'Guru'
+                );
+
+                $aksess[] = $data; 
+            }
+
+            $kelass = Kelas::where('homeroom_teacher', '=', $ustadz->ustadz_nik)
+                ->get();
+
+            foreach ($kelass as $kelas) {
+                $data = array(
+                    'id' => $ustadz->ustadz_id,
+                    'sekolah' => $kelas->class_school,
+                    'kelas' => $kelas->class_id,
+                    'nama' => $kelas->class_name,
+                    'akses' => '3',
+                    'akses_nama' => 'Wali Kelas'
+                );
+
+                $aksess[] = $data;
+            }
+
+            // return $aksess;
+
+
+            if ($ustadz->status == "Nonactive") {
                 Session::flash('error', 'Akun anda tidak Aktif');
                 return redirect('login');
             }
-            Session::put('user', $ustadz);
-            Session::put('pkpps', $ustadz[0]->school_name);
-            $user->login_date = tanggal('now');
-            $user->update();
-            if ($user->role == '1') {
-                return redirect('/');
-                // return redirect()->intended('admin');
-            } else if ($user->level == '2') {
-                return redirect()->intended('guru');
-            }
-            return redirect('/');
+            
+            Session::flash('success', $aksess);
+            return redirect('login');
         }
+
         Session::flash('error', 'Email atau password salah');
         return redirect('login');
+    }
+
+    public function akses($id, $school, $kelas, $akses) 
+    {
+        $ustadz = Ustadz::find($id);
+        $schoolData = School::find($school);
+
+        $data = array(
+            'id' => $ustadz->ustadz_id,
+            'nik' => $ustadz->ustadz_nik,
+            'nama' => $ustadz->ustadz_name,
+            'photo' => $ustadz->ustadz_photo,
+            'akses' => $akses,
+            'sekolah' => $school,
+            'sekolah_nama' => $schoolData->school_name,
+            'level' => $schoolData->school_level,
+            'kelas' => $kelas
+        );
+
+        // return $data;
+
+        Session::put('user', $data);
+        $user = User::where('email', '=', $ustadz->ustadz_email)->first();
+        $user->login_date = tanggal('now');
+        $user->update();
+
+        return redirect('/');
+
     }
 
     public function updateUser(Request $request, User $user) 

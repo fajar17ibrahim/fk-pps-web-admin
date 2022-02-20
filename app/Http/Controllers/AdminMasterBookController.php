@@ -26,8 +26,13 @@ class AdminMasterBookController extends Controller
         //
         $schools = School::orderBy('school_name', 'asc')->get();
         $user = Session::get('user');
+
+        if ($user == null) {
+            return redirect('login');
+        }
+        
         $kelass = array();
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -42,7 +47,7 @@ class AdminMasterBookController extends Controller
             }
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
             foreach($kelassCheck as $kelas) {
@@ -137,7 +142,7 @@ class AdminMasterBookController extends Controller
             ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
             ->leftJoin('school','kelas.class_school','=','school.school_id')
             ->where('master_book.santri_nisn', $id)
-            ->get();
+            ->first();
 
             // return $masterBook;
 
@@ -332,7 +337,7 @@ class AdminMasterBookController extends Controller
 
     public function listData($level, $school, $kelas) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($level != 0 && $school != 0 && $kelas != 0) {
                 $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
                 ->leftJoin('kelas','santri.santri_class','=','kelas.class_id')
@@ -388,9 +393,11 @@ class AdminMasterBookController extends Controller
         } else {
             $masterBooks = MasterBook::leftJoin('santri', 'master_book.santri_nisn', '=', 'santri.santri_nisn')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
         }
+
+        // return $masterBooks;
 
         $no = 0;
         $data = array();

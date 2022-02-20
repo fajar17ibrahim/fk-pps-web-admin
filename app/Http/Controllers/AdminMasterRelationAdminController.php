@@ -6,7 +6,11 @@ use Session;
 use App\Models\Ustadz;
 use App\Models\School;
 use App\Models\User;
+use App\Mail\EMail;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 
 class AdminMasterRelationAdminController extends Controller
 {
@@ -23,11 +27,16 @@ class AdminMasterRelationAdminController extends Controller
         $this->authorize('master-relation-admin');
 
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+
+        if ($user == null) {
+            return redirect('login');
+        }
+
+        if ($user['akses'] == 1) {
             $ustadzs = Ustadz::get();
         } else {
             $ustadzs = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
         }
         $schools = School::orderBy('school_name', 'asc')->get();
@@ -77,14 +86,22 @@ class AdminMasterRelationAdminController extends Controller
         //
         $this->authorize('master-relation-admin');
         
-        $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->leftJoin('users','ustadz.ustadz_email','=','users.email')
+        $ustadz = Ustadz::leftJoin('users','ustadz.ustadz_email','=','users.email')
                 ->where('users.role_id', '=', 2)
                 ->where('users.id', '=', $id)
                 ->first();
-        $data = array(
-            'email' => $ustadz->ustadz_email, 
-            'name' => $ustadz->ustadz_name);
+
+        if ($ustadz != null) {
+            $data = array(
+                'email' => $ustadz->ustadz_email, 
+                'name' => $ustadz->ustadz_name
+            );
+        } else {
+            $data = array(
+                'email' => '', 
+                'name' => ''
+            );
+        }
         return json_encode($data);
     }
 
@@ -102,12 +119,41 @@ class AdminMasterRelationAdminController extends Controller
             //
             $this->authorize('master-relation-admin');
 
+            $new = false;
             $user = User::find($id);
-            $user->email = $request['inEmailEdit'];
+            if ($user != null) {
+                $user->role_id = '2';
+            } else {
+                $new = true;
+                $user = new User;
+                $user->name = $request['inNameEdit'];
+                $user->email = $request['inEmailEdit'];
+                $user->role_id = '2';
+
+                $random_password = Str::random(8);
+                $user->password = Hash::make($random_password);
+                
+            }
+
+            $adminOld = $request['inEmailOldEdit'];
+            $userOld = User::where('email', '=', $adminOld)->first();
+            if ($userOld != null) {
+                $ususerOlder->role_id = '0';
+                $ususerOlder->update();
+            }
+
             $updated = $user->update();
             
-        
             if ($updated) {
+                if ($new) {
+                    $details = [
+                        'title' => 'Password Login',
+                        'body' => 'Password Anda : ' . $random_password
+                    ];
+
+                    Mail::to($request['inEmailEdit'])->send(new EMail($details));
+                }
+
                 return redirect()->route('master-relation-admin.index')
                 ->with('message_success', 'Admin berhasil diperbarui.');
             } else {
@@ -136,33 +182,73 @@ class AdminMasterRelationAdminController extends Controller
         $this->authorize('master-relation-admin');
 
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
-            $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
-                ->leftJoin('users','ustadz.ustadz_email','=','users.email')
-                ->where('users.role_id', '=', 2)
-                ->get();
-        } else {
-            $schools = School::leftJoin('ustadz','ustadz.ustadz_school','=','school.school_id')
-                ->leftJoin('users','ustadz.ustadz_email','=','users.email')
-                ->where('users.role_id', '=', 2)
-                ->where('school.school_level', '=', $user[0]->school_level)
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
-                ->get();
+        $admins = array();
+        if ($user['akses'] == 1) {
+            $schools = School::get();
+            foreach ($schools as $school) {
+                $ustadz = Ustadz::leftJoin('users','ustadz.ustadz_email','=','users.email')
+                    ->where('users.role_id', '=', 2)
+                    ->where('users.user_school', '=', $school->school_id)
+                    ->where('ustadz_school', 'like', '% ' . $school->school_id . ' %')
+                    ->first();
+
+                $name = '';
+                $id = '';
+                if ($ustadz != null) {
+                    $name = $ustadz->ustadz_name;
+                    $id = $ustadz->id;
+                }
+
+                // return $ustadz;
+
+                $admins[] = array(
+                    'id' => $school->school_id,
+                    'npsn' => $school->school_npsn,
+                    'sekolah' => $school->school_name,
+                    'level' => $school->school_level,
+                    'admin_id' => $id,
+                    'admin' => $name
+                );
+            }
+        } else {            
+            $schools = School::where('school_id', '=', $user['sekolah'])->get();
+            foreach ($schools as $school) {
+                $ustadz = Ustadz::leftJoin('users','ustadz.ustadz_email','=','users.email')
+                    ->where('users.role_id', '=', 2)
+                    ->where('ustadz_school', 'like', '% ' . $school->school_id . ' %')
+                    ->first();  
+
+                $name = '';
+                if ($ustadz != null) {
+                    $name = $ustadz->ustadz_name;
+                }
+
+                $admins[] = array(
+                    'id' => $school->school_id,
+                    'npsn' => $school->school_npsn,
+                    'sekolah' => $school->school_name,
+                    'level' => $school->school_level,
+                    'admin_id' => $ustadz->id,
+                    'admin' => $name
+                );
+            }
         }
+
+        // return $admins;
         
         $no = 0;
         $data = array();
-        foreach ($schools as $school) {
+        foreach ($admins as $admin) {
             $no++;
             $row = array();
             $row[] = $no;
-            $row[] = $school->school_npsn;
-            $row[] = $school->school_name;
-            $row[] = $school->school_level;
-            $row[] = $school->ustadz_name;
+            $row[] = $admin['npsn'];
+            $row[] = $admin['sekolah'];
+            $row[] = $admin['level'];
+            $row[] = $admin['admin'];
             $row[] = '<div class="col">
                         <div class="btn-group">
-                            <a href="#" onclick="editForm(' . $school->id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
+                            <a href="#" onclick="editForm(' . $admin['admin_id'] . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
                         </div>
                     </div>';
             $data[] = $row;
@@ -177,17 +263,17 @@ class AdminMasterRelationAdminController extends Controller
         $this->authorize('master-relation-admin');
         
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $ustadz = Ustadz::where('ustadz_email', '=', $email)->first();
         } else {
-            $ustadz = Ustadz::leftJoin('school','ustadz.ustadz_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+            $ustadz = Ustadz::where('ustadz.ustadz_school', 'like', '%' . $user['sekolah'] . ' %')
                 ->where('ustadz_email', '=', $email)
                 ->first();
         }
 
         $data = array(
-            'name' => $ustadz->ustadz_name);
+            'name' => $ustadz->ustadz_name
+        );
 
         return response()->json($data);
     }

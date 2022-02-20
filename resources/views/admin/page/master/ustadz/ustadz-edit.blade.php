@@ -6,7 +6,7 @@
 	
 	<div class="container">
 		<div class="main-body">
-			<form method="post" action="{{ URL::to('/') }}/master-ustadz/{{ $ustadz->ustadz_id }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+			<form method="post" action="{{ URL::to('/') }}/master-ustadz/{{ $ustadz['id'] }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 			@method('PUT')
 			@csrf
 				<div class="row">
@@ -14,7 +14,7 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="d-flex flex-column align-items-center text-center">
-									<img src="{{ URL::to('/') }}/images/{{ $ustadz->ustadz_photo }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
+									<img src="{{ URL::to('/') }}/images/{{ $ustadz['photo'] }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
 									<div class="mt-3">
 										<h5>Foto</h5>
 										<p class="text-secondary mb-1">Ustadz</p>
@@ -38,14 +38,14 @@
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzName" class="col-sm-3 col-form-label">Nama Lengkap</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzName" type="text" id="inUstadzName" class="form-control" value="{{ $ustadz->ustadz_name }}" required />
+										<input name="inUstadzName" type="text" id="inUstadzName" class="form-control" value="{{ $ustadz['name'] }}" required />
 										<div class="invalid-tooltip">Nama tidak boleh kosong</div>
 									</div>
 								</div>
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzNIK" class="col-sm-3 col-form-label">NIK</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzNIK" type="text" id="inUstadzNIK" class="form-control" value="{{ $ustadz->ustadz_nik }}" required />
+										<input name="inUstadzNIK" type="text" id="inUstadzNIK" class="form-control" value="{{ $ustadz['nik'] }}" required />
 										<div class="invalid-tooltip">NIK tidak boleh kosong</div>
 									</div>
 								</div>
@@ -53,7 +53,7 @@
 									<label for="soUstadzGender" class="col-sm-3 col-form-label">Jenis Kelamin</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzGender" class="form-select form-control" id="soUstadzGender" >
-											<option value="{{ $ustadz->ustadz_gender }}" class="form-control">{{ $ustadz->ustadz_gender }}</option>
+											<option value="{{ $ustadz['gender'] }}" class="form-control">{{ $ustadz['gender'] }}</option>
 											<option value="Laki-Laki" class="form-control">Laki-Laki</option>
 											<option value="Perempuan" class="form-control">Perempuan</option>
 										</select>
@@ -62,26 +62,26 @@
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzPlaceBorn" class="col-sm-3 col-form-label">Tempat Lahir</label>
 									<div class="col-sm-3 text-secondary">
-										<input name="inUstadzPlaceBorn" type="text" id="inUstadzPlaceBorn" class="form-control" value="{{ $ustadz->ustadz_born_place }}" required />
+										<input name="inUstadzPlaceBorn" type="text" id="inUstadzPlaceBorn" class="form-control" value="{{ $ustadz['tempat_lahir'] }}" required />
 										<div class="invalid-tooltip">Tempat Lahir tidak boleh kosong</div>
 									</div>
 									<label for="inUstadzDateBorn" class="col-sm-2 col-form-label">Tgl Lahir</label>
 									<div class="col-sm-4 text-secondary">
-										<input name="inUstadzDateBorn" type="date" id="inUstadzDateBorn" class="form-control" value="{{ $ustadz->ustadz_born_date }}" required>
+										<input name="inUstadzDateBorn" type="date" id="inUstadzDateBorn" class="form-control" value="{{ $ustadz['tanggal_lahir'] }}" required>
 										<div class="invalid-tooltip">Tanggal tidak boleh kosong</div>
 									</div>
 								</div>
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzReligion" class="col-sm-3 col-form-label">Agama</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzReligion" type="text" id="inUstadzReligion" class="form-control" value="{{ $ustadz->ustadz_religion }}" required />
+										<input name="inUstadzReligion" type="text" id="inUstadzReligion" class="form-control" value="{{ $ustadz['agama'] }}" required />
 										<div class="invalid-tooltip">Agama tidak boleh kosong</div>
 									</div>
 								</div>
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzMotherName" class="col-sm-3 col-form-label">Nama Ibu</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzMotherName" type="text" id="inUstadzMotherName" class="form-control" value="{{ $ustadz->ustadz_mother_name }}" required />
+										<input name="inUstadzMotherName" type="text" id="inUstadzMotherName" class="form-control" value="{{ $ustadz['ibu_name'] }}" required />
 										<div class="invalid-tooltip">Agama tidak boleh kosong</div>
 									</div>
 								</div>
@@ -89,7 +89,7 @@
 									<label for="soUstadzProfesi" class="col-sm-3 col-form-label">Profesi</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzProfesi" class="form-select form-control" id="soUstadzProfesi" >
-											<option value="{{ $ustadz->ustadz_profesion }}" class="form-control">{{ $ustadz->ustadz_profesion }}</option>
+											<option value="{{ $ustadz['profesi'] }}" class="form-control">{{ $ustadz['profesi'] }}</option>
 											<option value="Pendidik" class="form-control">Pendidik</option>
 										</select>
 									</div>
@@ -98,7 +98,7 @@
 								<label for="soUstadzEmployeeStatus" class="col-sm-3 col-form-label">Status Pegawai</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzEmployeeStatus" class="form-select form-control" id="soUstadzEmployeeStatus" >
-											<option value="{{ $ustadz->ustadz_employee_status }}" class="form-control">{{ $ustadz->ustadz_employee_status }}</option>	
+											<option value="{{ $ustadz['status_karyawan'] }}" class="form-control">{{ $ustadz['status_karyawan'] }}</option>	
 											<option value="PNS" class="form-control">PNS</option>
 											<option value="Non PNS" class="form-control">Non PNS</option>
 										</select>
@@ -108,7 +108,7 @@
 								<label for="soUstadzTetap" class="col-sm-3 col-form-label">Tetap / Tidak</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzTetap" class="form-select form-control" id="soUstadzTetap" >
-											<option value="{{ $ustadz->ustadz_assigment_status }}" class="form-control">{{ $ustadz->ustadz_assigment_status }}</option>	
+											<option value="{{ $ustadz['status_tugas'] }}" class="form-control">{{ $ustadz['status_tugas'] }}</option>	
 											<option value="Tetap" class="form-control">Tetap</option>
 											<option value="Tidak Tetap" class="form-control">Tidak Tetap</option>
 										</select>
@@ -118,7 +118,7 @@
 								<label for="soUstadzEducation" class="col-sm-3 col-form-label">Pendidikan</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzEducation" class="form-select form-control" id="soUstadzEducation" >
-											<option value="{{ $ustadz->ustadz_education }}" class="form-control">{{ $ustadz->ustadz_education }}</option>	
+											<option value="{{ $ustadz['pendidikan'] }}" class="form-control">{{ $ustadz['pendidikan'] }}</option>	
 											<option value="Tidak memiliki Pendidikan Formal">Tidak memiliki Pendidikan Formal</option>
 											<option value="SD / MI Sederajat">SD / MI Sederajat</option>
 											<option value="SMP / MTS Sederajat">SMP / MTS Sederajat</option>
@@ -136,7 +136,7 @@
 								<label for="soUstadzEducationIslamic" class="col-sm-3 col-form-label">Pendidikan Pesantren</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzEducationIslamic" class="form-select form-control" id="soUstadzEducationIslamic" >
-											<option value="{{ $ustadz->ustadz_education_pesantren }}" class="form-control">{{ $ustadz->ustadz_education_pesantren }}</option>
+											<option value="{{ $ustadz['pendidikan_pesantren'] }}" class="form-control">{{ $ustadz['pendidikan_pesantren'] }}</option>
 											<option value="1 s/d 3 Tahun" class="form-control">1 s/d 3 Tahun</option>
 											<option value="4 s/d 5 Tahun" class="form-control">4 s/d 5 Tahun</option>
 											<option value="Tidak Pernah" class="form-control">Tidak Pernah</option>
@@ -147,7 +147,7 @@
 								<label for="soUstadzEducationAbroad" class="col-sm-3 col-form-label">Pendidikan Luar Negeri</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzEducationAbroad" class="form-select form-control" id="soUstadzEducationAbroad" >
-											<option value="{{ $ustadz->ustadz_education_abroad }}" class="form-control">{{ $ustadz->ustadz_education_abroad }}</option>
+											<option value="{{ $ustadz['pendidikan_luar'] }}" class="form-control">{{ $ustadz['pendidikan_luar'] }}</option>
 											<option value="1 s/d 3 Tahun" class="form-control">1 s/d 3 Tahun</option>
 											<option value="4 s/d 5 Tahun" class="form-control">4 s/d 5 Tahun</option>
 											<option value="Tidak Pernah" class="form-control">Tidak Pernah</option>
@@ -158,7 +158,7 @@
 								<label for="soUstadzCompetence" class="col-sm-3 col-form-label">Kompetensi</label>
 									<div class="col-sm-9 text-secondary">
 										<select name="soUstadzCompetence" class="form-select form-control" id="soUstadzCompetence" >
-											<option value="{{ $ustadz->ustadz_competence }}" class="form-control">{{ $ustadz->ustadz_competence }}</option>
+											<option value="{{ $ustadz['kompetensi'] }}" class="form-control">{{ $ustadz['kompetensi'] }}</option>
 											<option value="Al-Qur'an" class="form-control">Al-Qur'an</option>
 											<option value="Tidak Pernah" class="form-control">Lainnya</option>
 										</select>
@@ -167,26 +167,15 @@
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzEmail" class="col-sm-3 col-form-label">Email</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzEmail" type="text" id="inUstadzEmail" class="form-control" value="{{ $ustadz->ustadz_email }}" required />
+										<input name="inUstadzEmail" type="text" id="inUstadzEmail" class="form-control" value="{{ $ustadz['email'] }}" required />
 										<div class="invalid-tooltip">Email tidak boleh kosong</div>
 									</div>
 								</div>
 								<div class="row mb-3 position-relative">
 									<label for="inUstadzPhone" class="col-sm-3 col-form-label">Nomor Telepon</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inUstadzPhone" type="text" id="inUstadzPhone" class="form-control" value="{{ $ustadz->ustadz_phone }}" required />
+										<input name="inUstadzPhone" type="text" id="inUstadzPhone" class="form-control" value="{{ $ustadz['phone'] }}" required />
 										<div class="invalid-tooltip">Telepon tidak boleh kosong</div>
-									</div>
-								</div>
-								<div class="row mb-3 position-relative">
-									<label for="soPKPPS" class="col-sm-3 col-form-label">PKPPS</label>
-									<div class="col-sm-9 text-secondary" >
-										<select name="soPKPPS" class="form-select form-control" name="soPKPPS" id="soPKPPS">
-											<option value="{{ $ustadz->school_id }}">{{ $ustadz->school_name . ' ('. $ustadz->school_level . ')' }}</option>
-											@foreach ($schools as $school)
-												<option value="{{ $school['id'] }}">{{ $school['pps_nama'] }}</option>
-											@endforeach
-										</select>
 									</div>
 								</div>
 							</div>
@@ -199,17 +188,18 @@
 									<h5 class="mb-0 text-success">Alamat Rumah</h5>
 								</div>
 								<hr>
-								<div class="row mb-3 position-relative">
+								<div class="row mb-3">
 									<label for="inAddress" class="col-sm-3 col-form-label">Alamat</label>
 									<div class="col-sm-9 text-secondary">
-										<input name="inAddress" type="text" id="inAddress" class="form-control" value="{{ $ustadz->ustadz_address }}" />
+										<input name="inAddress" type="text" id="inAddress" class="form-control" value="{{ $ustadz['alamat'] }}" />
 									</div>
 								</div>
+
 								<div class="row mb-3 position-relative">
 									<label for="soVillage" class="col-sm-3 col-form-label">Desa / Kelurahan</label>
-									<div class="col-sm-3 text-secondary">
+									<div class="col-sm-9 text-secondary">
 										<input name="inAddressId" type="text" id="inAddressId" class="form-control" value="" hidden/>
-										<input name="soVillage" class="form-control" list="datalistOptions" id="soVillage" placeholder="Cari Desa / Kelurahan..." value="{{ $ustadz->ustadz_village }}" required>
+										<input name="soVillage" class="form-control" list="datalistOptions" id="soVillage" placeholder="Cari Desa / Kelurahan..." value="{{ $ustadz['desa'] }}" required>
 										<div class="invalid-tooltip">Desa / Kelurahan tidak boleh kosong</div>
 										<datalist id="datalistOptions">
 										@foreach ($address as $addressData)
@@ -217,38 +207,40 @@
 										@endforeach
 										</datalist>
 									</div>
-									<label for="inRT" class="col-sm-2 col-form-label">RT / RW</label>
+								</div>
+																				
+								<div class="row mb-3 position-relative">												
+									<label for="inRTRW" class="col-sm-3 col-form-label">RT / RW</label>
 									<div class="col-sm-2 text-secondary">
-										<input name="inRT" type="text" id="inRT" class="form-control" placeholder="001" value="{{ substr($ustadz->ustadz_rt_rw, 0, 3) }}" />
+										<input name="inRT" type="text" id="inRTRW" class="form-control" value="{{ $ustadz['rt'] }}" />
 									</div>
 									<div class="col-sm-2 text-secondary">
-										<input name="inRW" type="text" id="inRW" class="form-control" placeholder="001" value="{{ substr($ustadz->ustadz_rt_rw, 4, 3) }}" />
+										<input name="inRW" type="text" id="inSantriName" class="form-control" value="{{ $ustadz['rw'] }}" />
 									</div>
-								</div>
-								<div class="row mb-3 position-relative">
-									<label for="inDistricts" class="col-sm-3 col-form-label">Kecamatan</label>
+									<label for="inDistrict" class="col-sm-2 col-form-label">Kecamatan</label>
 									<div class="col-sm-3 text-secondary">
-										<input name="inDistricts" type="text" id="inDistricts" class="form-control" value="{{ $ustadz->ustadz_districts }}" />
-									</div>
-									<label for="inKabOrCity" class="col-sm-2 col-form-label">Kab / Kota</label>
-									<div class="col-sm-4 text-secondary">
-										<input name="inKabOrCity" type="text" id="inKabOrCity" class="form-control" value="{{ $ustadz->ustadz_city }}" />
+										<input name="inDistrict" type="text" id="inDistrict" class="form-control" value="{{ $ustadz['kecamatan'] }}" />
 									</div>
 								</div>
-								<div class="row mb-3 position-relative">
-									<label for="inProvince" class="col-sm-3 col-form-label">Provinsi</label>
+								<div class="row mb-3">
+									<label for="inKabOrCity" class="col-sm-3 col-form-label">Kab / Kota</label>
+									<div class="col-sm-4 text-secondary">
+										<input name="inKabOrCity" type="text" id="inKabOrCity" class="form-control" value="{{ $ustadz['kab_kota'] }}" />
+									</div>
+
+									<label for="inProvince" class="col-sm-2 col-form-label">Provinsi</label>
 									<div class="col-sm-3 text-secondary">
-										<input name="inProvince" type="text" id="inProvince" class="form-control" value="{{ $ustadz->ustadz_province }}" />
-									</div>
-									<label for="inPosCode" class="col-sm-2 col-form-label">Kode Pos</label>
-									<div class="col-sm-4 text-secondary">
-										<input name="inPosCode" type="text" id="inPosCode" class="form-control" value="{{ $ustadz->ustadz_pos_code }}" />
+										<input name="inProvince" type="text" id="inProvince" class="form-control" value="{{ $ustadz['provinsi'] }}" />
 									</div>
 								</div>
-								<div class="row mb-3 position-relative">
-									<label for="inCountry" class="col-sm-3 col-form-label">Negara</label>
-									<div class="col-sm-9 text-secondary">
-										<input name="inCountry" type="text" id="inCountry" class="form-control" value="{{ $ustadz->ustadz_country }}" />
+								<div class="row mb-3">
+									<label for="inPosCode" class="col-sm-3 col-form-label">Kode Pos</label>
+									<div class="col-sm-4 text-secondary">
+										<input name="inPosCode" type="text" id="inPosCode" class="form-control" value="{{ $ustadz['kode_pos'] }}" />
+									</div>
+									<label for="inCountry" class="col-sm-2 col-form-label">Negara</label>
+									<div class="col-sm-3 text-secondary">
+										<input name="inCountry" type="text" id="inCountry" class="form-control" value="Indonesia" />
 									</div>
 								</div>
 								<div class="row">

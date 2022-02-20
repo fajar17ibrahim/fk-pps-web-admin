@@ -88,12 +88,12 @@
 									<div class="col-sm-12">
 										<div class="d-flex align-items-center">
 											<div class="">
-												<img src="{{ URL::to('/') }}/images/{{ $login->ustadz_photo }}" class="rounded-circle" width="60" height="60" alt="" />
+												<img src="{{ URL::to('/') }}/images/{{ $login['photo'] }}" class="rounded-circle" width="60" height="60" alt="" />
 											</div>
 											<div class="ms-2">
-												<h6 class="mb-1"><b>{{ $login->ustadz_name }}</b></h6>
-												<h6 class="mb-1">{{ roleName($login->role_name) }}</h6>
-												<p class="mb-1">{{ $login->login_date }}</p>
+												<h6 class="mb-1"><b>{{ $login['nama'] }}</b></h6>
+												<h6 class="mb-1">{{ $login['akses'] }}</h6>
+												<p class="mb-1">{{ $login['login_tgl'] }}</p>
 											</div>
 										</div>
 									</div>

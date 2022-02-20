@@ -26,7 +26,12 @@ class AdminGraduationController extends Controller
     {
         //
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+
+        if ($user == null) {
+            return redirect('login');
+        }
+
+        if ($user['akses'] == 1) {
             $schools = School::orderBy('school_name', 'asc')->get();
             $kelass = Kelas::orderBy('class_id', 'asc')->get();
 
@@ -35,16 +40,16 @@ class AdminGraduationController extends Controller
             ->get();
         } else {
             $schools = School::orderBy('school_name', 'asc')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
 
             $kelass = Kelas::orderBy('class_id', 'asc')
-                ->where('kelas.class_level', '=', $user[0]->class_level)
+                ->where('kelas.class_level', '=', $user['level'])
                 ->get();
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('santri_school', '=', $user[0]->ustadz_school)
+                ->where('santri_school', '=', $user['sekolah'])
                 ->get();
         }
         return view('admin.page.graduation.graduated.index', compact('schools'), compact('kelass'))
@@ -273,32 +278,32 @@ class AdminGraduationController extends Controller
         $user = Session::get('user');
         $mapels = array();
         $mapelOld = "";
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $santris = Santri::orderBy('santri_name', 'asc')->get();
             
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')       
                     ->orderBy('mapel_name', 'asc')->get();
-        } else if ($user[0]->role_id == 2) { 
+        } else if ($user['akses'] == 2) { 
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
 
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
-                ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
+                ->where('kelas.class_school', '=', $user['sekolah'])       
                 ->orderBy('mapel_name', 'asc')->get();
         } else {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','santri.santri_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->where('santri.santri_class', '=', $user[0]->ustadz_class)
                 ->get();
 
             $mapelsData = MapelTeacher::leftJoin('mapel', 'mapel_teacher.mapel_id', '=', 'mapel.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')   
-                ->where('kelas.class_school', '=', $user[0]->ustadz_school)       
+                ->where('kelas.class_school', '=', $user['sekolah'])       
                 ->orderBy('mapel_name', 'asc')->get();
         }
 
@@ -319,7 +324,7 @@ class AdminGraduationController extends Controller
         $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')->get();
 
         $kelass = array();
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -336,8 +341,8 @@ class AdminGraduationController extends Controller
             $santris = Santri::orderBy('santri_name', 'asc')->get();
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->class_level)
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_level', '=', $user['level'])
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
             foreach($kelassCheck as $kelas) {
@@ -351,7 +356,7 @@ class AdminGraduationController extends Controller
 
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('school.school_id', '=', $user[0]->ustadz_school)
+                ->where('school.school_id', '=', $user['sekolah'])
                 ->get();
         }
 
@@ -515,7 +520,7 @@ class AdminGraduationController extends Controller
 
     public function listData($level, $school) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($level != 0 && $school != 0) {
                 $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
                 ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
@@ -545,7 +550,7 @@ class AdminGraduationController extends Controller
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
                 ->leftJoin('kelas','kelas.class_id','=','graduation.graduation_class')
                 ->leftJoin('school','school.school_id','=','graduation.graduation_school')
-                ->where('graduation.graduation_school', '=', $user[0]->ustadz_school)
+                ->where('graduation.graduation_school', '=', $user['sekolah'])
                 ->get();
         }
         

@@ -3,7 +3,6 @@
 
                 @section('content')
                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					
 					<div class="container">
 						<div class="main-body">
 							<form method="post" action="{{ route('master-ustadz.store') }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
@@ -29,9 +28,11 @@
 									<div class="col-lg-8">
 										<div class="card">
 											<div class="card-body">
-												<div class="card-title d-flex align-items-center">
-													<div><i class="bx bx-user-circle me-1 font-22 text-success"></i></div>
-													<h5 class="mb-0 text-success">Data Ustadz</h5>
+												<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+													<div class="card-title d-flex align-items-center">
+														<div><i class="bx bx-user-circle me-1 font-22 text-success"></i></div>
+														<h5 class="mb-0 text-success">Data Ustadz</h5>
+													</div>
 												</div>
 												<hr>
 												<div class="row mb-3 position-relative">
@@ -189,55 +190,58 @@
 													<h5 class="mb-0 text-success">Alamat Rumah</h5>
 												</div>
 												<hr>
-												<div class="row mb-3 position-relative">
+												<div class="row mb-3">
 													<label for="inAddress" class="col-sm-3 col-form-label">Alamat</label>
 													<div class="col-sm-9 text-secondary">
 														<input name="inAddress" type="text" id="inAddress" class="form-control" value="" />
 													</div>
 												</div>
+
 												<div class="row mb-3 position-relative">
 													<label for="soVillage" class="col-sm-3 col-form-label">Desa / Kelurahan</label>
-													<div class="col-sm-3 text-secondary">
+													<div class="col-sm-9 text-secondary">
 														<input name="inAddressId" type="text" id="inAddressId" class="form-control" value="" hidden/>
 														<input name="soVillage" class="form-control" list="datalistOptions" id="soVillage" placeholder="Cari Desa / Kelurahan..." required>
 														<div class="invalid-tooltip">Desa / Kelurahan tidak boleh kosong</div>
 														<datalist id="datalistOptions">
 														@foreach ($address as $addressData)
-															<option value="{{ $addressData->address_village . ', ' . $addressData->address_districts }}">{{ $addressData->address_kab_or_city_name . ', ' . $addressData->address_province }}</option>
+															<option value="{{ $addressData->address_village . ', ' . $addressData->address_districts  }}">{{ $addressData->address_kab_or_city_name . ', ' . $addressData->address_province }}</option>
 														@endforeach
 														</datalist>
 													</div>
-													<label for="inRT" class="col-sm-2 col-form-label">RT / RW</label>
+												</div>
+																								
+												<div class="row mb-3 position-relative">												
+													<label for="inRTRW" class="col-sm-3 col-form-label">RT / RW</label>
 													<div class="col-sm-2 text-secondary">
-														<input name="inRT" type="text" id="inRT" class="form-control" placeholder="001" value="" />
+														<input name="inRT" type="text" id="inRTRW" class="form-control" value="" />
 													</div>
 													<div class="col-sm-2 text-secondary">
-														<input name="inRW" type="text" id="inRW" class="form-control" placeholder="001" value="" />
+														<input name="inRW" type="text" id="inSantriName" class="form-control" value="" />
+													</div>
+													<label for="inDistrict" class="col-sm-2 col-form-label">Kecamatan</label>
+													<div class="col-sm-3 text-secondary">
+														<input name="inDistrict" type="text" id="inDistrict" class="form-control" value="" />
 													</div>
 												</div>
-												<div class="row mb-3 position-relative">
-													<label for="inDistricts" class="col-sm-3 col-form-label">Kecamatan</label>
-													<div class="col-sm-3 text-secondary">
-														<input name="inDistricts" type="text" id="inDistricts" class="form-control" value="" />
-													</div>
-													<label for="inKabOrCity" class="col-sm-2 col-form-label">Kab / Kota</label>
+												<div class="row mb-3">
+													<label for="inKabOrCity" class="col-sm-3 col-form-label">Kab / Kota</label>
 													<div class="col-sm-4 text-secondary">
 														<input name="inKabOrCity" type="text" id="inKabOrCity" class="form-control" value="" />
 													</div>
-												</div>
-												<div class="row mb-3 position-relative">
-													<label for="inProvince" class="col-sm-3 col-form-label">Provinsi</label>
+
+													<label for="inProvince" class="col-sm-2 col-form-label">Provinsi</label>
 													<div class="col-sm-3 text-secondary">
 														<input name="inProvince" type="text" id="inProvince" class="form-control" value="" />
 													</div>
-													<label for="inPosCode" class="col-sm-2 col-form-label">Kode Pos</label>
+												</div>
+												<div class="row mb-3">
+													<label for="inPosCode" class="col-sm-3 col-form-label">Kode Pos</label>
 													<div class="col-sm-4 text-secondary">
 														<input name="inPosCode" type="text" id="inPosCode" class="form-control" value="" />
 													</div>
-												</div>
-												<div class="row mb-3 position-relative">
-													<label for="inCountry" class="col-sm-3 col-form-label">Negara</label>
-													<div class="col-sm-9 text-secondary">
+													<label for="inCountry" class="col-sm-2 col-form-label">Negara</label>
+													<div class="col-sm-3 text-secondary">
 														<input name="inCountry" type="text" id="inCountry" class="form-control" value="Indonesia" />
 													</div>
 												</div>

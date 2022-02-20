@@ -17,7 +17,7 @@
 							</div>
 						</div>
 					</a>
-					@if(Session::get('user')[0]['role_id'] != 4)
+					@if(Session::get('user')['akses'] != 4)
 					<a href="{{ URL::to('/') }}/report-attitude">
 						<div class="col">
 							<div class="card radius-10 bg-primary bg-gradient">

@@ -5,7 +5,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                    @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -15,7 +15,7 @@
                             </div>
                             <hr>
                             <br>
-                            @if(Session::get('user')[0]['role_id'] == 1)
+                            @if(Session::get('user')['akses'] == 1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Jenjang</h6>
@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             @endif
-                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                            @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Kelas</h6>

@@ -17,7 +17,7 @@ class CreateUstadzTable extends Migration
             $table->increments('ustadz_id', 12);
             $table->string('ustadz_nik', 25)->unique();
             $table->string('ustadz_name')->nullable();
-            $table->string('ustadz_born_place', 50)->nullable();
+            $table->string('ustadz_born_place', 100)->nullable();
             $table->string('ustadz_born_date', 20)->nullable();
             $table->string('ustadz_gender', 20)->nullable();
             $table->string('ustadz_religion', 20)->nullable();
@@ -33,9 +33,10 @@ class CreateUstadzTable extends Migration
             $table->string('ustadz_village', 50)->nullable();
             $table->string('ustadz_rt_rw', 15)->nullable();
             $table->string('ustadz_districts', 50)->nullable();
-            $table->string('ustadz_city', 50)->nullable();
+            $table->string('ustadz_city', 100)->nullable();
             $table->string('ustadz_province', 50)->nullable();
             $table->string('ustadz_country', 20)->nullable();
+            $table->string('ustadz_pos_code', 10)->nullable();
             $table->string('ustadz_photo', 50)->nullable()->default('avatar.png');
             $table->string('ustadz_email', 50)->nullable();
             $table->string('ustadz_phone', 20)->nullable();

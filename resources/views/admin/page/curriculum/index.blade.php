@@ -32,7 +32,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['school_level'] == 'Ula')
+            @if(Session::get('user')['akses'] == 1 || Session::get('user')['level'] == 'Ula')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -56,7 +56,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inCurriculumUla" class="form-label">Upload Kurikulum</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inCurriculumUla" type="file" class="form-control" id="inCurriculumUla" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -90,7 +90,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inSilabusUla" class="form-label">Upload Silabus</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inSilabusUla" type="file" class="form-control" id="inSilabusUla" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -124,7 +124,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inRPPUla" class="form-label">Upload RPP</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inRPPUla" type="file" class="form-control" id="inRPPUla" aria-describedby="inRPPUla" aria-label="Upload" required>
@@ -138,7 +138,7 @@
                 </div>
             </div>
             @endif
-            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['school_level'] == 'Wustha')
+            @if(Session::get('user')['akses'] == 1 || Session::get('user')['level'] == 'Wustha')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -162,7 +162,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inCurriculumWustha" class="form-label">Upload Kurikulum</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inCurriculumWustha" type="file" class="form-control" id="inCurriculumWustha" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -196,7 +196,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inSilabusWustha" class="form-label">Upload Silabus</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inSilabusWustha" type="file" class="form-control" id="inSilabusWustha" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -230,7 +230,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inRPPWustha" class="form-label">Upload RPP</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inRPPWustha" type="file" class="form-control" id="inRPPWustha" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -244,7 +244,7 @@
                 </div>
             </div>
             @endif
-            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['school_level'] == 'Ulya')
+            @if(Session::get('user')['akses'] == 1 || Session::get('user')['level'] == 'Ulya')
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -268,7 +268,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inCurriculumUlya" class="form-label">Upload Kurikulum</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inCurriculumUlya" type="file" class="form-control" id="inCurriculumUlya" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -302,7 +302,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inSilabusUlya" class="form-label">Upload Silabus</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inSilabusUlya" type="file" class="form-control" id="inSilabusUlya" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
@@ -336,7 +336,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                @if(Session::get('user')[0]['role_id'] == 1)
+                                @if(Session::get('user')['akses'] == 1)
                                 <label for="inRPPUlya" class="form-label">Upload RPP</label>
                                 <div class="input-group mb-3 position-relative">
                                     <input name="inRPPUlya" type="file" class="form-control" id="inRPPUlya" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>

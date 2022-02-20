@@ -41,6 +41,9 @@
 										</p>
 									</div>
 									<div class="form-body">
+										@if(session('success'))
+											@include('admin/auth/login-list')
+										@endif
 										<form class="row g-3 needs-validation" action="login-request" method="post" novalidate>
 											@csrf
 											@if(session('error'))
@@ -113,6 +116,8 @@
 					$('#show_hide_password i').addClass("bx-show");
 				}
 			});
+
+			$("#lognListModal").modal('show');
 		});
 	</script>
 	

@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                    @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -13,7 +13,7 @@
                             </div>
                             <hr>
                             <br>
-                            @if(Session::get('user')[0]['role_id'] == 1)
+                            @if(Session::get('user')['akses'] == 1)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Jenjang</h6>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             @endif
-                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                            @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Kelas</h6>
@@ -69,7 +69,7 @@
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 class="mb-0 text-uppercase">Daftar Santri</h6>
-                            @if(Session::get('user')[0]['role_id'] != 4)
+                            @if(Session::get('user')['akses'] != 4)
                             <a class="ms-auto" href="master-santri-add"> 
                                 <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Santri</button>
                             </a>

@@ -20,7 +20,11 @@ class AdminMasterClassController extends Controller
         $this->authorize('master-class');
         $user = Session::get('user');
 
-        if ($user[0]->role_id == 1) {
+        if ($user == null) {
+            return redirect('login');
+        }
+        
+        if ($user['akses'] == 1) {
             $schoolsData = School::orderBy('school_name', 'asc')->get();
             $schools = array();
             foreach($schoolsData as $school) {
@@ -33,7 +37,7 @@ class AdminMasterClassController extends Controller
             }
         } else {
             $schoolsData = School::orderBy('school_name', 'asc')
-            ->where('school.school_id', '=', $user[0]->ustadz_school)
+            ->where('school.school_id', '=', $user['sekolah'])
             ->get();
 
             $schools = array();
@@ -179,7 +183,7 @@ class AdminMasterClassController extends Controller
 
     public function listData($level, $school) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($level != 0 && $school != 0) {
                 $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
                 ->where('school.school_level', '=', $level)
@@ -199,7 +203,7 @@ class AdminMasterClassController extends Controller
             }
         } else {
             $kelass = Kelas::leftJoin('school','kelas.class_school','=','school.school_id')
-            ->where('school.school_id', '=', $user[0]->ustadz_school)
+            ->where('school.school_id', '=', $user['sekolah'])
             ->get();   
         }
         
@@ -213,7 +217,7 @@ class AdminMasterClassController extends Controller
             $row[] = $kelas->class_name;
             $row[] = $kelas->school_level;
             $row[] = $kelas->school_name;
-            if ($user[0]->role_id == 1 || $user[0]->role_id == 2) {
+            if ($user['akses'] == 1 || $user['akses'] == 2) {
             $row[] = '<div class="col">
                         <div class="btn-group">
                             <a href="#" onclick="editForm(' . $kelas->class_id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>

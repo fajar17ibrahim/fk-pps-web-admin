@@ -57,7 +57,7 @@ class AdminMastermapelController extends Controller
                 $mapelLast = Mapel::orderBy('mapel_id', 'desc')->first();
                 $mapelTeacher = new MapelTeacher;
                 $mapelTeacher->mapel_id = $mapelLast->mapel_id;
-                $mapelTeacher->class_id = $user[0]->ustadz_class;
+                $mapelTeacher->class_id = $user['kelas'];
                 $mapelTeacher->ustadz_nik = "";
                 $mapelTeacherSaved = $mapelTeacher->save();
 

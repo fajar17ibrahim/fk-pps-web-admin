@@ -28,16 +28,7 @@
                                                             <div class="invalid-tooltip">Nama User tidak boleh kosong</div>
                                                         </div>
                                                     </div>
-                                                    <div class="row mb-3 position-relative">
-                                                        <label for="soRole" class="col-sm-3 col-form-label">Role</label>
-                                                        <div class="col-sm-9 text-secondary" >
-                                                            <select class="form-select form-control" name="soRole" id="soRole" tabindex="-1">
-                                                                @foreach ($roles as $role)
-                                                                <option value="{{ $role['role_id'] }}">{{ $role['name'] }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="row mb-3 position-relative">
                                                         <label for="soStatus" class="col-sm-3 col-form-label">Status</label>
                                                         <div class="col-sm-9 text-secondary" >

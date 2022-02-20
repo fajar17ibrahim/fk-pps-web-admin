@@ -6,7 +6,7 @@
 					
 					<div class="container">
 						<div class="main-body">
-							<form method="post" action="{{ URL::to('/') }}/school-profile/{{ $school[0]->school_id }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+							<form method="post" action="{{ URL::to('/') }}/school-profile/{{ $school->school_id }}" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 								@method('PUT')
 								@csrf
 								<div class="row">
@@ -42,7 +42,7 @@
 										<div class="card">
 											<div class="card-body">
 												<div class="d-flex flex-column align-items-center text-center">
-													<img src="images/{{ $school[0]->school_photo }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
+													<img src="images/{{ $school->school_photo }}" alt="Admin" class="rounded-circle p-1 bg-success" width="110" height="110">
 													<div class="mt-3">
 														<p class="text-secondary mb-1">Gambar</p>
 														<h5>Logo Sekolah</h5>
@@ -66,47 +66,47 @@
 												<div class="row mb-3 position-relative">
 													<label for="inSchoolNPSN" class="col-sm-3 col-form-label">NPSN</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSchoolNPSN" type="text" id="inSchoolNPSN" class="form-control" value="{{ $school[0]->school_npsn }}" required/>
+														<input name="inSchoolNPSN" type="text" id="inSchoolNPSN" class="form-control" value="{{ $school->school_npsn }}" required/>
 														<div class="invalid-tooltip">NPSN tidak boleh kosong</div>
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inSchoolNSP" class="col-sm-3 col-form-label">Nomor Statistik</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSchoolNSP" type="text" id="inSchoolNSP" class="form-control" value="{{ $school[0]->school_statistic_number }}" required/>
+														<input name="inSchoolNSP" type="text" id="inSchoolNSP" class="form-control" value="{{ $school->school_statistic_number }}" required/>
 														<div class="invalid-tooltip">NSP tidak boleh kosong</div>
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inSchoolName" class="col-sm-3 col-form-label">Nama PKPPS</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSchoolName" type="text" id="inSchoolName" class="form-control" value="{{ $school[0]->school_name }}" required/>
+														<input name="inSchoolName" type="text" id="inSchoolName" class="form-control" value="{{ $school->school_name }}" required/>
 														<div class="invalid-tooltip">Nama tidak boleh kosong</div>
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inSchoolEmail" class="col-sm-3 col-form-label">Email</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSchoolEmail" type="text" id="inSchoolEmail" class="form-control" value="{{ $school[0]->school_email }}" />
+														<input name="inSchoolEmail" type="text" id="inSchoolEmail" class="form-control" value="{{ $school->school_email }}" />
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inSchoolPhone" class="col-sm-3 col-form-label">Nomor Telepon</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inSchoolPhone" type="text" id="inSchoolPhone" class="form-control" value="{{ $school[0]->school_phone }}" />
+														<input name="inSchoolPhone" type="text" id="inSchoolPhone" class="form-control" value="{{ $school->school_phone }}" />
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inAddress" class="col-sm-3 col-form-label">Alamat</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inAddress" type="text" id="inAddress" class="form-control" value="{{ $school[0]->school_address }}" />
+														<input name="inAddress" type="text" id="inAddress" class="form-control" value="{{ $school->school_address }}" />
 													</div>
 												</div>
 												<div class="row mb-3 position-relative position-relative">
 													<label for="soVillage" class="col-sm-3 col-form-label">Desa / Kelurahan</label>
 													<div class="col-sm-3 text-secondary">
 														<input name="inAddressId" type="text" id="inAddressId" class="form-control" hidden/>
-														<input name="soVillage" class="form-control" list="datalistOptions" id="soVillage" placeholder="Cari Desa / Kelurahan..." value="{{ $school[0]->school_village }}" required>
+														<input name="soVillage" class="form-control" list="datalistOptions" id="soVillage" placeholder="Cari Desa / Kelurahan..." value="{{ $school->school_village }}" required>
 														<div class="invalid-tooltip">Desa / Kelurahan tidak boleh kosong</div>
 														<datalist id="datalistOptions">
 															@foreach ($address as $addressData)
@@ -116,30 +116,30 @@
 													</div>
 													<label for="inRTRW" class="col-sm-2 col-form-label">RT / RW</label>
 													<div class="col-sm-2 text-secondary">
-														<input name="inRT" type="text" id="inRTRW" class="form-control" placeholder="001" value="{{ substr($school[0]->school_rt_rw, 0, 3) }}" />
+														<input name="inRT" type="text" id="inRTRW" class="form-control" placeholder="001" value="{{ substr($school->school_rt_rw, 0, 3) }}" />
 													</div>
 													<div class="col-sm-2 text-secondary">
-														<input name="inRW" type="text" id="inSantriName" class="form-control" placeholder="001" value="{{ substr($school[0]->school_rt_rw, 4, 3) }}" />
+														<input name="inRW" type="text" id="inSantriName" class="form-control" placeholder="001" value="{{ substr($school->school_rt_rw, 4, 3) }}" />
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inDistrict" class="col-sm-3 col-form-label">Kecamatan</label>
 													<div class="col-sm-3 text-secondary">
-														<input name="inDistrict" type="text" id="inDistrict" class="form-control" value="{{ $school[0]->school_districts }}" />
+														<input name="inDistrict" type="text" id="inDistrict" class="form-control" value="{{ $school->school_districts }}" />
 													</div>
 													<label for="inKabOrCity" class="col-sm-2 col-form-label">Kab / Kota</label>
 													<div class="col-sm-4 text-secondary">
-														<input name="inKabOrCity" type="text" id="inKabOrCity" class="form-control" value="{{ $school[0]->school_city }}" />
+														<input name="inKabOrCity" type="text" id="inKabOrCity" class="form-control" value="{{ $school->school_city }}" />
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inProvince" class="col-sm-3 col-form-label">Provinsi</label>
 													<div class="col-sm-3 text-secondary">
-														<input name="inProvince" type="text" id="inProvince" class="form-control" value="{{ $school[0]->school_province }}" />
+														<input name="inProvince" type="text" id="inProvince" class="form-control" value="{{ $school->school_province }}" />
 													</div>
 													<label for="inPosCode" class="col-sm-2 col-form-label">Kode Pos</label>
 													<div class="col-sm-4 text-secondary">
-														<input name="inPosCode" type="text" id="inPosCode" class="form-control" value="{{ $school[0]->school_pos_code }}" />
+														<input name="inPosCode" type="text" id="inPosCode" class="form-control" value="{{ $school->school_pos_code }}" />
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
@@ -161,7 +161,7 @@
 												<div class="row mb-3 position-relative">
 													<label for="soKepsek" class="col-sm-3 col-form-label">NIK Kepala Sekolah</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="soKepsek" class="form-control" list="datalistOptionsKepsek" id="soKepsek" placeholder="Cari NIK Kepala Sekolah..." value="{{ $school[0]->ustadz_nik }}" required>
+														<input name="soKepsek" class="form-control" list="datalistOptionsKepsek" id="soKepsek" placeholder="Cari NIK Kepala Sekolah..." value="{{ $school->ustadz_nik }}" required>
 														<div class="invalid-tooltip">Kepala Sekolah tidak boleh kosong</div>
 														<datalist id="datalistOptionsKepsek">
 														@foreach ($ustadzs as $ustadz)
@@ -173,16 +173,16 @@
 												<div class="row mb-3 position-relative">
 													<label for="inKepsekName" class="col-sm-3 col-form-label">Nama Lengkap</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inKepsekName" type="text" id="inKepsekName" class="form-control" value="{{ $school[0]->ustadz_name }}" readonly/>
+														<input name="inKepsekName" type="text" id="inKepsekName" class="form-control" value="{{ $school->ustadz_name }}" readonly/>
 													</div>
 												</div>
 												<div class="row mb-3 position-relative">
 													<label for="inKepsekEmail" class="col-sm-3 col-form-label">Email</label>
 													<div class="col-sm-9 text-secondary">
-														<input name="inKepsekEmail" type="text" id="inKepsekEmail" class="form-control" value="{{ $school[0]->ustadz_email }}" readonly/>
+														<input name="inKepsekEmail" type="text" id="inKepsekEmail" class="form-control" value="{{ $school->ustadz_email }}" readonly/>
 													</div>
 												</div>
-												@if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+												@if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
 												<div class="row">
 													<div class="col-sm-3"></div>
 													<div class="col-sm-9 text-secondary">
@@ -210,12 +210,12 @@
 							url: "/master-school-add/search/" + id,
 							dataType: "JSON",
 							success: function(response){
-								$('#inAddressId').val(response[0].address_id);
-								$('#soVillage').val(response[0].address_village);
-								$('#inDistrict').val(response[0].address_districts);
-								$('#inKabOrCity').val(response[0].address_kab_or_city_name);
-								$('#inProvince').val(response[0].address_province);
-								$('#inPosCode').val(response[0].address_pos_code);
+								$('#inAddressId').val(response.address_id);
+								$('#soVillage').val(response.address_village);
+								$('#inDistrict').val(response.address_districts);
+								$('#inKabOrCity').val(response.address_kab_or_city_name);
+								$('#inProvince').val(response.address_province);
+								$('#inPosCode').val(response.address_pos_code);
 							} ,
 							error: function() {
 								alert('Tidak dapat menampilkan Data');
@@ -231,8 +231,8 @@
 							dataType: "JSON",
 							success: function(response){
 								// alert('Tidak dapat menampilkan Data');
-								$('#inKepsekName').val(response[0].ustadz_name);
-								$('#inKepsekEmail').val(response[0].ustadz_email);
+								$('#inKepsekName').val(response.ustadz_name);
+								$('#inKepsekEmail').val(response.ustadz_email);
 							} ,
 							error: function() {
 								alert('Tidak dapat menampilkan Data');

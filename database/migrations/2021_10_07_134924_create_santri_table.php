@@ -19,7 +19,7 @@ class CreateSantriTable extends Migration
             $table->string('santri_nisn', 20)->nullable();
             $table->string('santri_name')->nullable();
             $table->string('santri_gender', 20)->nullable();
-            $table->string('santri_born_place', 50)->nullable();
+            $table->string('santri_born_place', 100)->nullable();
             $table->string('santri_born_date', 20)->nullable();
             $table->string('santri_religion', 20)->nullable();
             $table->string('santri_hobby', 50)->nullable();
@@ -54,7 +54,7 @@ class CreateSantriTable extends Migration
             $table->string('santri_village', 50)->nullable();
             $table->string('santri_rt_rw', 15)->nullable();
             $table->string('santri_districts', 30)->nullable();
-            $table->string('santri_city', 30)->nullable();
+            $table->string('santri_city', 100)->nullable();
             $table->string('santri_province', 30)->nullable();
             $table->string('santri_pos_code', 10)->nullable();
             $table->string('santri_country', 30)->nullable();

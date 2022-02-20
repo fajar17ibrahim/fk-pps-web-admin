@@ -25,21 +25,7 @@ class AdminUserController extends Controller
     {
         //
         $ustadzs = Ustadz::get();
-        $rolesCheck = Role::get();
-        $roles = array();
-        foreach ($rolesCheck as $role) {
-            if ($role->id > 1) {
-                $data = array(
-                    'role_id' => $role->id,
-                    'name' => roleName($role->role_name)
-                );
-                
-                $roles[] = $data;
-            }
-        }
-
-        // return $roles;
-        return view('admin.page.user.index', compact('ustadzs'), compact('roles'));
+        return view('admin.page.user.index', compact('ustadzs'));
     }
 
     /**
@@ -64,21 +50,24 @@ class AdminUserController extends Controller
         try {
             //
             $user = Session::get('user');   
-            if ($user[0]->role_id != 1) {
+            if ($user['akses'] != 1) {
                 $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
-                        ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                        ->where('ustadz_school', 'like', '% ' . $user['sekolah'] . ' %')
                         ->first();
             } else {
                 $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
-                        ->first();
+                        ->get();
             }
+
+            // return $emailCheck;
 
             if ($emailCheck != null) {
                 $user = new User;
                 $user->name = $emailCheck->ustadz_name;
                 $user->email = $request['inEmail'];
-                $user->role_id = $request['soRole'];
+                $user->role_id = '0';
                 $user->status = $request['soStatus'];
+                $user->user_school = $emailCheck->ustadz_school;
                 $random_password = Str::random(8);
                 $user->password = Hash::make($random_password);
                 $save = $user->save();
@@ -150,7 +139,6 @@ class AdminUserController extends Controller
         try {
             //
             $user = User::find($id);
-            $user->role_id = $request['soRoleEdit'];
             $user->status = $request['soStatusEdit'];
             $updated = $user->update();
             
@@ -180,11 +168,11 @@ class AdminUserController extends Controller
 
     public function search($email) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $ustadz = Ustadz::where('ustadz.ustadz_email', '=', $email)->get();
         } else {
             $ustadz = Ustadz::where('ustadz.ustadz_email', '=', $email)
-                ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
+                ->where('ustadz.ustadz_school', 'like', '% ' . $user['sekolah'] . ' %')
                 ->get();
         }
         return response()->json($ustadz);
@@ -192,19 +180,19 @@ class AdminUserController extends Controller
 
     public function listData() {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
             ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
-            ->select('role_name', 'name', 'email', 'users.id', 'users.status')
+            ->select('role_id', 'name', 'email', 'ustadz.ustadz_phone', 'users.id', 'users.status')
             ->get();
         } else {
             $users = User::leftJoin('role', 'users.role_id', '=', 'role.id')
             ->leftJoin('ustadz', 'ustadz.ustadz_email', '=', 'users.email')
-            ->where('ustadz.ustadz_school', '=', $user[0]->ustadz_school)
-            ->select('role_name', 'name', 'email', 'users.id', 'users.status')
+            ->where('ustadz.ustadz_school', 'like', '% ' . $user['sekolah'] . ' %')
+            ->select('role_id', 'name', 'email', 'ustadz.ustadz_phone', 'users.id', 'users.status')
             ->get();
         }
-        
+
         $no = 0;
         $data = array();
         foreach ($users as $userData) {
@@ -218,12 +206,12 @@ class AdminUserController extends Controller
             $row[] = $userData->id;
             $row[] = $userData->name;
             $row[] = $userData->email;
-            $row[] = roleName($userData->role_name);
+            $row[] = $userData->ustadz_phone;
             $row[] = '<div class="d-flex align-items-center ' . $label . '">	
                         <i class="bx bx-radio-circle-marked bx-burst bx-rotate-90 align-middle font-18 me-1"></i>
                         <span>' . $userData->status . '</span>
                     </div>';
-            if ($user[0]->role_id == 1 || $user[0]->role_id == 2) {
+            if ($user['akses'] == 1 || $user['akses'] == 2) {
             $row[] = '<div class="col">
                         <div class="btn-group">
                             <a href="#" onclick="editForm(' . $userData->id . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>

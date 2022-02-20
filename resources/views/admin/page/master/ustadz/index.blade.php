@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    @if(Session::get('user')[0]['role_id'] == 1)
+                    @if(Session::get('user')['akses'] == 1)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -38,10 +38,14 @@
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 class="mb-0 text-uppercase">Daftar Ustadz</h6>
-                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
-                            <a class="ms-auto" href="{{ URL::to('/') }}/master-ustadz-add"> 
-                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Ustadz</button>
-                            </a>
+                            @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
+                            <div class="ms-auto">
+                                <button type="button" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addTeacherModal"><i class='bx bx-plus-circle mr-1'></i>Tambah dari Jenjang Lain</button>
+								@include('admin/page/master/ustadz/ustadz-search')
+                                <a class="ms-auto" href="{{ URL::to('/') }}/master-ustadz-add"> 
+                                    <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-plus-circle mr-1'></i>Tambah Data Ustadz</button>
+                                </a>
+                            </div>
                             @endif
                         </div>
                         <div class="card">

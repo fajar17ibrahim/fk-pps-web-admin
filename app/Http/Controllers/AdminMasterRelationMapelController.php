@@ -21,10 +21,15 @@ class AdminMasterRelationMapelController extends Controller
     {
         //
         $user = Session::get('user');
+
+        if ($user == null) {
+            return redirect('login');
+        }
+
         $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')->get();
 
         $kelass = array();
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             $kelassCheck = Kelas::leftJoin('school', 'school.school_id', '=', 'kelas.class_school')
                 ->orderBy('class_id', 'asc')
                 ->get();
@@ -42,8 +47,8 @@ class AdminMasterRelationMapelController extends Controller
             
         } else {
             $kelassCheck = Kelas::orderBy('class_id', 'asc')
-                ->where('class_level', '=', $user[0]->school_level)
-                ->where('class_school', '=', $user[0]->ustadz_school)
+                ->where('class_level', '=', $user['level'])
+                ->where('class_school', '=', $user['sekolah'])
                 ->get();
 
             foreach($kelassCheck as $kelas) {
@@ -56,7 +61,7 @@ class AdminMasterRelationMapelController extends Controller
             }
 
             $ustadzsCheck = Ustadz::orderBy('ustadz_name', 'asc')
-                ->where('ustadz_school', '=', $user[0]->ustadz_school)
+                ->where('ustadz_school', 'like', '% ' . $user['sekolah'] . ' %')
                 ->get();
         }
 
@@ -100,7 +105,7 @@ class AdminMasterRelationMapelController extends Controller
             //
 
             $mapel = $request['soMapel'];
-            $kelas = $request['soKelas'];
+            $kelas = "|" . $request['soKelas'] . "|";
             $ustadz = $request['soUstadz'];
             $mapelTeacherCheck = MapelTeacher::where('mapel_id', '=', $mapel)
                 ->where('class_id', '=', $kelas)
@@ -110,7 +115,7 @@ class AdminMasterRelationMapelController extends Controller
             $ustadzCheck = Ustadz::where('ustadz_nik', '=', $ustadz)
                 ->first();
 
-            $ustadzCheck->ustadz_class = $kelas;
+            $ustadzCheck->ustadz_class .= $kelas;
             $update = $ustadzCheck->update();
 
             if ($mapelTeacherCheck && $update) {
@@ -185,19 +190,25 @@ class AdminMasterRelationMapelController extends Controller
         //
         try {
             //
+            $mapel = $request['soMapelEdit'];
+            $class = "|" . $request['soKelasEdit'] . "|";
+            $nik = $request['soUstadzEdit'];
+
             $mapelTeacher = MapelTeacher::find($id);
-            $mapelTeacher->mapel_id = $request['soMapelEdit'];
-            $mapelTeacher->class_id = $request['soKelasEdit'];
-            $mapelTeacher->ustadz_nik = $request['soUstadzEdit'];
+            $mapelTeacher->mapel_id = $mapel;
+            $mapelTeacher->class_id .= $class;
+            $mapelTeacher->ustadz_nik = $nik;
             $updated = $mapelTeacher->update();
 
-            $ustadzCheck = Ustadz::where('ustadz_nik', '=', $request['soUstadzEdit'])
+            $ustadzCheck = Ustadz::where('ustadz_nik', '=', $nik)
                 ->first();
 
-            $ustadzCheck->ustadz_class = $request['soKelasEdit'];
-            $updateUstadz = $ustadzCheck->update();
+            if (!str_contains($ustadzCheck->ustadz_class, $class)) {
+                $ustadzCheck->ustadz_class .= $class;
+                $updateUstadz = $ustadzCheck->update();
+            }
     
-            if ($updated && $updateUstadz) {
+            if ($updated) {
                 return redirect()->route('master-relation-mapel.index')
                 ->with('message_success', 'Guru Mapel berhasil diperbarui.');
             } else {
@@ -223,7 +234,7 @@ class AdminMasterRelationMapelController extends Controller
 
     public function listData($level, $school, $kelas) {
         $user = Session::get('user');
-        if ($user[0]->role_id == 1) {
+        if ($user['akses'] == 1) {
             if ($level != 0 && $school != 0 && $kelas != 0) {
                 $mapelTeachers = MapelTeacher::leftJoin('mapel','mapel.mapel_id','=','mapel_teacher.mapel_id')
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')
@@ -290,7 +301,7 @@ class AdminMasterRelationMapelController extends Controller
                 ->leftJoin('kelas','kelas.class_id','=','mapel_teacher.class_id')    
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
                 ->leftJoin('ustadz','ustadz.ustadz_nik','=','mapel_teacher.ustadz_nik')
-                ->where('kelas.class_school', '=', $user[0]->ustadz_school)
+                ->where('kelas.class_school', '=', $user['sekolah'])
                 ->get();
         }
         

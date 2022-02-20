@@ -3,10 +3,10 @@
 				<nav class="navbar navbar-expand">
 					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
 					</div>
-					@if(Session::has('pkpps'))
+					@if(Session::has('user'))
 					<div class="search-bar flex-grow-1">
 						<div class="position-relative search-bar-box">
-							<h5><b class="text text-success">E-Raport</b> {{ Session::get('pkpps') . " (" . Session::get('user')[0]['school_level'] . ")" }}</h5>
+							<h5><b class="text text-success">E-Raport</b> {{ Session::get('user')['sekolah_nama'] . " (" . Session::get('user')['level'] . ")" }}</h5>
 						</div>
 					</div>
 					@endif
@@ -49,10 +49,10 @@
 					</div>
 					<div class="user-box dropdown">
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="{{ URL::to('/') }}/images/{{ Session::get('user')[0]['ustadz_photo'] }}" class="user-img" alt="user avatar">
+							<img src="{{ URL::to('/') }}/images/{{ Session::get('user')['photo'] }}" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
-								<p class="user-name mb-0">{{ Session::get('user')[0]['ustadz_name'] }}</p>
-								<p class="designattion mb-0">{{ roleName(Session::get('user')[0]['role_name']) }}</p>
+								<p class="user-name mb-0">{{ Session::get('user')['nama'] }}</p>
+								<p class="designattion mb-0">{{ roleName(Session::get('user')['akses']) }}</p>
 							</div>
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">

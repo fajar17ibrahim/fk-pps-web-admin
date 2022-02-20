@@ -25,7 +25,7 @@ class CreateSchoolTable extends Migration
             $table->string('school_village', 50)->nullable();
             $table->string('school_rt_rw', 15)->nullable();
             $table->string('school_districts', 50)->nullable();
-            $table->string('school_city', 50)->nullable();
+            $table->string('school_city', 100)->nullable();
             $table->string('school_province', 50)->nullable();
             $table->string('school_pos_code', 12)->nullable();
             $table->string('school_country', 25)->nullable();

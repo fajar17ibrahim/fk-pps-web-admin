@@ -3,7 +3,7 @@
 
                 @section('content')
                 <div class="col-lg-12">
-                    @if(Session::get('user')[0]['role_id'] == 1)
+                    @if(Session::get('user')['akses'] == 1)
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -33,7 +33,7 @@
                                 <div class="col-sm-9 text-secondary">
                                     <select class="single-select" name="soSchoolFilter" id="soSchoolFilter">
 									<option value="0">Semua</option>	
-                                    @foreach ($schools as $school)
+                                        @foreach ($schools as $school)
 										<option value="{{ $school->school_id }}">{{ $school->school_name }}</option>
 										@endforeach
 									</select>

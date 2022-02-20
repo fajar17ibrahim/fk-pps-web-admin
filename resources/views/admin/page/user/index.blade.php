@@ -6,7 +6,7 @@
                     <div class="col">
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 class="mb-0 text-uppercase">Daftar Akun User</h6>
-                            @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                            @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                             <button type="button" class="btn btn-warning px-4 ms-auto" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class='bx bx-plus-circle mr-1'></i>Tambah Data User</button>
                             @include('admin/page/user/user-add')
                             @endif
@@ -48,9 +48,9 @@
                                                 <th>ID User</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Email</th>
-                                                <th>Role</th>
+                                                <th>Telepon</th>
                                                 <th>Status</th>
-                                                @if(Session::get('user')[0]['role_id'] == 1 || Session::get('user')[0]['role_id'] == 2)
+                                                @if(Session::get('user')['akses'] == 1 || Session::get('user')['akses'] == 2)
                                                 <th width="10%">Aksi</th>
                                                 @endif
                                             </tr>

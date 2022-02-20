@@ -48,6 +48,8 @@ Route::get('/login', [AdminAuthLoginController::class, 'index'])->name('login');
 
 Route::post('login-request', [AdminAuthLoginController::class, 'login']);
 
+Route::get('login-request/{id}/{school}/{kelas}/{akses}', [AdminAuthLoginController::class, 'akses']);
+
 Route::post('register-request', [AdminAuthLoginController::class, 'register']);
 
 Route::get('logout', [AdminAuthLoginController::class, 'logout'])->name('logout');
@@ -102,6 +104,8 @@ Route::middleware(['verify', 'verified'])->group(function () {
 
     Route::get('master-ustadz-add/search/{village}', [AdminMasterUstadzController::class, 'search'])->name('master-ustadz.search');
     
+    Route::post('master-ustadz-edit/add', [AdminMasterUstadzController::class, 'editAddUstadz'])->name('master-ustadz-edit-add');
+
     Route::get('master-ustadz-edit/{id}', [AdminMasterUstadzController::class, 'editUstadz'])->name('master-ustadz-edit');
 
     // Kelas
