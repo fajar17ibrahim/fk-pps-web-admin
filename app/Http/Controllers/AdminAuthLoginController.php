@@ -107,8 +107,20 @@ class AdminAuthLoginController extends Controller
                 return redirect('login');
             }
             
-            Session::flash('success', $aksess);
-            return redirect('login');
+            if (count($aksess) == 0 ) {
+                Session::flash('error', 'Akun tidak terdafar');
+                return redirect('login');
+            } else if (count($aksess) == 1 ) {
+                
+                $id = $aksess[0]['id'];
+                $sekolah = $aksess[0]['sekolah'];
+                $kelas = $aksess[0]['kelas'];
+                $akses = $aksess[0]['akses'];
+                return $this->akses($id, $sekolah, $kelas, $akses);
+            } else {
+                Session::flash('success', $aksess);
+                return redirect('login');
+            }
         }
 
         Session::flash('error', 'Email atau password salah');

@@ -13,6 +13,7 @@
                                                     <div class="row mb-3 position-relative">
                                                         <label for="inEmailEdit" class="col-sm-3 col-form-label">Email</label>
                                                         <div class="col-sm-9 text-secondary">
+                                                            <input type="hidden" name="inSchoolEdit" class="form-control" id="inSchoolEdit" value="">
                                                             <input type="hidden" name="inEmailOldEdit" class="form-control" id="inEmailOldEdit" value="">
                                                             <input name="inEmailEdit" class="form-control" list="datalistOptions" id="inEmailEdit" placeholder="Cari Email..." required>
                                                             <div class="invalid-tooltip">Email tidak boleh kosong</div>

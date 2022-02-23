@@ -88,18 +88,22 @@ class AdminMasterRelationAdminController extends Controller
         
         $ustadz = Ustadz::leftJoin('users','ustadz.ustadz_email','=','users.email')
                 ->where('users.role_id', '=', 2)
-                ->where('users.id', '=', $id)
+                ->where('users.user_school', '=', $id)
                 ->first();
 
         if ($ustadz != null) {
             $data = array(
+                'id' => $ustadz->ustadz_id,
                 'email' => $ustadz->ustadz_email, 
-                'name' => $ustadz->ustadz_name
+                'name' => $ustadz->ustadz_name,
+                'sekolah' => $id
             );
         } else {
             $data = array(
+                'id' => '', 
                 'email' => '', 
-                'name' => ''
+                'name' => '',
+                'sekolah' => $id
             );
         }
         return json_encode($data);
@@ -118,21 +122,27 @@ class AdminMasterRelationAdminController extends Controller
         try {
             //
             $this->authorize('master-relation-admin');
+            $user = Session::get('user');
 
             $new = false;
-            $user = User::find($id);
-            if ($user != null) {
-                $user->role_id = '2';
+            $userOld = User::where('user_school', '=', $id)->first();
+            
+            if ($userOld != null) {
+                $userOld->role_id = '2';
+                $userNew->user_school = ' ' . $request['inSchoolEdit'] . ' ';
+                $updated = $userOld->update();
             } else {
                 $new = true;
-                $user = new User;
-                $user->name = $request['inNameEdit'];
-                $user->email = $request['inEmailEdit'];
-                $user->role_id = '2';
+                $userNew = new User;
+                $userNew->name = $request['inNameEdit'];
+                $userNew->email = $request['inEmailEdit'];
+                $userNew->status = 'Aktif';
+                $userNew->user_school = ' ' . $request['inSchoolEdit'] . ' ';
+                $userNew->role_id = '2';
 
                 $random_password = Str::random(8);
-                $user->password = Hash::make($random_password);
-                
+                $userNew->password = Hash::make($random_password);
+                $updated = $userNew->save();
             }
 
             $adminOld = $request['inEmailOldEdit'];
@@ -142,7 +152,6 @@ class AdminMasterRelationAdminController extends Controller
                 $ususerOlder->update();
             }
 
-            $updated = $user->update();
             
             if ($updated) {
                 if ($new) {
@@ -248,7 +257,7 @@ class AdminMasterRelationAdminController extends Controller
             $row[] = $admin['admin'];
             $row[] = '<div class="col">
                         <div class="btn-group">
-                            <a href="#" onclick="editForm(' . $admin['admin_id'] . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
+                            <a href="#" onclick="editForm(' . $admin['id'] . ')" class="btn btn-success px-4 ms-auto" data-bs-toggle="modal"><i class="bx bx-edit"></i>Edit</a>
                         </div>
                     </div>';
             $data[] = $row;

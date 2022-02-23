@@ -105,7 +105,7 @@ class AdminMasterRelationMapelController extends Controller
             //
 
             $mapel = $request['soMapel'];
-            $kelas = "|" . $request['soKelas'] . "|";
+            $kelas = $request['soKelas'];
             $ustadz = $request['soUstadz'];
             $mapelTeacherCheck = MapelTeacher::where('mapel_id', '=', $mapel)
                 ->where('class_id', '=', $kelas)
@@ -191,12 +191,12 @@ class AdminMasterRelationMapelController extends Controller
         try {
             //
             $mapel = $request['soMapelEdit'];
-            $class = "|" . $request['soKelasEdit'] . "|";
+            $class = $request['soKelasEdit'];
             $nik = $request['soUstadzEdit'];
 
             $mapelTeacher = MapelTeacher::find($id);
             $mapelTeacher->mapel_id = $mapel;
-            $mapelTeacher->class_id .= $class;
+            $mapelTeacher->class_id = $class;
             $mapelTeacher->ustadz_nik = $nik;
             $updated = $mapelTeacher->update();
 
@@ -204,7 +204,7 @@ class AdminMasterRelationMapelController extends Controller
                 ->first();
 
             if (!str_contains($ustadzCheck->ustadz_class, $class)) {
-                $ustadzCheck->ustadz_class .= $class;
+                $ustadzCheck->ustadz_class = $class;
                 $updateUstadz = $ustadzCheck->update();
             }
     

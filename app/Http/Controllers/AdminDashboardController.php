@@ -47,7 +47,7 @@ class AdminDashboardController extends Controller
         } else if ($user['akses'] == 2) {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('santri.santri_school', 'like', '% ' . $user['sekolah'] . ' %')
+                ->where('santri.santri_school', '=', $user['sekolah'])
                 ->count();
 
             $graduations = Graduation::leftJoin('santri','santri.santri_nisn','=','graduation.graduation_santri')
@@ -69,7 +69,7 @@ class AdminDashboardController extends Controller
         } else {
             $santris = Santri::leftJoin('kelas','santri.santri_class','=','kelas.class_id')
                 ->leftJoin('school','kelas.class_school','=','school.school_id')
-                ->where('santri.santri_school', 'like', '% ' . $user['sekolah'] . ' %')
+                ->where('santri.santri_school', '=', $user['sekolah'] )
                 ->where('santri_class', '=', $user['kelas'])
                 ->count();
 
@@ -93,6 +93,8 @@ class AdminDashboardController extends Controller
 
         $newss = News::leftJoin('ustadz','ustadz.ustadz_nik','=','news.news_poster')
                 ->get();
+
+        // return $newss;
 
         $loginDatas =  array();
         foreach ($logins as $login) {

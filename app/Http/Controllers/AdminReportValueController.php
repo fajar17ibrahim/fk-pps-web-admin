@@ -88,7 +88,7 @@ class AdminReportValueController extends Controller
             }
 
             $schoolsData = School::orderBy('school_name', 'asc')
-                ->where('school_level', '=', $user[0]->school_level)
+                ->where('school_level', '=', $user['level'])
                 ->where('school_id', '=', $user['sekolah'])
                 ->get();
 

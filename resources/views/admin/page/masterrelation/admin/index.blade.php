@@ -75,16 +75,19 @@
 
                     // Form Edit Admin
                     function editForm($id) {
+                        // alert('Data');
                         $.ajax({
                             url: "{{ URL::to('/') }}/master-relation-admin/" + $id + "/edit",
                             type: "GET",
                             dataType: "JSON",
                             success: function(data) {
+                                // alert(data.id);
                                 url = "{{ URL::to('/') }}/master-relation-admin/" + $id;
                                 $('#editAdminModal').modal('show');
                                 $('.modal-title').text('Form Edit Admin');
                                 $('#formEdit').attr('action', url);
                                 $('#inEmailOldEdit').val(data.email).attr('readonly','true');
+                                $('#inSchoolEdit').val(data.sekolah);
                                 $('#inEmailEdit').val(data.email);
                                 $('#inNameEdit').val(data.name).attr('readonly','true');
                             },
