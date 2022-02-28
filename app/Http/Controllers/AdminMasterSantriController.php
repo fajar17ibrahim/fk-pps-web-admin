@@ -199,7 +199,7 @@ class AdminMasterSantriController extends Controller
             $santri->santri_pos_code = $request['inPosCode'];
             $santri->santri_country = $request['inCountry'];
             $santri->santri_class = $request['soLevelClass'];
-            $santri->santri_school = $user[0]->school_id;
+            $santri->santri_school = $user['sekolah'];
             $santri->santri_status = 'Aktif';
             $santri->santri_photo = $photoName;
 
@@ -397,7 +397,7 @@ class AdminMasterSantriController extends Controller
             $santri->santri_pos_code = $request['inPosCode'];
             $santri->santri_country = $request['inCountry'];
             $santri->santri_class = $request['soLevelClass'];
-            $santri->santri_school = $user[0]->school_id;
+            $santri->santri_school = $user['sekolah'];
             $santri->santri_status = 'Aktif';
             $santri->santri_photo = $photoName;
             $saveSantri = $santri->update();
