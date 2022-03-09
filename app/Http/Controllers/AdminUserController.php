@@ -65,7 +65,7 @@ class AdminUserController extends Controller
                 $user = new User;
                 $user->name = $emailCheck->ustadz_name;
                 $user->email = $request['inEmail'];
-                $user->role_id = '0';
+                $user->role_id = '4';
                 $user->status = $request['soStatus'];
                 $user->user_school = $emailCheck->ustadz_school;
                 $random_password = Str::random(8);

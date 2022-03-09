@@ -136,6 +136,13 @@
                 <div class="menu-title text-white">Manual Book</div>
             </a>
         </li>
+        <li class="btn btn-primary">
+            <a href="https://www.youtube.com/watch?v=IiplDjyKqZ8" target="_blank">
+                <div class="parent-icon text-white"><i class="bx bx-video"></i>
+                </div>
+                <div class="menu-title text-white">Video Tutorial</div>
+            </a>
+        </li>
     </ul>
     <!--end navigation-->
 </div>
