@@ -323,6 +323,18 @@ class AdminMasterSantriController extends Controller
             $santriPhoto = $request['inSantriPhoto'];
             $santriNISN = $request['inSantriNISN'];
 
+            $reportEquipment = ReportEquipment::where('santri_id', '=', $santri->santri_nisn)
+                    ->first();
+
+            if ($reportEquipment) {
+                $reportEquipment->santri_id = $santriNISN;
+                $saveEquipment = $reportEquipment->update();
+            } else {
+                $reportEquipment = new ReportEquipment;
+                $reportEquipment->santri_id = $santriNISN;
+                $saveEquipment = $reportEquipment->save();
+            }
+
             if ($santriPhoto) {
                 $photoName = $santriNISN . "_" . time().'.' . $request->inSantriPhoto->extension();
                 $request->inSantriPhoto->move(public_path('images'), $photoName);
@@ -401,18 +413,6 @@ class AdminMasterSantriController extends Controller
             $santri->santri_status = 'Aktif';
             $santri->santri_photo = $photoName;
             $saveSantri = $santri->update();
-
-            $reportEquipment = ReportEquipment::where('santri_id', '=', $santriNISN)
-                    ->first();
-
-            if ($reportEquipment) {
-                $reportEquipment->santri_id = $santriNISN;
-                $saveEquipment = $reportEquipment->update();
-            } else {
-                $reportEquipment = new ReportEquipment;
-                $reportEquipment->santri_id = $santriNISN;
-                $saveEquipment = $reportEquipment->save();
-            }
     
             if ($saveSantri && $saveEquipment) {
                 return redirect()->route('master-santri.index')
