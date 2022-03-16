@@ -56,7 +56,7 @@ class AdminUserController extends Controller
                         ->first();
             } else {
                 $emailCheck = Ustadz::where('ustadz_email', '=', $request['inEmail'])
-                        ->get();
+                        ->first();
             }
 
             // return $emailCheck;
