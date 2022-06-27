@@ -49,12 +49,12 @@ class AdminChangePasswordController extends Controller
             $this->authorize('changepassword');
             
             $user = Session::get('user');
-            $userData = User::find($user[0]->id);
+            $userData = User::find($user['id']);
             $passwordOld = $request['inPasswordOld'];
             $passwordNew = $request['inPasswordNew'];
             $passwordConfirm = $request['inPasswordConfirm'];
 
-            $check = Hash::check($passwordOld, $user[0]->password);
+            $check = Hash::check($passwordOld, $userData['password);
 
             if ($check) {
                 $userData->password = Hash::make($passwordNew);

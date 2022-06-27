@@ -62,26 +62,28 @@ class AdminUserController extends Controller
             // return $emailCheck;
 
             if ($emailCheck != null) {
+                 $random_password = Str::random(8);
+                
+                $details = [
+                    'title' => 'Password Login',
+                    'body' => 'Password Anda : ' . $random_password
+                ]; 
+                
+                $mail = Mail::to($request['inEmail'])->send(new EMail($details));
+                
                 $user = new User;
                 $user->name = $emailCheck->ustadz_name;
                 $user->email = $request['inEmail'];
                 $user->role_id = '4';
                 $user->status = $request['soStatus'];
                 $user->user_school = $emailCheck->ustadz_school;
-                $random_password = Str::random(8);
                 $user->password = Hash::make($random_password);
                 $save = $user->save();
                 
                 if ($save) {
-                    $details = [
-                        'title' => 'Password Login',
-                        'body' => 'Password Anda : ' . $random_password
-                    ];
-
-                    Mail::to($request['inEmail'])->send(new EMail($details));
-
+                    $message = 'User berhasil disimpan. Password telah dikirim ke email ' . $request['inEmail'];
                     return redirect()->route('user.index')
-                    ->with('message_success', 'User berhasil disimpan.');
+                        ->with('message_success', $message);
                 } else {
                     return redirect()->route('user.index')
                     ->with('message_error', 'User gagal disimpan.');

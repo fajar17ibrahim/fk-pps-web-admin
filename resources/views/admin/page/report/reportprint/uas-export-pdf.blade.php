@@ -135,6 +135,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+
                             <div class="new-page"></div>
                             <div class="text-bold text-uppercase">C. Deskripsi Pengetahuan dan Keterampilan</div>
                             <table id="table-attendance" class="border" style="width:100%">
@@ -159,6 +160,7 @@
                                 </tbody>
                             </table>
                             
+                            <div class="new-page"></div>
                             <div class="text-bold text-uppercase">D. Ekstrakurikuler</div>
                             <table id="table-attendance" class="border" style="width:100%">
                                 <thead class="text-center bg-light-info">
@@ -212,11 +214,11 @@
                                 <tbody>
                                     <tr>
                                         <td>Sakit</td>
-                                        <td class="text-center">{{ $data['kehadiran']['izin'] }}</td>
+                                        <td class="text-center">{{ $data['kehadiran']['sakit'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Izin</td>
-                                        <td class="text-center">{{ $data['kehadiran']['sakit'] }}</td>
+                                        <td class="text-center">{{ $data['kehadiran']['izin'] }}</td>
                                     </tr>
                                     <tr>
                                         <td>Tanpa Keterangan</td>
@@ -233,7 +235,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div class="new-page"></div>
+                            
                             <div class="text-bold text-uppercase">G. Tanggapan Orangtua / Wali</div>
                             <table id="table-attendance" class="border" style="width:100%; ">
                                 <tbody>
