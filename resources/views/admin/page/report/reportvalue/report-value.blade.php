@@ -92,7 +92,7 @@
                         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                             <h6 id="title" class="mb-0 text-uppercase">Input Nilai Rapor</h6>
                             <a class="ms-auto" href="report-value-settings"> 
-                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-cog mr-1'></i>Pengaturan</button>
+                                <button type="button" class="btn btn-warning px-4 ms-auto"><i class='bx bx-cog mr-1'></i>Kompetensi Dasar (KD)</button>
                             </a>
                         </div>
                         <div class="card">
@@ -312,7 +312,7 @@
 
                     // Validation
                     function validateForm() {
-                        let x = document.forms["formReportValue"]["inMapel"].value;
+                        let x = document.forms["formReportValue"]["inMapel"].val();
                         if (x == "" || x == "0") {
                             alert("Pilih Mapel terlebih dahulu dan tekan tombol Tampilkan Data");
                             return false;
@@ -321,51 +321,51 @@
 
                     // Calculate
                     function calculate($index) {
-                        let kkm = document.getElementsByName('inKKM[]');
-                        let p1 = document.getElementsByName('inP1[]');
-                        let p2 = document.getElementsByName('inP2[]');
-                        let p3 = document.getElementsByName('inP3[]');
-                        let p4 = document.getElementsByName('inP4[]');
-                        let p5 = document.getElementsByName('inP5[]');
-                        let p6 = document.getElementsByName('inP6[]');
-                        let p7 = document.getElementsByName('inP7[]');
-                        let p8 = document.getElementsByName('inP8[]');
-                        let p9 = document.getElementsByName('inP9[]');
-                        let p10 = document.getElementsByName('inP10[]');
-                        let rph = document.getElementsByName('inRPH[]');
-                        let pts = document.getElementsByName('inPTS[]');
-                        let pas = document.getElementsByName('inPAS[]');
-                        let hpa = document.getElementsByName('inHPA[]');
-                        let pred = document.getElementsByName('inPPRE[]');
-                        let pDesc = document.getElementsByName('taDailyDesc[]');
+                        let kkm = $('#inKKM'+$index+'');
+                        let p1 = $('#inP1'+$index+'');
+                        let p2 = $('#inP2'+$index+'');
+                        let p3 = $('#inP3'+$index+'');
+                        let p4 = $('#inP4'+$index+'');
+                        let p5 = $('#inP5'+$index+'');
+                        let p6 = $('#inP6'+$index+'');
+                        let p7 = $('#inP7'+$index+'');
+                        let p8 = $('#inP8'+$index+'');
+                        let p9 = $('#inP9'+$index+'');
+                        let p10 = $('#inP10'+$index+'');
+                        let rph = $('#inRPH'+$index+'');
+                        let pts = $('#inPTS'+$index+'');
+                        let pas = $('#inPAS'+$index+'');
+                        let hpa = $('#inHPA'+$index+'');
+                        let pred = $('#inPPRE'+$index+'');
+                        let pDesc = $('#taDailyDesc'+$index+'');
                         
-                        let k1 = document.getElementsByName('inK1[]');
-                        let k2 = document.getElementsByName('inK2[]');
-                        let k3 = document.getElementsByName('inK3[]');
-                        let k4 = document.getElementsByName('inK4[]');
-                        let k5 = document.getElementsByName('inK5[]');
-                        let k6 = document.getElementsByName('inK6[]');
-                        let k7 = document.getElementsByName('inK7[]');
-                        let k8 = document.getElementsByName('inK8[]');
-                        let k9 = document.getElementsByName('inK9[]');
-                        let k10 = document.getElementsByName('inK10[]');
-                        let krpk = document.getElementsByName('inRPK[]');
-                        let kPred = document.getElementsByName('inKPRE[]');
-                        let kDesc = document.getElementsByName('taSkillsDesc[]');
+                        let k1 = $('#inK1'+$index+'');
+                        let k2 = $('#inK2'+$index+'');
+                        let k3 = $('#inK3'+$index+'');
+                        let k4 = $('#inK4'+$index+'');
+                        let k5 = $('#inK5'+$index+'');
+                        let k6 = $('#inK6'+$index+'');
+                        let k7 = $('#inK7'+$index+'');
+                        let k8 = $('#inK8'+$index+'');
+                        let k9 = $('#inK9'+$index+'');
+                        let k10 = $('#inK10'+$index+'');
+                        let krpk = $('#inRPK'+$index+'');
+                        let kPred = $('#inKPRE'+$index+'');
+                        let kDesc = $('#taSkillsDesc'+$index+'');
 
-                        let kkmValue = Math.round(kkm[$index].value);
-                        let p1Value = Math.round(p1[$index].value);
-                        let p2Value = Math.round(p2[$index].value);
-                        let p3Value = Math.round(p3[$index].value);
-                        let p4Value = Math.round(p4[$index].value);
-                        let p5Value = Math.round(p5[$index].value);
-                        let p6Value = Math.round(p6[$index].value);
-                        let p7Value = Math.round(p7[$index].value);
-                        let p8Value = Math.round(p8[$index].value);
-                        let p9Value = Math.round(p9[$index].value);
-                        let p10Value = Math.round(p10[$index].value);
-                        let ptsValue = Math.round(pts[$index].value);
-                        let pasValue = Math.round(pas[$index].value);
+                        let kkmValue = Math.round(kkm.val());
+                        let p1Value = Math.round(p1.val());
+                        let p2Value = Math.round(p2.val());
+                        let p3Value = Math.round(p3.val());
+                        let p4Value = Math.round(p4.val());
+                        let p5Value = Math.round(p5.val());
+                        let p6Value = Math.round(p6.val());
+                        let p7Value = Math.round(p7.val());
+                        let p8Value = Math.round(p8.val());
+                        let p9Value = Math.round(p9.val());
+                        let p10Value = Math.round(p10.val());
+                        let ptsValue = Math.round(pts.val());
+                        let pasValue = Math.round(pas.val());
 
                         let rphValueCount = 0;
                         let rphValue = 0;
@@ -471,38 +471,38 @@
                         } 
                         
                         rphValue = Math.round(rphValue / rphValueCount);
-                        rph[$index].value = rphValue;
+                        rph.val(rphValue);
 
                         let hpaValue = Math.round((2 * rphValue + ptsValue + pasValue) / 4);
-                        hpa[$index].value = hpaValue;
+                        hpa.val(hpaValue);
                         
                         let predInterval = Math.round((100 - kkmValue) / 3);
                         let predC = kkmValue + predInterval;
                         let predB = kkmValue + predInterval * 2;
                         let predA =  kkmValue + predInterval * 3;
                         if (hpaValue < kkmValue) {
-                            pred[$index].value = "D";
+                            pred.val("D");
                         } else if (hpaValue >= kkmValue && hpaValue < predC) {               
-                            pred[$index].value = "C";
+                            pred.val("C");
                         } else if (hpaValue >= predC && hpaValue < predB) {
-                            pred[$index].value = "B";
+                            pred.val("B");
                         } else if (hpaValue >= predB && hpaValue <= predA) {
-                            pred[$index].value = "A";
+                            pred.val("A");
                         }
                         
-                        pDesc[$index].value = sKDKnowledge;
+                        pDesc.val(sKDKnowledge);
                 
-                        let k1Value = Math.round(k1[$index].value);
-                        let k2Value = Math.round(k2[$index].value);
-                        let k3Value = Math.round(k3[$index].value);
-                        let k4Value = Math.round(k4[$index].value);
-                        let k5Value = Math.round(k5[$index].value);
-                        let k6Value = Math.round(k6[$index].value);
-                        let k7Value = Math.round(k7[$index].value);
-                        let k8Value = Math.round(k8[$index].value);
-                        let k9Value = Math.round(k9[$index].value);
-                        let k10Value = Math.round(k10[$index].value);
-                        let krpkValue = Math.round(krpk[$index].value);
+                        let k1Value = Math.round(k1.val());
+                        let k2Value = Math.round(k2.val());
+                        let k3Value = Math.round(k3.val());
+                        let k4Value = Math.round(k4.val());
+                        let k5Value = Math.round(k5.val());
+                        let k6Value = Math.round(k6.val());
+                        let k7Value = Math.round(k7.val());
+                        let k8Value = Math.round(k8.val());
+                        let k9Value = Math.round(k9.val());
+                        let k10Value = Math.round(k10.val());
+                        let krpkValue = Math.round(krpk.val());
 
                         let rpkValue = 0;
                         let rpkValueCount = 0;
@@ -516,7 +516,7 @@
                             }
                             sKDSkills += desc;
                         }
-                        
+
                         if (k2Value != "") {
                             rpkValueCount++;
                             rpkValue += k2Value;
@@ -526,7 +526,7 @@
                             }
                             sKDSkills += desc;
                         } 
-                        
+
                         if (k3Value != "") {
                             rpkValueCount++;
                             rpkValue += k3Value;
@@ -535,8 +535,8 @@
                                 desc += ". ";
                             }
                             sKDSkills += desc;
-                        } 
-                        
+                        }
+
                         if (k4Value != "") {
                             rpkValueCount++;
                             rpkValue += k4Value;
@@ -546,7 +546,7 @@
                             }
                             sKDSkills += desc;
                         } 
-                        
+
                         if (k5Value != "") {
                             rpkValueCount++;
                             rpkValue += k5Value;
@@ -556,7 +556,7 @@
                             }
                             sKDSkills += desc;
                         } 
-                        
+
                         if (k6Value != "") {
                             rpkValueCount++;
                             rpkValue += k6Value;
@@ -606,7 +606,7 @@
                             }
                             sKDSkills += desc;
                         } 
-                        
+
                         rpkValue = Math.round(rpkValue / rpkValueCount);
                         
                         let kPredInterval = Math.round((100 - 25) / 3);
@@ -614,19 +614,19 @@
                         let kPredB = 25 + kPredInterval * 2;
                         let kPredSB =  25 + kPredInterval * 3;
                         if (rpkValue < 25) {
-                            kPred[$index].value = "D";
+                            kPred.val("D");
                         } else if (rpkValue >= 25 && rpkValue < predC) {               
-                            kPred[$index].value = "C";
+                            kPred.val("C");
                         } else if (rpkValue >= predC && rpkValue < predB) {
-                            kPred[$index].value = "B";
+                            kPred.val("B");
                         } else if (rpkValue >= predB && rpkValue <= kPredSB) {
-                            kPred[$index].value = "SB";
+                            kPred.val("SB");
                         } else if (rpkValue == 0) {
-                            kPred[$index].value = "";
+                            kPred.val("");
                         }
 
-                        krpk[$index].value = rpkValue;
-                        kDesc[$index].value = sKDSkills;
+                        krpk.val(rpkValue);
+                        kDesc.val(sKDSkills);
                     }
 
                 </script>
