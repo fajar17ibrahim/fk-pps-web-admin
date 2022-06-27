@@ -527,7 +527,7 @@ class AdminReportValueController extends Controller
             $index = (int) $no -1;
             $row = array();
             $row[] = $no;
-            $row[] = g$santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
+            $row[] = $santri->santri_nisn . '<input name="inNISN[]" type="hidden" class="form-control" value="'. $santri->santri_nisn .'" />';
             $row[] = $santri->santri_name;  
             $row[] = $santri->santri_gender;
             $row[] = '<input id="inKKM' .$index .'" name="inKKM[]" type="number" style="width:80px;" class="form-control" value="'. $kkm . '" onchange="calculate('. $index . ')" required />';
